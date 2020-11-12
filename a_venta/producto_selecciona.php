@@ -38,7 +38,9 @@
 
 	echo "esquema :".$producto->esquema;
 
-	echo "<form id='form_prod' is='is-selecciona' v_idproducto='$idproducto'>";
+	echo "<form id='form_prod' is='is-selecciona'>";
+
+		echo "<input type='text' class='form-control form-control-sm' name='idproducto' id='idproducto' value='$producto->idproducto' readonly>";
 
 		echo "<div class='modal-header'>";
 	  	echo "<h5 class='modal-title'>Agregar producto</h5>";
@@ -64,13 +66,37 @@
 			echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Cantidad</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1' required>";
+					echo "<input type='text' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1' required onchange='calcular()'>";
+				echo "</div>";
+
+			echo "</div>";
+				//////////////////////arreglar esto
+			echo "<div class='row'>";
+				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+					echo "<label>Precio normal</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='normal' id='normal' value='".$producto->precio."' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
-					echo "<label>Precio</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='precio' id='precio' value='".$producto->precio."' required>";
+					echo "<label>Mayoreo</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='mayoreo' id='mayoreo' value='' readonly>";
 				echo "</div>";
+
+				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+					echo "<label>Ditribuidor</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='distribuidor' id='distribuidor' value='' readonly>";
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='row'>";
+
+				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+					echo "<label>Precio a aplicar</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio' id='precio' value='0' readonly>";
+				echo "</div>";
+
+
+
 
 			echo "</div>";
 			echo "<hr>";

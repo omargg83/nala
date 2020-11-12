@@ -268,6 +268,70 @@ class Venta extends Sagyc{
 			return "Database access FAILED! ".$e->getMessage();
 		}
 	}
+	public function esquemas(){
+
+		////////////////////checar aca que variables quedan
+		$idproducto=$_REQUEST['idproducto'];
+		$cantidad=$_REQUEST['cantidad'];
+
+		$sql="SELECT * from productos
+		left outer join productos_catalogo on productos_catalogo.idcatalogo=productos.idcatalogo
+		where idproducto=:id";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":id",$idproducto);
+		$sth->execute();
+		$producto=$sth->fetch(PDO::FETCH_OBJ);
+
+
+		///////////////comienzan variables
+		$monto_mayor=$producto->monto_mayor;
+		$monto_distribuidor=$producto->monto_distribuidor;
+		$esquema=$producto->esquema;
+
+		////////////////
+		$precio=$producto->precio;
+		$precio_mayoreo=$producto->precio_mayoreo;
+		$precio_distri=$producto->precio_distri;
+		$cantidad_mayoreo=$producto->cantidad_mayoreo;
+
+		///////////////terminan variables
+
+
+		if($esquema==1){
+
+			$total_menudeo=($precio*$cantidad);
+			$total_mayoreo=($precio_mayoreo*$cantidad);
+			$total_distribuidor=($precio_distri*$cantidad);
+
+			$precio=$total_menudeo;
+			if($cantidad>=$cantidad_mayoreo and ($total_menudeo>=$monto_mayor and $total_menudeo<$monto_distribuidor)){
+				$precio=$total_mayoreo;
+			}
+			else if($cantidad>=$cantidad_mayoreo and $total_menudeo>=$monto_distribuidor){
+				$precio=$total_distribuidor;
+			}
+			else{
+
+			}
+
+			/*
+				echo "total_menudeo:".$total_menudeo;
+				echo "total_mayoreo:".$total_mayoreo;
+				echo "total_distribuidor:".$total_distribuidor;
+				echo "precio:".$precio;
+			*/
+
+			$arreglo =array();
+			$arreglo+=array('error'=>0);
+			$arreglo+=array('total_menudeo'=>$total_menudeo);
+			$arreglo+=array('total_mayoreo'=>$total_mayoreo);
+			$arreglo+=array('total_distribuidor'=>$total_distribuidor);
+			$arreglo+=array('precio'=>$precio);
+			return json_encode($arreglo);
+
+		}
+
+	}
 }
 
 $db = new Venta();

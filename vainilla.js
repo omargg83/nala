@@ -378,6 +378,39 @@ $(document).on('submit',"[is*='is-totalv']",function(e){
   xhr.send(formData);
 });
 
+
+function calcular(){
+
+  let idproducto=document.getElementById("idproducto").value;
+  let cantidad=document.getElementById("cantidad").value;
+
+  let formData = new FormData();
+  formData.append("function", "esquemas");
+  formData.append("idproducto", idproducto);
+  formData.append("cantidad", cantidad);
+
+
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST',"a_venta/db_.php");
+  xhr.addEventListener('load',(data)=>{
+    console.log(data.target.response);
+
+    var datos = JSON.parse(data.target.response);
+    document.getElementById("normal").value=datos.total_menudeo;
+    document.getElementById("mayoreo").value=datos.total_mayoreo;
+    document.getElementById("distribuidor").value=datos.total_distribuidor;
+    document.getElementById("precio").value=datos.precio;
+  });
+  xhr.onerror =  ()=>{
+    cargando(false);
+  };
+  xhr.send(formData);
+
+
+  console.log("entra");
+
+}
+
 function lista(idventa){
   var formData = new FormData();
   formData.append("idventa", idventa);
