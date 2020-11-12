@@ -69,6 +69,12 @@
 					echo "<input type='text' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1' required onchange='calcular()'>";
 				echo "</div>";
 
+
+				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+					echo "<label>Precio a aplicar</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio' id='precio' value='0' readonly>";
+				echo "</div>";
+
 			echo "</div>";
 				//////////////////////arreglar esto
 			echo "<div class='row'>";
@@ -88,17 +94,6 @@
 				echo "</div>";
 			echo "</div>";
 
-			echo "<div class='row'>";
-
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
-					echo "<label>Precio a aplicar</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='precio' id='precio' value='0' readonly>";
-				echo "</div>";
-
-
-
-
-			echo "</div>";
 			echo "<hr>";
 			echo "<div class='row'>";
 				echo "<div class='col-12'>";

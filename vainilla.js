@@ -393,8 +393,6 @@ function calcular(){
   let xhr = new XMLHttpRequest();
   xhr.open('POST',"a_venta/db_.php");
   xhr.addEventListener('load',(data)=>{
-    console.log(data.target.response);
-
     var datos = JSON.parse(data.target.response);
     document.getElementById("normal").value=datos.total_menudeo;
     document.getElementById("mayoreo").value=datos.total_mayoreo;

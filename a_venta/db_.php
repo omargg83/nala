@@ -294,6 +294,13 @@ class Venta extends Sagyc{
 		$precio_distri=$producto->precio_distri;
 		$cantidad_mayoreo=$producto->cantidad_mayoreo;
 
+		//////////////para esquema 2
+		$mayoreo_minimo=$producto->mayoreo_minimo;
+		$mayoreo_porcentaje=$producto->mayoreo_porcentaje;
+
+		$distri_minimo=$producto->distri_minimo;
+		$distri_porcentaje=$producto->distri_porcentaje;
+
 		///////////////terminan variables
 
 
@@ -313,6 +320,41 @@ class Venta extends Sagyc{
 			else{
 
 			}
+
+			/*
+				echo "total_menudeo:".$total_menudeo;
+				echo "total_mayoreo:".$total_mayoreo;
+				echo "total_distribuidor:".$total_distribuidor;
+				echo "precio:".$precio;
+			*/
+
+			$arreglo =array();
+			$arreglo+=array('error'=>0);
+			$arreglo+=array('total_menudeo'=>$total_menudeo);
+			$arreglo+=array('total_mayoreo'=>$total_mayoreo);
+			$arreglo+=array('total_distribuidor'=>$total_distribuidor);
+			$arreglo+=array('precio'=>$precio);
+			return json_encode($arreglo);
+
+		}
+		else{
+			$total_menudeo=($precio*$cantidad);
+
+			$total_mayoreo=$total_menudeo-(($total_menudeo*$mayoreo_porcentaje)/100);
+			$total_distribuidor=$total_menudeo-(($total_menudeo*$distri_porcentaje)/100);
+
+			$precio=$total_menudeo;
+			if($cantidad>=$mayoreo_minimo and $cantidad<$distri_minimo){
+				//echo "uno";
+				$precio=$total_mayoreo;
+			}
+			else if($cantidad>=$distri_minimo){
+				$precio=$total_distribuidor;
+			}
+			else{
+
+			}
+
 
 			/*
 				echo "total_menudeo:".$total_menudeo;
