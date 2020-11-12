@@ -48,7 +48,7 @@
 		$tipo="";
 		$activo_producto=0;
 
-		$esquema=1;
+		$esquema=0;
 		//// variables esquema NALA
 		$cantidad_mayoreo=0;
 		$precio_mayoreo=0;
@@ -172,8 +172,9 @@
 					<hr>
 						<div class='row'>
 								<div class='col-3'>
-							<select class="form-control form-control-sm" name="esquema" id="esquema">
+							<select class="form-control form-control-sm" name="esquema" id="esquema"required>
 								<option value='' disabled selected>Seleccione una opción</option>
+								<option value='0'<?php if($esquema=='0') echo 'selected'; ?> >NINGUNO</option>
 								<option value='1'<?php if($esquema=='1') echo 'selected'; ?> >NALA</option>
 								<option value='2'<?php if($esquema=='2') echo 'selected'; ?> >ESQUEMA 2</option>
 							</select>
