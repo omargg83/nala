@@ -30,10 +30,14 @@
 	$producto->preciom; // precio mayoreo * Cantidad
 	$producto->preciod; // precio distribuidor * Cantidad
 
-
+	$producto->monto_mayor;
+	$producto->monto_distribuidor;
 	// $parametro1 digamos los 1000 pesos  para llegar a mayoreo (esquema 1 NALA) tomar en cuenta que hoy son mil y mañana podria cambiar, lo mismo para elk parametro2
 	// $parametro2 los 3 mil pesos para llegar a distribuidor    (esquema 1 NALA)
 	/////////////////////
+
+	echo "esquema :".$producto->esquema;
+
 	echo "<form id='form_prod' is='is-selecciona' v_idproducto='$idproducto'>";
 
 		echo "<div class='modal-header'>";
