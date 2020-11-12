@@ -271,12 +271,10 @@ class Venta extends Sagyc{
 	public function esquemas(){
 
 		////////////////////checar aca que variables quedan
-		$idproducto=$_REQUEST['idproducto'];
-		$cantidad=$_REQUEST['cantidad'];
+		$idproducto=clean_var($_REQUEST['idproducto']);
+		$cantidad=clean_var($_REQUEST['cantidad']);
 
-		$sql="SELECT * from productos
-		left outer join productos_catalogo on productos_catalogo.idcatalogo=productos.idcatalogo
-		where idproducto=:id";
+		$sql="SELECT * from productos	where idproducto=:id";
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(":id",$idproducto);
 		$sth->execute();
@@ -303,75 +301,100 @@ class Venta extends Sagyc{
 
 		///////////////terminan variables
 
-
 		if($esquema==1){
-
 			$total_menudeo=($precio*$cantidad);
-			$total_mayoreo=($precio_mayoreo*$cantidad);
-			$total_distribuidor=($precio_distri*$cantidad);
 
+			////////////////validaciones
+			if($cantidad_mayoreo>0 and $monto_mayor>0 and $precio_mayoreo>0){
+				///////////la buena
+				$total_mayoreo=($precio_mayoreo*$cantidad);
+			}
+			else{
+				$total_mayoreo=$total_menudeo;
+			}
+			if($cantidad_mayoreo>0 and $monto_distribuidor>0 and $precio_distri>0){
+				///////////la buena
+				$total_distribuidor=($precio_distri*$cantidad);
+			}
+			else{
+				$total_distribuidor=$total_menudeo;
+			}
+
+			///////////////calculo
 			$precio=$total_menudeo;
+			/*
 			if($cantidad>=$cantidad_mayoreo and ($total_menudeo>=$monto_mayor and $total_menudeo<$monto_distribuidor)){
 				$precio=$total_mayoreo;
 			}
 			else if($cantidad>=$cantidad_mayoreo and $total_menudeo>=$monto_distribuidor){
 				$precio=$total_distribuidor;
 			}
-			else{
-
-			}
-
-			/*
-				echo "total_menudeo:".$total_menudeo;
-				echo "total_mayoreo:".$total_mayoreo;
-				echo "total_distribuidor:".$total_distribuidor;
-				echo "precio:".$precio;
 			*/
 
-			$arreglo =array();
-			$arreglo+=array('error'=>0);
-			$arreglo+=array('total_menudeo'=>$total_menudeo);
-			$arreglo+=array('total_mayoreo'=>$total_mayoreo);
-			$arreglo+=array('total_distribuidor'=>$total_distribuidor);
-			$arreglo+=array('precio'=>$precio);
-			return json_encode($arreglo);
-
+			/*
+			if($cantidad>=$cantidad_mayoreo){
+				$precio=$total_mayoreo;
+				if ($total_menudeo>=$monto_mayor and $total_menudeo<$monto_distribuidor){
+					$precio=$total_mayoreo;
+				}
+				else if($total_menudeo>=$monto_distribuidor){
+					$precio=$total_distribuidor;
+				}
+			}
+			*/
+			if($total_menudeo>=$monto_mayor and $total_menudeo<$monto_distribuidor){
+				////////////cuando es mayor que 1000
+				$precio=$total_mayoreo;
+			}
+			else if($total_menudeo>=$monto_distribuidor){
+				/////////////cuando es mayor que 3000
+				$precio=$total_distribuidor;
+			}
+			else if($cantidad>=$cantidad_mayoreo){
+				//////////////cuando es mayor de 10
+				$precio=$total_mayoreo;
+			}
+			else{
+				$precio=$total_menudeo;
+			}
 		}
 		else{
 			$total_menudeo=($precio*$cantidad);
 
-			$total_mayoreo=$total_menudeo-(($total_menudeo*$mayoreo_porcentaje)/100);
-			$total_distribuidor=$total_menudeo-(($total_menudeo*$distri_porcentaje)/100);
+			////////////////validaciones
+			if($mayoreo_minimo>0 and $mayoreo_porcentaje>0){
+				///////////la buena
+				$total_mayoreo=$total_menudeo-(($total_menudeo*$mayoreo_porcentaje)/100);
+			}
+			else{
+				$total_mayoreo=$total_menudeo;
+			}
+			if($distri_minimo>0 and $distri_porcentaje>0){
+				///////////la buena
+				$total_distribuidor=$total_menudeo-(($total_menudeo*$distri_porcentaje)/100);
+			}
+			else{
+				$total_distribuidor=$total_menudeo;
+			}
 
+			///////////////calculo
 			$precio=$total_menudeo;
 			if($cantidad>=$mayoreo_minimo and $cantidad<$distri_minimo){
-				//echo "uno";
 				$precio=$total_mayoreo;
 			}
 			else if($cantidad>=$distri_minimo){
 				$precio=$total_distribuidor;
 			}
-			else{
-
-			}
-
-
-			/*
-				echo "total_menudeo:".$total_menudeo;
-				echo "total_mayoreo:".$total_mayoreo;
-				echo "total_distribuidor:".$total_distribuidor;
-				echo "precio:".$precio;
-			*/
-
-			$arreglo =array();
-			$arreglo+=array('error'=>0);
-			$arreglo+=array('total_menudeo'=>$total_menudeo);
-			$arreglo+=array('total_mayoreo'=>$total_mayoreo);
-			$arreglo+=array('total_distribuidor'=>$total_distribuidor);
-			$arreglo+=array('precio'=>$precio);
-			return json_encode($arreglo);
-
 		}
+
+
+		$arreglo =array();
+		$arreglo+=array('error'=>0);
+		$arreglo+=array('total_menudeo'=>$total_menudeo);
+		$arreglo+=array('total_mayoreo'=>$total_mayoreo);
+		$arreglo+=array('total_distribuidor'=>$total_distribuidor);
+		$arreglo+=array('precio'=>$precio);
+		return json_encode($arreglo);
 
 	}
 }

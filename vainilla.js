@@ -388,25 +388,42 @@ function calcular(){
   formData.append("function", "esquemas");
   formData.append("idproducto", idproducto);
   formData.append("cantidad", cantidad);
-
-
+  cargando(true);
   let xhr = new XMLHttpRequest();
   xhr.open('POST',"a_venta/db_.php");
   xhr.addEventListener('load',(data)=>{
-    var datos = JSON.parse(data.target.response);
-    document.getElementById("normal").value=datos.total_menudeo;
-    document.getElementById("mayoreo").value=datos.total_mayoreo;
-    document.getElementById("distribuidor").value=datos.total_distribuidor;
-    document.getElementById("precio").value=datos.precio;
+    cargando(false);
+    if (isJSON(data.target.response)){
+      var datos = JSON.parse(data.target.response);
+      if (datos.error==0){
+        var datos = JSON.parse(data.target.response);
+        document.getElementById("normal").value=datos.total_menudeo;
+        document.getElementById("mayoreo").value=datos.total_mayoreo;
+        document.getElementById("distribuidor").value=datos.total_distribuidor;
+        document.getElementById("precio").value=datos.precio;
+      }
+      else{
+        Swal.fire({
+          type: 'Error',
+          title: "Favor de verificar",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    }
+    else{
+      Swal.fire({
+        type: 'Error',
+        title: "Favor de verificar",
+        showConfirmButton: false,
+        timer: 1000
+      });
+    }
   });
   xhr.onerror =  ()=>{
     cargando(false);
   };
   xhr.send(formData);
-
-
-  console.log("entra");
-
 }
 
 function lista(idventa){

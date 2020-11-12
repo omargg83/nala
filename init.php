@@ -1,7 +1,7 @@
 <?php
 
 $server=3;
-$_SESSION['des']=1;
+$_SESSION['des']=0;
 
 if($server==1){
   /////////remoto
