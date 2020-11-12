@@ -393,6 +393,7 @@ function calcular(){
   xhr.open('POST',"a_venta/db_.php");
   xhr.addEventListener('load',(data)=>{
     cargando(false);
+    console.log(data.target.response);
     if (isJSON(data.target.response)){
       var datos = JSON.parse(data.target.response);
       if (datos.error==0){

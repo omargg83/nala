@@ -293,11 +293,9 @@ class Venta extends Sagyc{
 		$cantidad_mayoreo=$producto->cantidad_mayoreo;
 
 		//////////////para esquema 2
-		$mayoreo_minimo=$producto->mayoreo_minimo;
-		$mayoreo_porcentaje=$producto->mayoreo_porcentaje;
+		$mayoreo_cantidad=$producto->mayoreo_cantidad;
+		$distri_cantidad=$producto->distri_cantidad;
 
-		$distri_minimo=$producto->distri_minimo;
-		$distri_porcentaje=$producto->distri_porcentaje;
 
 		///////////////terminan variables
 
@@ -322,26 +320,7 @@ class Venta extends Sagyc{
 
 			///////////////calculo
 			$precio=$total_menudeo;
-			/*
-			if($cantidad>=$cantidad_mayoreo and ($total_menudeo>=$monto_mayor and $total_menudeo<$monto_distribuidor)){
-				$precio=$total_mayoreo;
-			}
-			else if($cantidad>=$cantidad_mayoreo and $total_menudeo>=$monto_distribuidor){
-				$precio=$total_distribuidor;
-			}
-			*/
 
-			/*
-			if($cantidad>=$cantidad_mayoreo){
-				$precio=$total_mayoreo;
-				if ($total_menudeo>=$monto_mayor and $total_menudeo<$monto_distribuidor){
-					$precio=$total_mayoreo;
-				}
-				else if($total_menudeo>=$monto_distribuidor){
-					$precio=$total_distribuidor;
-				}
-			}
-			*/
 			if($total_menudeo>=$monto_mayor and $total_menudeo<$monto_distribuidor){
 				////////////cuando es mayor que 1000
 				$precio=$total_mayoreo;
@@ -361,32 +340,30 @@ class Venta extends Sagyc{
 		else{
 			$total_menudeo=($precio*$cantidad);
 
-			////////////////validaciones
-			if($mayoreo_minimo>0 and $mayoreo_porcentaje>0){
-				///////////la buena
-				$total_mayoreo=$total_menudeo-(($total_menudeo*$mayoreo_porcentaje)/100);
+			//////////////validaciones
+			if($precio_mayoreo>0 and $mayoreo_cantidad>0){
+				$total_mayoreo=($precio_mayoreo*$cantidad);
 			}
 			else{
 				$total_mayoreo=$total_menudeo;
 			}
-			if($distri_minimo>0 and $distri_porcentaje>0){
-				///////////la buena
-				$total_distribuidor=$total_menudeo-(($total_menudeo*$distri_porcentaje)/100);
+
+			if($precio_distri>0 and $distri_cantidad>0){
+				$total_distribuidor=($precio_distri*$cantidad);
 			}
 			else{
 				$total_distribuidor=$total_menudeo;
 			}
-
+			
 			///////////////calculo
 			$precio=$total_menudeo;
-			if($cantidad>=$mayoreo_minimo and $cantidad<$distri_minimo){
+			if($cantidad>=$mayoreo_cantidad and $cantidad<$distri_cantidad){
 				$precio=$total_mayoreo;
 			}
-			else if($cantidad>=$distri_minimo){
+			else if($cantidad>=$distri_cantidad){
 				$precio=$total_distribuidor;
 			}
 		}
-
 
 		$arreglo =array();
 		$arreglo+=array('error'=>0);
