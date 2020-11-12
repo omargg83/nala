@@ -119,6 +119,15 @@ class Productos extends Sagyc{
 					if($tipo==0){
 						$arreglo+=array('cantidad'=>1);
 					}
+					$monto_mayor=1000;
+					$monto_distribuidor=3000;
+					$stockmin=1;
+					$cantidad_mayoreo=10;
+					$arreglo+=array('monto_mayor'=>$monto_mayor);
+					$arreglo+=array('monto_distribuidor'=>$monto_distribuidor);
+					$arreglo+=array('stockmin'=>$stockmin);
+					$arreglo+=array('cantidad_mayoreo'=>$cantidad_mayoreo);
+
 					$arreglo+=array('idcatalogo'=>$idcatalogo);
 					$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
 					$this->insert('productos', $arreglo);

@@ -19,16 +19,19 @@
 		$tipo=$per->tipo;
 		$activo_producto=$per->activo_producto;
 
-		$cantidad_mayoreo=$per->cantidad_mayoreo;
+
+		$esquema=$per->esquema;
 		$precio_mayoreo=$per->precio_mayoreo;
-		$cantidad_distri=$per->cantidad_distri;
 		$precio_distri=$per->precio_distri;
-		$mayoreo_minimo=$per->mayoreo_minimo;
-		$mayoreo_maximo=$per->mayoreo_maximo;
-		$mayoreo_porcentaje=$per->mayoreo_porcentaje;
-		$distri_minimo=$per->distri_minimo;
-		$distri_maximo=$per->distri_maximo;
-		$distri_porcentaje=$per->distri_porcentaje;
+		//// variables esquema NALA
+		$cantidad_mayoreo=$per->cantidad_mayoreo;
+		$monto_mayor=$per->monto_mayor;
+		$monto_distribuidor=$per->monto_distribuidor;
+		///// varibables esquema 2
+		$mayoreo_cantidad=$per->mayoreo_cantidad;
+		$distri_cantidad=$per->distri_cantidad;
+		///
+
 	}
 	else{
 		$precio=0;
@@ -44,16 +47,19 @@
 		$descripcion="";
 		$tipo="";
 		$activo_producto=0;
+
+		$esquema=1;
+		//// variables esquema NALA
 		$cantidad_mayoreo=0;
 		$precio_mayoreo=0;
-		$cantidad_distri=0;
+		$monto_mayor=1000;
+		$monto_distribuidor=3000;
+		///// variables esquema 2
+		$mayoreo_cantidad=0;
+		$distri_cantidad=0;
 		$precio_distri=0;
-		$mayoreo_minimo=0;
-		$mayoreo_maximo=0;
-		$mayoreo_porcentaje=0;
-		$distri_minimo=0;
-		$distri_maximo=0;
-		$distri_porcentaje=0;
+
+
 		$codigo=0;
 	}
 
@@ -120,12 +126,12 @@
 				</div>
 				<div class='card-body'>
 					<div class='row'>
-						<div class="col-3">
+						<div class="col-2">
 						 <label>$ compra x Unidad</label>
 						 <input type="text" class="form-control form-control-sm" id="preciocompra" name='preciocompra' placeholder="Precio" value="<?php echo $preciocompra; ?>">
 						</div>
 
-						<div class="col-3">
+						<div class="col-2">
 							<?php
 							if($tipo==3){
 								$sql="select sum(cantidad) as total from bodega where idsucursal='".$_SESSION['idsucursal']."' and idproducto='$idproducto'";
@@ -139,75 +145,76 @@
 						 <input type="text" class="form-control form-control-sm" id="tmp_ex" name='tmp_ex' placeholder="Existencias" value="<?php echo $exist; ?>" readonly>
 						</div>
 
-						<div class="col-3">
+						<div class="col-2">
 						 <label>Stock Minimo</label>
 						 <input type="text" class="form-control form-control-sm" id="stockmin" name='stockmin' placeholder="Stock Minimo" value="<?php echo $stockmin; ?>">
 						</div>
 
-						<div class="col-3">
+						<div class="col-2">
 						 <label>$ Venta</label>
 						 <input type="text" class="form-control form-control-sm" id="precio" name='precio' placeholder="Precio" value="<?php echo $precio; ?>" required>
-						</div>
-					</div>
-					<hr>
-					<h5>Descuento por unidad</h5>
-					<hr>
-					<div class='row'>
-						<div class="col-2">
-						 <label># Mayoreo</label>
-						 <input type="text" class="form-control form-control-sm" id="cantidad_mayoreo" name='cantidad_mayoreo' placeholder="# Cant. Mayoreo" value="<?php echo $cantidad_mayoreo; ?>" >
 						</div>
 
 						<div class="col-2">
 						 <label>$ Mayoreo</label>
-						 <input type="text" class="form-control form-control-sm" id="precio_mayoreo" name='precio_mayoreo' placeholder="Precio Mayoreo" value="<?php echo $precio_mayoreo; ?>" >
-						</div>
-
-						<div class="col-2">
-						 <label># Distribuidor</label>
-						 <input type="text" class="form-control form-control-sm" id="cantidad_distri" name='cantidad_distri' placeholder="# Cant. Distribuidor" value="<?php echo $cantidad_distri; ?>" >
+						 <input type="text" class="form-control form-control-sm" id="precio_mayoreo" name='precio_mayoreo' placeholder="Precio Mayoreo" value="<?php echo $precio_mayoreo; ?>" required>
 						</div>
 
 						<div class="col-2">
 						 <label>$ Distribuidor</label>
-						 <input type="text" class="form-control form-control-sm" id="precio_distri" name='precio_distri' placeholder="Precio Distribuidor" value="<?php echo $precio_distri; ?>" >
+						 <input type="text" class="form-control form-control-sm" id="precio_distri" name='precio_distri' placeholder="Precio Distribuidor" value="<?php echo $precio_distri; ?>" required>
+						</div>
+
+					</div>
+
+					<hr>
+					<h5>Esquema de descuento:</h5>
+					<hr>
+						<div class='row'>
+								<div class='col-3'>
+							<select class="form-control form-control-sm" name="esquema" id="esquema">
+								<option value='' disabled selected>Seleccione una opción</option>
+								<option value='1'<?php if($esquema=='1') echo 'selected'; ?> >NALA</option>
+								<option value='2'<?php if($esquema=='2') echo 'selected'; ?> >ESQUEMA 2</option>
+							</select>
+								</div>
+
+					</div>
+
+					<hr>
+					<h5>Esquema NALA:</h5>
+					<hr>
+					<div class='row'>
+						<div class="col-2">
+						 <label>Cantidad min. Mayoreo (Pza.)</label>
+						 <input type="text" class="form-control form-control-sm" id="cantidad_mayoreo" name='cantidad_mayoreo' placeholder="# Cant. Mayoreo" value="<?php echo $cantidad_mayoreo; ?>" >
+						</div>
+
+						<div class="col-2">
+						 <label>Monto min. compra mayoreo</label>
+						 <input type="text" class="form-control form-control-sm" id="monto_mayor" name='monto_mayor' placeholder="Monto min compra mayoreo" value="<?php echo $monto_mayor; ?>" readonly>
+						</div>
+
+						<div class="col-2">
+						 <label>Monto min. compra distribuidor</label>
+						 <input type="text" class="form-control form-control-sm" id="monto_distribuidor" name='monto_distribuidor' placeholder="Monto min compra distribuidor" value="<?php echo $monto_distribuidor; ?>" readonly>
 						</div>
 
 					</div>
 					<hr>
-					<h5>Descuento por monto</h5>
+					<h5>Esquema 2:</h5>
 					<hr>
 					<div class='row'>
 						<div class="col-2">
-						 <label>Min Mayoreo</label>
-						 <input type="text" class="form-control form-control-sm" id="mayoreo_minimo" name='mayoreo_minimo' placeholder="$ Mayoreo" value="<?php echo $mayoreo_minimo; ?>" >
+						 <label>Cantidad Para Precio Mayoreo (Pza.)</label>
+						 <input type="text" class="form-control form-control-sm" id="mayoreo_cantidad" name='mayoreo_cantidad' placeholder="# Cant. Mayoreo" value="<?php echo $mayoreo_cantidad; ?>" >
 						</div>
 
 						<div class="col-2">
-						 <label>Max Mayoreo</label>
-						 <input type="text" class="form-control form-control-sm" id="mayoreo_maximo" name='mayoreo_maximo' placeholder="$ Mayoreo" value="<?php echo $mayoreo_maximo; ?>" >
+						 <label>Cantidad Para Precio Distribuidor (Pza.)</label>
+						 <input type="text" class="form-control form-control-sm" id="distri_cantidad" name='distri_cantidad' placeholder="# Cant. Mayoreo" value="<?php echo $distri_cantidad; ?>" >
 						</div>
 
-						<div class="col-2">
-						 <label>Porcentaje</label>
-						 <input type="text" class="form-control form-control-sm" id="mayoreo_porcentaje" name='mayoreo_porcentaje' placeholder="$ Mayoreo" value="<?php echo $mayoreo_porcentaje; ?>" >
-						</div>
-
-
-						<div class="col-2">
-						 <label>Min Distribuidor</label>
-						 <input type="text" class="form-control form-control-sm" id="distri_minimo" name='distri_minimo' placeholder="$ Distribuidor" value="<?php echo $distri_minimo; ?>" >
-						</div>
-
-						<div class="col-2">
-						 <label>Max Distribuidor</label>
-						 <input type="text" class="form-control form-control-sm" id="distri_maximo" name='distri_maximo' placeholder="$ Distribuidor" value="<?php echo $distri_maximo; ?>" >
-						</div>
-
-						<div class="col-2">
-						 <label>Porcentaje</label>
-						 <input type="text" class="form-control form-control-sm" id="distri_porcentaje" name='distri_porcentaje' placeholder="$ Distribuidor" value="<?php echo $distri_porcentaje; ?>" >
-						</div>
 					</div>
 				</div>
 

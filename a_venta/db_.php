@@ -337,7 +337,7 @@ class Venta extends Sagyc{
 				$precio=$total_menudeo;
 			}
 		}
-		else{
+		else if($esquema==2){//esquema 2
 			$total_menudeo=($precio*$cantidad);
 
 			//////////////validaciones
@@ -354,7 +354,7 @@ class Venta extends Sagyc{
 			else{
 				$total_distribuidor=$total_menudeo;
 			}
-			
+
 			///////////////calculo
 			$precio=$total_menudeo;
 			if($cantidad>=$mayoreo_cantidad and $cantidad<$distri_cantidad){

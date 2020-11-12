@@ -144,35 +144,31 @@ class Productos extends Sagyc{
 			if (isset($_REQUEST['stockmin'])){
 				$arreglo += array('stockmin'=>$_REQUEST['stockmin']);
 			}
+			if (isset($_REQUEST['esquema'])){
+				$arreglo += array('esquema'=>$_REQUEST['esquema']);
+			}
 			if (isset($_REQUEST['cantidad_mayoreo'])){
 				$arreglo += array('cantidad_mayoreo'=>$_REQUEST['cantidad_mayoreo']);
 			}
 			if (isset($_REQUEST['precio_mayoreo'])){
 				$arreglo += array('precio_mayoreo'=>$_REQUEST['precio_mayoreo']);
 			}
-			if (isset($_REQUEST['cantidad_distri'])){
-				$arreglo += array('cantidad_distri'=>$_REQUEST['cantidad_distri']);
+			if (isset($_REQUEST['monto_mayor'])){
+				$arreglo += array('monto_mayor'=>$_REQUEST['monto_mayor']);
 			}
+			if (isset($_REQUEST['monto_distribuidor'])){
+				$arreglo += array('monto_distribuidor'=>$_REQUEST['monto_distribuidor']);
+			}
+
 			if (isset($_REQUEST['precio_distri'])){
 				$arreglo += array('precio_distri'=>$_REQUEST['precio_distri']);
 			}
-			if (isset($_REQUEST['mayoreo_minimo'])){
-				$arreglo += array('mayoreo_minimo'=>$_REQUEST['mayoreo_minimo']);
+
+			if (isset($_REQUEST['mayoreo_cantidad'])){
+				$arreglo += array('mayoreo_cantidad'=>$_REQUEST['mayoreo_cantidad']);
 			}
-			if (isset($_REQUEST['mayoreo_maximo'])){
-				$arreglo += array('mayoreo_maximo'=>$_REQUEST['mayoreo_maximo']);
-			}
-			if (isset($_REQUEST['mayoreo_porcentaje'])){
-				$arreglo += array('mayoreo_porcentaje'=>$_REQUEST['mayoreo_porcentaje']);
-			}
-			if (isset($_REQUEST['distri_minimo'])){
-				$arreglo += array('distri_minimo'=>$_REQUEST['distri_minimo']);
-			}
-			if (isset($_REQUEST['distri_maximo'])){
-				$arreglo += array('distri_maximo'=>$_REQUEST['distri_maximo']);
-			}
-			if (isset($_REQUEST['distri_porcentaje'])){
-				$arreglo += array('distri_porcentaje'=>$_REQUEST['distri_porcentaje']);
+			if (isset($_REQUEST['distri_cantidad'])){
+				$arreglo += array('distri_cantidad'=>$_REQUEST['distri_cantidad']);
 			}
 
 			if (isset($_REQUEST['preciocompra']) and strlen($_REQUEST['preciocompra'])>0  ){
