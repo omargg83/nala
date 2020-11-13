@@ -99,8 +99,6 @@ class Venta extends Sagyc{
 			if(isset($_REQUEST['idproducto'])){
 				$precio=$_REQUEST['precio'];
 
-
-
 				if($idventa==0){
 					$date=date("Y-m-d H:i:s");
 					$estado="Activa";
@@ -302,6 +300,8 @@ class Venta extends Sagyc{
 		if($esquema==1){
 			$total_menudeo=($precio*$cantidad);
 
+			$precio_f=$precio;
+
 			////////////////validaciones
 			if($cantidad_mayoreo>0 and $monto_mayor>0 and $precio_mayoreo>0){
 				///////////la buena
@@ -323,23 +323,23 @@ class Venta extends Sagyc{
 
 			if($total_menudeo>=$monto_mayor and $total_menudeo<$monto_distribuidor){
 				////////////cuando es mayor que 1000
-				$precio=$total_mayoreo;
+				$precio=$precio_mayoreo;
 			}
 			else if($total_menudeo>=$monto_distribuidor){
 				/////////////cuando es mayor que 3000
-				$precio=$total_distribuidor;
+				$precio=$precio_distri;
 			}
 			else if($cantidad>=$cantidad_mayoreo){
 				//////////////cuando es mayor de 10
-				$precio=$total_mayoreo;
+				$precio=$precio_mayoreo;
 			}
 			else{
-				$precio=$total_menudeo;
+				$precio=$precio_f;
 			}
 		}
 		else if($esquema==2){//esquema 2
 			$total_menudeo=($precio*$cantidad);
-
+			$precio_f=$precio;
 			//////////////validaciones
 			if($precio_mayoreo>0 and $mayoreo_cantidad>0){
 				$total_mayoreo=($precio_mayoreo*$cantidad);
@@ -358,10 +358,10 @@ class Venta extends Sagyc{
 			///////////////calculo
 			$precio=$total_menudeo;
 			if($cantidad>=$mayoreo_cantidad and $cantidad<$distri_cantidad){
-				$precio=$total_mayoreo;
+				$precio=$precio_mayoreo;
 			}
 			else if($cantidad>=$distri_cantidad){
-				$precio=$total_distribuidor;
+				$precio=$precio_distri;
 			}
 		}
 
@@ -370,6 +370,11 @@ class Venta extends Sagyc{
 		$arreglo+=array('total_menudeo'=>$total_menudeo);
 		$arreglo+=array('total_mayoreo'=>$total_mayoreo);
 		$arreglo+=array('total_distribuidor'=>$total_distribuidor);
+
+		$arreglo+=array('precio_normal'=>$precio_f);
+		$arreglo+=array('precio_mayoreo'=>$precio_mayoreo);
+		$arreglo+=array('precio_distribuidor'=>$precio_distri);
+
 		$arreglo+=array('precio'=>$precio);
 		return json_encode($arreglo);
 

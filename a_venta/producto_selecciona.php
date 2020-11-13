@@ -33,9 +33,6 @@
 	$producto->monto_mayor;
 	$producto->monto_distribuidor;
 
-
-
-
 	echo "<form id='form_prod' is='is-selecciona'>";
 
 		echo "<input type='hidden' class='form-control form-control-sm' name='idproducto' id='idproducto' value='$producto->idproducto' readonly>";
@@ -48,9 +45,8 @@
 			echo "<div class='row'>";
 				echo "<div class='col-12'>";
 					echo "<input type='text' class='form-control form-control-sm' name='nombre' id='nombre' value='".$producto->nombre."' readonly>";
-
 					echo "<small>";
-						echo $producto->nombre;
+						echo $producto->esquema.$producto->nombre;
 					echo "</small>";
 					echo "<hr>";
 				echo "</div>";
@@ -73,20 +69,39 @@
 				echo "</div>";
 
 			echo "</div>";
+
+			echo "<hr>";
 				//////////////////////arreglar esto
 			echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Precio normal</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio_normal' id='precio_normal' value='' readonly>";
+				echo "</div>";
+
+				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+					echo "<label>Precio Mayoreo</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio_mayoreo' id='precio_mayoreo' value='' readonly>";
+				echo "</div>";
+
+				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+					echo "<label>Precio Ditribuidor</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio_distribuidor' id='precio_distribuidor' value='' readonly>";
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='row'>";
+				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+					echo "<label>Total normal</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='normal' id='normal' value='".$producto->precio."' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
-					echo "<label>Mayoreo</label>";
+					echo "<label>Total Mayoreo</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='mayoreo' id='mayoreo' value='' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
-					echo "<label>Ditribuidor</label>";
+					echo "<label>Total Ditribuidor</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='distribuidor' id='distribuidor' value='' readonly>";
 				echo "</div>";
 			echo "</div>";

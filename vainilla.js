@@ -246,9 +246,9 @@ $(document).on('submit',"[is*='is-selecciona']",function(e){
       document.getElementById("fecha").value=datos.fecha;
       document.getElementById("estado").value=datos.estado;
       document.getElementById("total").value=datos.total;
+
       lista(datos.idventa);
       document.getElementById("resultadosx").innerHTML ="";
-
     }
     else{
       cargando(false);
@@ -402,6 +402,13 @@ function calcular(){
         document.getElementById("mayoreo").value=datos.total_mayoreo;
         document.getElementById("distribuidor").value=datos.total_distribuidor;
         document.getElementById("precio").value=datos.precio;
+
+
+        document.getElementById("precio_normal").value=datos.precio_normal;
+        document.getElementById("precio_mayoreo").value=datos.precio_mayoreo;
+        document.getElementById("precio_distribuidor").value=datos.precio_distribuidor;
+
+
       }
       else{
         Swal.fire({
