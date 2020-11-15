@@ -38,7 +38,7 @@ class Venta extends Sagyc{
 
 			$sql="select venta.idventa, venta.idsucursal, venta.descuento, venta.factura, clientes.nombre as nombrecli, sucursal.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
 			left outer join clientes on clientes.idcliente=venta.idcliente
-			left outer join sucursal on sucursal.idsucursal=venta.idsucursal where (venta.fecha BETWEEN :fecha1 AND :fecha2)";
+			left outer join sucursal on sucursal.idsucursal=venta.idsucursal where venta.idsucursal='".$_SESSION['idsucursal']."' and (venta.fecha BETWEEN :fecha1 AND :fecha2)";
 			$sth = $this->dbh->prepare($sql);
 			$sth->bindValue(":fecha1",$desde);
 			$sth->bindValue(":fecha2",$hasta);
@@ -64,7 +64,7 @@ class Venta extends Sagyc{
 				left outer join productos on productos.idproducto=bodega.idproducto
 				LEFT OUTER JOIN clientes ON clientes.idcliente = venta.idcliente
 				LEFT OUTER JOIN sucursal ON sucursal.idsucursal = venta.idsucursal
-				where bodega.idventa and (venta.fecha BETWEEN :fecha1 AND :fecha2)";
+				where bodega.idventa and venta.idsucursal='".$_SESSION['idsucursal']."' and (venta.fecha BETWEEN :fecha1 AND :fecha2)";
 				if(strlen($idusuario)>0){
 					$sql.=" and venta.idusuario=:idusuario";
 				}

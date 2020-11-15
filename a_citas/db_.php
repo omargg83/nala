@@ -92,8 +92,8 @@ class Pedidos extends Sagyc{
 			if (isset($_REQUEST['buscar']) and strlen(trim($_REQUEST['buscar']))>0){
 				$texto=trim(htmlspecialchars($_REQUEST['buscar']));
 				$sql="SELECT * from pedidos
-				left outer join clientes on clientes.id=pedidos.idcliente
-				where pedidos.id like '%$texto%' or pedidos.estatus like '%$texto%' or clientes.nombre like '%$texto' order by pedidos.id desc limit 100";
+				left outer join clientes on clientes.id=citas.idcliente
+				where citas.idcitas like '%$texto%' or citas.estatus like '%$texto%' or clientes.nombre like '%$texto' order by citas.idcitas desc limit 100";
 			}
 			else{
 				$sql="SELECT * from citas order by citas.idcitas desc";
@@ -231,9 +231,10 @@ class Pedidos extends Sagyc{
 	}
 
 	public function borrar_cita(){
-		if (isset($_REQUEST['id'])){$id=$_REQUEST['id'];}
+		if (isset($_REQUEST['idcita'])){$id=$_REQUEST['idcita'];}
 		return $this->borrar('citas',"idcitas",$id);
 	}
+
 
 	public function info($id){
 		try{

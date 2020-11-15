@@ -55,7 +55,8 @@
         </div>
      </div>
      <div class="modal-footer">
-       <button type="button" class="btn btn-outline-primary btn-sm" onclick='editar_cita(<?php echo $id; ?>)'><i class='fas fa-pencil-alt'></i>Editar</button>
-       <button type="button" class="btn btn-outline-primary btn-sm" data-dismiss="modal"><i class='fas fa-undo-alt'></i>Cerrar</button>
+
+			<?php	echo "<button type='button' class='btn btn-outline-primary btn-sm' id='edit_comision' is='b-link' title='Editar' des='a_citas/editar' dix='trabajo' v_idcita='$resp->idcitas' data-dismiss='modal'><i class='fas fa-pencil-alt'></i>Editar</button>";?>
+       	<button type="button" class="btn btn-outline-primary btn-sm" data-dismiss="modal"><i class='fas fa-undo-alt'></i>Cerrar</button>
      </div>
    </div>

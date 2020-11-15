@@ -27,8 +27,6 @@
 
 	$producto->cantidad;
 	$producto->precio; //precio unitario * cantidad (menudeo)
-	$producto->preciom; // precio mayoreo * Cantidad
-	$producto->preciod; // precio distribuidor * Cantidad
 
 	$producto->monto_mayor;
 	$producto->monto_distribuidor;
@@ -46,7 +44,18 @@
 				echo "<div class='col-12'>";
 					echo "<input type='text' class='form-control form-control-sm' name='nombre' id='nombre' value='".$producto->nombre."' readonly>";
 					echo "<small>";
-						echo $producto->esquema.$producto->nombre;
+						if ($producto->esquema==0){
+							echo "Este producto no tiene ningun esquema de descuento";
+						}
+						else if ($producto->esquema==1){
+							echo "Esquema Nala";
+
+						}
+						else if ($producto->esquema==2){
+
+						echo "Esquema por Cantidad";
+						}
+
 					echo "</small>";
 					echo "<hr>";
 				echo "</div>";
@@ -59,8 +68,8 @@
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
-					echo "<label>Precio a aplicar</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='precio' id='precio' value='$producto->precio' readonly>";
+					echo "<label>Precio a aplicar x Unidad</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio' id='precio' value='".moneda($producto->precio)."' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
@@ -72,37 +81,37 @@
 
 			echo "<hr>";
 				//////////////////////arreglar esto
-			echo "<div class='row'>";
+		/*	echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Precio normal</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='precio_normal' id='precio_normal' value='' readonly>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio_normal' id='precio_normal' value='$producto->precio' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Precio Mayoreo</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='precio_mayoreo' id='precio_mayoreo' value='' readonly>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio_mayoreo' id='precio_mayoreo' value='$producto->precio_mayoreo' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Precio Ditribuidor</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='precio_distribuidor' id='precio_distribuidor' value='' readonly>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio_distribuidor' id='precio_distribuidor' value='$producto->precio_distri' readonly>";
 				echo "</div>";
-			echo "</div>";
+			echo "</div>"; */
 
 			echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Total normal</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='normal' id='normal' value='".$producto->precio."' readonly>";
+					echo "<input type='text' class='form-control form-control-sm' name='normal' id='normal' value='".moneda($producto->precio)."' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Total Mayoreo</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='mayoreo' id='mayoreo' value='' readonly>";
+					echo "<input type='text' class='form-control form-control-sm' name='mayoreo' id='mayoreo' value='".moneda($producto->precio_mayoreo)."' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Total Ditribuidor</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='distribuidor' id='distribuidor' value='' readonly>";
+					echo "<input type='text' class='form-control form-control-sm' name='distribuidor' id='distribuidor' value='".moneda($producto->precio_distri)."' readonly>";
 				echo "</div>";
 			echo "</div>";
 

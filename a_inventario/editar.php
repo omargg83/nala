@@ -7,8 +7,6 @@
 
 		$exist=$per->cantidad;
 		$precio=$per->precio;
-		$preciom=$per->preciom;
-		$preciod=$per->preciod;
 		$stockmin=$per->stockmin;
 		$codigo=$per->codigo;
 

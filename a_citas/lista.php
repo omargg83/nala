@@ -37,8 +37,7 @@
 								echo "<button type='button' class='btn btn-warning btn-sm' id='edit_comision' is='b-link' title='Editar' des='a_citas/editar' dix='trabajo' v_idcita='$key->idcitas'><i class='fas fa-pencil-alt'></i></button>";
 								//echo "<button class='btn btn-outline-secondary btn-sm' id='edit_comision' title='Editar' data-lugar='a_citas/editar'><i class='fas fa-pencil-alt'></i></i></button>";
 								if($key->estatus!="REALIZADA"){
-									echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_productos/db_' des='a_citas/lista' fun='borrar_cita' dix='trabajo' v_id='$key->idcitas' id='eliminar' tp='¿Desea eliminar la cita?'><i class='far fa-trash-alt'></i></button>";
-									//echo "<button class='btn btn-outline-secondary btn-sm' id='eliminar_pedido' data-lugar='a_citas/db_' data-destino='a_citas/lista' data-id='".$key->idcitas."' data-funcion='borrar_cita' data-div='trabajo'><i class='far fa-trash-alt'></i></button>";
+									echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_citas/db_' des='a_citas/lista' fun='borrar_cita' dix='trabajo' v_idcita='$key->idcitas' id='eliminar' tp='¿Desea eliminar la cita?'><i class='far fa-trash-alt'></i></button>";
 								}
 
 							echo "</div>";

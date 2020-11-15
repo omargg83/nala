@@ -21,9 +21,9 @@
 		$limite->modify("+60 minute");
 
 		$color="#000";
-		if($key->estatus=='PENDIENTE'){ $color="#bc9c6b"; }
-		if($key->estatus=='PROGRAMADA'){ $color="#fffacd"; }
-		if($key->estatus=='REALIZADA'){ $color="#8bb9dd"; }
+		if($key->estatus=='PENDIENTE'){ $color="#d1ef14"; }
+		if($key->estatus=='PROGRAMADA'){ $color="#6392e5"; }
+		if($key->estatus=='REALIZADA'){ $color="#1ecbab"; }
 		if($key->estatus=='CANCELADA'){ $color="#f59aa8"; }
 
 		$texto="Retiro";

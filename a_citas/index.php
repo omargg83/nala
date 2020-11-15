@@ -103,7 +103,7 @@
               var datos = JSON.parse(response);
               if (datos.idcliente>0){
                 $("#idcliente").val(datos.idcliente);
-                $("#nombre").val(datos.profesion+" "+datos.nombre+" "+datos.apellidop+" "+datos.apellidom);
+                $("#nombre").val(datos.nombre);
                 $("#correo").val(datos.correo);
                 $("#telefono").val(datos.telefono);
                 Swal.fire({
