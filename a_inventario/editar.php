@@ -33,9 +33,6 @@
 	}
 	else{
 		$precio=0;
-
-		$preciom=0;
-		$preciod=0;
 		$stockmin=1;
 
 		$cantidad=0;

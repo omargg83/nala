@@ -111,7 +111,7 @@
 						echo "<a href='#a_cliente/index' is='menu-link' title='Clientes'><i class='fas fa-user-tag'></i><span>Clientes</span></a>";
 
 						if(array_key_exists('CITAS', $db->derecho))
-						echo "<a href='#a_citas/index' is='menu-link' title='Citas'><i class='far fa-calendar-check'></i><span>Citas</span></a>";
+						echo "<a href='#a_citas/index' is='menu-link' title='Citas'><i class='far fa-calendar-check'></i><span>Citas/Agenda</span></a>";
 
 						if(array_key_exists('PROVEEDORES', $db->derecho))
 						echo "<a href='#a_proveedores/index' is='menu-link' title='Proveedores'><i class='fas fa-people-carry'></i><span>Proveedores</span></a>";

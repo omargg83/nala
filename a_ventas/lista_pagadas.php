@@ -6,7 +6,7 @@
 		$pd = $db->ventas_buscar($texto);
 	}
 	else{
-		$pd = $db->ventas_lista();
+		$pd = $db->ventas_pagadas();
 	}
 
 	echo "<div class='container-fluid' style='background-color:".$_SESSION['cfondo']."; '>";
@@ -14,7 +14,7 @@
 <div class='tabla_css' id='tabla_css'>
 	<div class='row titulo-row'>
 		<div class='col-12'>
-			LISTA DE VENTAS ABIERTAS
+			LISTA DE VENTAS EFECTUADAS
 		</div>
 	</div>
 	<div class='row header-row'>

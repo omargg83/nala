@@ -215,7 +215,7 @@
 							if($id>0){
 								echo "<button type='button' class='btn btn-warning btn-sm' id='producto_add' v_idproducto='$idproducto'is='b-link' v_idcita='$id' des='a_citas/form_producto'  dix='trabajo' omodal='1'>+ <i class='fab fa-product-hunt'></i>Producto</button>";
 							}*/
-            echo "<button type='button' class='btn btn-warning btn-sm' id='calendario' onclick='calendar_load(1)' title='Regresar'><i class='fas fa-undo-alt'></i>Regresar</button>";
+            echo "<button type='button' class='btn btn-warning btn-sm' id='calendario' data-dismiss='modal' title='Cerrar'><i class='fas fa-sign-out-alt'></i>Cerrar</button>";
 
         echo "</div>";
 				echo "</form>";

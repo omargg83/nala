@@ -21,20 +21,31 @@
 		$limite->modify("+60 minute");
 
 		$color="#000";
-		if($key->estatus=='PENDIENTE'){ $color="#d1ef14"; }
+		if($key->estatus=='PENDIENTE'){ $color="#f3ef19"; }
 		if($key->estatus=='PROGRAMADA'){ $color="#6392e5"; }
-		if($key->estatus=='REALIZADA'){ $color="#1ecbab"; }
-		if($key->estatus=='CANCELADA'){ $color="#f59aa8"; }
+		if($key->estatus=='REALIZADA'){ $color="#20b224"; }
+		if($key->estatus=='CANCELADA'){ $color="#e53636"; }
 
 		$texto="Retiro";
+		if ($key->idcliente>0){
+			$arreglo[$i]=array(
+				'id'=>$key->idcitas,
+				'title'=>$key->nombre,
+				'start'=>$hora[0]."T".$hora[1],
+				'end'=>$hora2[0]."T".$hora2[1],
+				'color'=>$color
+			);
+			}
+			else {
+				$arreglo[$i]=array(
+					'id'=>$key->idcitas,
+					'title'=>$key->asunto,
+					'start'=>$hora[0]."T".$hora[1],
+					'end'=>$hora2[0]."T".$hora2[1],
+					'color'=>$color
+				);
+				}
 
-		$arreglo[$i]=array(
-			'id'=>$key->idcitas,
-			'title'=>$key->nombre,
-			'start'=>$hora[0]."T".$hora[1],
-			'end'=>$hora2[0]."T".$hora2[1],
-			'color'=>$color
-		);
 		$i++;
 	}
 	echo json_encode($arreglo);
