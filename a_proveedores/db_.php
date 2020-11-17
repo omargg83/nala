@@ -85,9 +85,9 @@ class Cliente extends Sagyc{
 		}
 		return $x;
 	}
-	public function borrar_cliente(){
-		if (isset($_REQUEST['id'])){ $id=$_REQUEST['id']; }
-		return $this->borrar('proveedores',"id",$id);
+	public function borrar_proveedor(){
+		if (isset($_REQUEST['idproveedor'])){ $idproveedor=$_REQUEST['idproveedor']; }
+		return $this->borrar('proveedores',"idproveedor",$idproveedor);
 	}
 }
 

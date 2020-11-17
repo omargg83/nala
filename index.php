@@ -44,7 +44,7 @@
 	    <ul class='navbar-nav mr-auto'>
 
 	    </ul>
-			
+
 			<ul class='nav navbar-nav navbar-right' id='chatx'>
 			 <li class='nav-item dropdown'>
 					<a class='btn my-2 my-sm-0' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
@@ -144,6 +144,9 @@
 
 						if(array_key_exists('DATOSEMP', $db->derecho))
 		        echo "<a href='#a_datosemp/index' is='menu-link' title='Datosemp'><i class='fas fa-wrench'></i><span>Datos Emp.</span></a>";
+
+						if(array_key_exists('CAJAS', $db->derecho))
+		        echo "<a href='#a_cajas/index' is='menu-link' title='Datosemp'><i class='fas fa-cart-arrow-down'></i><span>Cajas</span></a>";
 
 						if(array_key_exists('USUARIOS', $db->derecho))
 						echo "<a href='#a_usuarios/index' is='menu-link' title='Usuarios'><i class='fas fa-users'></i> <span>Usuarios</span></a>";
