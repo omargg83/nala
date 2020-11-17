@@ -44,6 +44,22 @@
 	    <ul class='navbar-nav mr-auto'>
 
 	    </ul>
+			
+			<ul class='nav navbar-nav navbar-right' id='chatx'>
+			 <li class='nav-item dropdown'>
+					<a class='btn my-2 my-sm-0' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+					 <i class='fab fa-rocketchat fa-spin' style='color:#96ff57 !important;'></i> Chat
+					</a>
+
+					<div id='myUL' class='dropdown-menu' aria-labelledby='navbarDropdown' style='width:200px;max-height:400px !important; overflow: scroll; overflow-x: hidden;'>
+				 <div class='row'><div class='col-12'><input type='text' id='myInput' placeholder='Buscar..' title='Buscar' class='form-control' autocomplete='off'></div></div>
+					 <div id='conecta_x'>
+					 </div>
+					</div>
+				</li>
+		 </ul>
+
+
       <ul class='nav navbar-nav navbar-right text-white' id='precios'>
 				<?php
 					if($_SESSION['a_sistema']==1){
@@ -71,8 +87,15 @@
 	<div class='wrapper' >
 	  <div class='content navbar-default'>
 	    <div class='container-fluid'>
-	      <div class='sidebar sidenav' id='navx'>
 
+					<?php
+						if($_SESSION['sidebar']==1){
+							echo "<div class='sidebar_fija' id='navx'>";
+						}
+						else{
+							echo "<div class='sidebar' id='navx'>";
+						}
+					?>
 
 					<div class="sidebar-header">
 		        <div class="user-pic">
@@ -116,7 +139,6 @@
 						if(array_key_exists('PROVEEDORES', $db->derecho))
 						echo "<a href='#a_proveedores/index' is='menu-link' title='Proveedores'><i class='fas fa-people-carry'></i><span>Proveedores</span></a>";
 
-
 						if(array_key_exists('TRASPASOS', $db->derecho))
 						echo "<a href='#a_traspasos/index' is='menu-link' title='Traspasos'><i class='fas fa-arrows-alt-h'></i><span>Traspasos</span></a>";
 
@@ -132,7 +154,14 @@
 					</div>
 	      </div>
 			</div>
-	    <div class='fijaproceso main' id='contenido'>
+			<?php
+				if($_SESSION['sidebar']==1){
+					echo "<div class='fijaproceso main_fija' id='contenido'>";
+				}
+				else{
+					echo "<div class='fijaproceso main' id='contenido'>";
+				}
+			?>
 	    </div>
 	  </div>
 	</div>
@@ -180,6 +209,7 @@
 	<script src="lib/tooltip.js"></script>
 
 	<!--   Propios   -->
+	<script src="chat/chat.js"></script>
 	<script src="sagyc.js"></script>
 	<script src="vainilla.js"></script>
 

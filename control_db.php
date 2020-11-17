@@ -681,6 +681,14 @@
 			}
 
 		}
+
+		public function fija(){
+			$sidebar=$_REQUEST['sidebar'];
+			$_SESSION['sidebar']=$sidebar;
+			$arreglo =array();
+			$arreglo+=array('sidebar'=>$sidebar);
+			return $this->update('usuarios',array('idusuario'=>$_SESSION['idusuario']), $arreglo);
+		}
 	}
 
 	if(strlen($ctrl)>0){

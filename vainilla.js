@@ -171,13 +171,14 @@ function fondo(archivo){
   xhr.send(formData);
 }
 function fijar(){
+  let sidebar;
   if(document.querySelector('.sidebar')){
     document.getElementById("navx").classList.remove('sidebar');
     document.getElementById("navx").classList.add('sidebar_fija');
 
     document.getElementById("contenido").classList.remove('main');
     document.getElementById("contenido").classList.add('main_fija');
-
+    sidebar=1;
   }
   else{
     document.getElementById("navx").classList.remove('sidebar_fija');
@@ -185,9 +186,22 @@ function fijar(){
 
     document.getElementById("contenido").classList.remove('main_fija');
     document.getElementById("contenido").classList.add('main');
+    sidebar=0;
   }
+  console.log("entra");
+  var formData = new FormData();
+  formData.append("function","fija");
+  formData.append("ctrl", "control");
+  formData.append("sidebar", sidebar);
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST',db_inicial);
+  xhr.addEventListener('load',(data)=>{
+    console.log(data.target.response);
+  });
+  xhr.onerror =  ()=>{
+  };
+  xhr.send(formData);
 }
-
 ///////////////////////////////////////////////ESPECIAL
 
 $(document).on('submit',"[is*='p-busca']",function(e){

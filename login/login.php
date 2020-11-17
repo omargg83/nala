@@ -3,7 +3,7 @@
 	@session_start();
 
 	require_once("../init.php");
-	class ipsi{
+	class sagyc{
 		public $nivel_personal;
 		public $nivel_captura;
 
@@ -43,17 +43,15 @@
 						$_SESSION['idtienda']=$CLAVE['idtienda'];
 						$_SESSION['idsucursal']=$CLAVE['idsucursal'];
 						$_SESSION['nivel']=$CLAVE['nivel'];
+						$_SESSION['sidebar']=$CLAVE['sidebar'];
+
+						$sucursal=self::sucursal($CLAVE['idsucursal']);
+						$_SESSION['sucursal_nombre']=$sucursal->nombre;
 
 						$fecha=date("Y-m-d");
 						list($anyo,$mes,$dia) = explode("-",$fecha);
 
-
-						$sql="SELECT * FROM tienda where idtienda=:idtienda";
-						$sth = $this->dbh->prepare($sql);
-						$sth->bindValue(":idtienda",$CLAVE['idtienda']);
-						$sth->execute();
-						$tienda=$sth->fetch(PDO::FETCH_OBJ);
-
+						$tienda=self::tienda($CLAVE['idtienda']);
 						$_SESSION['n_sistema']=$tienda->nombre_sis;
 						$_SESSION['a_sistema']=$tienda->activo;
 
@@ -83,13 +81,27 @@
 				return "Database access FAILED!".$e->getMessage();
 			}
 		}
+		public function sucursal($id){
+			$sql="select * from sucursal where idsucursal=:id";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":id",$id);
+			$sth->execute();
+			return $sth->fetch(PDO::FETCH_OBJ);
+		}
+		public function tienda($id){
+			$sql="select * from tienda where idtienda=:idtienda";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":idtienda",$id);
+			$sth->execute();
+			return $sth->fetch(PDO::FETCH_OBJ);
+		}
 	}
 	function clean_var($val){
 		$val=htmlspecialchars(strip_tags(trim($val)));
 		return $val;
 	}
 
-	$db = new ipsi();
+	$db = new sagyc();
 	echo $db->acceso();
 
 ?>
