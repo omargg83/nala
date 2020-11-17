@@ -115,13 +115,13 @@ class Pedidos extends Sagyc{
 
 			$hora_fin=$_REQUEST['hora_fin'];
 			$minuto_fin=$_REQUEST['minuto_fin'];
-			if (!isset($_REQUEST['idcliente']) or strlen($_REQUEST['idcliente'])==0 or $_REQUEST['idcliente']==0){
+		/*	if (!isset($_REQUEST['idcliente']) or strlen($_REQUEST['idcliente'])==0 or $_REQUEST['idcliente']==0){
 				$resp=array();
 				$resp+=array('id'=>0);
 				$resp+=array('error'=>1);
 				$resp+=array('terror'=>'Falta seleccionar cliente');
 				return json_encode($resp);
-			}
+			}*/
 
 			if (isset($_REQUEST['fecha']) and strlen($_REQUEST['fecha'])>0){
 				$fx=explode("-",$_REQUEST['fecha']);
@@ -131,6 +131,9 @@ class Pedidos extends Sagyc{
 			if (isset($_REQUEST['fecha']) and strlen($_REQUEST['fecha'])>0){
 				$fx=explode("-",$_REQUEST['fecha']);
 				$arreglo+=array('fecha_fin'=>$fx['2']."-".$fx['1']."-".$fx['0']." $hora_fin:$minuto_fin:00");
+			}
+			if (isset($_REQUEST['asunto'])){
+				$arreglo+= array('asunto'=>$_REQUEST['asunto']);
 			}
 			if (isset($_REQUEST['estatus'])){
 				$arreglo+= array('estatus'=>$_REQUEST['estatus']);
@@ -176,12 +179,7 @@ class Pedidos extends Sagyc{
 			productos_catalogo.tipo,
 			productos.idproducto,
 			productos.activo_producto,
-			productos.cantidad,
 			productos.precio,
-			productos.preciocompra,
-			productos.preciom,
-			productos.preciod,
-			productos.stockmin,
 			productos.idsucursal
 			from productos
 			LEFT OUTER JOIN productos_catalogo ON productos_catalogo.idcatalogo = productos.idcatalogo
@@ -342,8 +340,6 @@ class Pedidos extends Sagyc{
 			productos.cantidad,
 			productos.precio,
 			productos.preciocompra,
-			productos.preciom,
-			productos.preciod,
 			productos.stockmin,
 			productos.idsucursal
 			from productos

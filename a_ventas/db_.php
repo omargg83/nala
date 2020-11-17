@@ -35,6 +35,14 @@ class Venta extends Sagyc{
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
 	}
+	public function ventas_pagadas(){
+		$sql="select venta.idventa, venta.numero, venta.idsucursal, clientes.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
+		left outer join clientes on clientes.idcliente=venta.idcliente
+		where venta.idsucursal='".$_SESSION['idsucursal']."' and venta.estado='Pagada' order by venta.numero desc";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll(PDO::FETCH_OBJ);
+	}
 	public function ventas_buscar($texto){
 		$sql="select venta.idventa, venta.numero, venta.idsucursal, clientes.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
 		left outer join clientes on clientes.idcliente=venta.idcliente

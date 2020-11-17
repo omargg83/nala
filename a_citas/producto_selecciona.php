@@ -22,16 +22,7 @@
 	}
 
 	//////////////////////variables a utilizar para los 2 esquemas que se requieren segun el ejemplo de excel que te mande men
-	$producto->esquema; // definira el tipo de esquema (agregue este campo apenas a la bdd men) es entero y nos servira para definir o agregar futuros esquemas de descuento por producto
 
-	$producto->cantidad;
-	$producto->precio; //precio unitario * cantidad (menudeo)
-	$producto->preciom; // precio mayoreo * Cantidad
-	$producto->preciod; // precio distribuidor * Cantidad
-
-
-	// $parametro1 digamos los 1000 pesos  para llegar a mayoreo (esquema 1 NALA) tomar en cuenta que hoy son mil y mañana podria cambiar, lo mismo para elk parametro2
-	// $parametro2 los 3 mil pesos para llegar a distribuidor    (esquema 1 NALA)
 	/////////////////////
 	echo "<form id='form_prod' is='is-selecciona' v_idproducto='$idproducto'>";
 
