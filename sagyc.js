@@ -793,6 +793,7 @@
 		//}
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', datos.des);
+		xhr.timeout = 4000;
 		xhr.addEventListener('load',(datares)=>{
 			if(datares.target.status=="404"){
 				Swal.fire({

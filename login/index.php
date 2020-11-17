@@ -68,6 +68,7 @@
       let xhr = new XMLHttpRequest();
       xhr.open('POST',"login.php");
       xhr.addEventListener('load',(data)=>{
+        console.log(data.target.response);
         var data = JSON.parse(data.target.response);
         if (data.acceso==1){
           location.href="../";

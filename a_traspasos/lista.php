@@ -32,7 +32,7 @@
 				<div class='row body-row' draggable='true'>
 					<div class='col-2'>
 						<div class="btn-group">
-							<button class='btn btn-warning btn-sm'  id='edit_persona' is='b-link' id='nueva_venta' des='a_venta/venta' dix='trabajo'  v_idventa='<?php echo $key->idventa; ?> ' ><i class="fas fa-pencil-alt"></i></button>
+							<button class='btn btn-warning btn-sm'  id='edit_persona' is='b-link' id='nueva_venta' des='a_traspasos/editar' dix='trabajo'  v_idtraspaso='<?php echo $key->idtraspaso; ?> ' ><i class="fas fa-pencil-alt"></i></button>
 						</div>
 					</div>
 					<div class='col-2'><?php echo $key->numero; ?></div>

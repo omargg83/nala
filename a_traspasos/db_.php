@@ -95,6 +95,70 @@ class Traspaso extends Sagyc{
 		}
 		return $x;
 	}
+	public function traspaso_pedido($id){
+		$sql="select * from bodega where idtraspaso='$id' order by idbodega desc";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll(PDO::FETCH_OBJ);
+	}
+
+	public function agregatraspaso(){
+		$idtraspaso=$_REQUEST['idtraspaso'];
+		$idproducto=$_REQUEST['idproducto'];
+		$cantidad=$_REQUEST['cantidad'];
+
+
+
+		$sql="select * from productos
+		left outer join productos_catalogo on productos_catalogo.idcatalogo=productos.idcatalogo
+		where idproducto='$idproducto'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		$producto=$sth->fetch(PDO::FETCH_OBJ);
+
+		if(!isset($_REQUEST['cantidad'])){
+			$arreglo =array();
+			$arreglo+=array('error'=>1);
+			$arreglo+=array('terror'=>"Falta cantidad");
+			return json_encode($arreglo);
+		}
+		else{
+			$cantidad=clean_var($_REQUEST['cantidad']);
+		}
+
+		if($cantidad==0){
+			$arreglo =array();
+			$arreglo+=array('error'=>1);
+			$arreglo+=array('terror'=>"Verificar cantidad");
+			return json_encode($arreglo);
+		}
+
+		$arreglo=array();
+		$arreglo+=array('idtraspaso'=>$idtraspaso);
+		$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
+		$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
+		$arreglo+=array('idproducto'=>$producto->idproducto);
+		$arreglo+=array('v_cantidad'=>$cantidad);
+
+		$cantidad=$cantidad*-1;
+		$arreglo+=array('cantidad'=>$cantidad);
+		$arreglo+=array('nombre'=>$producto->nombre);
+		$x=$this->insert('bodega', $arreglo);
+		$ped=json_decode($x);
+		return "$idtraspaso $idproducto $cantidad ghola mundo";
+	}
+	public function borrar_traspaso(){
+		$idbodega=$_REQUEST['idbodega'];
+		$idtraspaso=$_REQUEST['idtraspaso'];
+		$x=$this->borrar('bodega',"idbodega",$idbodega);
+		
+		$arreglo =array();
+		$arreglo+=array('idtraspaso'=>$idtraspaso);
+		$arreglo+=array('error'=>0);
+		return json_encode($arreglo);
+	}
+
+
 }
 $db = new Traspaso();
 if(strlen($function)>0){

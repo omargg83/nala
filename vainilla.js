@@ -227,7 +227,6 @@ $(document).on('submit',"[is*='p-busca']",function(e){
     cargando(false);
   };
   xhr.send(formData);
-
 });
 $(document).on('submit',"[is*='is-selecciona']",function(e){
   e.preventDefault();
@@ -391,8 +390,6 @@ $(document).on('submit',"[is*='is-totalv']",function(e){
   };
   xhr.send(formData);
 });
-
-
 function calcular(){
 
   let idproducto=document.getElementById("idproducto").value;
@@ -498,6 +495,138 @@ function venta(idventa){
     document.getElementById("trabajo").innerHTML = data.target.response;
   });
   xhr.onerror =  ()=>{
+  };
+  xhr.send(formData);
+}
+
+////////////traspasos
+$(document).on('submit',"[is*='t-busca']",function(e){
+  e.preventDefault();
+  cargando(true);
+  let id=e.currentTarget.attributes.id.nodeValue;
+  let elemento = document.getElementById(id);
+
+  let idtraspaso=document.getElementById("idtraspaso").value;
+  let prod_venta=document.getElementById("prod_venta").value;
+
+  var formData = new FormData(elemento);
+  formData.append("idtraspaso", idtraspaso);
+  formData.append("prod_venta", prod_venta);
+
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST',"a_traspasos/productos_lista.php");
+  xhr.addEventListener('load',(data)=>{
+    document.getElementById("resultadosx").innerHTML =data.target.response;
+    cargando(false);
+  });
+  xhr.onerror =  ()=>{
+    cargando(false);
+  };
+  xhr.send(formData);
+});
+$(document).on('submit',"[is*='t-selecciona']",function(e){
+  e.preventDefault();
+  cargando(true);
+  let id=e.currentTarget.attributes.id.nodeValue;
+  let elemento = document.getElementById(id);
+
+  let idtraspaso=document.getElementById("idtraspaso").value;
+
+
+  var formData = new FormData(elemento);
+  formData.append("function", "agregatraspaso");
+  formData.append("idtraspaso", idtraspaso);
+
+
+  for(let contar=0;contar<elemento.attributes.length; contar++){
+    let arrayDeCadenas = elemento.attributes[contar].name.split("_");
+    if(arrayDeCadenas.length>1){
+      formData.append(arrayDeCadenas[1], elemento.attributes[contar].value);
+    }
+  }
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST',"a_traspasos/db_.php");
+  xhr.addEventListener('load',(data)=>{
+    console.log(data.target.response);
+    tras_lista(idtraspaso);
+    /*
+    var datos = JSON.parse(data.target.response);
+    if(datos.error==0){
+      $('#myModal').modal('hide');
+      document.getElementById("idventa").value=datos.idventa;
+      document.getElementById("numero").value=datos.numero;
+      document.getElementById("fecha").value=datos.fecha;
+      document.getElementById("estado").value=datos.estado;
+      document.getElementById("total").value=datos.total;
+
+      lista(datos.idventa);
+      document.getElementById("resultadosx").innerHTML ="";
+    }
+    else{
+      cargando(false);
+      Swal.fire({
+        type: 'error',
+        title: "Error: "+datos.terror,
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+    */
+  });
+  xhr.onerror =  ()=>{
+    cargando(false);
+  };
+  xhr.send(formData);
+});
+$(document).on('click',"[is*='t-borraprod']",function(e){
+  e.preventDefault();
+  let idtraspaso=document.getElementById("idtraspaso").value;
+  let idbodega=e.currentTarget.attributes.v_idbodega.value;
+  let formData = new FormData();
+
+  $.confirm({
+    title: 'Eliminar',
+    content: '¿Desea eliminar el producto seleccionada?',
+    buttons: {
+      Eliminar: function () {
+        cargando(true);
+        formData.append("idtraspaso", idtraspaso);
+        formData.append("idbodega", idbodega);
+        formData.append("function", "borrar_traspaso");
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST',"a_traspasos/db_.php");
+        xhr.addEventListener('load',(data)=>{
+          var datos = JSON.parse(data.target.response);
+
+          tras_lista(idtraspaso);
+        });
+        xhr.onerror =  ()=>{
+          cargando(false);
+        };
+        xhr.send(formData);
+      },
+      Cancelar: function () {
+
+      }
+    }
+  });
+});
+
+
+
+function tras_lista(idtraspaso){
+  var formData = new FormData();
+  formData.append("idtraspaso", idtraspaso);
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST',"a_traspasos/lista_pedido.php");
+  xhr.addEventListener('load',(data)=>{
+    document.getElementById("lista").innerHTML=data.target.response;
+    cargando(false);
+  });
+  xhr.onerror =  ()=>{
+    cargando(false);
   };
   xhr.send(formData);
 }
