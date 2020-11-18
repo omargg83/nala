@@ -121,9 +121,6 @@
 						if(array_key_exists('VENTAREGISTRO', $db->derecho))
 						echo "<a href='#a_ventas/index' id='ventas' is='menu-link' title='Pedidos'><i class='fas fa-shopping-basket'></i><span>Ventas</span></a>";
 
-
-
-
 						if(array_key_exists('COMPRAS', $db->derecho))
 						echo "<a href='#a_compras/index' is='menu-link' title='Compras'><i class='fas fa-shopping-bag'></i><span>Compras</span></a>";
 

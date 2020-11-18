@@ -20,8 +20,8 @@
 	</div>
 	<div class='row header-row'>
 		<div class='col-2'>#</div>
-		<div class='col-1'>Tipo</div>
-		<div class='col-3'>Nombre</div>
+		<div class='col-2'>Tipo</div>
+		<div class='col-2'>Nombre</div>
 		<div class='col-2'>Estatus</div>
 		<div class='col-2'>Existencia</div>
 		<div class='col-2'>Precio de venta</div>
@@ -52,12 +52,12 @@
 						echo "</div>";
 					echo "</div>";
 
-					echo "<div class='col-1'>";
+					echo "<div class='col-2'>";
 						if($key->tipo==0) echo "Servicio";
 						if($key->tipo==3) echo "Volúmen";
 					echo "</div>";
 
-					echo "<div class='col-3'>".$key->nombre."</div>";
+					echo "<div class='col-2'>".$key->nombre."</div>";
 
 					echo "<div class='col-2 text-center'>";
 					if($cantidad->total>0 and $key->activo_producto==1 ){

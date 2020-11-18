@@ -58,6 +58,12 @@ class Usuario extends Sagyc{
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
 	}
+  public function caja_lista(){
+		$sql="SELECT * FROM cajas where idsucursal='".$_SESSION['idsucursal']."'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll(PDO::FETCH_OBJ);
+	}
 	public function guardar_usuario(){
 		$x="";
 		$arreglo =array();
@@ -73,6 +79,9 @@ class Usuario extends Sagyc{
 		}
 		if (isset($_REQUEST['nivel'])){
 			$arreglo+=array('nivel'=>$_REQUEST['nivel']);
+		}
+		if (isset($_REQUEST['idcaja'])){
+			$arreglo+=array('idcaja'=>$_REQUEST['idcaja']);
 		}
 		if (isset($_REQUEST['idsucursal'])){
 			$arreglo+=array('idsucursal'=>$_REQUEST['idsucursal']);
@@ -129,6 +138,7 @@ class Usuario extends Sagyc{
 		$x.= "<optgroup label='Empresa'>";
 		$x.= "<option value='DATOSEMP'>Datos</option>";
 		$x.= "<option value='SUCURSAL'>Sucursal</option>";
+		$x.= "<option value='CAJAS'>Cajas</option>";
 		$x.= "<option value='REPORTES'>Reportes</option>";
 		$x.= "<option value='USUARIOS'>Usuarios</option>";
 		return $x;

@@ -44,6 +44,7 @@
 						$_SESSION['idsucursal']=$CLAVE['idsucursal'];
 						$_SESSION['nivel']=$CLAVE['nivel'];
 						$_SESSION['sidebar']=$CLAVE['sidebar'];
+						$_SESSION['idcaja']=$CLAVE['idcaja'];
 
 						$sucursal=self::sucursal($CLAVE['idsucursal']);
 						$_SESSION['sucursal_nombre']=$sucursal->nombre;

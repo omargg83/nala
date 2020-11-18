@@ -2,6 +2,7 @@
 	require_once("db_.php");
 	if (isset($_REQUEST['id'])){$id=$_REQUEST['id'];} else{ $id=0;}
 	$sucursal=$db->sucursal_lista();
+	$caja=$db->caja_lista();
 	if($id>0){
 		$pd = $db->usuario($id);
 		$id=$pd->idusuario;
@@ -11,6 +12,7 @@
 		$nivel=$pd->nivel;
 		$nombre=$pd->nombre;
 		$estado=$pd->activo;
+		$idcaja=$pd->idcaja;
 	}
 	else{
 		$id=0;
@@ -72,13 +74,30 @@
 					<?php
 
 						echo "<select class='form-control form-control-sm' name='idsucursal' id='idsucursal'>";
-						echo '<option disabled>Seleccione sucursal</option>';
 						foreach($sucursal as $v1){
 							  echo '<option value="'.$v1->idsucursal.'"';
 							  if($v1->idsucursal==$idsucursal){
 								  echo " selected";
 							  }
 							  echo '>'.$v1->nombre.'</option>';
+						}
+					  echo "</select>";
+					?>
+				  </div>
+				</div>
+				<div class="form-group row">
+				  <label class="control-label col-sm-2" for="">Caja:</label>
+				  <div class="col-sm-10">
+					<?php
+
+						echo "<select class='form-control form-control-sm' name='idcaja' id='idcaja'>";
+
+						foreach($caja as $v1){
+							  echo '<option value="'.$v1->idcaja.'"';
+							  if($v1->idcaja==$idcaja){
+								  echo " selected";
+							  }
+							  echo '>'.$v1->nombrecaja.'</option>';
 						}
 					  echo "</select>";
 					?>
