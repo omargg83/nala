@@ -59,7 +59,8 @@
 					if ( $key->esquema==0) {
 
 							echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
-								echo number_format($key->v_total_normal,2);
+								echo number_format($key->v_precio_normal,2);
+								$total=$key->v_precio_normal;
 							echo "</div>";
 
 					}
@@ -68,21 +69,21 @@
 
 						if ($key->v_cantidad < $key->mayoreo_cantidad) {
 							echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
-								echo number_format($key->v_total_normal,2);
-								$total=$key->v_total_normal;
+								echo number_format($key->v_precio_normal,2);
+								$total=$key->v_precio_normal;
 							echo "</div>";
 						}
 						else if ($key->v_cantidad >= $key->mayoreo_cantidad and $key->v_cantidad < $key->distri_cantidad) {
 							echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
-								echo number_format($key->v_total_mayoreo,2);
-								$total=$key->v_total_mayoreo;
+								echo number_format($key->v_precio_mayoreo,2);
+								$total=$key->v_precio_mayoreo;
 							echo "</div>";
 						}
 
 						else if ($key->v_cantidad >= $key->distri_cantidad) {
 							echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
-								echo number_format($key->v_total_distribuidor,2);
-								$total=$key->v_total_distribuidor;
+								echo number_format($key->v_precio_distribuidor,2);
+								$total=$key->v_precio_distribuidor;
 							echo "</div>";
 						}
 
@@ -95,20 +96,20 @@
 
 					if ($sumas->total_mayoreo < $key->monto_mayor and $sumcant < $key->cantidad_mayoreo){
 					echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
-						echo number_format($key->v_total_normal,2);
-						$total=$key->v_total_normal;
+						echo number_format($key->v_precio_normal,2);
+						$total=$key->v_precio_normal;
 					echo "</div>";
 					}
 					else if ($sumas->total_distribuidor >= $key->monto_distribuidor) { //primero que nada checo que se alcance el monto para distribuidor antes de mayoreo porque si no no funciona
 						echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
-							echo number_format($key->v_total_distribuidor,2);
-							$total=$key->v_total_distribuidor;
+							echo number_format($key->v_precio_distribuidor,2);
+							$total=$key->v_precio_distribuidor;
 						echo "</div>";
 					}
 					else if ($sumcant >= $key->cantidad_mayoreo or $sumas->total_mayoreo >= $key->monto_mayor) {
 						echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
-							echo number_format($key->v_total_mayoreo,2);
-							$total=$key->v_total_mayoreo;
+							echo number_format($key->v_precio_mayoreo,2);
+							$total=$key->v_precio_mayoreo;
 						echo "</div>";
 					}
 
@@ -119,8 +120,8 @@
 
 
 					echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
-						echo number_format($total,2);
-						$total+=$total;
+						echo number_format($total*$key->v_cantidad,2);
+						$total=$total*$key->v_cantidad;
 					echo "</div>";
 				echo "</div>";
 			}

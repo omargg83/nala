@@ -167,6 +167,8 @@ class Venta extends Sagyc{
 				$arreglo+=array('monto_mayor'=>$producto->monto_mayor);
 				$arreglo+=array('monto_distribuidor'=>$producto->monto_distribuidor);
 
+				$arreglo+=array('v_precio'=>$precio);
+
 				$x=$this->insert('bodega', $arreglo);
 				$ped=json_decode($x);
 
@@ -243,9 +245,9 @@ class Venta extends Sagyc{
 		}
 	}
 	public function suma_venta($idventa){
+
 		///////////////corregir este
 
-		/*
 			$sql="select sum(v_precio * v_cantidad) as total from bodega where idventa='$idventa' ";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
@@ -255,10 +257,12 @@ class Venta extends Sagyc{
 			$arreglo+=array('total'=>$rex->total);
 			$this->update('venta',array('idventa'=>$idventa), $arreglo);
 			return $rex->total;
-		*/
+
 
 		return 0;
 	}
+
+
 	public function finalizar_venta(){
 
 		$total_g=clean_var($_REQUEST['total_g']);
