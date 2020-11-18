@@ -88,17 +88,17 @@
 					else if ( $key->esquema==1) {
 
 
-					if ($sumas->total_mayoreo<1000){
+					if ($sumas->total_mayoreo<$key->monto_mayor){
 					echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
 						echo number_format($key->v_total_normal,2);
 					echo "</div>";
 					}
-					else if ($sumas->total_mayoreo>=1000) {
+					else if ($sumas->total_mayoreo>=$key->monto_mayor) {
 						echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
 							echo number_format($key->v_total_mayoreo,2);
 						echo "</div>";
 					}
-					else if ($sumas->total_mayoreo>=3000 ) {
+					else if ($sumas->total_mayoreo>=$key->monto_distribuidor ) {
 						echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
 							echo number_format($key->v_total_distribuidor,2);
 						echo "</div>";
