@@ -160,6 +160,13 @@ class Venta extends Sagyc{
 				$arreglo+=array('v_precio_distribuidor'=>$esquema->precio_distribuidor);
 				$arreglo+=array('v_total_distribuidor'=>$esquema->total_distribuidor);
 
+				$arreglo+=array('mayoreo_cantidad'=>$producto->mayoreo_cantidad); //define el stock minimo para alcanzar el precio mayoreo y distribuidor en el esquema 2
+				$arreglo+=array('distri_cantidad'=>$producto->distri_cantidad);
+
+				$arreglo+=array('cantidad_mayoreo'=>$producto->cantidad_mayoreo);	//define el stock minimo para alcanzar el precio mayoreo y distribuidor en el esquema 1
+				$arreglo+=array('monto_mayor'=>$producto->monto_mayor);
+				$arreglo+=array('monto_distribuidor'=>$producto->monto_distribuidor);
+
 				$x=$this->insert('bodega', $arreglo);
 				$ped=json_decode($x);
 
@@ -237,7 +244,7 @@ class Venta extends Sagyc{
 	}
 	public function suma_venta($idventa){
 		///////////////corregir este
-		
+
 		/*
 			$sql="select sum(v_precio * v_cantidad) as total from bodega where idventa='$idventa' ";
 			$sth = $this->dbh->prepare($sql);
@@ -312,6 +319,7 @@ class Venta extends Sagyc{
 
 
 		///////////////terminan variables
+
 		if($esquema==1){
 			$total_menudeo=($precio*$cantidad);
 
