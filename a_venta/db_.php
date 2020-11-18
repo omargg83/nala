@@ -154,10 +154,8 @@ class Venta extends Sagyc{
 				$arreglo+=array('v_precio_normal'=>$esquema->precio_normal);
 				$arreglo+=array('v_total_normal'=>$esquema->total_menudeo);
 
-
 				$arreglo+=array('v_precio_mayoreo'=>$esquema->precio_mayoreo);
 				$arreglo+=array('v_total_mayoreo'=>$esquema->total_mayoreo);
-
 
 				$arreglo+=array('v_precio_distribuidor'=>$esquema->precio_distribuidor);
 				$arreglo+=array('v_total_distribuidor'=>$esquema->total_distribuidor);
@@ -239,7 +237,7 @@ class Venta extends Sagyc{
 	}
 	public function suma_venta($idventa){
 		///////////////corregir este
-
+		
 		/*
 			$sql="select sum(v_precio * v_cantidad) as total from bodega where idventa='$idventa' ";
 			$sth = $this->dbh->prepare($sql);

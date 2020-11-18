@@ -9,7 +9,7 @@
 	$precio="";
 ?>
 
-<form is="f-submit" id="form_inventario" db="a_inventario/db_" fun="existencia_agrega" des="a_inventario/editar" desid='idproducto'>
+<form is="f-submit" id="form_inventario" db="a_inventario/db_" fun="existencia_agrega" des="a_inventario/editar" desid='idproducto' cmodal='2'>
 <div class='modal-header'>
 	<h5 class='modal-title'>Agregar existencia</h5>
 </div>

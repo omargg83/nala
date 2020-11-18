@@ -67,35 +67,22 @@ class Productos extends Sagyc{
 			$arreglo =array();
 			$tipo="";
 			$imei="";
+			$codigo="";
+
 			if (isset($_REQUEST['codigo'])){
+				$codigo=$_REQUEST['codigo'];
 				$arreglo += array('codigo'=>$_REQUEST['codigo']);
 			}
 			if (isset($_REQUEST['nombre'])){
 				$arreglo += array('nombre'=>$_REQUEST['nombre']);
 			}
-			if (isset($_REQUEST['unidad'])){
-				$arreglo += array('unidad'=>$_REQUEST['unidad']);
-			}
-			if (isset($_REQUEST['marca'])){
-				$arreglo += array('marca'=>$_REQUEST['marca']);
-			}
-			if (isset($_REQUEST['marca'])){
-				$arreglo += array('marca'=>$_REQUEST['marca']);
-			}
-			if (isset($_REQUEST['modelo'])){
-				$arreglo += array('modelo'=>$_REQUEST['modelo']);
-			}
+
 			if (isset($_REQUEST['descripcion'])){
 				$arreglo += array('descripcion'=>$_REQUEST['descripcion']);
 			}
 			if (isset($_REQUEST['activo_catalogo'])){
 				$arreglo += array('activo_catalogo'=>$_REQUEST['activo_catalogo']);
 			}
-
-			if (isset($_REQUEST['color'])){
-				$arreglo += array('color'=>$_REQUEST['color']);
-			}
-
 			if (isset($_REQUEST['categoria'])){
 				$arreglo += array('categoria'=>$_REQUEST['categoria']);
 			}
@@ -123,20 +110,31 @@ class Productos extends Sagyc{
 					$monto_distribuidor=3000;
 					$stockmin=1;
 					$cantidad_mayoreo=10;
+
+					$arreglo+=array('preciocompra'=>0);
+					$arreglo+=array('precio'=>0);
 					$arreglo+=array('monto_mayor'=>$monto_mayor);
+
 					$arreglo+=array('monto_distribuidor'=>$monto_distribuidor);
 					$arreglo+=array('stockmin'=>$stockmin);
 					$arreglo+=array('cantidad_mayoreo'=>$cantidad_mayoreo);
+					$arreglo+=array('mayoreo_cantidad'=>0);
+					$arreglo+=array('distri_cantidad'=>0);
+					$arreglo+=array('precio_mayoreo'=>0);
+					$arreglo+=array('precio_distri'=>0);
 
 					$arreglo+=array('idcatalogo'=>$idcatalogo);
 					$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
 					$this->insert('productos', $arreglo);
 
 					$this->cantidad_update($idcatalogo,$tipo);
-					$codigo="9".str_pad($idcatalogo, 8, "0", STR_PAD_LEFT);
-					$arreglo =array();
-					$arreglo = array('codigo'=>$codigo);
-					$this->update('productos_catalogo',array('idcatalogo'=>$idcatalogo), $arreglo);
+
+					if(strlen(trim($codigo))==0){
+						$codigo="9".str_pad($idcatalogo, 8, "0", STR_PAD_LEFT);
+						$arreglo =array();
+						$arreglo = array('codigo'=>$codigo);
+						$this->update('productos_catalogo',array('idcatalogo'=>$idcatalogo), $arreglo);
+					}
 				}
 				else{
 					return $x;
@@ -154,7 +152,6 @@ class Productos extends Sagyc{
 			return "Database access FAILED!".$e->getMessage();
 		}
 	}
-
 	public function genera_barras(){
 		try{
 			parent::set_names();
@@ -172,7 +169,6 @@ class Productos extends Sagyc{
 		}
 	}
 
-
 	public function sucursal(){
 		try{
 			$sql="SELECT * FROM sucursal where idtienda='".$_SESSION['idtienda']."'";
@@ -184,7 +180,6 @@ class Productos extends Sagyc{
 			return "Database access FAILED!".$e->getMessage();
 		}
 	}
-
 	public function categoria(){
 		try{
 			$sql="SELECT * FROM categorias where idtienda='".$_SESSION['idtienda']."'";

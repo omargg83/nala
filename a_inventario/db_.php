@@ -76,6 +76,13 @@ class Productos extends Sagyc{
 			return "Database access FAILED! ".$e->getMessage();
 		}
 	}
+	public function barras(){
+		$idcatalogo=$_REQUEST['idcatalogo'];
+		$codigo="9".str_pad($idcatalogo, 8, "0", STR_PAD_LEFT);
+		$arreglo =array();
+		$arreglo = array('codigo'=>$codigo);
+		return $this->update('productos_catalogo',array('idcatalogo'=>$idcatalogo), $arreglo);
+	}
 
 	public function servicios_lista(){
 		try{
@@ -132,45 +139,77 @@ class Productos extends Sagyc{
 				$arreglo += array('activo_producto'=>$_REQUEST['activo_producto']);
 			}
 
-			if (isset($_REQUEST['precio'])){
+			if (isset($_REQUEST['precio']) and strlen($_REQUEST['precio'])>0){
 				$arreglo += array('precio'=>$_REQUEST['precio']);
 			}
+			else{
+				$arreglo += array('precio'=>0);
+			}
 
-			if (isset($_REQUEST['stockmin'])){
+			if (isset($_REQUEST['stockmin']) and strlen($_REQUEST['stockmin'])>0){
 				$arreglo += array('stockmin'=>$_REQUEST['stockmin']);
 			}
-			if (isset($_REQUEST['esquema'])){
+			else{
+				$arreglo += array('stockmin'=>0);
+			}
+
+			if (isset($_REQUEST['esquema']) and strlen($_REQUEST['precio'])>0){
 				$arreglo += array('esquema'=>$_REQUEST['esquema']);
 			}
-			if (isset($_REQUEST['cantidad_mayoreo'])){
+			if (isset($_REQUEST['cantidad_mayoreo']) and strlen($_REQUEST['cantidad_mayoreo'])>0){
 				$arreglo += array('cantidad_mayoreo'=>$_REQUEST['cantidad_mayoreo']);
 			}
-			if (isset($_REQUEST['precio_mayoreo'])){
+			else{
+				$arreglo += array('cantidad_mayoreo'=>0);
+			}
+
+			if (isset($_REQUEST['precio_mayoreo']) and strlen($_REQUEST['precio_mayoreo'])>0){
 				$arreglo += array('precio_mayoreo'=>$_REQUEST['precio_mayoreo']);
 			}
-			if (isset($_REQUEST['monto_mayor'])){
+			else{
+				$arreglo += array('precio_mayoreo'=>0);
+			}
+
+			if (isset($_REQUEST['monto_mayor']) and strlen($_REQUEST['monto_mayor'])>0){
 				$arreglo += array('monto_mayor'=>$_REQUEST['monto_mayor']);
 			}
-			if (isset($_REQUEST['monto_distribuidor'])){
+			else{
+				$arreglo += array('monto_mayor'=>0);
+			}
+
+			if (isset($_REQUEST['monto_distribuidor']) and strlen($_REQUEST['monto_distribuidor'])>0){
 				$arreglo += array('monto_distribuidor'=>$_REQUEST['monto_distribuidor']);
 			}
+			else{
+				$arreglo += array('monto_distribuidor'=>0);
+			}
 
-			if (isset($_REQUEST['precio_distri'])){
+			if (isset($_REQUEST['precio_distri']) and strlen($_REQUEST['precio_distri'])>0){
 				$arreglo += array('precio_distri'=>$_REQUEST['precio_distri']);
 			}
+			else{
+				$arreglo += array('precio_distri'=>0);
+			}
 
-			if (isset($_REQUEST['mayoreo_cantidad'])){
+			if (isset($_REQUEST['mayoreo_cantidad']) and strlen($_REQUEST['mayoreo_cantidad'])>0){
 				$arreglo += array('mayoreo_cantidad'=>$_REQUEST['mayoreo_cantidad']);
 			}
-			if (isset($_REQUEST['distri_cantidad'])){
+			else{
+				$arreglo += array('mayoreo_cantidad'=>0);
+			}
+
+			if (isset($_REQUEST['distri_cantidad']) and strlen($_REQUEST['distri_cantidad'])>0){
 				$arreglo += array('distri_cantidad'=>$_REQUEST['distri_cantidad']);
+			}
+			else{
+				$arreglo += array('distri_cantidad'=>0);
 			}
 
 			if (isset($_REQUEST['preciocompra']) and strlen($_REQUEST['preciocompra'])>0  ){
 				$arreglo += array('preciocompra'=>$_REQUEST['preciocompra']);
 			}
 			else{
-				$arreglo += array('preciocompra'=>NULL);
+				$arreglo += array('preciocompra'=>0);
 			}
 
 			$x="";
@@ -264,9 +303,7 @@ class Productos extends Sagyc{
 	}
 	public function productos_inventario($id){
 		try{
-			$sql="select * from bodega
-
-			where idproducto=$id and idsucursal='".$_SESSION['idsucursal']."' order by idbodega desc";
+			$sql="select * from bodega where idproducto=$id and idsucursal='".$_SESSION['idsucursal']."' order by idbodega desc";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
