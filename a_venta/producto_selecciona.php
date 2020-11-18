@@ -49,39 +49,38 @@
 						}
 						else if ($producto->esquema==1){
 							echo "Esquema Nala";
-
 						}
 						else if ($producto->esquema==2){
-
-						echo "Esquema por Cantidad";
+							echo "Esquema por Cantidad";
 						}
-
 					echo "</small>";
+					echo "<hr>";
+					echo $producto->descripcion;
 					echo "<hr>";
 				echo "</div>";
 			echo "</div>";
 
 			echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
-					echo "<label>Cantidad</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1' required onchange='calcular()'>";
+					echo "<label><b>Cantidad</b></label>";
+					echo "<input type='number' min=0 max=9999 class='form-control' is='f-cantidad' name='cantidad' id='cantidad' value='1' required>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
-					echo "<label>Precio a aplicar x Unidad</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='precio' id='precio' value='".moneda($producto->precio)."' readonly>";
+					echo "<label><b>Precio a aplicar x Unidad</b></label>";
+					echo "<input type='text' class='form-control' name='precio' id='precio' value='".$producto->precio."' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
-					echo "<label>Existencia:</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='existencia' id='existencia' value='$exist' readonly>";
+					echo "<label><b>Existencia</b>:</label>";
+					echo "<input type='text' class='form-control' name='existencia' id='existencia' value='$exist' readonly>";
 				echo "</div>";
 
 			echo "</div>";
 
 			echo "<hr>";
 				//////////////////////arreglar esto
-		/*	echo "<div class='row'>";
+			echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Precio normal</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='precio_normal' id='precio_normal' value='$producto->precio' readonly>";
@@ -96,22 +95,22 @@
 					echo "<label>Precio Ditribuidor</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='precio_distribuidor' id='precio_distribuidor' value='$producto->precio_distri' readonly>";
 				echo "</div>";
-			echo "</div>"; */
+			echo "</div>";
 
 			echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Total normal</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='normal' id='normal' value='".moneda($producto->precio)."' readonly>";
+					echo "<input type='text' class='form-control form-control-sm' name='normal' id='normal' value='".$producto->precio."' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Total Mayoreo</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='mayoreo' id='mayoreo' value='".moneda($producto->precio_mayoreo)."' readonly>";
+					echo "<input type='text' class='form-control form-control-sm' name='mayoreo' id='mayoreo' value='".$producto->precio_mayoreo."' readonly>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Total Ditribuidor</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='distribuidor' id='distribuidor' value='".moneda($producto->precio_distri)."' readonly>";
+					echo "<input type='text' class='form-control form-control-sm' name='distribuidor' id='distribuidor' value='".$producto->precio_distri."' readonly>";
 				echo "</div>";
 			echo "</div>";
 

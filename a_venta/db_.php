@@ -133,23 +133,39 @@ class Venta extends Sagyc{
 					$estado=$venta->estado;
 				}
 
+
+				///////////////////////////recalcula esquemas
+				$esquema=json_decode(self::esquemas($idproducto,$cantidad));
+
+
 				$arreglo=array();
 				$arreglo+=array('idventa'=>$idventa);
 				$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
 				$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
 				$arreglo+=array('idproducto'=>$producto->idproducto);
-				$arreglo+=array('v_cantidad'=>$cantidad);
-				$arreglo+=array('v_precio'=>$precio);
-				$total=$cantidad*$precio;
-				$arreglo+=array('v_total'=>$total);
-				$cantidad=$cantidad*-1;
-				$arreglo+=array('cantidad'=>$cantidad);
 				$arreglo+=array('nombre'=>$producto->nombre);
+				$arreglo+=array('esquema'=>$producto->esquema);
+
+				$arreglo+=array('v_cantidad'=>$cantidad);
+				$total=$cantidad*$precio;
+				$resta=$cantidad*-1;
+				$arreglo+=array('cantidad'=>$resta);
+
+				$arreglo+=array('v_precio_normal'=>$esquema->precio_normal);
+				$arreglo+=array('v_total_normal'=>$esquema->total_menudeo);
+
+
+				$arreglo+=array('v_precio_mayoreo'=>$esquema->precio_mayoreo);
+				$arreglo+=array('v_total_mayoreo'=>$esquema->total_mayoreo);
+
+
+				$arreglo+=array('v_precio_distribuidor'=>$esquema->precio_distribuidor);
+				$arreglo+=array('v_total_distribuidor'=>$esquema->total_distribuidor);
+
 				$x=$this->insert('bodega', $arreglo);
 				$ped=json_decode($x);
 
 				$total=$this->suma_venta($idventa);
-
 				if($ped->error==0){
 					$arreglo =array();
 					$arreglo+=array('idventa'=>$idventa);
@@ -222,15 +238,21 @@ class Venta extends Sagyc{
 		}
 	}
 	public function suma_venta($idventa){
-		$sql="select sum(v_precio * v_cantidad) as total from bodega where idventa='$idventa' ";
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-		$rex=$sth->fetch(PDO::FETCH_OBJ);
+		///////////////corregir este
 
-		$arreglo=array();
-		$arreglo+=array('total'=>$rex->total);
-		$this->update('venta',array('idventa'=>$idventa), $arreglo);
-		return $rex->total;
+		/*
+			$sql="select sum(v_precio * v_cantidad) as total from bodega where idventa='$idventa' ";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			$rex=$sth->fetch(PDO::FETCH_OBJ);
+
+			$arreglo=array();
+			$arreglo+=array('total'=>$rex->total);
+			$this->update('venta',array('idventa'=>$idventa), $arreglo);
+			return $rex->total;
+		*/
+
+		return 0;
 	}
 	public function finalizar_venta(){
 
@@ -266,11 +288,7 @@ class Venta extends Sagyc{
 			return "Database access FAILED! ".$e->getMessage();
 		}
 	}
-	public function esquemas(){
-
-		////////////////////checar aca que variables quedan
-		$idproducto=clean_var($_REQUEST['idproducto']);
-		$cantidad=clean_var($_REQUEST['cantidad']);
+	public function esquemas($idproducto,$cantidad){
 
 		$sql="SELECT * from productos	where idproducto=:id";
 		$sth = $this->dbh->prepare($sql);
@@ -296,7 +314,6 @@ class Venta extends Sagyc{
 
 
 		///////////////terminan variables
-
 		if($esquema==1){
 			$total_menudeo=($precio*$cantidad);
 
@@ -377,7 +394,13 @@ class Venta extends Sagyc{
 
 		$arreglo+=array('precio'=>$precio);
 		return json_encode($arreglo);
+	}
+	public function esquemas_prev(){
+		////////////////////checar aca que variables quedan
+		$idproducto=clean_var($_REQUEST['idproducto']);
+		$cantidad=clean_var($_REQUEST['cantidad']);
 
+		return self::esquemas($idproducto,$cantidad);
 	}
 }
 

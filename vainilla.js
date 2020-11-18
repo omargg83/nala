@@ -390,21 +390,24 @@ $(document).on('submit',"[is*='is-totalv']",function(e){
   };
   xhr.send(formData);
 });
-function calcular(){
+$(document).on('change',"[is*='f-cantidad']",function(e){
+  calcular();
+});
+$(document).on('keypress',"[is*='f-cantidad']",function(e){
+  calcular();
+});
 
+function calcular(){
   let idproducto=document.getElementById("idproducto").value;
   let cantidad=document.getElementById("cantidad").value;
 
   let formData = new FormData();
-  formData.append("function", "esquemas");
+  formData.append("function", "esquemas_prev");
   formData.append("idproducto", idproducto);
   formData.append("cantidad", cantidad);
-  cargando(true);
   let xhr = new XMLHttpRequest();
   xhr.open('POST',"a_venta/db_.php");
   xhr.addEventListener('load',(data)=>{
-    cargando(false);
-    console.log(data.target.response);
     if (isJSON(data.target.response)){
       var datos = JSON.parse(data.target.response);
       if (datos.error==0){
@@ -414,12 +417,9 @@ function calcular(){
         document.getElementById("distribuidor").value=datos.total_distribuidor;
         document.getElementById("precio").value=datos.precio;
 
-
         document.getElementById("precio_normal").value=datos.precio_normal;
         document.getElementById("precio_mayoreo").value=datos.precio_mayoreo;
         document.getElementById("precio_distribuidor").value=datos.precio_distribuidor;
-
-
       }
       else{
         Swal.fire({
@@ -439,12 +439,8 @@ function calcular(){
       });
     }
   });
-  xhr.onerror =  ()=>{
-    cargando(false);
-  };
   xhr.send(formData);
 }
-
 function lista(idventa){
   var formData = new FormData();
   formData.append("idventa", idventa);
