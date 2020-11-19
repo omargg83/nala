@@ -126,6 +126,7 @@ class Usuario extends Sagyc{
 		$x.= "<option value='PRODUCTOS'>Productos</option>";
 		$x.= "<option value='INVENTARIO'>Inventario</option>";
 
+
 		$x.= "<optgroup label='Clientes'>";
 		$x.= "<option value='CLIENTES'>Clientes</option>";
 		$x.= "<option value='CITAS'>Citas</option>";
@@ -134,6 +135,9 @@ class Usuario extends Sagyc{
 		$x.= "<option value='PROVEEDORES'>Proveedores</option>";
 		$x.= "<option value='COMPRAS'>Compras</option>";
 		$x.= "<option value='TRASPASOS'>Traspasos</option>";
+
+		$x.= "<optgroup label='Gastos'>";
+		$x.= "<option value='GASTOS'>Gastos</option>";
 
 		$x.= "<optgroup label='Empresa'>";
 		$x.= "<option value='DATOSEMP'>Datos</option>";
@@ -220,6 +224,7 @@ class Usuario extends Sagyc{
 		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'VENTAREGISTRO'));
 		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'PRODUCTOS'));
 		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'INVENTARIO'));
+		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'GASTOS'));
 		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'CLIENTES'));
 		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'CITAS'));
 		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'PROVEEDORES'));

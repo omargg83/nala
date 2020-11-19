@@ -121,6 +121,9 @@ class Usuario extends Sagyc{
 		$x.= "<option value='COMPRAS'>Compras</option>";
 		$x.= "<option value='TRASPASOS'>Traspasos</option>";
 
+		$x.= "<optgroup label='Gastos'>";
+		$x.= "<option value='GASTOS'>Gastos</option>";
+
 		$x.= "<optgroup label='Empresa'>";
 		$x.= "<option value='DATOSEMP'>Datos</option>";
 		$x.= "<option value='SUCURSAL'>Sucursal</option>";
@@ -216,6 +219,7 @@ class Usuario extends Sagyc{
 		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'DATOSEMP'));
 		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'SUCURSAL'));
 		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'REPORTES'));
+		$x=$this->insert('usuarios_permiso', array('idusuario'=>$id,'captura'=>0,'nivel'=>0,'modulo'=>'GASTOS'));
 
 		$arreglo =array();
 		$arreglo+=array('id'=>$id);

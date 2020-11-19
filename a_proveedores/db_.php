@@ -1,6 +1,5 @@
 <?php
 require_once("../control_db.php");
-
 if($_SESSION['des']==1 and strlen($function)==0)
 {
 	echo "<div class='alert alert-primary' role='alert'>";

@@ -145,6 +145,9 @@
 						if(array_key_exists('CAJAS', $db->derecho))
 		        echo "<a href='#a_cajas/index' is='menu-link' title='Datosemp'><i class='fas fa-cart-arrow-down'></i><span>Cajas</span></a>";
 
+						if(array_key_exists('GASTOS', $db->derecho))
+		        echo "<a href='#a_gastos/index' is='menu-link' title='Datosemp'><i class='fas fa-donate'></i><span>Gastos</span></a>";
+
 						if(array_key_exists('USUARIOS', $db->derecho))
 						echo "<a href='#a_usuarios/index' is='menu-link' title='Usuarios'><i class='fas fa-users'></i> <span>Usuarios</span></a>";
 

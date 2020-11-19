@@ -183,12 +183,12 @@
 
 							<div class="col-4">
 							 <label>Monto min. compra mayoreo</label>
-							 <input type="text" class="form-control form-control-sm" id="monto_mayor" name='monto_mayor' placeholder="Monto min compra mayoreo" value="<?php echo $monto_mayor; ?>" readonly>
+							 <input type="text" class="form-control form-control-sm" id="monto_mayor" name='monto_mayor' placeholder="Monto min compra mayoreo" value="<?php echo $monto_mayor; ?>" >
 							</div>
 
 							<div class="col-4">
 							 <label>Monto min. compra distribuidor</label>
-							 <input type="text" class="form-control form-control-sm" id="monto_distribuidor" name='monto_distribuidor' placeholder="Monto min compra distribuidor" value="<?php echo $monto_distribuidor; ?>" readonly>
+							 <input type="text" class="form-control form-control-sm" id="monto_distribuidor" name='monto_distribuidor' placeholder="Monto min compra distribuidor" value="<?php echo $monto_distribuidor; ?>" >
 							</div>
 
 						</div>
