@@ -37,8 +37,8 @@ $total=round($total,2);
         <label>Metodo de pago</label>
         <select class="form-control" name="tipo_pago" id="tipo_pago">
           <option value="Efectivo">Efectivo</option>
-          <option value="Debito">Tarjeta debito</option>
-          <option value="Credito">Credito</option>
+          <option value="Debito">Tarjeta de debito</option>
+          <option value="T.Credito">Tarjeta de Credito</option>
           <option value="Cupon">Cupón</option>
         </select>
       </div>
