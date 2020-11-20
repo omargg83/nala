@@ -339,7 +339,20 @@ class Venta extends Sagyc{
 
 		///////////////terminan variables
 
-		if($esquema==1){
+		if($esquema==0){//esquema 0
+			$total_menudeo=($precio*$cantidad);
+			$precio_f=$precio;
+
+			$total_menudeo=$total_menudeo;
+			$total_mayoreo=$total_menudeo;
+			$total_distribuidor=$total_menudeo;
+
+			$precio_mayoreo=$total_menudeo;
+			$precio_distri=$total_menudeo;
+
+		}
+
+		else if($esquema==1){
 			$total_menudeo=($precio*$cantidad);
 
 			$precio_f=$precio;

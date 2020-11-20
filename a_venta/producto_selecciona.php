@@ -63,7 +63,7 @@
 			echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label><b>Cantidad</b></label>";
-					echo "<input type='number' min=0 max=9999 class='form-control' is='f-cantidad' name='cantidad' id='cantidad' value='1' required>";
+					echo "<input type='number' min=0 max=9999 class='form-control' is='f-cantidad' name='cantidad' id='cantidad' value='0' required>";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
