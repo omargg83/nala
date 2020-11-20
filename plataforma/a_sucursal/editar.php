@@ -8,6 +8,7 @@
 	$tel1="";
 	$tel2="";
 	$cp="";
+	$estado="";
 	if($idsucursal>0){
 		$pd = $db->sucursal($idsucursal);
 		$nombre=$pd->nombre;
@@ -16,6 +17,7 @@
 		$tel1=$pd->tel1;
 		$tel2=$pd->tel2;
 		$cp=$pd->cp;
+		$estado=$pd->estado;
 	}
 ?>
 
@@ -28,17 +30,21 @@
 			</div>
 			<div class='card-body'>
 				<div class='row'>
-					<div class="col-4">
+					<div class="col-3">
 						<label>Nombre:</label>
 							<input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre;?>" placeholder="Nombre" required maxlength='100'>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<label>Ubicación:</label>
 							<input type="text" class="form-control form-control-sm" name="ubicacion" id="ubicacion" value="<?php echo $ubicacion;?>" placeholder="Ubicación" required maxlength='155'>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<label>Ciudad:</label>
 							<input type="text" class="form-control form-control-sm" name="ciudad" id="ciudad" value="<?php echo $ciudad;?>" placeholder="Ciudad" required maxlength='145'>
+					</div>
+					<div class="col-3">
+						<label>Estado:</label>
+							<input type="text" class="form-control form-control-sm" name="estado" id="estado" value="<?php echo $estado;?>" placeholder="Estado" required maxlength='45'>
 					</div>
 				</div>
 			</div>

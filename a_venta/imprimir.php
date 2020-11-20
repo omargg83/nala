@@ -22,6 +22,9 @@
 
 	$pedido = $db->ventas_pedido($idventa);
 
+	$suc=  $db->sucursal_info();
+	$tiend=  $db->tienda_info();
+
 	set_include_path('../lib/pdf2/src/'.PATH_SEPARATOR.get_include_path());
 	include 'Cezpdf.php';
 
@@ -30,12 +33,12 @@
 	$pdf->selectFont('Helvetica');
 	// la imagen solo aparecera si antes del codigo ezStream se pone ob_end_clean como se muestra al final men
 	$pdf->ezImage("../img/logoimp.jpg", 0, 100, 'none', 'center');
-//	$pdf->ezText("SAGYC",10,array('justification' => 'center'));
-//	$pdf->ezText("OPERADORA PLATHEA SA DE CV",10,array('justification' => 'center'));
-//	$pdf->ezText("Rfc: OPL180514RA2",10,array('justification' => 'center'));
-	$pdf->ezText("Blvd. Valle de San Javier # 202, Local 10 C.P.: 42086 Pachuca de Soto, Hgo.",10,array('justification' => 'center'));
-	$pdf->ezText("Tel. 7716884592",10,array('justification' => 'center'));
-	$pdf->ezText("Cel. 7712602184",10,array('justification' => 'center'));
+	$pdf->ezText($tiend->razon,10,array('justification' => 'center'));
+	$pdf->ezText($suc->ubicacion,10,array('justification' => 'center'));
+	$pdf->ezText("Codigo Postal: ".$suc->cp,10,array('justification' => 'center'));
+	$pdf->ezText($suc->ciudad." ".$suc->estado,10,array('justification' => 'center'));
+	$pdf->ezText($suc->tel1,10,array('justification' => 'center'));
+	$pdf->ezText($suc->tel2,10,array('justification' => 'center'));
 	$pdf->ezText(" ",10);
 	$pdf->ezText("Cliente: ".$nombre_cli,10);
 	$pdf->ezText("Fecha y hora: ".$fecha,10);
@@ -63,11 +66,14 @@
 
 	$pdf->ezText("Tipo de pago: ".$tipo_pago,10);
 	$pdf->ezText(" ",10);
-	//$pdf->ezText("Sub-Total: $".$subtotal,10,array('justification' => 'right'));
-	//$pdf->ezText("Iva: $".$iva,10,array('justification' => 'right'));
+
+	if ($tiend->desglose=='1'){
+	$pdf->ezText("Sub-Total: $".$subtotal,10,array('justification' => 'right'));
+	$pdf->ezText("Iva: $".$iva,10,array('justification' => 'right'));
+	}
 	$pdf->ezText("Total:".moneda($total),12,array('justification' => 'right'));
 	$pdf->ezText(" ",10);
-	$pdf->ezText("¡Gracias por tu preferencia!",12,array('justification' => 'center'));
+	$pdf->ezText($tiend->mensaje,12,array('justification' => 'center'));
 	if (ob_get_contents()) ob_end_clean();
 	$pdf->ezStream();
 ?>

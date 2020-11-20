@@ -8,7 +8,8 @@
 	$col="";
 	$ciudad="";
 	$estado="";
-
+	$desglose=0;
+	$mensaje="";
 	if($idtienda>0){
 		$pd = $db->tienda($idtienda);
 		$razon=$pd->razon;
@@ -17,6 +18,8 @@
 		$col=$pd->col;
 		$ciudad=$pd->ciudad;
 		$estado=$pd->estado;
+		$desglose=$pd->desglose;
+		$mensaje=$pd->mensaje;
 	}
 
 ?>
@@ -57,6 +60,22 @@
 							<input type="text" class="form-control form-control-sm" name="estado" id="estado" value="<?php echo $estado;?>" placeholder="Estado" readonly>
 					</div>
 				</div>
+
+				<div class='row'>
+					<div class='col-3'>
+						<label>Desglose de iva</label>
+						<select class="form-control form-control-sm" name="desglose" id="desglose"required>
+							<option value='0'<?php if($desglose=='0') echo 'selected'; ?> >NO</option>
+							<option value='1'<?php if($desglose=='1') echo 'selected'; ?> >SI</option>
+						</select>
+					</div>
+					<div class="col-3">
+						<label>Mensaje ticket</label>
+							<input type="text" class="form-control form-control-sm" name="mensaje" id="mensaje" value="<?php echo $mensaje;?>" placeholder="Mensaje del ticket" readonly>
+					</div>
+
+				</div>
+
 			</div>
 			<div class='card-footer'>
 				<div class="row">

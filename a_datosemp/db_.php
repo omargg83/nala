@@ -71,6 +71,12 @@ class Datos_tienda extends Sagyc{
 		if (isset($_REQUEST['estado'])){
 			$arreglo+=array('estado'=>$_REQUEST['estado']);
 		}
+		if (isset($_REQUEST['desglose'])){
+			$arreglo+=array('desglose'=>$_REQUEST['desglose']);
+		}
+		if (isset($_REQUEST['mensaje'])){
+			$arreglo+=array('mensaje'=>$_REQUEST['mensaje']);
+		}
 
 		if($idtienda==0){
 			$x=$this->insert('tienda', $arreglo);
