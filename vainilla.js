@@ -287,7 +287,7 @@ $(document).on('click',"[is*='is-borraprod']",function(e){
 
   $.confirm({
     title: 'Eliminar',
-    content: '¿Desea eliminar el producto seleccionada?',
+    content: '¿Desea eliminar el producto seleccionado?',
     buttons: {
       Eliminar: function () {
         cargando(true);
@@ -583,7 +583,7 @@ $(document).on('click',"[is*='t-borraprod']",function(e){
 
   $.confirm({
     title: 'Eliminar',
-    content: '¿Desea eliminar el producto seleccionada?',
+    content: '¿Desea eliminar el producto seleccionado?',
     buttons: {
       Eliminar: function () {
         cargando(true);

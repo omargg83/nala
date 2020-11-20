@@ -53,7 +53,7 @@
 			'No.'=>$contar+1,
 			'Desc.'=>$ped->nombre,
 			'Cant.'=>number_format($ped->v_cantidad),
-			'Costo'=>number_format($ped->v_precio,2)
+			'Costo'=>number_format($ped->v_precio*$ped->v_cantidad,2)
 		);
 		$contar++;
 	}
