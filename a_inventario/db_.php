@@ -50,24 +50,17 @@ class Productos extends Sagyc{
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
   }
-	public function productos_lista(){
+	public function productos_lista($pagina){
 		try{
+			$pagina=$pagina*$_SESSION['pagina'];
 			$sql="SELECT
 			productos_catalogo.nombre,
 			productos_catalogo.codigo,
 			productos_catalogo.tipo,
-			productos.idproducto,
-			productos.activo_producto,
-			productos.cantidad,
-			productos.precio,
-			productos.preciocompra,
-			productos.precio_mayoreo,
-			productos.precio_distri,
-			productos.stockmin,
-			productos.idsucursal
+			productos.*
 			from productos
 			LEFT OUTER JOIN productos_catalogo ON productos_catalogo.idcatalogo = productos.idcatalogo
-			where productos.idsucursal='".$_SESSION['idsucursal']."'and productos_catalogo.tipo<>0 limit 50";
+			where productos.idsucursal='".$_SESSION['idsucursal']."'and productos_catalogo.tipo<>0 limit $pagina,".$_SESSION['pagina']."";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
