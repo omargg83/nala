@@ -342,6 +342,8 @@ class Venta extends Sagyc{
 
 		///////////////terminan variables
 
+		//////////////// empieza el caclulo de los esquemas cuando se selecciona un producto antes de agregarlo (pantalla agregar producto)
+
 		if($esquema==0){//esquema 0
 			$total_menudeo=($precio*$cantidad);
 			$precio_f=$precio;
