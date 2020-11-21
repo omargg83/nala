@@ -9,6 +9,7 @@
 	$tel2="";
 	$cp="";
 	$estado="";
+	$tipoticket="";
 	if($idsucursal>0){
 		$pd = $db->sucursal($idsucursal);
 		$nombre=$pd->nombre;
@@ -18,6 +19,7 @@
 		$tel2=$pd->tel2;
 		$cp=$pd->cp;
 		$estado=$pd->estado;
+		$tipoticket=$pd->tipoticket;
 	}
 ?>
 
@@ -51,17 +53,24 @@
 
 			<div class='card-body'>
 				<div class='row'>
-					<div class="col-4">
+					<div class="col-3">
 						<label>Código Postal:</label>
 							<input type="text" class="form-control form-control-sm" name="cp" id="cp" value="<?php echo $cp;?>" placeholder="Código  postal" maxlength='5'>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<label>Teléfono 1:</label>
 							<input type="text" class="form-control form-control-sm" name="tel1" id="tel1" value="<?php echo $tel1;?>" placeholder="Teléfono 1" maxlength='15'>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<label>Teléfono 2:</label>
 							<input type="text" class="form-control form-control-sm" name="tel2" id="tel2" value="<?php echo $tel2;?>" placeholder="Teléfono 2" maxlength='15'>
+					</div>
+					<div class='col-3'>
+						<p>Tamaño de ticket de venta:</p>
+						<select class="form-control form-control-sm" name="tipoticket" id="tipoticket"required>
+							<option value='0'<?php if($tipoticket=='0') echo 'selected'; ?> >58mm</option>
+							<option value='1'<?php if($tipoticket=='1') echo 'selected'; ?> >80mm</option>
+						</select>
 					</div>
 				</div>
 			</div>

@@ -23,6 +23,12 @@
     $cliente=$sth->fetch(PDO::FETCH_OBJ);
     $idcliente=$cliente->idcliente;
     $n_cliente=$cliente->nombre;
+
+    $sql="select tipoticket from sucursal where idsucursal='".$_SESSION['idsucursal']."'";
+    $sth = $db->dbh->prepare($sql);
+    $sth->execute();
+    $sucu=$sth->fetch(PDO::FETCH_OBJ);
+    $tamanoticket=$sucu->tipoticket;
   }
   else{
     $idventa=0;
@@ -70,8 +76,12 @@
               else{
                 if($_SESSION['a_sistema']==1){
                   echo "<button type='button' class='btn btn-warning btn-sm mr-2' id='nueva' is='b-link' des='a_venta/venta' dix='trabajo'><i class='fas fa-cash-register'></i>Nueva</button>";
-
-                  echo "<button type='button' class='btn btn-warning btn-sm mr-2'  id='print_persona' is='b-print' title='Editar' des='a_venta/imprimir' dix='trabajo' v_idventa='$idventa'><i class='fas fa-print'></i>Imprimir</button>";
+                  if ($tamanoticket==0) {
+                    echo "<button type='button' class='btn btn-warning btn-sm mr-2'  id='print_persona' is='b-print' title='Editar' des='a_venta/imprimir' dix='trabajo' v_idventa='$idventa'><i class='fas fa-print'></i>Imprimir</button>";
+                  }
+                  else {
+                    echo "<button type='button' class='btn btn-warning btn-sm mr-2'  id='print_persona' is='b-print' title='Editar' des='a_venta/imprimir88mm' dix='trabajo' v_idventa='$idventa'><i class='fas fa-print'></i>Imprimir</button>";
+                  }
                 }
               }
 

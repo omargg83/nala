@@ -70,6 +70,12 @@ class Sucursal extends Sagyc{
 		if (isset($_REQUEST['ubicacion'])){
 			$arreglo+=array('ubicacion'=>$_REQUEST['ubicacion']);
 		}
+		if (isset($_REQUEST['estado'])){
+			$arreglo+=array('estado'=>$_REQUEST['estado']);
+		}
+		if (isset($_REQUEST['tipoticket'])){
+			$arreglo+=array('tipoticket'=>$_REQUEST['tipoticket']);
+		}
 
 		if($idsucursal==0){
 			$arreglo+=array('idtienda'=>$_SESSION['idtienda']);

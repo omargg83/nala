@@ -267,9 +267,12 @@ class Venta extends Sagyc{
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			$rex=$sth->fetch(PDO::FETCH_OBJ);
+			$total=$rex->total;
+			$subtotal=$total/1.16;
+			$iva=$total-$subtotal;
 
 			$arreglo=array();
-			$arreglo+=array('total'=>$rex->total);
+			$arreglo+=array('total'=>$rex->total,'subtotal'=>$subtotal, 'iva'=>$iva);
 			$this->update('venta',array('idventa'=>$idventa), $arreglo);
 			return $rex->total;
 
@@ -395,6 +398,7 @@ class Venta extends Sagyc{
 		else if($esquema==2){//esquema 2
 			$total_menudeo=($precio*$cantidad);
 			$precio_f=$precio;
+
 			//////////////validaciones
 			if($precio_mayoreo>0 and $mayoreo_cantidad>0){
 				$total_mayoreo=($precio_mayoreo*$cantidad);
@@ -411,7 +415,7 @@ class Venta extends Sagyc{
 			}
 
 			///////////////calculo
-			$precio=$total_menudeo;
+			$precio=$precio_f;
 			if($cantidad>=$mayoreo_cantidad and $cantidad<$distri_cantidad){
 				$precio=$precio_mayoreo;
 			}
