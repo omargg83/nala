@@ -3,6 +3,8 @@
 
 	$suc=  $db->sucursal_info();
 	$tiend=  $db->tienda_info();
+	$pd=$db->corte_caja();
+
 	set_include_path('../lib/pdf2/src/'.PATH_SEPARATOR.get_include_path());
 	include 'Cezpdf.php';
 
@@ -18,6 +20,18 @@
 	$pdf->ezText($suc->tel1,10,array('justification' => 'center'));
 	$pdf->ezText($suc->tel2,10,array('justification' => 'center'));
 	$pdf->ezText(" ",10);
+	$data=array();
+	$contar=0;
+
+	foreach($pd as $key){
+		$data[$contar]=array(
+			'No.'=>$contar+1,
+			'Desc.'=>$key->fecha,
+			'Cant.'=>number_format($key->total),
+			'Costo'=>$key->tipo_pago
+		);
+		$contar++;
+	}
 
 	//$pdf->ezText("Expedido en: Pachuca Hgo.",10);
 
