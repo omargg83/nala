@@ -113,6 +113,29 @@
 						echo "</div>";
 					}
 
+					////////////// Actualiza el nuevo costo cuando las sumas de los productos alcanzan precio mayoreo o distribuidor
+						$sql="update bodega set v_precio='$total' where idbodega='$key->idbodega' ";
+						$sth = $db->dbh->prepare($sql);
+						$sth->execute();
+						$sth->fetch(PDO::FETCH_OBJ);
+
+					/////////////// actualiza el costo total de la venta cuando las sumas de los productos alcanzan precio mayoreo o distribuidor
+
+						$sql="select sum(v_precio * v_cantidad) as total from bodega where idventa='$idventa' ";
+						$sth = $db->dbh->prepare($sql);
+						$sth->execute();
+						$rex=$sth->fetch(PDO::FETCH_OBJ);
+
+						$totalt=$rex->total;
+						$subtotalt=$totalt/1.16;
+						$ivat=$totalt-$subtotalt;
+
+						$sql="update venta set total='$rex->total',subtotal='$subtotalt', iva='$ivat' where idventa='$idventa' ";
+						$sth = $db->dbh->prepare($sql);
+						$sth->execute();
+						$sth->fetch(PDO::FETCH_OBJ);
+
+						///////////////////////////////////////
 
 				}
 

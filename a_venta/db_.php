@@ -381,11 +381,11 @@ class Venta extends Sagyc{
 			///////////////calculo
 			$precio=$total_menudeo;
 
-			if($total_menudeo>=$monto_mayor and $total_menudeo<$monto_distribuidor){
+			if($total_mayoreo>=$monto_mayor and $total_mayoreo<$monto_distribuidor){
 				////////////cuando es mayor que 1000
 				$precio=$precio_mayoreo;
 			}
-			else if($total_menudeo>=$monto_distribuidor){
+			else if($total_distribuidor>=$monto_distribuidor){
 				/////////////cuando es mayor que 3000
 				$precio=$precio_distri;
 			}
