@@ -27,6 +27,22 @@ class Venta extends Sagyc{
 		}
 	}
 
+
+	public function sucursal_info(){
+		$sql="select * from sucursal where idsucursal='".$_SESSION['idsucursal']."'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetch(PDO::FETCH_OBJ);
+	}
+
+	public function tienda_info(){
+		$sql="select * from tienda where idtienda='".$_SESSION['idtienda']."'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetch(PDO::FETCH_OBJ);
+	}
+
+
 	public function emitidas(){
 		try{
 
@@ -75,6 +91,27 @@ class Venta extends Sagyc{
 			if(strlen($idusuario)>0){
 				$sth->bindValue(":idusuario",$idusuario);
 			}
+			$sth->execute();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
+
+	public function corte_caja(){
+		try{
+			$desde=$_REQUEST['desde'];
+			$hasta=$_REQUEST['hasta'];
+
+			$desde = date("Y-m-d", strtotime($desde))." 00:00:00";
+			$hasta = date("Y-m-d", strtotime($hasta))." 23:59:59";
+
+			$sql="select sum(venta.total) as total, venta.fecha, venta.estado, venta.tipo_pago from venta
+			where venta.idsucursal='".$_SESSION['idsucursal']."' and (venta.fecha BETWEEN :fecha1 AND :fecha2) and venta.estado='Pagada' GROUP BY tipo_pago";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":fecha1",$desde);
+			$sth->bindValue(":fecha2",$hasta);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
 		}
