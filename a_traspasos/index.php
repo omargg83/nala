@@ -19,8 +19,13 @@
 				</form>
 
 				<li class='nav-item active'>
-					<a class='nav-link barranav' title='Mostrar todo' is='a-link' id='lista_comision' des='a_traspasos/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Lista</span></a>
+					<a class='nav-link barranav' title='Mostrar todo' is='a-link' id='envios' des='a_traspasos/lista' dix='trabajo'><i class='fas fa-arrow-right'></i><span>Envios</span></a>
 				</li>
+
+				<li class='nav-item active'>
+					<a class='nav-link barranav' title='Mostrar todo' is='a-link' id='recepcion' des='a_traspasos/lista_recepcion' dix='trabajo'><i class='far fa-arrow-alt-circle-down'></i><span>Recepcion</span></a>
+				</li>
+
 				<li class='nav-item active'>
 					<a class='nav-link barranav izq' title='Nuevo' is='a-link' id='new_personal' des='a_traspasos/editar' dix='trabajo' v_id='0'><i class='fas fa-plus'></i><span>Nuevo</span></a>
 				</li>

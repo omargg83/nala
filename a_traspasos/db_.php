@@ -46,7 +46,7 @@ class Traspaso extends Sagyc{
 
 	public function traspasos_lista(){
 		try{
-			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' order by idtraspaso desc";
+			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' and iddesde='".$_SESSION['idsucursal']."' order by idtraspaso desc";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -151,13 +151,25 @@ class Traspaso extends Sagyc{
 		$idbodega=$_REQUEST['idbodega'];
 		$idtraspaso=$_REQUEST['idtraspaso'];
 		$x=$this->borrar('bodega',"idbodega",$idbodega);
-		
+
 		$arreglo =array();
 		$arreglo+=array('idtraspaso'=>$idtraspaso);
 		$arreglo+=array('error'=>0);
 		return json_encode($arreglo);
 	}
 
+	public function recepcion_lista(){
+		try{
+			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' and idsucursal='".$_SESSION['idsucursal']."' order by idtraspaso desc";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			echo $e;
+			return "Database access FAILED!";
+		}
+	}
 
 }
 $db = new Traspaso();

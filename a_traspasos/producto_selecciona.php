@@ -10,7 +10,7 @@
 	$sth->bindValue(":id",$idproducto);
 	$sth->execute();
 	$producto=$sth->fetch(PDO::FETCH_OBJ);
-
+	$exist=0;
 	if($producto->tipo==3){
 		$sql="select sum(cantidad) as total from bodega where idsucursal='".$_SESSION['idsucursal']."' and idproducto='$producto->idproducto'";
 		$sth = $db->dbh->prepare($sql);
@@ -57,14 +57,13 @@
 					echo "<label>Existencia:</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='existencia' id='existencia' value='$exist' readonly>";
 				echo "</div>";
-
 			echo "</div>";
 
 			echo "<hr>";
 			echo "<div class='row'>";
 				echo "<div class='col-12'>";
 						echo "<button class='btn btn-warning btn-sm' type='submit' ><i class='fas fa-cart-plus'></i>Agregar</button>";
-						echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' cmodal='1' ><i class='fas fa-sign-out-alt'></i>Cancelar</button>";
+						echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' cmodal='1' ><i class='fas fa-sign-out-alt'></i>Cerrar</button>";
 				echo "</div>";
 			echo "</div>";
 	echo "</form>";

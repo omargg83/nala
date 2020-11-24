@@ -2,6 +2,7 @@
 	require_once("db_.php");
 	if (isset($_REQUEST['idtraspaso'])){$idtraspaso=$_REQUEST['idtraspaso'];} else{ $idtraspaso=0;}
 	$sucursal=$db->sucursal_lista();
+
 	if($idtraspaso>0){
 		$traspaso = $db->traspaso($idtraspaso);
 		$numero=$traspaso->numero;
@@ -74,6 +75,13 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<button class="btn btn-warning btn-sm" type="submit"><i class='far fa-save'></i>Guardar</button>
+						<?php
+							if($idtraspaso>0){
+								echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_traspasos/form_producto' omodal='1'><i class='fas fa-plus'></i>Producto</button>";
+
+								echo "<button class='btn btn-warning btn-sm' type='button' is='b-print' des='a_traspasos/imprimir' v_idtraspaso='$idtraspaso' omodal='1'><i class='fas fa-print'></i>Imprimir</button>";
+							}
+						?>
 						<button type="button" class='btn btn-warning btn-sm' id='lista_penarea' is="b-link" des='a_traspasos/lista' dix='trabajo'><i class='fas fa-undo-alt'></i>Regresar</button>
 					</div>
 				</div>
@@ -86,22 +94,6 @@
 			include 'lista_pedido.php';
 		echo "</div>";
 
-
-		echo "<div class='card-body' >";
-			echo "<form is='t-busca' id='form_busca' >";
-				echo "<div clas='row'>";
-						echo "<div class='input-group mb-3'>";
-						echo "<input type='text' class='form-control form-control-sm' name='prod_venta' id='prod_venta' placeholder='buscar producto' aria-label='buscar producto' aria-describedby='basic-addon2'>";
-						echo "<div class='input-group-append'>";
-							echo "<button class='btn btn-warning btn-sm' type='submit' ><i class='fas fa-search'></i>Buscar</button>";
-						echo "</div>";
-					echo "</div>";
-				echo "</div>";
-			echo "</form>";
-		echo "</div>";
-
-		echo "<div clas='row' id='resultadosx' style='min-height:500px; max-height: 500; overflow:auto;'>
-		</div>";
 	}
 ?>
 	</div>

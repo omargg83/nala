@@ -24,9 +24,9 @@
 		<div class='row header-row'>
 			<div class='col-2'>#</div>
 			<div class='col-2'>Tipo</div>
-			<div class='col-2'>Nombre</div>
+			<div class='col-3'>Nombre</div>
 			<div class='col-2'>Estatus</div>
-			<div class='col-2'>Existencia</div>
+			<div class='col-1'>Existencia</div>
 			<div class='col-2'>Precio de venta</div>
 		</div>
 
@@ -61,7 +61,7 @@
 
 						echo "<div class='col-2'>".$key->nombre."</div>";
 
-						echo "<div class='col-2 text-center'>";
+						echo "<div class='col-3 text-center'>";
 						if($cantidad->total>0 and $key->activo_producto==1 ){
 							echo "<button type='button'  id='0' des='' dix='0' v_idproducto='0' class='btn btn-warning btn-sm' title='Producto en existencia' omodal='1'><i class='far fa-thumbs-up'></i></button>";
 						}
@@ -73,7 +73,7 @@
 						}
 						echo "</div>";
 
-						echo "<div class='col-2 text-center'>";
+						echo "<div class='col-1 text-center'>";
 							echo $exist;
 						echo "</div>";
 
@@ -92,6 +92,7 @@
 	$contar=$sth->fetch(PDO::FETCH_OBJ);
 	$paginas=ceil($contar->total/$_SESSION['pagina']);
 	$pagx=$paginas-1;
+	echo "<br>";
 	echo "<nav aria-label='Page navigation text-center'>";
 	  echo "<ul class='pagination'>";
 	    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista' dix='trabajo'>Primera</a></li>";

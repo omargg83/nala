@@ -1,20 +1,14 @@
 <?php
 	require_once("db_.php");
 
-	if(isset($_REQUEST['buscar'])){
-		$texto=$_REQUEST['buscar'];
-		$pd = $db->traspasos_buscar($texto);
-	}
-	else{
-		$pd = $db->traspasos_lista();
-	}
 
+	$pd = $db->recepcion_lista();
 	echo "<div class='container-fluid' style='background-color:".$_SESSION['cfondo']."; '>";
 ?>
 <div class='tabla_css' id='tabla_css'>
 	<div class='row titulo-row'>
 		<div class='col-12'>
-			LISTA DE ENVIOS
+			LISTA DE RECEPCION
 		</div>
 	</div>
 	<div class='row header-row'>
