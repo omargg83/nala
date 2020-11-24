@@ -4,7 +4,7 @@
   $nuevafecha = strtotime ( '-1 month' , strtotime ( $fecha ) ) ;
   $fecha1 = date ( "Y-m-d" , $nuevafecha );
 
-  $sql="select * from usuarios";
+  $sql="select * from usuarios where idsucursal='".$_SESSION['idsucursal']."'";
   $sth = $db->dbh->prepare($sql);
   $sth->execute();
   $res=$sth->fetchAll(PDO::FETCH_OBJ);

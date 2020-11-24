@@ -22,10 +22,19 @@
 	  	<div class="card bg-white text-black">
 		    <p class="card-text text-center">Corte de caja</p>
 				<div class='card-footer'>
-					<a class="btn btn-warning btn-sm btn-block" id='menu_ventas' is='menu-link' href='#a_reporte/reporte4'>Ir</a>
+					<a class="btn btn-warning btn-sm btn-block" id='menu_ventas' is='menu-link' href='#a_reporte/reporte3'>Ir</a>
 				</div>
 		  </div>
 	  </div>
+
+		<div class="col-3 edit-t mb-1">
+			<div class="card bg-white text-black">
+				<p class="card-text text-center">Corte de caja x usuario</p>
+				<div class='card-footer'>
+					<a class="btn btn-warning btn-sm btn-block" id='menu_ventas' is='menu-link' href='#a_reporte/reporte4'>Ir</a>
+				</div>
+			</div>
+		</div>
 
 	</div>
 </div>

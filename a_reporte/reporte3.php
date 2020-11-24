@@ -4,17 +4,12 @@
   $nuevafecha = strtotime ( '+0 month' , strtotime ( $fecha ) ) ;
   $fecha1 = date ( "Y-m-d" , $nuevafecha );
 
-  $sql="select * from usuarios where idsucursal='".$_SESSION['idsucursal']."'";
-  $sth = $db->dbh->prepare($sql);
-  $sth->execute();
-  $res=$sth->fetchAll(PDO::FETCH_OBJ);
-
 ?>
 
-<form id='consulta_avanzada' is='f-submit' des='a_reporte/reporte4_res' dix='resultado'  autocomplete='off'>
+<form id='consulta_avanzada' is='f-submit' des='a_reporte/reporte3_res' dix='resultado'  autocomplete='off'>
   <div class='container' >
     <div class="alert alert-light" role="alert">
-      <h4 class="alert-heading">CORTE DE CAJA POR USUARIO</h4>
+      <h4 class="alert-heading">CORTE DE CAJA</h4>
       <div class='row'>
         <div class='col-sm-3'>
             <label><b>Del</b></label>
@@ -24,18 +19,6 @@
         <div class='col-sm-3'>
           <label><b>Al</b></label>
           <input class="form-control fechaclass" placeholder="Hasta...." type="date" id='hasta' name='hasta' value='<?php echo $fecha; ?>' autocomplete="off">
-        </div>
-
-        <div class='col-sm-3'>
-          <label><b>Vendedor</b></label>
-          <select class="form-control" name="idusuario" id="idusuario" required>
-            <option value=""></option>
-          <?php
-            foreach($res as $v2){
-              echo "<option value='$v2->idusuario'>$v2->nombre</option>";
-            }
-          ?>
-      </select>
         </div>
 
       </div>
