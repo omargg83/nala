@@ -65,6 +65,35 @@ class Venta extends Sagyc{
 			return "Database access FAILED! ".$e->getMessage();
 		}
 	}
+	public function emitidasxsuc(){
+		try{
+
+			$desde=$_REQUEST['desde'];
+			$hasta=$_REQUEST['hasta'];
+			$idsucursal=$_REQUEST['idsucursal'];
+
+			$desde = date("Y-m-d", strtotime($desde))." 00:00:00";
+			$hasta = date("Y-m-d", strtotime($hasta))." 23:59:59";
+
+			$sql="select venta.idventa, venta.idsucursal, venta.descuento, venta.factura, clientes.nombre as nombrecli, sucursal.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
+			left outer join clientes on clientes.idcliente=venta.idcliente
+			left outer join sucursal on sucursal.idsucursal=venta.idsucursal where (venta.fecha BETWEEN :fecha1 AND :fecha2)";
+			if(strlen($idsucursal)>0){
+				$sql.=" and venta.idsucursal=:idsucursal";
+			}
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":fecha1",$desde);
+			$sth->bindValue(":fecha2",$hasta);
+			if(strlen($idsucursal)>0){
+				$sth->bindValue(":idsucursal",$idsucursal);
+			}
+			$sth->execute();
+			return $sth->fetchAll();
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
 	public function productos_vendidos(){
 		try{
 			$idusuario=$_REQUEST['idusuario'];
@@ -112,6 +141,36 @@ class Venta extends Sagyc{
 			$sth = $this->dbh->prepare($sql);
 			$sth->bindValue(":fecha1",$desde);
 			$sth->bindValue(":fecha2",$hasta);
+			$sth->execute();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
+
+	public function corte_cajaxsuc(){
+		try{
+			$idsucursal=$_REQUEST['idsucursal'];
+			$desde=$_REQUEST['desde'];
+			$hasta=$_REQUEST['hasta'];
+
+			$desde = date("Y-m-d", strtotime($desde))." 00:00:00";
+			$hasta = date("Y-m-d", strtotime($hasta))." 23:59:59";
+
+			$sql="select sum(venta.total) as total, venta.fecha, venta.estado, venta.tipo_pago, sucursal.nombre from venta
+			left outer join sucursal on sucursal.idsucursal=venta.idsucursal
+			where (venta.fecha BETWEEN :fecha1 AND :fecha2) and venta.estado='Pagada' ";
+			if(strlen($idsucursal)>0){
+				$sql.=" and venta.idsucursal=:idsucursal";
+			}
+			$sql.=" GROUP BY tipo_pago";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":fecha1",$desde);
+			$sth->bindValue(":fecha2",$hasta);
+			if(strlen($idsucursal)>0){
+				$sth->bindValue(":idsucursal",$idsucursal);
+			}
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
 		}

@@ -13,7 +13,7 @@
   		<th>-</th>
   		<th>Ticket #</th>
   		<th>Fecha</th>
-  		<th>Porducto</th>
+  		<th>Producto</th>
       <th>Cantidad</th>
   		<th>Precio U.</th>
   		<th>Total</th>
