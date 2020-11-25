@@ -388,7 +388,60 @@ class Productos extends Sagyc{
 		echo "<a href='$direccion' target='_black'>Archivo</a>";
 	}
 	public function asignar_sucursal(){
-		return "ghola mundo";
+		$idcatalogo=$_REQUEST['idcatalogo'];
+
+		$sql="select * from productos where idcatalogo='$idcatalogo' and idsucursal='".$_SESSION['idsucursal']."'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		$contar=$sth->rowCount();
+		
+
+		if($contar==0){
+			$sql="select * from productos_catalogo where idcatalogo='$idcatalogo'";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			$catalogo=$sth->fetch(PDO::FETCH_OBJ);
+			$tipo=$catalogo->tipo;
+
+			$arreglo =array();
+			if($tipo==0){
+				$arreglo+=array('cantidad'=>1);
+			}
+			$monto_mayor=1000;
+			$monto_distribuidor=3000;
+			$stockmin=1;
+			$cantidad_mayoreo=10;
+
+			$arreglo+=array('preciocompra'=>0);
+			$arreglo+=array('precio'=>0);
+			$arreglo+=array('monto_mayor'=>$monto_mayor);
+
+			$arreglo+=array('monto_distribuidor'=>$monto_distribuidor);
+			$arreglo+=array('stockmin'=>$stockmin);
+			$arreglo+=array('cantidad_mayoreo'=>$cantidad_mayoreo);
+			$arreglo+=array('mayoreo_cantidad'=>0);
+			$arreglo+=array('distri_cantidad'=>0);
+			$arreglo+=array('precio_mayoreo'=>0);
+			$arreglo+=array('precio_distri'=>0);
+
+			$arreglo+=array('idcatalogo'=>$idcatalogo);
+			$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
+			return $this->insert('productos', $arreglo);
+
+			$arreglo =array();
+			$arreglo+=array('error'=>0);
+			$arreglo+=array('terror'=>"Se agregó correctamente");
+			return json_encode($arreglo);
+
+		}
+		else{
+			$arreglo =array();
+			//$arreglo+=array('id'=>$idproducto);
+			$arreglo+=array('error'=>1);
+			$arreglo+=array('terror'=>"El producto ya existe en la sucursal");
+			return json_encode($arreglo);
+		}
 	}
 }
 $db = new Productos();

@@ -27,7 +27,8 @@
 		<div class='col-2'>#</div>
 		<div class='col-2'>ID</div>
 		<div class='col-2'>Tipo</div>
-		<div class='col-4'>Nombre</div>
+		<div class='col-2'>Codigo</div>
+		<div class='col-2'>Nombre</div>
 		<div class='col-2'>Descripción</div>
 	</div>
 
@@ -38,6 +39,9 @@
 						echo "<div class='btn-group'>";
 
 						echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_productos/editar' dix='trabajo' v_idcatalogo='$key->idcatalogo'><i class='fas fa-pencil-alt'></i></button>";
+
+						////////////quitar este boton o esconder
+						echo "<button type='button' class='btn btn-danger btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_productos/homologar' omodal=1 v_idcatalogo='$key->idcatalogo'><i class='fas fa-pencil-alt'></i>HOMOLOGAR</button>";
 
 						echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_productos/db_' des='a_productos/lista' fun='borrar_producto' dix='trabajo' v_idcatalogo='$key->idcatalogo' id='eliminar' tp='¿Desea eliminar el Producto seleccionado?'><i class='far fa-trash-alt'></i></button>";
 
@@ -53,11 +57,9 @@
 						if($key->tipo==3) echo "Producto";
 					echo "</div>";
 
-					echo "<div class='col-4'>".$key->nombre."</div>";
-
+					echo "<div class='col-2'>".$key->codigo."</div>";
+					echo "<div class='col-2'>".$key->nombre."</div>";
 					echo "<div class='col-2'>".$key->descripcion."</div>";
-
-
 				echo '</div>';
 			}
 		?>

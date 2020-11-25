@@ -1,9 +1,8 @@
 <?php
 	require_once("db_.php");
+
 	if (isset($_REQUEST['idcatalogo'])){$idcatalogo=$_REQUEST['idcatalogo'];} else{ $idcatalogo=0;}
-
-	if (isset($_REQUEST['idproducto'])){$idproducto=$_REQUEST['idproducto'];} else{ $idproducto=0;}
-
+	
 	$codigo="";
 	$nombre="";
 	$unidad="";

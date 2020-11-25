@@ -47,6 +47,17 @@ class Productos extends Sagyc{
 			return "Database access FAILED! ".$e->getMessage();
 		}
 	}
+	public function productos_homologar($idcatalogo){
+		try{
+			$sql="SELECT * from productos_catalogo where idcatalogo!=$idcatalogo order by nombre asc, idcatalogo asc";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
 	public function borrar_producto(){
 		if (isset($_REQUEST['idcatalogo'])){ $idcatalogo=$_REQUEST['idcatalogo']; }
 		return $this->borrar('productos_catalogo',"idcatalogo",$idcatalogo);
@@ -108,6 +119,7 @@ class Productos extends Sagyc{
 				if($ped->error==0){
 					$idcatalogo=$ped->id;
 
+					/*
 					$arreglo =array();
 					if($tipo==0){
 						$arreglo+=array('cantidad'=>1);
@@ -134,6 +146,7 @@ class Productos extends Sagyc{
 					$this->insert('productos', $arreglo);
 
 					$this->cantidad_update($idcatalogo,$tipo);
+					*/
 
 					if(strlen(trim($codigo))==0){
 						$codigo="9".str_pad($idcatalogo, 8, "0", STR_PAD_LEFT);
@@ -250,6 +263,24 @@ class Productos extends Sagyc{
 		echo "<a href='$direccion' target='_black'>Archivo</a>";
 		echo "</div>";
 	}
+	public function homologa_final(){
+		$origen=$_REQUEST['origen'];
+		$destino=$_REQUEST['destino'];
+
+		$sql="select * from productos where idcatalogo=$destino";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		foreach($sth->fetchAll(PDO::FETCH_OBJ) as $hom){
+			$arreglo =array();
+			$arreglo += array('idcatalogo'=>$origen);
+			$this->update('productos',array('idproducto'=>$hom->idproducto), $arreglo);
+
+		}
+		$x=$this->borrar('productos_catalogo',"idcatalogo",$destino);
+		return $x;
+	}
+
+
 }
 $db = new Productos();
 if(strlen($function)>0){
