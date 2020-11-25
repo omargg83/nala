@@ -23,6 +23,8 @@
 
         <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_prod' des='a_productos/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Lista</span></a></li>
 
+        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_servicios' des='a_productos/excel' dix='trabajo'><i class='fas fa-list-ul'></i><span>Excel</span></a></li>
+
         <?php
     			if($_SESSION['a_sistema']==1){
     				echo "<li class='nav-item active'><a class='nav-link barranav izq' is='a-link' title='Nuevo' id='new_poliza' des='a_productos/editar' v_id='0' dix='trabajo'><i class='fas fa-plus'></i><span>Nuevo</span></a></li>";

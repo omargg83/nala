@@ -11,6 +11,12 @@ if($_SESSION['des']==1 and strlen($function)==0)
 	echo "</div>";
 }
 
+require '../vendor/autoload.php';
+
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Productos extends Sagyc{
 	public $nivel_personal;
 	public $nivel_captura;
@@ -191,7 +197,59 @@ class Productos extends Sagyc{
 			return "Database access FAILED!".$e->getMessage();
 		}
 	}
+	public function excel(){
+		$direccion="tmp/excel.xlsx";
 
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+
+
+
+
+		$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by nombre asc, idcatalogo asc";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		$contar=1;
+		$sheet->setCellValue('A'.$contar,"idCatalogo");
+		$sheet->setCellValue('B'.$contar,"idtienda");
+		$sheet->setCellValue('C'.$contar,"tipo");
+		$sheet->setCellValue('D'.$contar,"codigo");
+		$sheet->setCellValue('E'.$contar,"nombre");
+		$sheet->setCellValue('F'.$contar,"descripcion");
+		$sheet->setCellValue('G'.$contar,"unidad");
+		$sheet->setCellValue('H'.$contar,"color");
+		$sheet->setCellValue('I'.$contar,"marca");
+		$sheet->setCellValue('J'.$contar,"modelo");
+		$sheet->setCellValue('K'.$contar,"fechaalta");
+		$sheet->setCellValue('L'.$contar,"activo_catalogo");
+		$sheet->setCellValue('M'.$contar,"categoria");
+		$sheet->setCellValue('N'.$contar,"fechamod");
+		$contar++;
+		foreach($sth->fetchAll(PDO::FETCH_OBJ) as $prod){
+			$sheet->setCellValue('A'.$contar, $prod->idcatalogo);
+			$sheet->setCellValue('B'.$contar, $prod->idtienda);
+			$sheet->setCellValue('C'.$contar, $prod->tipo);
+			$sheet->setCellValue('D'.$contar, "'".$prod->codigo);
+			$sheet->setCellValue('E'.$contar, $prod->nombre);
+			$sheet->setCellValue('F'.$contar, $prod->descripcion);
+			$sheet->setCellValue('G'.$contar, $prod->unidad);
+			$sheet->setCellValue('H'.$contar, $prod->color);
+			$sheet->setCellValue('I'.$contar, $prod->marca);
+			$sheet->setCellValue('J'.$contar, $prod->modelo);
+			$sheet->setCellValue('K'.$contar, $prod->fechaalta);
+			$sheet->setCellValue('L'.$contar, $prod->activo_catalogo);
+			$sheet->setCellValue('M'.$contar, $prod->categoria);
+			$sheet->setCellValue('N'.$contar, $prod->fechamod);
+
+			$contar++;
+		}
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save("../".$direccion);
+		echo "<div class='container-fluid' style='background-color:".$_SESSION['cfondo']."; '>";
+		echo "<a href='$direccion' target='_black'>Archivo</a>";
+		echo "</div>";
+	}
 }
 $db = new Productos();
 if(strlen($function)>0){
