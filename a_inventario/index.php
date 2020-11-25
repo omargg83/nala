@@ -23,6 +23,8 @@
         <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_inventario' des='a_inventario/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Inventario</span></a></li>
         <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_servicios' des='a_inventario/lista_servicios' dix='trabajo'><i class='fas fa-list-ul'></i><span>Servicios</span></a></li>
 
+        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_servicios' des='a_inventario/excel' dix='trabajo'><i class='fas fa-list-ul'></i><span>Excel</span></a></li>
+
         <?php
         	if(array_key_exists('PRODUCTOS', $db->derecho)){
             if($_SESSION['a_sistema']==1){

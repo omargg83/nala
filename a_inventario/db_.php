@@ -11,6 +11,12 @@ if($_SESSION['des']==1 and strlen($function)==0)
 	echo "</div>";
 }
 
+require '../vendor/autoload.php';
+
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Productos extends Sagyc{
 	public $nivel_personal;
 	public $nivel_captura;
@@ -356,6 +362,18 @@ class Productos extends Sagyc{
 		catch(PDOException $e){
 			return "Database access FAILED!".$e->getMessage();
 		}
+	}
+
+	public function excel(){
+		$direccion="tmp/excel.xlsx";
+
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'Hello World !');
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save("../".$direccion);
+		echo "<a href='$direccion' target='_black'>Archivo</a>";
 	}
 }
 $db = new Productos();
