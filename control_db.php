@@ -16,6 +16,9 @@
 		public $limite=300;
 		public $derecho=array();
 
+		public $f_productos="a_archivos/productos/";
+		public $f_usuarios="a_archivos/usuarios/";
+
 		public function __construct(){
 			date_default_timezone_set("America/Mexico_City");
 			try{

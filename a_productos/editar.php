@@ -46,7 +46,7 @@
 				<div class='row'>
 					<div class="col-2">
 						<?php
-							echo "<img src='".$db->doc."/".$archivo."' width='100%' class='img-thumbnail'/>";
+							echo "<img src='".$db->f_productos."/".$archivo."' width='100%' class='img-thumbnail'/>";
 					 ?>
 					</div>
 					<div class="col-10">

@@ -99,7 +99,14 @@
 
 					<div class="sidebar-header">
 		        <div class="user-pic">
-		          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" alt="User picture">
+							<?php
+								if(strlen($_SESSION['foto'])>0){
+									echo "<img class='img-responsive img-rounded' src='".$db->f_usuarios.$_SESSION['foto']."' alt='User picture'>";
+								}
+								else{
+									echo "<img class='img-responsive img-rounded' src='https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg' alt='User picture'>";
+								}
+							?>
 		        </div>
 		        <div class="user-info">
 		          <span class="user-name"><?php echo "algo"; ?>

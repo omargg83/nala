@@ -33,6 +33,7 @@
 
 	echo "<form id='form_prod' is='is-selecciona'>";
 
+
 		echo "<input type='hidden' class='form-control form-control-sm' name='idproducto' id='idproducto' value='$producto->idproducto' readonly>";
 
 		echo "<div class='modal-header'>";
@@ -41,7 +42,10 @@
 
 		echo "<div class='modal-body' style='max-height:580px;overflow: auto;'>";
 			echo "<div class='row'>";
-				echo "<div class='col-12'>";
+				echo "<div class='col-4'>";
+					echo "<img src='".$db->f_productos."/".$producto->archivo."' width='100%' class='img-thumbnail'/>";
+				echo "</div>";
+				echo "<div class='col-8'>";
 					echo "<input type='text' class='form-control form-control-sm' name='nombre' id='nombre' value='".$producto->nombre."' readonly>";
 					echo "<small>";
 						if ($producto->esquema==0){

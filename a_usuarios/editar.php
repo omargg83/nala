@@ -13,6 +13,7 @@
 		$nombre=$pd->nombre;
 		$estado=$pd->activo;
 		$idcaja=$pd->idcaja;
+		$archivo=$pd->archivo;
 	}
 	else{
 		$id=0;
@@ -22,6 +23,7 @@
 		$nombre="";
 		$estado="1";
 		$idsucursal=$_SESSION['idsucursal'];
+		$archivo="";
 	}
 ?>
 <div class="container">
@@ -30,90 +32,82 @@
 			Usuarios
 		</div>
 		<form is="f-submit" id="form_personal" db="a_usuarios/db_" fun="guardar_usuario" des='a_usuarios/editar' desid='id'>
+			<input type="hidden" class="form-control form-control-sm" name="id" id="id" value="<?php echo $id ;?>" placeholder="Tienda" readonly>
+
 			<div class='card-body'>
+				<div class="row">
+					<div class="col-2">
+						<?php
+							echo "<img src='".$db->f_usuarios."/".$archivo."' width='100%' class='img-thumbnail'/>";
+					 ?>
+					</div>
+					<div class="col-10">
+						<div class="row">
+							<div class="col-12">
+		 				   <label>Nombre:</label>
+		 					 <input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre ;?>" placeholder="Nombre del usuario" required>
+		 				 	</div>
 
-				 <input type="hidden" class="form-control form-control-sm" name="id" id="id" value="<?php echo $id ;?>" placeholder="Tienda" readonly>
-				 <div class="form-group row">
-				   <label class="control-label col-sm-2" for="">Nombre:</label>
-				   <div class="col-sm-10">
-					 <input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre ;?>" placeholder="Nombre del usuario" required>
-				   </div>
-				 </div>
+							<div class="col-12">
+							 <label >Estado:</label>
+								<select class="form-control form-control-sm" name="estado" id="estado">
+									<option value="1"<?php if($estado=="1") echo "selected"; ?> >Activa</option>
+									<option value="0"<?php if($estado=="0") echo "selected"; ?> >Inactivo</option>
+								</select>
+							</div>
+
+							<div class="col-12">
+								<label >Usuario:</label>
+								<input type="text" class="form-control form-control-sm" name="user" id="user" value="<?php echo $user ;?>" placeholder="Usuario" required>
+							</div>
+
+						<div class="col-12">
+		 				 <label>Nivel:</label>
+		 					<select class="form-control form-control-sm" name="nivel" id="nivel">
+		 					  <option value="1"<?php if($nivel=="1") echo "selected"; ?> >1 Administrador</option>
+		 					  <option value="2"<?php if($nivel=="2") echo "selected"; ?> >2 Normal</option>
+		 					</select>
+		 				</div>
+
+		 				<div class="col-12">
+		 				  <label>Sucursal:</label>
+		 					<?php
+
+		 						echo "<select class='form-control form-control-sm' name='idsucursal' id='idsucursal'>";
+		 						foreach($sucursal as $v1){
+		 							  echo '<option value="'.$v1->idsucursal.'"';
+		 							  if($v1->idsucursal==$idsucursal){
+		 								  echo " selected";
+		 							  }
+		 							  echo '>'.$v1->nombre.'</option>';
+		 						}
+		 					  echo "</select>";
+		 					?>
+		 				</div>
 
 
-				<div class="form-group row">
-				 <label class="control-label col-sm-2" for="">Estado:</label>
-				  <div class="col-sm-10">
-					<select class="form-control form-control-sm" name="estado" id="estado">
-					  <option value="1"<?php if($estado=="1") echo "selected"; ?> >Activa</option>
-					  <option value="0"<?php if($estado=="0") echo "selected"; ?> >Inactivo</option>
-					</select>
-				  </div>
+
+
+						</div>
+
+					</div>
 				</div>
 
-				 <div class="form-group row">
-				   <label class="control-label col-sm-2" for="">Usuario:</label>
-				   <div class="col-sm-10">
-					 <input type="text" class="form-control form-control-sm" name="user" id="user" value="<?php echo $user ;?>" placeholder="Usuario" required>
-				   </div>
-				 </div>
-
-				 <div class="form-group row">
-				 <label class="control-label col-sm-2" for="">Nivel:</label>
-				  <div class="col-sm-10">
-					<select class="form-control form-control-sm" name="nivel" id="nivel">
-					  <option value="1"<?php if($nivel=="1") echo "selected"; ?> >1 Administrador</option>
-					  <option value="2"<?php if($nivel=="2") echo "selected"; ?> >2 Normal</option>
-					</select>
-				  </div>
-				</div>
-
-				<div class="form-group row">
-				  <label class="control-label col-sm-2" for="">Sucursal:</label>
-				  <div class="col-sm-10">
-					<?php
-
-						echo "<select class='form-control form-control-sm' name='idsucursal' id='idsucursal'>";
-						foreach($sucursal as $v1){
-							  echo '<option value="'.$v1->idsucursal.'"';
-							  if($v1->idsucursal==$idsucursal){
-								  echo " selected";
-							  }
-							  echo '>'.$v1->nombre.'</option>';
-						}
-					  echo "</select>";
-					?>
-				  </div>
-				</div>
-				<div class="form-group row">
-				  <label class="control-label col-sm-2" for="">Caja:</label>
-				  <div class="col-sm-10">
-					<?php
-
-						echo "<select class='form-control form-control-sm' name='idcaja' id='idcaja'>";
-
-						foreach($caja as $v1){
-							  echo '<option value="'.$v1->idcaja.'"';
-							  if($v1->idcaja==$idcaja){
-								  echo " selected";
-							  }
-							  echo '>'.$v1->nombrecaja.'</option>';
-						}
-					  echo "</select>";
-					?>
-				  </div>
-				</div>
 			</div>
 			<div class="card-footer">
 				<div class="row">
 					<div class="col-sm-12">
+						<div class="btn-group">
 						<button class="btn btn-warning btn-sm" type="submit"><i class='far fa-save'></i>Guardar</button>
 						<?php
 							if($id>0){
+								echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_usuarios/form_foto' v_id='$id' omodal='1'><i class='fas fa-camera'></i>Foto</button>";
+
 								echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_usuarios/form_pass' omodal='1' v_id='$id'><i class='fas fa-key'></i>Contraseña</button>";
 							}
 						?>
 						<button type="button" class='btn btn-warning btn-sm' id='lista_penarea' is="b-link" des='a_usuarios/lista' dix='trabajo'><i class='fas fa-undo-alt'></i>Regresar</button>
+						</div>
 					</div>
 				</div>
 			</div>

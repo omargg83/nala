@@ -36,9 +36,6 @@ class Productos extends Sagyc{
 			include "../error.php";
 			die();
 		}
-		$this->doc="a_archivos/productos/";
-
-
 	}
 	public function producto_buscar($texto){
 		$sql="select * from productos_catalogo where productos_catalogo.nombre like '%$texto%' and idtienda='".$_SESSION['idtienda']."' limit 50";
@@ -294,7 +291,7 @@ class Productos extends Sagyc{
 		$idcatalogo=$_REQUEST['idcatalogo'];
 
 		$extension = '';
-		$ruta = '../a_archivos/productos/';
+		$ruta = '../'.$this->f_productos;
 		$archivo = $_FILES['foto']['tmp_name'];
 		$nombrearchivo = $_FILES['foto']['name'];
 		$tmp=$_FILES['foto']['tmp_name'];

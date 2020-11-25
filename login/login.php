@@ -40,12 +40,12 @@
 
 						$_SESSION['nick']=$CLAVE['user'];
 						$_SESSION['idusuario']=$CLAVE['idusuario'];
-						$_SESSION['foto']=$CLAVE['file_foto'];
 						$_SESSION['idtienda']=$CLAVE['idtienda'];
 						$_SESSION['idsucursal']=$CLAVE['idsucursal'];
 						$_SESSION['nivel']=$CLAVE['nivel'];
 						$_SESSION['sidebar']=$CLAVE['sidebar'];
 						$_SESSION['idcaja']=$CLAVE['idcaja'];
+						$_SESSION['foto']=$CLAVE['archivo'];
 
 						$sucursal=self::sucursal($CLAVE['idsucursal']);
 						$_SESSION['sucursal_nombre']=$sucursal->nombre;

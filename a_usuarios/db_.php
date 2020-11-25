@@ -245,7 +245,32 @@ class Usuario extends Sagyc{
 		$arreglo+=array('error'=>0);
 		return json_encode($arreglo);
 	}
+	public function foto(){
+		$x="";
+		$arreglo =array();
+		$idusuario=$_REQUEST['idusuario'];
 
+		$extension = '';
+		$ruta = '../'.$this->f_usuarios;
+		$archivo = $_FILES['foto']['tmp_name'];
+		$nombrearchivo = $_FILES['foto']['name'];
+		$tmp=$_FILES['foto']['tmp_name'];
+		$info = pathinfo($nombrearchivo);
+		if($archivo!=""){
+			$extension = $info['extension'];
+			if ($extension=='png' || $extension=='PNG' || $extension=='jpg'  || $extension=='JPG') {
+				$nombreFile = "resp_".date("YmdHis").rand(0000,9999).".".$extension;
+				move_uploaded_file($tmp,$ruta.$nombreFile);
+				$ruta=$ruta."/".$nombreFile;
+				$arreglo+=array('archivo'=>$nombreFile);
+			}
+			else{
+				echo "fail";
+				exit;
+			}
+		}
+		return $this->update('usuarios',array('idusuario'=>$idusuario), $arreglo);
+	}
 }
 
 $db = new Usuario();
