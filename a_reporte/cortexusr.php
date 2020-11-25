@@ -3,20 +3,29 @@
 
 	$desde=$_REQUEST['desde'];
 	$hasta=$_REQUEST['hasta'];
+	$idusuario=$_REQUEST['idusuario'];
 	$xdel=date("d-m-y",strtotime($desde));
 	$xal=date("d-m-y",strtotime($hasta));
 
 
 	$desde = date("Y-m-d", strtotime($desde))." 00:00:00";
 	$hasta = date("Y-m-d", strtotime($hasta))." 23:59:59";
-	$sql="select sum(venta.total) as total, venta.fecha, venta.estado, venta.tipo_pago from venta
-	where venta.idsucursal='".$_SESSION['idsucursal']."' and (venta.fecha BETWEEN :fecha1 AND :fecha2) and venta.estado='Pagada' GROUP BY tipo_pago ";
+	$sql="select sum(venta.total) as total, venta.fecha, venta.estado, venta.tipo_pago, usuarios.nombre as vendedor from venta
+	LEFT OUTER JOIN usuarios ON usuarios.idusuario = venta.idusuario
+	where venta.idsucursal='".$_SESSION['idsucursal']."' and (venta.fecha BETWEEN :fecha1 AND :fecha2) and venta.estado='Pagada' ";
+	if(strlen($idusuario)>0){
+		$sql.=" and venta.idusuario=:idusuario";
+	}
+	$sql.=" GROUP BY tipo_pago";
 	$sth = $db->dbh->prepare($sql);
 	$sth->bindValue(":fecha1",$desde);
 	$sth->bindValue(":fecha2",$hasta);
+	if(strlen($idusuario)>0){
+		$sth->bindValue(":idusuario",$idusuario);
+	}
 	$sth->execute();
 	$res=$sth->fetchAll(PDO::FETCH_OBJ);
-
+	$vendedor=$res->vendedor;
 	$suc=  $db->sucursal_info();
 	$tiend=  $db->tienda_info();
 
@@ -35,8 +44,9 @@
 	$pdf->ezText(" ",10);
 	$data=array();
 	$contar=0;
-	$pdf->ezText("Corte de caja",12,array('justification' => 'center'));
+	$pdf->ezText("Corte de caja por usuario",12,array('justification' => 'center'));
 	$pdf->ezText(" ",10);
+		$pdf->ezText($res->vendedor,10,array('justification' => 'center'));
 	$pdf->ezText("Del: ".$xdel,10,array('justification' => 'left'));
 	$pdf->ezText("Al: ".$xal,10,array('justification' => 'left'));
 	$pdf->ezText(" ",10);

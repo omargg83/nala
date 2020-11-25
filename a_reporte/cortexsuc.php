@@ -3,14 +3,20 @@
 
 	$desde=$_REQUEST['desde'];
 	$hasta=$_REQUEST['hasta'];
+	$idsucursal=$_REQUEST['idsucursal'];
 	$xdel=date("d-m-y",strtotime($desde));
 	$xal=date("d-m-y",strtotime($hasta));
 
 
 	$desde = date("Y-m-d", strtotime($desde))." 00:00:00";
 	$hasta = date("Y-m-d", strtotime($hasta))." 23:59:59";
-	$sql="select sum(venta.total) as total, venta.fecha, venta.estado, venta.tipo_pago from venta
-	where venta.idsucursal='".$_SESSION['idsucursal']."' and (venta.fecha BETWEEN :fecha1 AND :fecha2) and venta.estado='Pagada' GROUP BY tipo_pago ";
+	$sql="select sum(venta.total) as total, venta.fecha, venta.estado, venta.tipo_pago, sucursal.nombre from venta
+	left outer join sucursal on sucursal.idsucursal=venta.idsucursal
+	where (venta.fecha BETWEEN :fecha1 AND :fecha2) and venta.estado='Pagada' ";
+	if(strlen($idsucursal)>0){
+		$sql.=" and venta.idsucursal=:idsucursal";
+	}
+	$sql.=" GROUP BY tipo_pago";
 	$sth = $db->dbh->prepare($sql);
 	$sth->bindValue(":fecha1",$desde);
 	$sth->bindValue(":fecha2",$hasta);
@@ -35,7 +41,7 @@
 	$pdf->ezText(" ",10);
 	$data=array();
 	$contar=0;
-	$pdf->ezText("Corte de caja",12,array('justification' => 'center'));
+	$pdf->ezText("Corte de caja por sucursal",12,array('justification' => 'center'));
 	$pdf->ezText(" ",10);
 	$pdf->ezText("Del: ".$xdel,10,array('justification' => 'left'));
 	$pdf->ezText("Al: ".$xal,10,array('justification' => 'left'));

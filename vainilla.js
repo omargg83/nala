@@ -299,7 +299,7 @@ $(document).on('click',"[is*='is-borraprod']",function(e){
         xhr.open('POST',"a_venta/db_.php");
         xhr.addEventListener('load',(data)=>{
           var datos = JSON.parse(data.target.response);
-          document.getElementById("total").value=datos.total;
+          //document.getElementById("total").value=datos.total;
           lista(idventa);
         });
         xhr.onerror =  ()=>{
