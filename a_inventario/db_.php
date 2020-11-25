@@ -75,6 +75,18 @@ class Productos extends Sagyc{
 			return "Database access FAILED! ".$e->getMessage();
 		}
 	}
+	public function catalogo_lista($pagina){
+		try{
+			$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by nombre asc, idcatalogo asc limit $pagina,".$_SESSION['pagina']."";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
+
 	public function barras(){
 		$idcatalogo=$_REQUEST['idcatalogo'];
 		$codigo="9".str_pad($idcatalogo, 8, "0", STR_PAD_LEFT);
@@ -374,6 +386,9 @@ class Productos extends Sagyc{
 		$writer = new Xlsx($spreadsheet);
 		$writer->save("../".$direccion);
 		echo "<a href='$direccion' target='_black'>Archivo</a>";
+	}
+	public function asignar_sucursal(){
+		return "ghola mundo";
 	}
 }
 $db = new Productos();

@@ -102,5 +102,4 @@
 	    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
 	  echo "</ul>";
 	echo "</nav>";
-
 ?>
