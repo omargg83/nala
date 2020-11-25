@@ -30,9 +30,10 @@ class Productos extends Sagyc{
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
   }
-	public function productos_lista(){
+	public function productos_lista($pagina){
 		try{
-			$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by tipo asc, idcatalogo asc limit 50";
+			$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by nombre asc, idcatalogo asc limit $pagina,".$_SESSION['pagina']."";
+			echo $sql;
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
