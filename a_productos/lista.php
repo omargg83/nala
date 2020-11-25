@@ -26,7 +26,6 @@
 	</div>
 	<div class='row header-row'>
 		<div class='col-2'>#</div>
-		<div class='col-2'>ID</div>
 		<div class='col-2'>Tipo</div>
 		<div class='col-2'>Codigo</div>
 		<div class='col-2'>Nombre</div>
@@ -45,10 +44,6 @@
 					//	echo "<button type='button' class='btn btn-danger btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_productos/homologar' omodal=1 v_idcatalogo='$key->idcatalogo'><i class='fas fa-pencil-alt'></i>HOMOLOGAR</button>";
 
 						echo "</div>";
-					echo "</div>";
-
-					echo "<div class='col-2'>";
-						echo $key->idcatalogo;
 					echo "</div>";
 
 					echo "<div class='col-2'>";
