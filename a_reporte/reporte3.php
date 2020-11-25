@@ -27,7 +27,7 @@
         <div class='col-sm-4'>
           <div class='btn-group'>
             <button title='Buscar' class='btn btn-outline-warning btn-sm' id='buscar_canalizado' type='submit' id='lista_buscar'><i class='fa fa-search'></i><span> Consultar</span></button>
-            <button type='button' class='btn btn-warning btn-sm mr-2'  id='print_persona' is='b-print' title='Editar' des='a_reporte/corte' dix='resultado' ><i class='fas fa-print'></i>Imprimir</button>
+            <button type='button' class='btn btn-warning btn-sm mr-2'  id='print_persona' is='f-print' title='Editar' des='a_reporte/corte' dix='resultado'><i class='fas fa-print'></i>Imprimir</button>
 
           </div>
         </div>
