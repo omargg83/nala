@@ -58,8 +58,6 @@
 							else if ($key->activo_producto==0){
 								echo "<button type='button'  id='0' des='' dix='0' v_idproducto='0' class='btn btn-secondary btn-sm' title='Producto inactivo' omodal='1'><i class='fas fa-ban'></i></button>";
 							}
-
-
 							//////
 							echo "</div>";
 						echo "</div>";

@@ -75,9 +75,9 @@ class Traspaso extends Sagyc{
 		if (isset($_REQUEST['nombre'])){
 			$arreglo+=array('nombre'=>clean_var($_REQUEST['nombre']));
 		}
-		if (isset($_REQUEST['estado'])){
-			$arreglo+=array('estado'=>clean_var($_REQUEST['estado']));
-		}
+
+
+
 		if (isset($_REQUEST['fecha'])){
 			$arreglo+=array('fecha'=>$_REQUEST['fecha']);
 		}
@@ -88,6 +88,8 @@ class Traspaso extends Sagyc{
 			$x=$this->update('traspasos',array('idtraspaso'=>$idtraspaso),$arreglo);
 		}
 		else{
+			$arreglo+=array('estado'=>"Activa");
+
 			$sql = "SELECT MAX(numero) FROM traspasos where idtienda='".$_SESSION['idtienda']."'";
 			$statement = $this->dbh->prepare($sql);
 			$statement->execute();
@@ -193,6 +195,32 @@ class Traspaso extends Sagyc{
 		$arreglo =array();
 		$arreglo+=array('estado'=>"Enviada");
 		return $this->update('traspasos',array('idtraspaso'=>$idtraspaso), $arreglo);
+	}
+	public function recibir_traspaso(){
+		$idbodega=$_REQUEST['idbodega'];
+
+		$sql="select * from bodega where idbodega='$idbodega'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		$bodega=$sth->fetch(PDO::FETCH_OBJ);
+
+		
+		/*
+
+		$arreglo=array();
+		$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
+		$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
+		$arreglo+=array('idproducto'=>$bodega->idproducto);
+		$arreglo+=array('idpadre'=>$bodega->idbodega);
+		$cantidad=abs($bodega->cantidad);
+		$arreglo+=array('cantidad'=>$cantidad);
+		$date=date("Y-m-d H:i:s");
+		$arreglo+=array('fecha'=>$date);
+		$arreglo+=array('nombre'=>$bodega->nombre);
+		$x=$this->insert('bodega', $arreglo);
+
+		return "ghola mundo $idbodega";
+		*/
 	}
 }
 $db = new Traspaso();

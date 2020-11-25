@@ -66,7 +66,6 @@ else{
 								echo "<button type='button' class='btn btn-warning btn-sm' id='producto_add' is='b-link' v_idcompra='$idcompra' des='a_compras/form_producto' omodal='1' title='Agregar Producto'><i class='fab fa-product-hunt'></i>+ Producto</button>";
 
 								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_compras/db_' des='a_compras/lista' desid='$idcompra' fun='finalizar_compra' dix='trabajo' v_idcompra='$idcompra' id='eliminar' tp='¿Desea finalizar la compra seleccionada?'><i class='fas fa-lock'></i>Finalizar</button>";
-
 							}
 						?>
 						<button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_compras/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>

@@ -81,7 +81,7 @@
 										if($idsucursal!=$_SESSION['idsucursal']){
 											echo "<button class='btn btn-warning btn-sm' type='button' is='b-print' des='a_traspasos/imprimir' v_idtraspaso='$idtraspaso' omodal='1'><i class='fas fa-print'></i>Imprimir</button>";
 										}
-									
+
 									}
 								}
 							?>
@@ -97,7 +97,6 @@
 		echo "<div class='col-12' id='lista' style='max-height:600px; overflow:auto;'>";
 			include 'lista_pedido.php';
 		echo "</div>";
-
 	}
 ?>
 	</div>
