@@ -258,7 +258,7 @@ $(document).on('submit',"[is*='is-selecciona']",function(e){
       document.getElementById("numero").value=datos.numero;
       document.getElementById("fecha").value=datos.fecha;
       document.getElementById("estado").value=datos.estado;
-      document.getElementById("total").value=datos.total;
+      //document.getElementById("total").value=datos.total;
 
       lista(datos.idventa);
       document.getElementById("resultadosx").innerHTML ="";

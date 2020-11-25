@@ -25,7 +25,7 @@
   }
 
 		$pedido = $db->ventas_pedido($idventa);
-		echo "<div class='tabla_css col-12' id='tabla_css'>";
+		echo "<div class='tabla_css col-12' id='tabla_css' style='min-height:200px'>";
 			echo "<div class='row header-row'>";
 				echo "<div class='col-6'>DESCRIPCION</div>";
 				echo "<div class='col-2'>#</div>";
@@ -33,9 +33,10 @@
 				echo "<div class='col-2'>G$</div>";
 			echo "</div>";
 
-
+			$gtotal=0;
 		if($idventa>0){
 			$total=0;
+
 			foreach($pedido as $key){
 			//	print_r($sumas);
 			//	print_r($key);
@@ -61,6 +62,7 @@
 							echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
 								echo number_format($key->v_precio_normal,2);
 								$total=$key->v_precio_normal;
+
 							echo "</div>";
 
 					}
@@ -145,10 +147,21 @@
 					echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
 						echo number_format($total*$key->v_cantidad,2);
 						$total=$total*$key->v_cantidad;
+						$gtotal+=$total;
 					echo "</div>";
 				echo "</div>";
 			}
 
 		}
 		echo "</div>";
+
 ?>
+
+<div class="row">
+	<div class="col-sm-6">
+		<p><b>Total final</b></p>
+	</div>
+	<div class="col-sm-6 text-right">
+		<h5><?php echo moneda($gtotal); ?></h5>
+	</div>
+</div>

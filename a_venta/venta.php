@@ -118,9 +118,7 @@
             <hr>
             <div clas='row' id='resultadosx' style='min-height:500px; max-height: 500; overflow:auto;'>
             </div>
-            <?php
-              include 'producto_buscar.php';
-            ?>
+          
           </div>
         </div>
       </div>

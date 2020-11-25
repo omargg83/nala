@@ -197,7 +197,6 @@ class Venta extends Sagyc{
 					$arreglo+=array('total'=>$total);
 					$fecha1 = date ( "Y-m-d" , strtotime($date) );
 					$arreglo+=array('fecha'=>$fecha1);
-					$arreglo+=array('error'=>0);
 					return json_encode($arreglo);
 				}
 				else{
