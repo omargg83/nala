@@ -1,6 +1,6 @@
 <?php
-$server=2;
-$_SESSION['des']=1;
+$server=3;
+$_SESSION['des']=0;
 
 if($server==2){
   //////////localhost
