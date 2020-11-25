@@ -118,12 +118,8 @@
 								<div class="col-12">
 									<?php
 										echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
-										if($idproducto==0){
-											echo "<button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_inventario/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>";
-										}
-										else{
-											echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_inventario/editar' dix='trabajo' v_idproducto='$idproducto'><i class='fas fa-undo-alt'></i>Regresar</button>";
-										}
+										echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo'><i class='fas fa-undo-alt'></i>Regresar</button>";
+
 
 									?>
 								</div>
