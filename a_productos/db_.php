@@ -56,7 +56,7 @@ class Productos extends Sagyc{
 	}
 	public function productos_homologar($idcatalogo){
 		try{
-			$sql="SELECT * from productos_catalogo where idcatalogo!=$idcatalogo order by nombre asc, idcatalogo asc";
+			$sql="SELECT * from productos_catalogo where idcatalogo!=$idcatalogo order by idcatalogo asc";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
