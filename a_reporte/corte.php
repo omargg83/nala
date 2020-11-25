@@ -1,6 +1,11 @@
 <?php
 	require_once("db_.php");
 
+	$desde=$_REQUEST['desde'];
+	$hasta=$_REQUEST['hasta'];
+	echo $desde;
+	echo $hasta;
+	/*
 	$suc=  $db->sucursal_info();
 	$tiend=  $db->tienda_info();
 	$pd=$db->corte_caja();
@@ -41,4 +46,6 @@
 
 	if (ob_get_contents()) ob_end_clean();
 	$pdf->ezStream();
+
+	*/
 ?>
