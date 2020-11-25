@@ -16,7 +16,12 @@
 		$sth = $db->dbh->prepare($sql);
 		$sth->execute();
 		$cantidad=$sth->fetch(PDO::FETCH_OBJ);
-		$exist=$cantidad->total;
+		if(strlen($cantidad->total)>0){
+			$exist=$cantidad->total;
+		}
+		else{
+			$exist=0;
+		}
 	}
 	else{
 		$exist=$producto->cantidad;
@@ -40,17 +45,41 @@
 	  echo "</div>";
 
 		echo "<div class='modal-body' style='max-height:580px;overflow: auto;'>";
+
 			echo "<div class='row'>";
-				echo "<div class='col-12'>";
+				echo "<div class='col-4'>";
+					if(strlen($producto->archivo)>0 and file_exists("../".$db->f_productos."/".$producto->archivo)){
+						echo "<img src='".$db->f_productos."/".$producto->archivo."' width='100%' class='img-thumbnail'/>";
+					}
+					else{
+						echo "<img src='img/unnamed.png' width='100%' class='img-thumbnail'/>";
+					}
+
+				echo "</div>";
+				echo "<div class='col-8'>";
+					echo "<label>Producto</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='nombre' id='nombre' value='".$producto->nombre."' readonly>";
+					echo "<small>";
+						if ($producto->esquema==0){
+							echo "Este producto no tiene ningun esquema de descuento";
+						}
+						else if ($producto->esquema==1){
+							echo "Esquema Nala";
+						}
+						else if ($producto->esquema==2){
+							echo "Esquema por Cantidad";
+						}
+					echo "</small>";
 					echo "<hr>";
+					echo $producto->descripcion;
 				echo "</div>";
 			echo "</div>";
+
 
 			echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Cantidad</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1' required onchange='calcular()'>";
+					echo "<input type='text' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1' required >";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
@@ -62,8 +91,10 @@
 			echo "<hr>";
 			echo "<div class='row'>";
 				echo "<div class='col-12'>";
+					echo "<div class='btn-group'>";
 						echo "<button class='btn btn-warning btn-sm' type='submit' ><i class='fas fa-cart-plus'></i>Agregar</button>";
 						echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' cmodal='1' ><i class='fas fa-sign-out-alt'></i>Cerrar</button>";
+					echo "</div>";
 				echo "</div>";
 			echo "</div>";
 	echo "</form>";

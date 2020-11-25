@@ -142,12 +142,16 @@ class Compras extends Sagyc{
 		if($sth->rowCount()>0){
 			$producto=$sth->fetch(PDO::FETCH_OBJ);
 			$idproducto=$producto->idproducto;
+
+			$arreglo=array();
+			$arreglo+=array('preciocompra'=>$precio);
+			$this->update('productos',array('idproducto'=>$idproducto), $arreglo);
 		}
 		else{
 			$arreglo=array();
 			$arreglo+=array('idcatalogo'=>$idcatalogo);
 			$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
-		//	$arreglo+=array('preciocompra'=>$precio);
+			$arreglo+=array('preciocompra'=>$precio);
 			$arreglo+=array('activo_producto'=>1);
 			$x=$this->insert('productos', $arreglo);
 
@@ -167,15 +171,9 @@ class Compras extends Sagyc{
 		$arreglo+=array('c_precio'=>$precio);
 		$x=$this->insert('bodega', $arreglo);
 
-
 		$arr=array();
 		$arr+=array('id'=>$idcompra);
 		$arr+=array('error'=>0);
-
-
-		$this->cantidad_update($idproducto,3);
-
-
 		return json_encode($arr);
 	}
 	public function borrar_registro(){

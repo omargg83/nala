@@ -82,9 +82,11 @@ class Productos extends Sagyc{
 			return "Database access FAILED! ".$e->getMessage();
 		}
 	}
-	public function catalogo_lista($pagina){
+	public function catalogo_lista($pagina, $texto){
 		try{
-			$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by nombre asc, idcatalogo asc limit $pagina,".$_SESSION['pagina']."";
+			$texto=clean_var($texto);
+			$pagina=$pagina*$_SESSION['pagina'];
+			$sql="SELECT * from productos_catalogo where activo_catalogo=1 and (productos_catalogo.nombre like '%$texto%' or productos_catalogo.codigo like '%$texto%') order by nombre asc, idcatalogo asc limit $pagina,".$_SESSION['pagina']."";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);

@@ -43,7 +43,13 @@
 		echo "<div class='modal-body' style='max-height:580px;overflow: auto;'>";
 			echo "<div class='row'>";
 				echo "<div class='col-4'>";
-					echo "<img src='".$db->f_productos."/".$producto->archivo."' width='100%' class='img-thumbnail'/>";
+					if(strlen($producto->archivo)>0 and file_exists("../".$db->f_productos."/".$producto->archivo)){
+						echo "<img src='".$db->f_productos."/".$producto->archivo."' width='100%' class='img-thumbnail'/>";
+					}
+					else{
+						echo "<img src='img/unnamed.png' width='100%' class='img-thumbnail'/>";
+					}
+
 				echo "</div>";
 				echo "<div class='col-8'>";
 					echo "<input type='text' class='form-control form-control-sm' name='nombre' id='nombre' value='".$producto->nombre."' readonly>";

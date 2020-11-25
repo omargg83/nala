@@ -114,7 +114,6 @@ class Traspaso extends Sagyc{
 		$cantidad=$_REQUEST['cantidad'];
 
 
-
 		$sql="select * from productos
 		left outer join productos_catalogo on productos_catalogo.idcatalogo=productos.idcatalogo
 		where idproducto='$idproducto'";
@@ -139,6 +138,19 @@ class Traspaso extends Sagyc{
 			return json_encode($arreglo);
 		}
 
+		if($producto->tipo==3){
+			$sql="select sum(cantidad) as total from bodega where idsucursal='".$_SESSION['idsucursal']."' and idproducto='$idproducto'";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			$cantidad_bg=$sth->fetch(PDO::FETCH_OBJ);
+			if ($cantidad>$cantidad_bg->total){
+				$arreglo =array();
+				$arreglo+=array('error'=>1);
+				$arreglo+=array('terror'=>"Verificar existencias");
+				return json_encode($arreglo);
+			}
+		}
+
 		$arreglo=array();
 		$arreglo+=array('idtraspaso'=>$idtraspaso);
 		$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
@@ -150,8 +162,8 @@ class Traspaso extends Sagyc{
 		$arreglo+=array('cantidad'=>$cantidad);
 		$arreglo+=array('nombre'=>$producto->nombre);
 		$x=$this->insert('bodega', $arreglo);
-		$ped=json_decode($x);
-		return "$idtraspaso $idproducto $cantidad ghola mundo";
+		//$ped=json_decode($x);
+		return $x;
 	}
 	public function borrar_traspaso(){
 		$idbodega=$_REQUEST['idbodega'];
@@ -166,7 +178,7 @@ class Traspaso extends Sagyc{
 
 	public function recepcion_lista(){
 		try{
-			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' and idsucursal='".$_SESSION['idsucursal']."' order by idtraspaso desc";
+			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' and idsucursal='".$_SESSION['idsucursal']."' and estado='Enviada' order by idtraspaso desc";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -176,7 +188,12 @@ class Traspaso extends Sagyc{
 			return "Database access FAILED!";
 		}
 	}
-
+	public function enviar_traspaso(){
+		$idtraspaso=$_REQUEST['idtraspaso'];
+		$arreglo =array();
+		$arreglo+=array('estado'=>"Enviada");
+		return $this->update('traspasos',array('idtraspaso'=>$idtraspaso), $arreglo);
+	}
 }
 $db = new Traspaso();
 if(strlen($function)>0){

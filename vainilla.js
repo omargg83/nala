@@ -544,19 +544,13 @@ $(document).on('submit',"[is*='t-selecciona']",function(e){
   xhr.open('POST',"a_traspasos/db_.php");
   xhr.addEventListener('load',(data)=>{
     console.log(data.target.response);
-    tras_lista(idtraspaso);
-    /*
+    cargando(false);
+    
     var datos = JSON.parse(data.target.response);
     if(datos.error==0){
       $('#myModal').modal('hide');
-      document.getElementById("idventa").value=datos.idventa;
-      document.getElementById("numero").value=datos.numero;
-      document.getElementById("fecha").value=datos.fecha;
-      document.getElementById("estado").value=datos.estado;
-      document.getElementById("total").value=datos.total;
-
-      lista(datos.idventa);
-      document.getElementById("resultadosx").innerHTML ="";
+      tras_lista(idtraspaso);
+      cargando(false);
     }
     else{
       cargando(false);
@@ -566,9 +560,8 @@ $(document).on('submit',"[is*='t-selecciona']",function(e){
         showConfirmButton: false,
         timer: 1000
       });
-      return;
     }
-    */
+
   });
   xhr.onerror =  ()=>{
     cargando(false);

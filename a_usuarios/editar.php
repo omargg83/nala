@@ -38,8 +38,13 @@
 				<div class="row">
 					<div class="col-2">
 						<?php
-							echo "<img src='".$db->f_usuarios."/".$archivo."' width='100%' class='img-thumbnail'/>";
-					 ?>
+							if(strlen($archivo)>0 and file_exists("../".$db->f_usuarios."/".$archivo)){
+								echo "<img src='".$db->f_usuarios."/".$archivo."' width='100%' class='img-thumbnail'/>";
+							}
+							else{
+								echo "<img src='img/user.jpg' width='100%' class='img-thumbnail'/>";
+							}
+					  ?>
 					</div>
 					<div class="col-10">
 						<div class="row">

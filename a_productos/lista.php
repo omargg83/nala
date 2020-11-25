@@ -28,7 +28,7 @@
 		<div class='col-2'>#</div>
 		<div class='col-2'>Tipo</div>
 		<div class='col-2'>Codigo</div>
-		<div class='col-2'>Nombre</div>
+		<div class='col-4'>Nombre</div>
 		<div class='col-2'>Descripción</div>
 	</div>
 
@@ -52,7 +52,7 @@
 					echo "</div>";
 
 					echo "<div class='col-2'>".$key->codigo."</div>";
-					echo "<div class='col-2'>".$key->nombre."</div>";
+					echo "<div class='col-4'>".$key->nombre."</div>";
 					echo "<div class='col-2'>".$key->descripcion."</div>";
 				echo '</div>';
 			}

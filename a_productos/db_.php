@@ -38,13 +38,14 @@ class Productos extends Sagyc{
 		}
 	}
 	public function producto_buscar($texto){
-		$sql="select * from productos_catalogo where productos_catalogo.nombre like '%$texto%' and idtienda='".$_SESSION['idtienda']."' limit 50";
+		$sql="select * from productos_catalogo where (productos_catalogo.nombre like '%$texto%' or productos_catalogo.codigo like '%$texto%') and idtienda='".$_SESSION['idtienda']."' limit 50";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
   }
 	public function productos_lista($pagina){
 		try{
+			$pagina=$pagina*$_SESSION['pagina'];
 			$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by nombre asc, idcatalogo asc limit $pagina,".$_SESSION['pagina']."";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
@@ -66,8 +67,58 @@ class Productos extends Sagyc{
 		}
 	}
 	public function borrar_producto(){
+
 		if (isset($_REQUEST['idcatalogo'])){ $idcatalogo=$_REQUEST['idcatalogo']; }
+
+		$sql="select * from productos_catalogo where idcatalogo=:id";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":id",$idcatalogo);
+		$sth->execute();
+		$prod=$sth->fetch(PDO::FETCH_OBJ);
+
+		$ruta = '../'.$this->f_productos.$prod->archivo;
+		if (file_exists($ruta)){
+			unlink($ruta);
+		}
 		return $this->borrar('productos_catalogo',"idcatalogo",$idcatalogo);
+	}
+	public function foto(){
+		$x="";
+		$arreglo =array();
+		$idcatalogo=$_REQUEST['idcatalogo'];
+
+		$sql="select * from productos_catalogo where idcatalogo=:id";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":id",$idcatalogo);
+		$sth->execute();
+		$prod=$sth->fetch(PDO::FETCH_OBJ);
+
+		if(strlen($prod->archivo)>0){
+			$ruta = '../'.$this->f_productos.$prod->archivo;
+			if (file_exists($ruta)){
+				unlink($ruta);
+			}
+		}
+		$extension = '';
+		$ruta = '../'.$this->f_productos;
+		$archivo = $_FILES['foto']['tmp_name'];
+		$nombrearchivo = $_FILES['foto']['name'];
+		$tmp=$_FILES['foto']['tmp_name'];
+		$info = pathinfo($nombrearchivo);
+		if($archivo!=""){
+			$extension = $info['extension'];
+			if ($extension=='png' || $extension=='PNG' || $extension=='jpg'  || $extension=='JPG') {
+				$nombreFile = "resp_".date("YmdHis").rand(0000,9999).".".$extension;
+				move_uploaded_file($tmp,$ruta.$nombreFile);
+				$ruta=$ruta."/".$nombreFile;
+				$arreglo+=array('archivo'=>$nombreFile);
+			}
+			else{
+				echo "fail";
+				exit;
+			}
+		}
+		return $this->update('productos_catalogo',array('idcatalogo'=>$idcatalogo), $arreglo);
 	}
 	public function producto_edit($id){
 		try{
@@ -285,32 +336,7 @@ class Productos extends Sagyc{
 		$x=$this->borrar('productos_catalogo',"idcatalogo",$destino);
 		return $x;
 	}
-	public function foto(){
-		$x="";
-		$arreglo =array();
-		$idcatalogo=$_REQUEST['idcatalogo'];
 
-		$extension = '';
-		$ruta = '../'.$this->f_productos;
-		$archivo = $_FILES['foto']['tmp_name'];
-		$nombrearchivo = $_FILES['foto']['name'];
-		$tmp=$_FILES['foto']['tmp_name'];
-		$info = pathinfo($nombrearchivo);
-		if($archivo!=""){
-			$extension = $info['extension'];
-			if ($extension=='png' || $extension=='PNG' || $extension=='jpg'  || $extension=='JPG') {
-				$nombreFile = "resp_".date("YmdHis").rand(0000,9999).".".$extension;
-				move_uploaded_file($tmp,$ruta.$nombreFile);
-				$ruta=$ruta."/".$nombreFile;
-				$arreglo+=array('archivo'=>$nombreFile);
-			}
-			else{
-				echo "fail";
-				exit;
-			}
-		}
-		return $this->update('productos_catalogo',array('idcatalogo'=>$idcatalogo), $arreglo);
-	}
 
 }
 $db = new Productos();

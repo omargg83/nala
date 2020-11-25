@@ -35,7 +35,7 @@
 
 <div class='container'>
 	<?php
-		echo "<form is='f-submit' id='form_editar' db='a_productos/db_' fun='guardar_producto' des='a_productos/editar' desid='idcatalogo'>";
+		echo "<form is='f-submit' id='form_editar' db='a_productos/db_' fun='guardar_producto' des='a_productos/editar' desid='idcatalogo' dix='trabajo'>";
 	?>
 		<input type="hidden" name="idcatalogo" id="idcatalogo" value="<?php echo $idcatalogo;?>">
 		<div class='card'>
@@ -46,12 +46,17 @@
 				<div class='row'>
 					<div class="col-2">
 						<?php
-							echo "<img src='".$db->f_productos."/".$archivo."' width='100%' class='img-thumbnail'/>";
+							if(strlen($archivo)>0 and file_exists("../".$db->f_productos."/".$archivo)){
+								echo "<img src='".$db->f_productos."/".$archivo."' width='100%' class='img-thumbnail'/>";
+							}
+							else{
+								echo "<img src='img/unnamed.png' width='100%' class='img-thumbnail'/>";
+							}
 					 ?>
 					</div>
 					<div class="col-10">
 						<div class='row'>
-								<div class="col-12">
+								<div class="col-9">
 									<label>Tipo de producto</label>
 									<?php
 									if($idcatalogo==0){
@@ -69,6 +74,12 @@
 										}
 									}
 									?>
+							</div>
+							<div class="col-3">
+								<label>Activo</label>
+								<select class="form-control form-control-sm" name="activo_catalogo" id="activo_catalogo"  >
+									<option value="0"<?php if($activo_catalogo=="0") echo "selected"; ?> > Inactivo</option>
+									<option value="1"<?php if($activo_catalogo=="1") echo "selected"; ?> > Activo</option>
 								</select>
 							</div>
 						</div>
@@ -100,19 +111,7 @@
 							</div>
 						</div>
 
-						<div class='row'>
-
-							<div class="col-3">
-								<label>Activo</label>
-								<select class="form-control form-control-sm" name="activo_catalogo" id="activo_catalogo"  >
-									<option value="0"<?php if($activo_catalogo=="0") echo "selected"; ?> > Inactivo</option>
-									<option value="1"<?php if($activo_catalogo=="1") echo "selected"; ?> > Activo</option>
-								</select>
-							</div>
-
-						</div>
 						<hr>
-
 						<div class='row'>
 							<div class="col-12">
 								<div class="btn-group">
@@ -126,16 +125,13 @@
 											echo "<button type='button' class='btn btn-danger btn-sm' is='b-link' db='a_productos/db_' des='a_productos/lista' fun='borrar_producto' dix='trabajo' v_idcatalogo='$idcatalogo' id='eliminar' tp='¿Desea eliminar el Producto seleccionado?'><i class='far fa-trash-alt'></i>Eliminar</button>";
 										}
 									}
-									echo "<button type='button' class='btn btn-warning btn-sm' id='regresa_lista' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo'><i class='fas fa-undo-alt'></i>Regresar</button>";
+									echo "<button type='button' class='btn btn-warning btn-sm' id='regresar_lista' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo'><i class='fas fa-undo-alt'></i>Regresar</button>";
 									?>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-
-
 			</div>
 		</div>
 		</form>

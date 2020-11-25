@@ -33,7 +33,7 @@
 					echo "<div class='col-12'>";
 						if($estado_compra=="Activa" and $_SESSION['a_sistema']==1){
 							echo "<div class='btn-group mr-1'>";
-						      echo "<button type='button' is='b-link' id='sel_producto_$key->idproducto' des='a_traspasos/producto_selecciona' dix='resultadosx' v_idproducto='$key->idproducto' v_idtraspaso='$idtraspaso' class='btn btn-warning btn-sm' title='Seleccionar producto' omodal='1'><i class='fas fa-plus'></i></button>";
+						      echo "<button type='button' is='b-link' id='sel_producto_$key->idproducto' des='a_traspasos/producto_selecciona' dix='resultadosx' v_idproducto='$key->idproducto' v_idtraspaso='$idtraspaso' class='btn btn-warning btn-sm' title='Seleccionar producto'><i class='fas fa-plus'></i></button>";
 							echo  "</div>";
 						}
 		      	echo  $key->nombre;

@@ -37,4 +37,7 @@
 	<?php
 		include 'lista.php';
 	?>
+	<?php
+		include 'lista_recepcion.php';
+	?>
 </div>
