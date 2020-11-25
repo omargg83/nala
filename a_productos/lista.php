@@ -2,6 +2,7 @@
 	require_once("db_.php");
 
 	$pag=0;
+	$texto="";
 	if(isset($_REQUEST['buscar'])){
 		$texto=$_REQUEST['buscar'];
 		$pd = $db->producto_buscar($texto);
@@ -43,8 +44,6 @@
 						////////////quitar este boton o esconder
 						echo "<button type='button' class='btn btn-danger btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_productos/homologar' omodal=1 v_idcatalogo='$key->idcatalogo'><i class='fas fa-pencil-alt'></i>HOMOLOGAR</button>";
 
-						echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_productos/db_' des='a_productos/lista' fun='borrar_producto' dix='trabajo' v_idcatalogo='$key->idcatalogo' id='eliminar' tp='¿Desea eliminar el Producto seleccionado?'><i class='far fa-trash-alt'></i></button>";
-
 						echo "</div>";
 					echo "</div>";
 
@@ -68,23 +67,24 @@
 
 
 	<?php
-		$sql="SELECT count(productos_catalogo.idcatalogo) as total
-		from productos_catalogo	where productos_catalogo.idtienda='".$_SESSION['idtienda']."'";
-		$sth = $db->dbh->prepare($sql);
-		$sth->execute();
-		$contar=$sth->fetch(PDO::FETCH_OBJ);
-		$paginas=ceil($contar->total/$_SESSION['pagina']);
-		$pagx=$paginas-1;
-		echo "<br>";
-		echo "<nav aria-label='Page navigation text-center'>";
-		  echo "<ul class='pagination'>";
-		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo'>Primera</a></li>";
-				for($i=0;$i<$paginas;$i++){
-					$b=$i+1;
-					echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo' v_pag='$i'>$b</a></li>";
-				}
-		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
-		  echo "</ul>";
-		echo "</nav>";
-
+		if(strlen($texto)==0){
+			$sql="SELECT count(productos_catalogo.idcatalogo) as total
+			from productos_catalogo	where productos_catalogo.idtienda='".$_SESSION['idtienda']."'";
+			$sth = $db->dbh->prepare($sql);
+			$sth->execute();
+			$contar=$sth->fetch(PDO::FETCH_OBJ);
+			$paginas=ceil($contar->total/$_SESSION['pagina']);
+			$pagx=$paginas-1;
+			echo "<br>";
+			echo "<nav aria-label='Page navigation text-center'>";
+			  echo "<ul class='pagination'>";
+			    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo'>Primera</a></li>";
+					for($i=0;$i<$paginas;$i++){
+						$b=$i+1;
+						echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo' v_pag='$i'>$b</a></li>";
+					}
+			    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
+			  echo "</ul>";
+			echo "</nav>";
+		}
 	?>

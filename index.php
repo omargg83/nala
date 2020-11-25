@@ -125,7 +125,7 @@
 						echo "<a href='#a_compras/index' is='menu-link' title='Compras'><i class='fas fa-shopping-bag'></i><span>Compras</span></a>";
 
 						if(array_key_exists('PRODUCTOS', $db->derecho))
-						echo "<a href='#a_productos/index' is='menu-link' title='inventario'><i class='fas fa-boxes'></i><span>Productos</span></a>";
+						echo "<a href='#a_productos/index' is='menu-link' title='Productos'><i class='fab fa-product-hunt'></i><span>Catalogo</span></a>";
 
 						if(array_key_exists('INVENTARIO', $db->derecho))
 						echo "<a href='#a_inventario/index' is='menu-link' title='inventario'><i class='fas fa-boxes'></i><span>Inventario</span></a>";

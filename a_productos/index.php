@@ -1,10 +1,9 @@
 <?php
   require_once("db_.php");
-  $_SESSION['nivel_captura']=1;
  ?>
 
  <nav class='navbar navbar-expand-sm navbar-light bg-light'>
- 		  <a class='navbar-brand' ><i class="fab fa-product-hunt"></i>Productos</a>
+ 		  <a class='navbar-brand' ><i class="fab fa-product-hunt"></i>Catalogo global</a>
  		  <button class='navbar-toggler navbar-toggler-right' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
  			<span class='navbar-toggler-icon'></span>
  		  </button>
@@ -20,20 +19,18 @@
           </div>
         </form>
 
-
-        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_prod' des='a_productos/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Lista</span></a></li>
-
-        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_servicios' des='a_productos/excel' dix='trabajo'><i class='fas fa-list-ul'></i><span>Excel</span></a></li>
-
         <?php
     			if($_SESSION['a_sistema']==1){
-    				echo "<li class='nav-item active'><a class='nav-link barranav izq' is='a-link' title='Nuevo' id='new_poliza' des='a_productos/editar' v_id='0' dix='trabajo'><i class='fas fa-plus'></i><span>Nuevo</span></a></li>";
+            if($db->nivel_captura==1){
+    				  echo "<li class='nav-item active'><a class='nav-link barranav izq' is='a-link' title='Nuevo' id='new_poliza' des='a_productos/editar' v_id='0' dix='trabajo'><i class='fas fa-plus'></i><span>Nuevo</span></a></li>";
+            }
           }
         ?>
 
+        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_prod' des='a_productos/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Lista</span></a></li>
 
+        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_servicios' des='a_productos/excel' dix='trabajo'><i class='far fa-file-excel'></i><span>Excel</span></a></li>
 
-      </li>
 
  			</ul>
  		</div>

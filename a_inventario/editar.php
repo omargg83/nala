@@ -9,6 +9,7 @@
 		$precio=$per->precio;
 		$stockmin=$per->stockmin;
 		$codigo=$per->codigo;
+		$archivo=$per->archivo;
 
 		$preciocompra=$per->preciocompra;
 		$idcatalogo=$per->idcatalogo;
@@ -66,14 +67,7 @@
 				<input type="hidden" name="idproducto" id="idproducto" value="<?php echo $idproducto;?>">
 				<div class='card-header'>
 					<div class='row'>
-						<div class='col-2 text-left'>
-							<?php
-							if($idproducto>0){
-								echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_productos/editar' dix='trabajo' v_idcatalogo='$idcatalogo' v_idproducto='$idproducto'><i class='fas fa-pencil-alt'></i>Editar</button>";
-							}
-							?>
-						</div>
-						<div class='col-10'>
+						<div class='col-12'>
 							<?php echo "<b>".$nombre."</b>";
 
 							 echo "<br><small>";
@@ -88,48 +82,58 @@
 						</div>
 					</div>
 				</div>
+
+
 				<div class='card-body'>
-						<input type="hidden" class="form-control form-control-sm" id="id" name='id' value="<?php echo $idproducto; ?>">
+					<div class='row'>
+						<div class="col-2">
+							<?php
+								echo "<img src='".$db->doc."/".$archivo."' width='100%' class='img-thumbnail'/>";
+						 	?>
+						</div>
+						<div class="col-10">
+							<div class='row'>
+								<div class="col-2">
+								 <label><b>Codigo</b></label>
+								 <p><?php echo $codigo; ?></p>
 
-						<div class='row'>
-							<div class="col-2">
-							 <label><b>Codigo</b></label>
-							 <p><?php echo $codigo; ?></p>
+								</div>
+								<div class="col-8">
+								 <label><b>Producto</b></label>
+								 <p><?php echo $nombre; ?></p>
+								</div>
 
+								<div class="col-2">
+								 <label><b>Activo</b></label>
+								 <p><?php
+								 		if($activo_producto=="1"){ echo "Activo"; }
+								 		if($activo_producto=="0"){ echo "Inactivo"; }
+								  ?></p>
+								</div>
+
+								<div class="col-12" style='max-height:100px;'>
+								 <label><b>Descripción</b></label>
+								 <p><?php echo $descripcion; ?></p>
+								</div>
 							</div>
-							<div class="col-8">
-							 <label><b>Producto</b></label>
-							 <p><?php echo $nombre; ?></p>
-							</div>
-
-							<div class="col-2">
-							 <label><b>Activo</b></label>
-							 <p><?php
-							 		if($activo_producto=="1"){ echo "Activo"; }
-							 		if($activo_producto=="0"){ echo "Inactivo"; }
-							  ?></p>
-							</div>
-
-							<div class="col-12" style='min-height:100px;'>
-							 <label><b>Descripción</b></label>
-							 <p><?php echo $descripcion; ?></p>
-							</div>
-
 						</div>
 					</div>
-				<hr>
-				<div class='card-body'>
-						<div class='row'>
+
+
+
+					<hr>
+				<?php
+				if($tipo==3){
+					$sql="select sum(cantidad) as total from bodega where idsucursal='".$_SESSION['idsucursal']."' and idproducto='$idproducto'";
+					$sth = $db->dbh->prepare($sql);
+					$sth->execute();
+					$cantidad=$sth->fetch(PDO::FETCH_OBJ);
+					$exist=$cantidad->total;
+				}
+				?>
+
+						<div class='row mb-3'>
 							<div class="col-2">
-								<?php
-								if($tipo==3){
-									$sql="select sum(cantidad) as total from bodega where idsucursal='".$_SESSION['idsucursal']."' and idproducto='$idproducto'";
-									$sth = $db->dbh->prepare($sql);
-									$sth->execute();
-									$cantidad=$sth->fetch(PDO::FETCH_OBJ);
-									$exist=$cantidad->total;
-								}
-								?>
 							 <label><b>Existencias</b></label>
 							 <input type="text" class="form-control form-control-sm" id="tmp_ex" name='tmp_ex' placeholder="Existencias" value="<?php echo $exist; ?>" readonly>
 							</div>
@@ -161,9 +165,11 @@
 							</div>
 
 						</div>
-						<br>
-						<p><b>Esquema de descuento:</b></p>
-						<div class='row'>
+
+						<div class='row mb-3'>
+							<div class='col-3'>
+								<p><b>Esquema de descuento:</b></p>
+							</div>
 							<div class='col-3'>
 								<select class="form-control form-control-sm" name="esquema" id="esquema"required>
 									<option value='' disabled selected>Seleccione una opción</option>
@@ -173,28 +179,31 @@
 								</select>
 							</div>
 						</div>
-						<br>
-						<p><b>Esquema NALA:</b></p>
-						<div class='row'>
-							<div class="col-4">
+						<hr>
+						<div class='row mb-3' >
+							<div class="col-3">
+								<br><p><b>Esquema NALA:</b></p>
+							</div>
+							<div class="col-3">
 							 <label>Cantidad min. Mayoreo (Pza.)</label>
 							 <input type="text" class="form-control form-control-sm" id="cantidad_mayoreo" name='cantidad_mayoreo' placeholder="# Cant. Mayoreo" value="<?php echo $cantidad_mayoreo; ?>" >
 							</div>
 
-							<div class="col-4">
+							<div class="col-3">
 							 <label>Monto min. compra mayoreo</label>
 							 <input type="text" class="form-control form-control-sm" id="monto_mayor" name='monto_mayor' placeholder="Monto min compra mayoreo" value="<?php echo $monto_mayor; ?>" >
 							</div>
 
-							<div class="col-4">
+							<div class="col-3">
 							 <label>Monto min. compra distribuidor</label>
 							 <input type="text" class="form-control form-control-sm" id="monto_distribuidor" name='monto_distribuidor' placeholder="Monto min compra distribuidor" value="<?php echo $monto_distribuidor; ?>" >
 							</div>
-
 						</div>
-						<br>
-						<p><b>Esquema 2:</b></p>
-						<div class='row'>
+						<hr>
+						<div class='row mb-3'>
+							<div class="col-4">
+								<br><p><b>Esquema 2:</b></p>
+							</div>
 							<div class="col-4">
 							 <label>Cantidad Para Precio Mayoreo (Pza.)</label>
 							 <input type="text" class="form-control form-control-sm" id="mayoreo_cantidad" name='mayoreo_cantidad' placeholder="# Cant. Mayoreo" value="<?php echo $mayoreo_cantidad; ?>" >
@@ -212,6 +221,7 @@
 					<div class='row'>
 						<div class="col-12">
 								<?php
+									echo "<div class='btn-group'>";
 									echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
 
 
@@ -230,6 +240,7 @@
 								?>
 								<button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_inventario/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
 
+							</div>
 						</div>
 					</div>
 				</div>

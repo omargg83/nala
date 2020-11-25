@@ -24,11 +24,21 @@ class Productos extends Sagyc{
 		parent::__construct();
 		if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('PRODUCTOS', $this->derecho)) {
 
+			////////////////PERMISOS
+			$sql="SELECT nivel,captura FROM usuarios_permiso where idusuario='".$_SESSION['idusuario']."' and modulo='PRODUCTOS'";
+			$stmt= $this->dbh->query($sql);
+
+			$row =$stmt->fetchObject();
+			$this->nivel_personal=$row->nivel;
+			$this->nivel_captura=$row->captura;
 		}
 		else{
 			include "../error.php";
 			die();
 		}
+		$this->doc="a_archivos/productos/";
+
+
 	}
 	public function producto_buscar($texto){
 		$sql="select * from productos_catalogo where productos_catalogo.nombre like '%$texto%' and idtienda='".$_SESSION['idtienda']."' limit 50";
@@ -62,7 +72,6 @@ class Productos extends Sagyc{
 		if (isset($_REQUEST['idcatalogo'])){ $idcatalogo=$_REQUEST['idcatalogo']; }
 		return $this->borrar('productos_catalogo',"idcatalogo",$idcatalogo);
 	}
-
 	public function producto_edit($id){
 		try{
 			$sql="select * from productos_catalogo where idcatalogo=:id and idtienda='".$_SESSION['idtienda']."'";
@@ -75,7 +84,6 @@ class Productos extends Sagyc{
 			return "Database access FAILED!".$e->getMessage();
 		}
 	}
-
 	public function guardar_producto(){
 		try{
 			if (isset($_REQUEST['idcatalogo'])){
@@ -187,7 +195,6 @@ class Productos extends Sagyc{
 			return "Database access FAILED!".$e->getMessage();
 		}
 	}
-
 	public function sucursal(){
 		try{
 			$sql="SELECT * FROM sucursal where idtienda='".$_SESSION['idtienda']."'";
@@ -259,8 +266,10 @@ class Productos extends Sagyc{
 
 		$writer = new Xlsx($spreadsheet);
 		$writer->save("../".$direccion);
-		echo "<div class='container-fluid' style='background-color:".$_SESSION['cfondo']."; '>";
-		echo "<a href='$direccion' target='_black'>Archivo</a>";
+
+		echo "<div class='container text-center' style='background-color:".$_SESSION['cfondo']."; '>";
+		echo "<h3>Descargar</h3>";
+		echo "<a href='$direccion' target='_black' class='btn btn-success'><i class='fas fa-download'></i>Archivo</a>";
 		echo "</div>";
 	}
 	public function homologa_final(){
@@ -279,7 +288,32 @@ class Productos extends Sagyc{
 		$x=$this->borrar('productos_catalogo',"idcatalogo",$destino);
 		return $x;
 	}
+	public function foto(){
+		$x="";
+		$arreglo =array();
+		$idcatalogo=$_REQUEST['idcatalogo'];
 
+		$extension = '';
+		$ruta = '../a_archivos/productos/';
+		$archivo = $_FILES['foto']['tmp_name'];
+		$nombrearchivo = $_FILES['foto']['name'];
+		$tmp=$_FILES['foto']['tmp_name'];
+		$info = pathinfo($nombrearchivo);
+		if($archivo!=""){
+			$extension = $info['extension'];
+			if ($extension=='png' || $extension=='PNG' || $extension=='jpg'  || $extension=='JPG') {
+				$nombreFile = "resp_".date("YmdHis").rand(0000,9999).".".$extension;
+				move_uploaded_file($tmp,$ruta.$nombreFile);
+				$ruta=$ruta."/".$nombreFile;
+				$arreglo+=array('archivo'=>$nombreFile);
+			}
+			else{
+				echo "fail";
+				exit;
+			}
+		}
+		return $this->update('productos_catalogo',array('idcatalogo'=>$idcatalogo), $arreglo);
+	}
 
 }
 $db = new Productos();

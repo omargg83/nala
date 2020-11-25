@@ -19,7 +19,7 @@
             </div>
           </div>
         </form>
-        <li class='nav-item active'><a class='nav-link barranav izq' is='a-link' title='Nuevo' id='new_poliza' des='a_inventario/agregar' v_id='0' dix='trabajo'><i class='fas fa-cloud-download-alt'></i><span>Agregar producto</span></a></li>
+
 
         <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_inventario' des='a_inventario/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Inventario</span></a></li>
 
@@ -35,9 +35,11 @@
 
             //echo "<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_prod' des='a_productos/lista' dix='trabajo'><i class='fab fa-product-hunt'></i><span>Productos</span></a></li>";
 
-            echo "<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_comision' des='a_categorias/lista' dix='trabajo'><i class='fas fa-box'></i><span>Categorias</span></a></li>";
+            echo "<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='cate_nue' des='a_categorias/lista' dix='trabajo'><i class='fas fa-box'></i><span>Categorias</span></a></li>";
           }
         ?>
+
+        <li class='nav-item active'><a class='nav-link barranav izq' is='a-link' title='Nuevo' id='new_poliza' des='a_inventario/agregar' v_id='0' dix='trabajo'><i class='fas fa-cloud-download-alt'></i><span>Agregar producto</span></a></li>
 
 
 

@@ -23,12 +23,19 @@ class Productos extends Sagyc{
 	public function __construct(){
 		parent::__construct();
 		if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('INVENTARIO', $this->derecho)) {
+			////////////////PERMISOS
+			$sql="SELECT nivel,captura FROM usuarios_permiso where idusuario='".$_SESSION['idusuario']."' and modulo='INVENTARIO'";
+			$stmt= $this->dbh->query($sql);
 
+			$row =$stmt->fetchObject();
+			$this->nivel_personal=$row->nivel;
+			$this->nivel_captura=$row->captura;
 		}
 		else{
 			include "../error.php";
 			die();
 		}
+		$this->doc="a_archivos/productos/";
 	}
 	public function producto_buscar($texto){
 		$sql="SELECT
@@ -395,7 +402,7 @@ class Productos extends Sagyc{
 		$sth->execute();
 
 		$contar=$sth->rowCount();
-		
+
 
 		if($contar==0){
 			$sql="select * from productos_catalogo where idcatalogo='$idcatalogo'";
