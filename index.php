@@ -109,7 +109,11 @@
 							?>
 		        </div>
 		        <div class="user-info">
-		          <span class="user-name"><?php echo "algo"; ?>
+		          <span class="user-name" style='
+							width: 80px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;'><?php echo $_SESSION['nombre'] ?>
 		          </span>
 		          <span class="user-role">Administrator</span>
 		          <span class="user-status">
