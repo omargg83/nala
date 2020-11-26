@@ -67,7 +67,7 @@
 			$_SESSION["carga"]=1;
 			$x="<li class='nav-item dropdown'>";
 				$x.= "<a class='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-				  <i class='fab fa-rocketchat fa-spin' style='color:#96ff57 !important;'></i> Chat";
+				  <i class='fab fa-rocketchat fa-spin' style='color:#07009e !important;'></i> Chat";
 				$x.= "</a>";
 
 				$x.= "<div id='myUL' class='dropdown-menu' aria-labelledby='navbarDropdown' style='width:200px;max-height:400px !important; overflow: scroll; overflow-x: hidden;'>";
