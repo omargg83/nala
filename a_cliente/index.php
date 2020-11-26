@@ -20,7 +20,10 @@
 			<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_comision' des='a_cliente/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Lista</span></a></li>
 			<?php
 			if($_SESSION['a_sistema']==1){
-				echo "<li class='nav-item active'><a class='nav-link barranav izq' is='a-link' title='Nuevo' id='new_personal' des='a_cliente/editar' v_id='0' dix='trabajo'><i class='fas fa-plus'></i><span>Nuevo</span></a></li>";
+				if($db->nivel_captura==1){
+					echo "<li class='nav-item active'><a class='nav-link barranav izq' is='a-link' title='Nuevo' id='new_personal' des='a_cliente/editar' v_id='0' dix='trabajo'><i class='fas fa-plus'></i><span>Nuevo</span></a></li>";
+
+				}
 			}
 			?>
 			</ul>

@@ -27,9 +27,12 @@
 				echo "<div class='row body-row' draggable='true'>";
 						echo "<div class='col-2'>";
 
+						if($db->nivel_captura==1){
 							echo "<button class='btn btn-warning btn-sm' is='b-link' des='a_usuarios/editar' dix='trabajo' v_id='$key->idusuario' id='edit_persona'><i class='fas fa-pencil-alt'></i></button>";
 							echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_usuarios/db_' des='a_usuarios/lista' fun='borrar_usuario' dix='trabajo' v_id='$key->idusuario' id='eliminar' tp='¿Desea eliminar el usuario seleccionado?'><i class='far fa-trash-alt'></i></button>";
-							
+							}
+
+
 						echo "</div>";
 					echo "<div class='col-4'>".$key->nombre."</div>";
 					echo "<div class='col-2'>".$key->nivel."</div>";

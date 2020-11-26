@@ -53,7 +53,14 @@
 	          echo "<div class='col-2'>";
 	            echo "<div class='btn-group'>";
 
-	            echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_inventario/db_' des='a_inventario/lista' fun='asignar_sucursal' dix='trabajo' v_idcatalogo='$key->idcatalogo' id='asignar' tp='¿Desea agregar el Producto seleccionado a la sucursal?'><i class='fas fa-cloud-download-alt'></i></button>";
+							if($_SESSION['a_sistema']==1){
+								if($db->nivel_captura==1){
+									if($_SESSION['matriz']==1){
+										echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_inventario/db_' des='a_inventario/lista' fun='asignar_sucursal' dix='trabajo' v_idcatalogo='$key->idcatalogo' id='asignar' tp='¿Desea agregar el Producto seleccionado a la sucursal?'><i class='fas fa-cloud-download-alt'></i></button>";
+									}
+								}
+							}
+
 
 	            echo "</div>";
 	          echo "</div>";

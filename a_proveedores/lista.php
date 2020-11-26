@@ -31,9 +31,11 @@
 					echo "<div class='col-2'>";
 						echo "<div class='btn-group'>";
 
-						echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_proveedores/editar' dix='trabajo' v_idproveedor='$key->idproveedor'><i class='fas fa-pencil-alt'></i></button>";
+						if($db->nivel_captura==1){
+							echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_proveedores/editar' dix='trabajo' v_idproveedor='$key->idproveedor'><i class='fas fa-pencil-alt'></i></button>";
+							echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_proveedores/db_' des='a_proveedores/lista' fun='borrar_proveedor' dix='trabajo' v_idproveedor='$key->idproveedor' id='eliminar' tp='¿Desea eliminar el proveedor seleccionado?'><i class='far fa-trash-alt'></i></button>";
+							}		
 
-						echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_proveedores/db_' des='a_proveedores/lista' fun='borrar_proveedor' dix='trabajo' v_idproveedor='$key->idproveedor' id='eliminar' tp='¿Desea eliminar el proveedor seleccionado?'><i class='far fa-trash-alt'></i></button>";
 
 						echo "</div>";
 					echo "</div>";

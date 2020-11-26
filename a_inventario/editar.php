@@ -75,7 +75,7 @@
 								 echo "Servicio (solo registra ventas, no es necesario registrar entrada)";
 							 }
 							 if($tipo==3){
-								 echo "Producto (Se controla el inventario por volúmen";
+								 echo "Producto (Se controla el inventario por volúmen)";
 							 }
 							 echo "</small>";
 							?>
@@ -227,8 +227,12 @@
 						<div class="col-12">
 								<?php
 									echo "<div class='btn-group'>";
-									if($_SESSION['matriz']==1){
+									if($_SESSION['a_sistema']==1){
+										if($db->nivel_captura==1){
+											if($_SESSION['matriz']==1){
 										echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
+											}
+										}
 									}
 
 

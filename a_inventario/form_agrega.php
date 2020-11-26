@@ -3,10 +3,10 @@
 	$id=$_REQUEST['id'];
 	$idproducto=$_REQUEST['idproducto'];
 
-	$cantidad="";
+	$cantidad=1;
 	$fecha=date("Y-m-d");
 	$nota="";
-	$precio="";
+	$precio=0;
 ?>
 
 <form is="f-submit" id="form_inventario" db="a_inventario/db_" fun="existencia_agrega" des="a_inventario/editar" desid='idproducto' cmodal='2'>
@@ -51,9 +51,18 @@
 	<div class='modal-footer' >
 
 		<div class='modal-footer' >
+ <?php
+			echo "<div class='btn-group'>";
+			if($_SESSION['a_sistema']==1){
+				if($db->nivel_captura==1){
+					if($_SESSION['matriz']==1){
+				echo "<button class='btn btn-warning btn-sm' type='submit' is='f-submit' id='acceso' title='Guardar'><i class='far fa-save'></i>Guardar</button>";
+					}
+				}
+			}
+?>
 
-			<button class='btn btn-warning btn-sm' type='submit' is="f-submit" id='acceso' title='Guardar'><i class='far fa-save'></i>Guardar</button>
-			<button class="btn btn-warning btn-sm" type="button" is="b-link" cmodal='1' ><i class="fas fa-sign-out-alt"></i>Cancelar</button>
+			<button class="btn btn-warning btn-sm" type="button" is="b-link" cmodal='1' ><i class="fas fa-sign-out-alt"></i>Cerrar</button>
 		</div>
 
   </div>
