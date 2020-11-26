@@ -29,13 +29,19 @@
 ?>
 
 <header class="d-block p-2" id='header'>
-	<nav class='barraprincipal navbar navbar-expand-sm fixed-top navbar-light bg-light text-'  style='background-color: #e4e9ee !important; color: white !important;'>
+	<nav class='barraprincipal navbar navbar-expand-sm fixed-top navbar-light bg-light' >
 
 		<button class="btn btn-warning btn-sm mr-2" type="button" onclick='fijar()'><i class='fas fa-bars'></i></button>
 
 	  <img src='img/sagyc.png' width='60' height='30' alt=''>
 	  <a class='navbar-brand text-black text-center ml-3' href='#'>
-			<?php echo $_SESSION['n_sistema'];  if($_SESSION['a_sistema']==0){ echo " - SISTEMA INACTIVO";}?>  </a>
+			<?php
+			echo $_SESSION['n_sistema'];
+			echo "<small> - ".$_SESSION['sucursal_nombre']."</small>";
+			if($_SESSION['a_sistema']==0){
+				echo " - SISTEMA INACTIVO";
+			}
+			?>  </a>
 	  <button class='navbar-toggler collapsed' type='button' data-toggle='collapse' data-target='#navbarsExample06' aria-controls='navbarsExample06' aria-expanded='false' aria-label='Toggle navigation'>
 	    <span class='navbar-toggler-icon'></span>
 	  </button>
@@ -60,21 +66,25 @@
 		 </ul>
 
 
-      <ul class='nav navbar-nav navbar-right text-white' id='precios'>
+      <ul class='nav navbar-nav navbar-right' id='precios'>
 				<?php
 					if($_SESSION['a_sistema']==1){
-						echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_precios/index' omodal='1'><i class='fas fa-check-circle'></i>Precios</button>";
+						echo "<li class='nav-item'>";
+		          echo "<a class='nav-link pull-left bg-warning rounded' is='b-link' des='a_precios/index' omodal='1'>";
+		            echo "<i class='fas fa-sign-out-alt text-dark'></i> Precios";
+		          echo "</a>";
+		        echo "</li>";
 					}
 				?>
 			</ul>
 			<?php
 				if($_SESSION['a_sistema']==1){
-      	 echo "<ul class='nav navbar-nav navbar-right text-white' id='fondo'></ul>";
+      	 echo "<ul class='nav navbar-nav navbar-right' id='fondo'></ul>";
 			 	}
 			?>
       <ul class='nav navbar-nav navbar-right'>
         <li class='nav-item'>
-          <a class='nav-link pull-left text-black' onclick='salir()'>
+          <a class='nav-link pull-left border border-warning rounded' onclick='salir()'>
             <i class='fas fa-sign-out-alt text-dark'></i> Salir
           </a>
         </li>
@@ -100,7 +110,7 @@
 					<div class="sidebar-header">
 		        <div class="user-pic">
 							<?php
-								if(strlen($_SESSION['foto'])>0){
+								if(strlen($_SESSION['foto'])>0 and file_exists("../".$db->f_usuarios."/".$_SESSION['foto'])){
 									echo "<img class='img-responsive img-rounded' src='".$db->f_usuarios.$_SESSION['foto']."' alt='User picture'>";
 								}
 								else{
@@ -108,14 +118,9 @@
 								}
 							?>
 		        </div>
-		        <div class="user-info">
-		          <span class="user-name" style='
-							width: 80px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;'><?php echo $_SESSION['nombre'] ?>
-		          </span>
-		          <span class="user-role">Administrator</span>
+		        <div class="user-info" style='width: 80px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;'>
+		          <span class="user-name" ><?php echo $_SESSION['nombre'] ?></span>
+		          <span class="user-role"><?php echo $_SESSION['sucursal_nombre']; ?></span>
 		          <span class="user-status">
 		            <i class="fa fa-circle"></i>
 		            <span>Online</span>

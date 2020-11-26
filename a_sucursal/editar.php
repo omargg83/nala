@@ -10,6 +10,7 @@
 	$cp="";
 	$estado="";
 	$tipoticket="";
+	$matriz="";
 	if($idsucursal>0){
 		$pd = $db->sucursal($idsucursal);
 		$nombre=$pd->nombre;
@@ -20,6 +21,7 @@
 		$cp=$pd->cp;
 		$estado=$pd->estado;
 		$tipoticket=$pd->tipoticket;
+		$matriz=$pd->matriz;
 	}
 ?>
 
@@ -36,7 +38,7 @@
 						<label>Nombre:</label>
 							<input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre;?>" placeholder="Nombre" required maxlength='100'>
 					</div>
-					<div class="col-3">
+					<div class="col-6">
 						<label>Ubicación:</label>
 							<input type="text" class="form-control form-control-sm" name="ubicacion" id="ubicacion" value="<?php echo $ubicacion;?>" placeholder="Ubicación" required maxlength='155'>
 					</div>
@@ -48,11 +50,7 @@
 						<label>Estado:</label>
 							<input type="text" class="form-control form-control-sm" name="estado" id="estado" value="<?php echo $estado;?>" placeholder="Estado" required maxlength='45'>
 					</div>
-				</div>
-			</div>
 
-			<div class='card-body'>
-				<div class='row'>
 					<div class="col-3">
 						<label>Código Postal:</label>
 							<input type="text" class="form-control form-control-sm" name="cp" id="cp" value="<?php echo $cp;?>" placeholder="Código  postal" maxlength='5'>
@@ -67,10 +65,18 @@
 					</div>
 
 					<div class='col-3'>
-						<p>Tamaño de ticket de venta:</p>
+						<label>Tamaño de ticket de venta:</label>
 						<select class="form-control form-control-sm" name="tipoticket" id="tipoticket"required>
 							<option value='0'<?php if($tipoticket=='0') echo 'selected'; ?> >58mm</option>
 							<option value='1'<?php if($tipoticket=='1') echo 'selected'; ?> >80mm</option>
+						</select>
+					</div>
+
+					<div class='col-3'>
+						<label>Matriz:</label>
+						<select class="form-control form-control-sm" name="matriz" id="matriz" required>
+							<option value='1'<?php if($matriz=='1') echo 'selected'; ?> >Si</option>
+							<option value='0'<?php if($matriz=='0') echo 'selected'; ?> >No</option>
 						</select>
 					</div>
 				</div>

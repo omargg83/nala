@@ -49,6 +49,7 @@
 
 						$sucursal=self::sucursal($CLAVE['idsucursal']);
 						$_SESSION['sucursal_nombre']=$sucursal->nombre;
+						$_SESSION['matriz']=$sucursal->matriz;
 
 						$fecha=date("Y-m-d");
 						list($anyo,$mes,$dia) = explode("-",$fecha);

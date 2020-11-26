@@ -118,7 +118,9 @@
 									<?php
 									if($_SESSION['a_sistema']==1){
 										if($db->nivel_captura==1){
-											echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
+											if($_SESSION['matriz']==1){
+												echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
+											}
 
 											echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_productos/form_foto' v_idcatalogo='$idcatalogo' omodal='1'><i class='fas fa-camera'></i>Foto</button>";
 

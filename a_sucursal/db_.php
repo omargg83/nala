@@ -56,8 +56,24 @@ class Sucursal extends Sagyc{
 	public function guardar_sucursal(){
 		$x="";
 		$arreglo =array();
-
 		$idsucursal=$_REQUEST['idsucursal'];
+		$matriz=$_REQUEST['matriz'];
+		$arreglo+=array('matriz'=>$matriz);
+
+		if($matriz==1){
+			$sql="select * from sucursal where idsucursal!=$idsucursal and matriz=1";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			$matriz=$sth->fetch(PDO::FETCH_OBJ);
+			if ($sth->rowCount()>0){
+				$arreglo =array();
+				$arreglo+=array('error'=>1);
+				$arreglo+=array('terror'=>"Solo puede existir una matriz");
+				return json_encode($arreglo);
+			}
+		}
+
+
 		if (isset($_REQUEST['nombre'])){
 			$arreglo+=array('nombre'=>$_REQUEST['nombre']);
 		}
@@ -82,6 +98,7 @@ class Sucursal extends Sagyc{
 		if (isset($_REQUEST['tipoticket'])){
 			$arreglo+=array('tipoticket'=>$_REQUEST['tipoticket']);
 		}
+
 
 		if($idsucursal==0){
 			$arreglo+=array('idtienda'=>$_SESSION['idtienda']);

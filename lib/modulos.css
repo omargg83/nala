@@ -142,15 +142,15 @@ body {
 
 }
 .nav-link:hover{
-  background-color: #e3e3eb !important;
+  /*background-color: #e3e3eb !important;*/
 }
 .nav a{
-  color: white !important;
+  /*color: white !important;*/
 }
 
 .nav a:hover{
-  color: white !important;
-  background-color: #4e5c6d !important;
+  /*color: white !important;
+  background-color: #4e5c6d !important;*/
 }
 label{
 	font-family: 'Roboto', sans-serif;

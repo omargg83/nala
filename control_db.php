@@ -7,6 +7,7 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', '1');
 	date_default_timezone_set("America/Mexico_City");
+
 	$_SESSION['des']=1;
 
 	require_once("init.php");
@@ -26,6 +27,7 @@
 				$this->dbh = new PDO("mysql:host=".SERVIDOR.";port=".PORT.";dbname=".BDD, MYSQLUSER, MYSQLPASS);
 				$this->dbh->query("SET NAMES 'utf8'");
 
+				
 				if(isset($_SESSION['idtienda'])){
 					$sql="SELECT * FROM tienda where idtienda=:idtienda";
 					$sth = $this->dbh->prepare($sql);

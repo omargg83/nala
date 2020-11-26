@@ -13,7 +13,6 @@ if($_SESSION['des']==1 and strlen($function)==0)
 
 require '../vendor/autoload.php';
 
-
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -150,13 +149,22 @@ class Productos extends Sagyc{
 	}
 	public function guardar_producto(){
 		try{
-			if (isset($_REQUEST['idproducto'])){$idproducto=$_REQUEST['idproducto'];}
+			$idproducto=clean_var($_REQUEST['idproducto']);
+
+			$sql="SELECT * from productos where productos.idproducto=:id ";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":id",$idproducto);
+			$sth->execute();
+			$prod=$sth->fetch(PDO::FETCH_OBJ);
+
+			$idcatalogo=$prod->idcatalogo;
+
 			$arreglo =array();
 			$tipo="";
 			$imei="";
 
 			if (isset($_REQUEST['activo_producto'])){
-				$arreglo += array('activo_producto'=>$_REQUEST['activo_producto']);
+				$arreglo += array('activo_producto'=>clean_var($_REQUEST['activo_producto']));
 			}
 
 			if (isset($_REQUEST['precio']) and strlen($_REQUEST['precio'])>0){
@@ -232,10 +240,12 @@ class Productos extends Sagyc{
 				$arreglo += array('preciocompra'=>0);
 			}
 
-			$x="";
-			$x=$this->update('productos',array('idproducto'=>$idproducto), $arreglo);
-			$this->cantidad_update($idproducto,$tipo);
-			return $x;
+			$x=$this->update('productos',array('idcatalogo'=>$idcatalogo), $arreglo);
+
+			$arreglo =array();
+			$arreglo+=array('id'=>$idproducto);
+			$arreglo+=array('error'=>0);
+			return json_encode($arreglo);
 		}
 		catch(PDOException $e){
 			return "Database access FAILED!".$e->getMessage();

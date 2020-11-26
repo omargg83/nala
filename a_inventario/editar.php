@@ -227,7 +227,9 @@
 						<div class="col-12">
 								<?php
 									echo "<div class='btn-group'>";
-									echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
+									if($_SESSION['matriz']==1){
+										echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
+									}
 
 
 										if($idproducto>0){
