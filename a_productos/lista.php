@@ -26,7 +26,8 @@
 	</div>
 	<div class='row header-row'>
 		<div class='col-2'>#</div>
-		<div class='col-2'>Tipo</div>
+		<div class='col-2'>ID</div>
+	<!--	<div class='col-2'>Tipo</div> -->
 		<div class='col-2'>Codigo</div>
 		<div class='col-4'>Nombre</div>
 		<div class='col-2'>Descripción</div>
@@ -45,6 +46,10 @@
 
 						echo "</div>";
 					echo "</div>";
+
+			/*		echo "<div class='col-2'>";
+						echo $key->idcatalogo;
+					echo "</div>"; */
 
 					echo "<div class='col-2'>";
 						if($key->tipo==0) echo "Servicio";

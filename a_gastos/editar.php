@@ -1,9 +1,9 @@
 <?php
 	require_once("db_.php");
 	$db = new Gastos();
-	$id=$_REQUEST['id'];
-	if($id>0){
-		$pers = $db->gastos_edit($id);
+	$idgastos=$_REQUEST['idgastos'];
+	if($idgastos>0){
+		$pers = $db->gastos_edit($idgastos);
 		$fecha=fecha($pers['fecha']);
 		$gasto=$pers['gasto'];
 		$descripcion=$pers['descripcion'];
@@ -49,8 +49,11 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="btn-group">
-
-							<button class="btn btn-warning btn-sm" type="submit"><i class='far fa-save'></i>Guardar</button>
+							<?php
+							if($db->nivel_captura==1){
+								echo "<button class='btn btn-warning btn-sm' type='submit'><i class='far fa-save'></i>Guardar</button>";
+								}
+							?>
 							<button type='button' class='btn btn-warning btn-sm' id='lista_penarea' is='b-link'  des='a_gastos/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
 						</div>
 					</div>
