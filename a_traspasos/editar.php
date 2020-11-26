@@ -73,7 +73,7 @@
 								}
 								if($idtraspaso>0){
 									if($estado=="Activa"){
-										echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_traspasos/db_' des='a_traspasos/editar' desid='$idtraspaso' fun='enviar_traspaso' dix='trabajo' v_idtraspaso='$idtraspaso' id='finaliza' tp='¿Desea procesar el traspaso seleccionado?'><i class='fas fa-lock'></i>Enviar</button>";
+										echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_traspasos/db_' des='a_traspasos/editar' desid='$idtraspaso' fun='enviar_traspaso' dix='trabajo' v_idtraspaso='$idtraspaso' id='finaliza' tp='¿Desea procesar el traspaso seleccionado?'><i class='fas fa-cloud-upload-alt'></i>Enviar</button>";
 
 										echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_traspasos/form_producto' omodal='1'><i class='fas fa-plus'></i>Producto</button>";
 									}

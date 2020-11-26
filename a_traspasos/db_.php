@@ -199,18 +199,56 @@ class Traspaso extends Sagyc{
 	public function recibir_traspaso(){
 		$idbodega=$_REQUEST['idbodega'];
 
-		$sql="select * from bodega where idbodega='$idbodega'";
+		//////////busca en catalogo para homologar
+		$sql="select bodega.*, productos.idcatalogo from bodega
+		left outer join productos on productos.idproducto=bodega.idproducto
+		where idbodega='$idbodega'";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		$bodega=$sth->fetch(PDO::FETCH_OBJ);
 
-		
-		/*
+		//////////////busca si existe ese producto en la sucursal destino
+		$sql="select * from productos where idcatalogo=$bodega->idcatalogo and idsucursal='".$_SESSION['idsucursal']."'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		if($sth->rowCount()==0){
+			/////////no existe el producto, se agrega en destino
+			$sql="select * from productos where idcatalogo='$bodega->idcatalogo' order by idproducto asc limit 1";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			$producto=$sth->fetch(PDO::FETCH_OBJ);
+
+			$arreglo=array();
+			$arreglo+=array('idcatalogo'=>$bodega->idcatalogo);
+			$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
+			$arreglo+=array('preciocompra'=>$producto->preciocompra);
+			$arreglo+=array('activo_producto'=>1);
+			$arreglo+=array('precio'=>$producto->precio);
+			$arreglo+=array('stockmin'=>$producto->stockmin);
+			$arreglo+=array('cantidad_mayoreo'=>$producto->cantidad_mayoreo);
+			$arreglo+=array('precio_mayoreo'=>$producto->precio_mayoreo);
+			$arreglo+=array('precio_distri'=>$producto->precio_distri);
+			$arreglo+=array('mayoreo_cantidad'=>$producto->mayoreo_cantidad);
+			$arreglo+=array('distri_cantidad'=>$producto->distri_cantidad);
+			$arreglo+=array('esquema'=>$producto->esquema);
+			$arreglo+=array('monto_mayor'=>$producto->monto_mayor);
+			$arreglo+=array('monto_distribuidor'=>$producto->monto_distribuidor);
+			$x=$this->insert('productos', $arreglo);
+
+			$ped=json_decode($x);
+			if($ped->error==0){
+				$idproducto=$ped->id;
+			}
+		}
+		else{
+			$producto=$sth->fetch(PDO::FETCH_OBJ);
+			$idproducto=$producto->idproducto;
+		}
 
 		$arreglo=array();
 		$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
 		$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
-		$arreglo+=array('idproducto'=>$bodega->idproducto);
+		$arreglo+=array('idproducto'=>$idproducto);
 		$arreglo+=array('idpadre'=>$bodega->idbodega);
 		$cantidad=abs($bodega->cantidad);
 		$arreglo+=array('cantidad'=>$cantidad);
@@ -218,9 +256,21 @@ class Traspaso extends Sagyc{
 		$arreglo+=array('fecha'=>$date);
 		$arreglo+=array('nombre'=>$bodega->nombre);
 		$x=$this->insert('bodega', $arreglo);
+		$ped=json_decode($x);
+		if($ped->error==0){
+			$arreglo=array();
+			$arreglo+=array('trasp_recepcion'=>1);
+			$x=$this->update('bodega',array('idbodega'=>$idbodega),$arreglo);
+		}
+		else{
+			$arreglo =array();
+			$arreglo+=array('error'=>1);
+			$arreglo+=array('terror'=>"Error favor de verificar");
+			return json_encode($arreglo);
+		}
 
-		return "ghola mundo $idbodega";
-		*/
+		return $x;
+
 	}
 }
 $db = new Traspaso();

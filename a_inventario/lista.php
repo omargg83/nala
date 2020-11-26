@@ -43,7 +43,12 @@
 								$sth = $db->dbh->prepare($sql);
 								$sth->execute();
 								$cantidad=$sth->fetch(PDO::FETCH_OBJ);
-								$exist=$cantidad->total;
+								if(strlen($cantidad->total)>0){
+									$exist=$cantidad->total;
+								}
+								else{
+									$exist=0;
+								}
 							}
 							else{
 								$exist=$key->cantidad;

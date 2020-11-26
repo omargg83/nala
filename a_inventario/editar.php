@@ -227,13 +227,15 @@
 						<div class="col-12">
 								<?php
 									echo "<div class='btn-group'>";
-									if($_SESSION['matriz']==1){
-										echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
-									}
+										if($_SESSION['matriz']==1){
+											echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
+										}
 
 
 										if($idproducto>0){
-											echo "<button type='button' class='btn btn-warning btn-sm' id='genera_Barras' is='b-link' title='Editar' tp='¿Desea generar el codigo de barras?' db='a_inventario/db_' fun='barras' des='a_inventario/editar' dix='trabajo' v_idproducto='$idproducto' v_idcatalogo='$idcatalogo'><i class='fas fa-barcode'></i>Barras</button>";
+											if($_SESSION['matriz']==1){
+												echo "<button type='button' class='btn btn-warning btn-sm' id='genera_Barras' is='b-link' title='Editar' tp='¿Desea generar el codigo de barras?' db='a_inventario/db_' fun='barras' des='a_inventario/editar' dix='trabajo' v_idproducto='$idproducto' v_idcatalogo='$idcatalogo'><i class='fas fa-barcode'></i>Barras</button>";
+											}
 
 											echo "<button type='button' class='btn btn-warning btn-sm' id='Imprime_barras' is='b-print' title='Editar' des='a_inventario/imprimir' v_idcatalogo='$idcatalogo'><i class='fas fa-print'></i>Barras</button>";
 										}
@@ -286,14 +288,22 @@
 							if($key->cantidad>0 and strlen($key->idcompra)>0){
 								echo "Compra";
 							}
-							if($key->cantidad<0 and strlen($key->idventa)==0){
+							if($key->cantidad<0 and strlen($key->idventa)==0 and strlen($key->idtraspaso)==0){
 								echo "Venta";
 							}
-							if($key->cantidad<0 and strlen($key->idtraspaso)==0){
+							if($key->cantidad<0 and strlen($key->idtraspaso)>0){
 								echo "Traspaso";
 							}
 						echo "</td>";
 						echo "<td>";
+							if(strlen($key->idtraspaso)>0){
+								$sql="select * from traspasos where idtraspaso=$key->idtraspaso";
+								$sth = $db->dbh->query($sql);
+								$res=$sth->fetch(PDO::FETCH_OBJ);
+								echo "#:".$res->numero;
+								echo "<br>".fecha($res->fecha);
+								echo "<br>".$res->nombre;
+							}
 							if(strlen($key->idcompra)>0){
 								$sql="select * from compras where idcompra=$key->idcompra";
 								$sth = $db->dbh->query($sql);

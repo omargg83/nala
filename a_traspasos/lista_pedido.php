@@ -30,7 +30,7 @@
 						if($estado_compra=="Activa"){
 							echo "<button class='btn btn-warning btn-sm' id='del_$key->idbodega' type='button' is='t-borraprod' v_idbodega='$key->idbodega' title='Borrar'><i class='far fa-trash-alt'></i></button>";
 						}
-						if($idsucursal==$_SESSION['idsucursal']){
+						if($idsucursal==$_SESSION['idsucursal'] and $key->trasp_recepcion!=1){
 							echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_traspasos/db_' des='a_traspasos/editar' desid='$idtraspaso' fun='recibir_traspaso' dix='trabajo' v_idtraspaso='$idtraspaso' v_idbodega='$key->idbodega' id='finaliza' tp='¿Desea recibir el producto seleccionado?'><i class='fas fa-cloud-download-alt'></i>Recibir</button>";
 						}
 					echo "</div>";

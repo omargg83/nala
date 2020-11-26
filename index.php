@@ -110,7 +110,7 @@
 					<div class="sidebar-header">
 		        <div class="user-pic">
 							<?php
-								if(strlen($_SESSION['foto'])>0 and file_exists("../".$db->f_usuarios."/".$_SESSION['foto'])){
+								if(strlen($_SESSION['foto'])>0 and file_exists($db->f_usuarios."/".$_SESSION['foto'])){
 									echo "<img class='img-responsive img-rounded' src='".$db->f_usuarios.$_SESSION['foto']."' alt='User picture'>";
 								}
 								else{
