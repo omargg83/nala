@@ -31,9 +31,9 @@
 					echo "<div class='col-2'>";
 						echo "<div class='btn-group'>";
 
-						echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_gastos/editar' dix='trabajo' v_idg='$key->idgastos'><i class='fas fa-pencil-alt'></i></button>";
+						echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_gastos/editar' dix='trabajo' v_idgastos='$key->idgastos'><i class='fas fa-pencil-alt'></i></button>";
 
-						echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_gastos/db_' des='a_gastos/lista' fun='borrar_gasto' dix='trabajo' v_id='$key->idgastos' id='eliminar' tp='¿Desea eliminar el gasto seleccionado?'><i class='far fa-trash-alt'></i></button>";
+						echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_gastos/db_' des='a_gastos/lista' fun='borrar_gasto' dix='trabajo' v_idgastos='$key->idgastos' id='eliminar' tp='¿Desea eliminar el gasto seleccionado?'><i class='far fa-trash-alt'></i></button>";
 
 						echo "</div>";
 					echo "</div>";

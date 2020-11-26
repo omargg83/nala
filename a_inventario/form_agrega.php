@@ -53,13 +53,10 @@
 		<div class='modal-footer' >
  <?php
 			echo "<div class='btn-group'>";
-			if($_SESSION['a_sistema']==1){
+
 				if($db->nivel_captura==1){
-					if($_SESSION['matriz']==1){
 				echo "<button class='btn btn-warning btn-sm' type='submit' is='f-submit' id='acceso' title='Guardar'><i class='far fa-save'></i>Guardar</button>";
-					}
 				}
-			}
 ?>
 
 			<button class="btn btn-warning btn-sm" type="button" is="b-link" cmodal='1' ><i class="fas fa-sign-out-alt"></i>Cerrar</button>
