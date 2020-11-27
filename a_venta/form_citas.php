@@ -2,7 +2,7 @@
 	$idventa=$_REQUEST['idventa'];
 ?>
 
-<form is="b-submit" id="form_busca" des="a_ventas/busca_cita" dix='resultadosx' >
+<form is="b-submit" id="form_busca" des="a_venta/busca_cita" dix='resultadosx' >
 <?php
 	echo "<input  type='hidden' id='idventa' NAME='idventa' value='$idventa'>";
 ?>

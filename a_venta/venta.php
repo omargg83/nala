@@ -68,7 +68,7 @@
                 if($_SESSION['a_sistema']==1){
                   echo "<button class='btn btn-warning btn-sm mr-2' type='button' is='b-link' des='a_venta/cliente_busca' dix='trabajo' omodal='1'><i class='fas fa-user-tag'></i>Cliente</button>";
 
-                  echo "<button type='button' class='btn btn-warning btn-sm mr-2' id='producto_add' is='b-link' v_idventa='$idventa' des='a_ventas/form_citas' omodal='1' title='Agregar cita'><i class='far fa-calendar-check'></i>Citas</button>";
+                  echo "<button type='button' class='btn btn-warning btn-sm mr-2' id='producto_add' is='b-link' v_idventa='$idventa' des='a_venta/form_citas' omodal='1' title='Agregar cita'><i class='far fa-calendar-check'></i>Citas</button>";
                   if($db->nivel_captura==1){
                     echo "<button type='button' class='btn btn-warning btn-sm mr-2' id='finalizar' is='is-finalizar'><i class='fas fa-cash-register'></i>Finalizar</button>";
   								}
