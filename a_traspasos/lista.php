@@ -47,12 +47,19 @@
 				}
 			?>
 	</div>
-</div>
+	</div>
 <br>
 
 <?php
+	if(isset($_REQUEST['buscar'])){
+		$texto=$_REQUEST['buscar'];
+		$pd = $db->recepcion_buscar($texto);
+	}
+	else{
+		$pd = $db->recepcion_lista();
+	}
 
-	$pd = $db->recepcion_lista();
+
 	echo "<div class='container-fluid' style='background-color:".$_SESSION['cfondo']."; '>";
 ?>
 <div class='tabla_css' id='tabla_css'>

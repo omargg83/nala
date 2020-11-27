@@ -44,7 +44,27 @@ class Traspaso extends Sagyc{
 		}
 	}
 	public function traspasos_buscar($texto){
-		$sql="select * from traspasos	where traspasos.idtienda='".$_SESSION['idtienda']."' and (traspasos.numero like '%$texto%' or traspasos.nombre like '%$texto%') limit 100";
+		$sql="select * from traspasos	where traspasos.idtienda='".$_SESSION['idtienda']."' and iddesde='".$_SESSION['idsucursal']."' and (traspasos.numero like '%$texto%' or traspasos.nombre like '%$texto%') limit 100";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll(PDO::FETCH_OBJ);
+  }
+
+
+	public function recepcion_lista(){
+		try{
+			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' and idsucursal='".$_SESSION['idsucursal']."' and estado='Enviada' order by idtraspaso desc";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			echo $e;
+			return "Database access FAILED!";
+		}
+	}
+	public function recepcion_buscar($texto){
+		$sql="select * from traspasos	where traspasos.idtienda='".$_SESSION['idtienda']."' and idsucursal='".$_SESSION['idsucursal']."' and estado='Enviada' and (traspasos.numero like '%$texto%' or traspasos.nombre like '%$texto%') limit 100";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -178,18 +198,6 @@ class Traspaso extends Sagyc{
 		return json_encode($arreglo);
 	}
 
-	public function recepcion_lista(){
-		try{
-			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' and idsucursal='".$_SESSION['idsucursal']."' and estado='Enviada' order by idtraspaso desc";
-			$sth = $this->dbh->prepare($sql);
-			$sth->execute();
-			return $sth->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(PDOException $e){
-			echo $e;
-			return "Database access FAILED!";
-		}
-	}
 	public function enviar_traspaso(){
 		$idtraspaso=$_REQUEST['idtraspaso'];
 		$arreglo =array();
