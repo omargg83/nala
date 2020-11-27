@@ -58,6 +58,8 @@ else{
 			<div class='card-footer'>
 				<div class="row">
 					<div class="col-sm-12">
+						<div class="btn-group">
+
 						<?php
 							if($estado=="Activa"){
 								echo "<button class='btn btn-warning btn-sm' type='submit'><i class='far fa-save'></i>Guardar</button>";
@@ -69,6 +71,7 @@ else{
 							}
 						?>
 						<button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_compras/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
+						</div>	
 					</div>
 				</div>
 			</div>

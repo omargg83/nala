@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="lib/load/css-loader.css">
 	<link rel="stylesheet" type="text/css" href="lib/modulos.css"/>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="chat/chat.css" />
 </head>
 
 <?php
@@ -140,7 +141,7 @@
 						if(array_key_exists('COMPRAS', $db->derecho))
 						echo "<a href='#a_compras/index' is='menu-link' title='Compras'><i class='fas fa-shopping-bag'></i><span>Compras</span></a>";
 
-						if(array_key_exists('PRODUCTOS', $db->derecho))
+						if(array_key_exists('PRODUCTOS', $db->derecho) and $_SESSION['matriz']==1)
 						echo "<a href='#a_productos/index' is='menu-link' title='Productos'><i class='fab fa-product-hunt'></i><span>Catalogo</span></a>";
 
 						if(array_key_exists('INVENTARIO', $db->derecho))

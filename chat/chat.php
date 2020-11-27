@@ -7,6 +7,7 @@
 	ini_set('display_errors', '1');
 
 	require_once("../init.php");
+
 	class Chat{
 		public function __construct(){
 			date_default_timezone_set("America/Chicago");

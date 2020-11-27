@@ -17,6 +17,7 @@
 					<input type="text" class="form-control" name="prod_venta" id='prod_venta' placeholder='buscar producto' aria-label="buscar producto" aria-describedby="basic-addon2">
 					<div class="input-group-append">
 						<button class="btn btn-warning btn-sm" type="submit" ><i class='fas fa-search'></i>Buscar</button>
+						<button type="button" class="btn btn-warning btn-sm" is='b-link' cmodal='1'><i class="fas fa-sign-out-alt"></i>Cerrar</button>
 					</div>
 				</div>
 			</div>
@@ -24,7 +25,4 @@
 		<div clas='row' id='productos'>
 
 		</div>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-warning btn-sm" is='b-link' cmodal='1'><i class="fas fa-sign-out-alt"></i>Cerrar</button>
 	</div>

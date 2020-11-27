@@ -30,10 +30,8 @@
         <?php
         	if(array_key_exists('PRODUCTOS', $db->derecho)){
             if($_SESSION['a_sistema']==1){
-            //
+            
             }
-
-            //echo "<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_prod' des='a_productos/lista' dix='trabajo'><i class='fab fa-product-hunt'></i><span>Productos</span></a></li>";
 
             echo "<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='cate_nue' des='a_categorias/lista' dix='trabajo'><i class='fas fa-box'></i><span>Categorias</span></a></li>";
           }

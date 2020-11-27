@@ -3,6 +3,8 @@
 	$idcatalogo=$_REQUEST['idcatalogo'];
 	$idcompra=$_REQUEST['idcompra'];
 
+	$precio=0;
+
 	$sql="SELECT * from productos_catalogo where idcatalogo=:id";
 	$sth = $db->dbh->prepare($sql);
 	$sth->bindValue(":id",$idcatalogo);
@@ -13,51 +15,51 @@
 	echo "<input type='hidden' name='idcompra' id='idcompra' value='$idcompra' readonly>";
 	echo "<input type='hidden' name='idcatalogo' id='idcatalogo' value='$idcatalogo' readonly>";
 	echo "<input type='hidden' name='tipo' id='tipo' value='".$res->tipo."' readonly>";
+
 	echo "<div class='row'>";
-
-		echo "<div class='col-12'>";
-			echo "<label>Tipo:</label>";
-				if($res->tipo=="0") echo " Registro (solo registra ventas, no es necesario registrar entrada)";
-				if($res->tipo=="3") echo " Volúmen (Se controla el inventario por volúmen)";
-			echo "</select>";
+		echo "<div class='col-2'>";
+			if(strlen($res->archivo)>0 and file_exists("../".$db->f_productos."/".$res->archivo)){
+				echo "<img src='".$db->f_productos."/".$res->archivo."' width='100%' class='img-thumbnail'/>";
+			}
+			else{
+				echo "<img src='img/unnamed.png' width='100%' class='img-thumbnail'/>";
+			}
 		echo "</div>";
+		echo "<div class='col-10'>";
+			echo "<div class='row'>";
 
-		echo "<div class='col-12'>";
-			echo "<label>Nombre:</label>";
-			echo "<input type='text' class='form-control form-control-sm' name='nombre' id='nombre' value='".$res->nombre."' readonly>";
+				echo "<div class='col-12'>";
+					echo "<b>$res->nombre</b></br>";
+					echo "<small>";
+							if($res->tipo=="0") echo " Registro (solo registra ventas, no es necesario registrar entrada)";
+							if($res->tipo=="3") echo " Volúmen (Se controla el inventario por volúmen)";
+					echo "</small>";
+					echo "<p><b>$res->descripcion</b></p>";
+
+				echo "</div>";
+
+				echo "<div class='col-3'>";
+					echo "<label>Cantidad</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1'>";
+				echo "</div>";
+
+				echo "<div class='col-3'>";
+					echo "<label>Precio Compra</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio' id='precio' value='$precio' ";
+						if($res->tipo==0){
+							echo "";
+						}
+					echo ">";
+				echo "</div>";
+
+				echo "<div class='col-12'>";
+					echo "<label>Observaciones</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='observaciones' id='observaciones' value='' placeholder='Observaciones'>";
+				echo "</div>";
+
+			echo "</div>";
 		echo "</div>";
-
-		echo "<div class='col-3'>";
-			echo "<label>Marca</label>";
-			echo "<input type='text' class='form-control form-control-sm' name='marca' id='marca' value='".$res->marca."' readonly>";
-		echo "</div>";
-
-		echo "<div class='col-3'>";
-			echo "<label>Modelo</label>";
-			echo "<input type='text' class='form-control form-control-sm' name='modelo' id='modelo' value='".$res->nombre."' readonly>";
-		echo "</div>";
-
-		echo "<div class='col-3'>";
-			echo "<label>Cantidad</label>";
-			echo "<input type='text' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1'>";
-		echo "</div>";
-
-		echo "<div class='col-3'>";
-			echo "<label>Precio Compra</label>";
-			echo "<input type='text' class='form-control form-control-sm' name='precio' id='precio' value='' ";
-				if($res->tipo==0){
-					echo "";
-				}
-			echo ">";
-		echo "</div>";
-
-		echo "<div class='col-12'>";
-			echo "<label>Observaciones</label>";
-			echo "<input type='text' class='form-control form-control-sm' name='observaciones' id='observaciones' value='' placeholder='Observaciones'>";
-		echo "</div>";
-
 	echo "</div>";
-	echo "<hr>";
 	echo "<div class='row'>";
 		echo "<div class='col-12'>";
 			echo "<div class='btn-group'>";

@@ -12,7 +12,7 @@
 	<div class='row header-row'>
 		<div class='col-2'>#</div>
 		<div class='col-2'>Razon Social</div>
-		<div class='col-2'>Calle</div>
+		<div class='col-4'>Calle</div>
 		<div class='col-2'>No</div>
 	</div>
 
@@ -25,7 +25,7 @@
 					echo "</div>";
 					echo "</div>";
 					echo "<div class='col-2'>".$key->razon."</div>";
-					echo "<div class='col-2'>".$key->calle."</div>";
+					echo "<div class='col-4'>".$key->calle."</div>";
 					echo "<div class='col-2'>".$key->no."</div>";
 				echo "</div>";
 			}

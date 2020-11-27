@@ -123,7 +123,7 @@
 													if($idcatalogo>0){
 														echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_productos/form_foto' v_idcatalogo='$idcatalogo' omodal='1'><i class='fas fa-camera'></i>Foto</button>";
 														echo "<button type='button' class='btn btn-danger btn-sm' is='b-link' db='a_productos/db_' des='a_productos/lista' fun='borrar_producto' dix='trabajo' v_idcatalogo='$idcatalogo' id='eliminar' tp='¿Desea eliminar el Producto seleccionado?'><i class='far fa-trash-alt'></i>Eliminar</button>";
-														}
+													}
 											}
 										}
 									}

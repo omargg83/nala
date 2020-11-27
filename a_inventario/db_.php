@@ -3,10 +3,10 @@ require_once("../control_db.php");
 
 if($_SESSION['des']==1 and strlen($function)==0)
 {
-	echo "<div class='alert alert-primary' role='alert'>";
+	echo "<div class='alert alert-primary' role='alert' style='font-size:10px'>";
 	$arrayx=explode('/', $_SERVER['SCRIPT_NAME']);
 	echo print_r($arrayx);
-	echo "<hr>";
+	echo "<br>";
 	echo print_r($_REQUEST);
 	echo "</div>";
 }
@@ -424,35 +424,74 @@ class Productos extends Sagyc{
 			$tipo=$catalogo->tipo;
 
 			$arreglo =array();
+			$arreglo+=array('idcatalogo'=>$idcatalogo);
+			$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
+			$arreglo+=array('activo_producto'=>1);
 			if($tipo==0){
 				$arreglo+=array('cantidad'=>1);
 			}
-			$monto_mayor=1000;
-			$monto_distribuidor=3000;
-			$stockmin=1;
-			$cantidad_mayoreo=10;
+			else{
+				$arreglo+=array('cantidad'=>0);
+			}
 
-			$arreglo+=array('preciocompra'=>0);
-			$arreglo+=array('precio'=>0);
-			$arreglo+=array('monto_mayor'=>$monto_mayor);
+			$sql="select * from productos where idcatalogo='$idcatalogo' order by idproducto asc limit 1";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			if($sth->rowCount()>0){
+				$producto=$sth->fetch(PDO::FETCH_OBJ);
 
-			$arreglo+=array('monto_distribuidor'=>$monto_distribuidor);
+				$preciocompra=$producto->preciocompra;
+				$precio=$producto->precio;
+				$stockmin=$producto->stockmin;
+				$cantidad_mayoreo=$producto->cantidad_mayoreo;
+				$precio_mayoreo=$producto->precio_mayoreo;
+				$precio_distri=$producto->precio_distri;
+				$mayoreo_cantidad=$producto->mayoreo_cantidad;
+				$distri_cantidad=$producto->distri_cantidad;
+				$esquema=$producto->esquema;
+				$monto_mayor=$producto->monto_mayor;
+				$monto_distribuidor=$producto->monto_distribuidor;
+			}
+			else{
+				$preciocompra=0;
+				$precio=0;
+				$stockmin=0;
+				$cantidad_mayoreo=10;
+				$precio_mayoreo=0;
+				$precio_distri=0;
+				$mayoreo_cantidad=0;
+				$distri_cantidad=0;
+				$esquema=0;
+				$monto_mayor=1000;
+				$monto_distribuidor=3000;
+				$stockmin=1;
+			}
+
+			$arreglo+=array('preciocompra'=>$preciocompra);
+			$arreglo+=array('precio'=>$precio);
 			$arreglo+=array('stockmin'=>$stockmin);
 			$arreglo+=array('cantidad_mayoreo'=>$cantidad_mayoreo);
-			$arreglo+=array('mayoreo_cantidad'=>0);
-			$arreglo+=array('distri_cantidad'=>0);
-			$arreglo+=array('precio_mayoreo'=>0);
-			$arreglo+=array('precio_distri'=>0);
-
-			$arreglo+=array('idcatalogo'=>$idcatalogo);
-			$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
-			return $this->insert('productos', $arreglo);
-
-			$arreglo =array();
-			$arreglo+=array('error'=>0);
-			$arreglo+=array('terror'=>"Se agregó correctamente");
-			return json_encode($arreglo);
-
+			$arreglo+=array('precio_mayoreo'=>$precio_mayoreo);
+			$arreglo+=array('precio_distri'=>$precio_distri);
+			$arreglo+=array('mayoreo_cantidad'=>$mayoreo_cantidad);
+			$arreglo+=array('distri_cantidad'=>$distri_cantidad);
+			$arreglo+=array('esquema'=>$esquema);
+			$arreglo+=array('monto_mayor'=>$monto_mayor);
+			$arreglo+=array('monto_distribuidor'=>$monto_distribuidor);
+			$x=$this->insert('productos', $arreglo);
+			$ped=json_decode($x);
+			if($ped->error==0){
+				$arreglo =array();
+				$arreglo+=array('error'=>0);
+				$arreglo+=array('terror'=>"Se agregó correctamente");
+				return json_encode($arreglo);
+			}
+			else{
+				$arreglo =array();
+				$arreglo+=array('error'=>1);
+				$arreglo+=array('terror'=>"Favor de verificar");
+				return json_encode($arreglo);
+			}
 		}
 		else{
 			$arreglo =array();

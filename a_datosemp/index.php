@@ -14,8 +14,6 @@
 
 				<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='sucursal' des='a_sucursal/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Sucursal</span></a></li>
 
-				<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='cajas' des='a_cajas/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Cajas</span></a></li>
-
 			</ul>
 	  </div>
 	</nav>

@@ -58,8 +58,6 @@
 										echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_inventario/db_' des='a_inventario/lista' fun='asignar_sucursal' dix='trabajo' v_idcatalogo='$key->idcatalogo' id='asignar' tp='¿Desea agregar el Producto seleccionado a la sucursal?'><i class='fas fa-cloud-download-alt'></i></button>";
 								}
 
-
-
 	            echo "</div>";
 	          echo "</div>";
 
