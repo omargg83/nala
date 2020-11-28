@@ -212,12 +212,12 @@ class Chat extends Sagyc{
 					$fecha=mktime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"));
 					$sql="insert into chat (de,para,mensaje,envio,leido,den) values ('".$_SESSION['idusuario']."','$idpersona','$mensaje','$fecha','0','".$_SESSION['nick']."')";
 					$this->dbh->query($sql);
-					echo  "<div class='b2'>";
-					echo  "<b>Yo:</b>";
-					echo  "<br>".$mensaje;
-					echo  "<span id='horachat'>$fecha";
-					echo  date('Y-m-d H:i:s',$fecha);
-					echo  "</span></div>";
+					$x.= "<div class='b2'>";
+					$x.= "<b>Yo:</b>";
+					$x.= "<br>".$mensaje;
+					$x.= "<span id='horachat'>$fecha";
+					$x.= date('Y-m-d H:i:s',$fecha);
+					$x.= "</span></div>";
 				}
 			}
 			return $x;

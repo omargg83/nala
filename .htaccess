@@ -4,15 +4,15 @@ Options All -Indexes
 
 
 # inicia https
-# RewriteCond %{HTTP_HOST} !=localhost
-# RewriteCond %{HTTP_HOST} !=127.0.0.1
-# RewriteCond %{REMOTE_ADDR} !=127.0.0.1
-# RewriteCond %{REMOTE_ADDR} !=::1
-# RewriteCond %{HTTPS} !=on
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+RewriteCond %{HTTP_HOST} !=localhost
+RewriteCond %{HTTP_HOST} !=127.0.0.1
+RewriteCond %{REMOTE_ADDR} !=127.0.0.1
+RewriteCond %{REMOTE_ADDR} !=::1
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
 
 Header always set Strict-Transport-Security "max-age=2592000; includeSubDomains; preload" env=HTTPS
-Header always set X-Frame-Options: "same-origin"
+Header always set X-Frame-Options: "SAMEORIGIN"
 Header always set X-Content-Type-Options nosniff
 Header always set X-XSS-Protection "1; mode=block"
 Header always set Referrer-Policy "same-origin"
