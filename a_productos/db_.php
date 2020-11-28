@@ -266,48 +266,154 @@ class Productos extends Sagyc{
 		}
 	}
 	public function excel(){
-		$direccion="tmp/excel.xlsx";
+		$direccion="tmp/Catalogo_porductos.xlsx";
 
 		$spreadsheet = new Spreadsheet();
 		$sheet = $spreadsheet->getActiveSheet();
 
+		$sheet->setCellValue('A1',"Catalogo de productos");
+		$sheet->setTitle("Catalogo de prodcutos");
+
+		//DEFINE EL AUTOSIZE PARA CADA COLUMNA MEN
+		foreach(range('B','O') as $columnID) {
+    $sheet->getColumnDimension($columnID)
+     ->setAutoSize(true);
+	 	}
+		//largo de celdas
+		foreach(range('A','A') as $columnID3) {
+		 $sheet->getColumnDimension($columnID3)->setWidth(15);
+	 	}
+		//// pone el logotipo
+		$sheeti = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+		$sheeti->setName('logo');
+		$sheeti->setDescription('description');
+		$sheeti->setPath('../img/logoimp.jpg');
+		$sheeti->setHeight(90);
+		$sheeti->setCoordinates("G1");
+		$sheeti->setOffsetX(20);
+		$sheeti->setOffsetY(5);
+		$sheeti->setWorksheet($sheet);
+		// fin logo
+		$sql="SELECT
+		productos_catalogo.*,
+		tienda.razon,
+		categorias.nombre as nombrecat
+		from productos_catalogo
+		LEFT OUTER JOIN categorias ON categorias.idcat =productos_catalogo.categoria
+		LEFT OUTER JOIN tienda ON tienda.idtienda =productos_catalogo.idtienda
+		where productos_catalogo.idtienda='".$_SESSION['idtienda']."' and productos_catalogo.activo_catalogo=1 order by productos_catalogo.nombre asc, productos_catalogo.idcatalogo asc";
 
 
-
-		$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by nombre asc, idcatalogo asc";
+	//	$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by nombre asc, idcatalogo asc";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
-		$contar=1;
-		$sheet->setCellValue('A'.$contar,"idCatalogo");
-		$sheet->setCellValue('B'.$contar,"idtienda");
-		$sheet->setCellValue('C'.$contar,"tipo");
-		$sheet->setCellValue('D'.$contar,"codigo");
-		$sheet->setCellValue('E'.$contar,"nombre");
-		$sheet->setCellValue('F'.$contar,"descripcion");
-		$sheet->setCellValue('G'.$contar,"unidad");
-		$sheet->setCellValue('H'.$contar,"color");
-		$sheet->setCellValue('I'.$contar,"marca");
-		$sheet->setCellValue('J'.$contar,"modelo");
-		$sheet->setCellValue('K'.$contar,"fechaalta");
-		$sheet->setCellValue('L'.$contar,"activo_catalogo");
-		$sheet->setCellValue('M'.$contar,"categoria");
-		$sheet->setCellValue('N'.$contar,"fechamod");
+		$contar=7;
+
+		$sheet->getStyle('A7:O7')->getFill()
+    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+    ->getStartColor()->setARGB('04006a'); // color de celdas con rango
+		$sheet->getStyle('A7:O7')->getFont()->getColor()->setARGB('fffffc'); // CAMBIAR COLOR DE LA FUENTE
+		$sheet->getStyle('A1:F1')->getFont()->setSize(18); //Tamaño fuente
+		$sheet->getStyle('A2')->getFont()->setSize(18); //Tamaño fuente
+		$sheet->setCellValue('A2', 'Visitanos en www.sagyc.com.mx');
+		$sheet->getCell('A2')->getHyperlink()->setUrl('https://www.sagyc.com.mx');
+
+			$sheet->getStyle('A1')
+    ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); //ALINEACION DE FUENTE
+
+		$sheet->getStyle('A1')->getFont()->setBold(true);
+		$sheet->getStyle('A7:O7')->getFont()->setBold(true); // NEGRITA
+		$sheet->mergeCells('A1:F1'); //combinar celdas
+		$sheet->mergeCells('A2:E2'); //combinar celdas
+		//$sheet->getStyle('A7:O7')->getFill()->getStartColor()->setARGB('29bb04');
+
+
+		$sheet->setCellValue('A'.$contar,"Imagen");
+		$sheet->setCellValue('B'.$contar,"Id catalogo");
+		$sheet->setCellValue('C'.$contar,"Tienda");
+		$sheet->setCellValue('D'.$contar,"Tipo");
+		$sheet->setCellValue('E'.$contar,"Codigo");
+		$sheet->setCellValue('F'.$contar,"Nombre");
+		$sheet->setCellValue('G'.$contar,"Descripción");
+		$sheet->setCellValue('H'.$contar,"Unidad");
+		$sheet->setCellValue('I'.$contar,"Color");
+		$sheet->setCellValue('J'.$contar,"Marca");
+		$sheet->setCellValue('K'.$contar,"Modelo");
+		$sheet->setCellValue('L'.$contar,"Fecha de alta");
+		$sheet->setCellValue('M'.$contar,"Activo");
+		$sheet->setCellValue('N'.$contar,"Categoria");
+		$sheet->setCellValue('O'.$contar,"fecha mod.");
 		$contar++;
 		foreach($sth->fetchAll(PDO::FETCH_OBJ) as $prod){
-			$sheet->setCellValue('A'.$contar, $prod->idcatalogo);
-			$sheet->setCellValue('B'.$contar, $prod->idtienda);
-			$sheet->setCellValue('C'.$contar, $prod->tipo);
-			$sheet->setCellValue('D'.$contar, "'".$prod->codigo);
-			$sheet->setCellValue('E'.$contar, $prod->nombre);
-			$sheet->setCellValue('F'.$contar, $prod->descripcion);
-			$sheet->setCellValue('G'.$contar, $prod->unidad);
-			$sheet->setCellValue('H'.$contar, $prod->color);
-			$sheet->setCellValue('I'.$contar, $prod->marca);
-			$sheet->setCellValue('J'.$contar, $prod->modelo);
-			$sheet->setCellValue('K'.$contar, $prod->fechaalta);
-			$sheet->setCellValue('L'.$contar, $prod->activo_catalogo);
-			$sheet->setCellValue('M'.$contar, $prod->categoria);
-			$sheet->setCellValue('N'.$contar, $prod->fechamod);
+
+			//BORDES
+					$styleArray = [
+			    'borders' => [
+			        'allBorders' => [
+			            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN, //BORDER_THICK pone el borde mas grueso
+			            'color' => ['argb' => '04006a'],
+			        						],
+			    						],
+										];
+
+										$sheet->getStyle('A'.$contar.":".'O'.$contar)->applyFromArray($styleArray);
+										/* parametros extras:
+
+								    allBorders
+								    outline
+								    inside
+								    vertical
+								    horizontal
+										*/
+			/////
+
+			//// inicia la carga de las imagenes de los productos, si no tiene pone una por default
+			$sheeti = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+			$sheeti->setName('imagen');
+			$sheeti->setDescription('description');
+			if (is_null($prod->archivo)) {
+			$sheeti->setPath('../img/unnamed.png');
+			}
+			else {
+			$sheeti->setPath('../a_archivos/productos/'.$prod->archivo);
+			}
+
+			$sheeti->setHeight(40);
+			$sheeti->setCoordinates('A'.$contar);
+			$sheeti->setOffsetX(20);
+			$sheeti->setOffsetY(5);
+			$sheeti->setWorksheet($sheet);
+			///altura de columna
+			foreach(range('8',$contar) as $columnID2) {
+			 $sheet->getRowDimension($columnID2)->setRowHeight(40);
+			}
+			//////////////////////
+			$sheet->setCellValue('B'.$contar, $prod->idcatalogo);
+			$sheet->setCellValue('C'.$contar, $prod->razon);
+			if ($prod->tipo==3) {
+			$sheet->setCellValue('D'.$contar, "Producto");
+			}
+			else {
+				$sheet->setCellValue('D'.$contar, "Servicio");
+			}
+
+			$sheet->setCellValue('E'.$contar, "'".$prod->codigo);
+			$sheet->setCellValue('F'.$contar, $prod->nombre);
+			$sheet->setCellValue('G'.$contar, $prod->descripcion);
+			$sheet->setCellValue('H'.$contar, $prod->unidad);
+			$sheet->setCellValue('I'.$contar, $prod->color);
+			$sheet->setCellValue('J'.$contar, $prod->marca);
+			$sheet->setCellValue('K'.$contar, $prod->modelo);
+			$sheet->setCellValue('L'.$contar, $prod->fechaalta);
+
+			if ($prod->activo_catalogo==1) {
+			$sheet->setCellValue('M'.$contar, "Si");
+			}
+			else {
+				$sheet->setCellValue('M'.$contar, "No");
+			}
+			$sheet->setCellValue('N'.$contar, $prod->nombrecat);
+			$sheet->setCellValue('O'.$contar, $prod->fechamod);
 
 			$contar++;
 		}
@@ -316,8 +422,8 @@ class Productos extends Sagyc{
 		$writer->save("../".$direccion);
 
 		echo "<div class='container text-center' style='background-color:".$_SESSION['cfondo']."; '>";
-		echo "<h3>Descargar</h3>";
-		echo "<a href='$direccion' target='_black' class='btn btn-success'><i class='fas fa-download'></i>Archivo</a>";
+		echo "<h3>Descargar Catalogo</h3>";
+		echo "<a href='$direccion' target='_black' class='btn btn-success'><i class='fas fa-download'></i>Excel</a>";
 		echo "</div>";
 	}
 	public function homologa_final(){
