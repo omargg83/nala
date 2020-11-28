@@ -91,8 +91,7 @@
 	if(strlen($texto)==0){
 		$sql="SELECT count(productos.idproducto) as total
 		from productos LEFT OUTER JOIN productos_catalogo ON productos_catalogo.idcatalogo = productos.idcatalogo	where productos.idsucursal='".$_SESSION['idsucursal']."' and productos_catalogo.tipo<>0";
-		$sth = $db->dbh->prepare($sql);
-		$sth->execute();
+		$sth = $db->dbh->query($sql);
 		$contar=$sth->fetch(PDO::FETCH_OBJ);
 		$paginas=ceil($contar->total/$_SESSION['pagina']);
 		$pagx=$paginas-1;
@@ -108,5 +107,4 @@
 		  echo "</ul>";
 		echo "</nav>";
 	}
-
 ?>

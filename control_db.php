@@ -1,14 +1,15 @@
 <?php
 	session_name("chingon");
 	@session_start();
-	if (isset($_REQUEST['function'])){$function=$_REQUEST['function'];}	else{ $function="";}
-	if (isset($_REQUEST['ctrl'])){$ctrl=$_REQUEST['ctrl'];}	else{ $ctrl="";}
+	if (isset($_REQUEST['function'])){$function=clean_var($_REQUEST['function']);}	else{ $function="";}
+	if (isset($_REQUEST['ctrl'])){$ctrl=clean_var($_REQUEST['ctrl']);}	else{ $ctrl="";}
 
 	error_reporting(E_ALL);
 	ini_set('display_errors', '1');
 	date_default_timezone_set("America/Mexico_City");
 
 	$_SESSION['des']=1;
+	$_SESSION['pagina']=100;
 
 	require_once("init.php");
 	class Sagyc{
@@ -27,7 +28,7 @@
 				$this->dbh = new PDO("mysql:host=".SERVIDOR.";port=".PORT.";dbname=".BDD, MYSQLUSER, MYSQLPASS);
 				$this->dbh->query("SET NAMES 'utf8'");
 
-				
+
 				if(isset($_SESSION['idtienda'])){
 					$sql="SELECT * FROM tienda where idtienda=:idtienda";
 					$sth = $this->dbh->prepare($sql);

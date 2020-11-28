@@ -33,9 +33,7 @@
 
 	echo "<form id='form_prod' is='is-selecciona'>";
 
-
 		echo "<input type='hidden' class='form-control form-control-sm' name='idproducto' id='idproducto' value='$producto->idproducto' readonly>";
-
 		echo "<div class='modal-header'>";
 	  	echo "<h5 class='modal-title'>Agregar producto</h5>";
 	  echo "</div>";

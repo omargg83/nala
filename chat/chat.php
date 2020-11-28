@@ -27,8 +27,10 @@ class Chat extends Sagyc{
 					else{
 						$nick=$_SESSION['nombre'];
 					}
-					$sql="insert into chat_conectados (idpersona, ultima, foto, nick, nombre) values ('".$_SESSION['idusuario']."', '$fecha', '".$_SESSION['foto']."', '$nick', '".$_SESSION['nombre']."')";
-					$this->dbh->query($sql);
+					if($_SESSION['idusuario']>0){
+						$sql="insert into chat_conectados (idpersona, ultima, foto, nick, nombre) values ('".$_SESSION['idusuario']."', '$fecha', '".$_SESSION['foto']."', '$nick', '".$_SESSION['nombre']."')";
+						$this->dbh->query($sql);
+					}
 					$_SESSION["tchat"]=$fecha;
 				}
 				else{
@@ -109,11 +111,10 @@ class Chat extends Sagyc{
 					}
 				}
 			echo "</div>";
-
 				echo  "<div class='chat-header mb-3' id='head$idpersona'>";
 					echo  "<div class='row'>";
 						echo  "<div class='col-3'>";
-							if(strlen($pers->foto)>0 and file_exists("".$this->f_usuarios."/".$pers->foto)){
+							if(strlen($pers->foto)>0 and file_exists("../".$this->f_usuarios."/".$pers->foto)){
 								echo "<img src='".$this->f_usuarios."/".$pers->foto."' width='40px' class='rounded-circle'/>";
 							}
 							else{
@@ -142,7 +143,6 @@ class Chat extends Sagyc{
 				$sql="select * from chat where ((de='".$_SESSION['idusuario']."' and para='$idpersona') or (de='$idpersona' and para='".$_SESSION['idusuario']."')) order by idchat asc";
 				$sth = $this->dbh->query($sql);
 			 	$men=$sth->fetchAll(PDO::FETCH_OBJ);
-
 
 				$refresh="";
 				foreach ($men as $key){

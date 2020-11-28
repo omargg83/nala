@@ -30,9 +30,10 @@ class Compras extends Sagyc{
 			die();
 		}
 	}
-	public function compras_lista(){
+	public function compras_lista($pagina){
 		try{
-			$sql="SELECT * FROM compras where idsucursal='".$_SESSION['idsucursal']."' order by numero desc";
+			$pagina=$pagina*$_SESSION['pagina'];
+			$sql="SELECT * FROM compras where idsucursal='".$_SESSION['idsucursal']."' order by numero desc limit $pagina,".$_SESSION['pagina']."";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);

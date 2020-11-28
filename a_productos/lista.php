@@ -27,10 +27,8 @@
 	<div class='row header-row'>
 		<div class='col-2'>#</div>
 		<div class='col-2'>ID</div>
-	<!--	<div class='col-2'>Tipo</div> -->
 		<div class='col-2'>Codigo</div>
-		<div class='col-4'>Nombre</div>
-		<div class='col-2'>Descripción</div>
+		<div class='col-6'>Nombre</div>
 	</div>
 
 		<?php
@@ -57,8 +55,7 @@
 					echo "</div>";
 
 					echo "<div class='col-2'>".$key->codigo."</div>";
-					echo "<div class='col-4'>".$key->nombre."</div>";
-					echo "<div class='col-2'>".$key->descripcion."</div>";
+					echo "<div class='col-6'>".$key->nombre."</div>";
 				echo '</div>';
 			}
 		?>
@@ -71,8 +68,7 @@
 		if(strlen($texto)==0){
 			$sql="SELECT count(productos_catalogo.idcatalogo) as total
 			from productos_catalogo	where productos_catalogo.idtienda='".$_SESSION['idtienda']."'";
-			$sth = $db->dbh->prepare($sql);
-			$sth->execute();
+			$sth = $db->dbh->query($sql);
 			$contar=$sth->fetch(PDO::FETCH_OBJ);
 			$paginas=ceil($contar->total/$_SESSION['pagina']);
 			$pagx=$paginas-1;

@@ -34,7 +34,6 @@
 
 				if(is_array($CLAVE)){
 					if($userPOST == $CLAVE['user'] and strtoupper($passPOST)==strtoupper($CLAVE['pass'])){
-						$_SESSION['pagina']=50;
 						$_SESSION['autoriza']=1;
 						$_SESSION['nombre']=$CLAVE['nombre'];
 

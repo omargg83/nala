@@ -1,6 +1,6 @@
 <?php
 	require_once("db_.php");
-	if (isset($_REQUEST['id'])){$id=$_REQUEST['id'];} else{ $id=0;}
+	if (isset($_REQUEST['id'])){$id=clean_var($_REQUEST['id']);} else{ $id=0;}
 	$sucursal=$db->sucursal_lista();
 	$caja=$db->caja_lista();
 	if($id>0){

@@ -5,11 +5,9 @@
 
 		function chat_inicia(){
 			if(chatx==""){
-				chatx=setInterval(function(){ conectados(); }, 120000);
+				chatx=setInterval(function(){ conectados(); }, 100000);
 			}
-			if(newx==""){
-				newx=setInterval(function(){ nuevos(); }, 2000);
-			}
+			setTimeout(nuevos_inicia, 120000);
 
 			var formData = new FormData();
 		  formData.append("function", "inicia");
@@ -26,6 +24,14 @@
 		  xhr.send(formData);
 			conectados();
 		}
+
+		function nuevos_inicia(){
+			if(newx==""){
+				newx=setInterval(function(){ nuevos(); }, 2000);
+			}
+		}
+
+
 		function conectados(){
 			var formData = new FormData();
 		  formData.append("function", "conectados");

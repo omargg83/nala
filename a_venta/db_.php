@@ -160,6 +160,7 @@ class Venta extends Sagyc{
 
 
 				$arreglo=array();
+				$arreglo+=array('fecha'=>date("Y-m-d H:i:s"));
 				$arreglo+=array('idventa'=>$idventa);
 				$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
 				$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
