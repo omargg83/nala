@@ -430,12 +430,14 @@ class Productos extends Sagyc{
 		productos_catalogo.*,
 		productos.*,
 		categorias.nombre as nombrecat,
-		sucursal.nombre as nombresuc
+		sucursal.nombre as nombresuc,
+		sum(bodega.cantidad) as stock
 		from productos
 		LEFT OUTER JOIN productos_catalogo ON productos_catalogo.idcatalogo = productos.idcatalogo
 		LEFT OUTER JOIN sucursal ON sucursal.idsucursal = productos.idsucursal
+		LEFT OUTER JOIN bodega ON bodega.idproducto = productos.idproducto
 		LEFT OUTER JOIN categorias ON categorias.idcat =productos_catalogo.categoria
-		where productos.idsucursal='".$_SESSION['idsucursal']."' ";
+		where productos.idsucursal='".$_SESSION['idsucursal']."' group by productos.idproducto ";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		$contar=7; //empiezan los datos a partir de la fila 7
@@ -539,7 +541,8 @@ class Productos extends Sagyc{
 			->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
 			->getStartColor()->setARGB('c8d013'); // color de celdas con rango
 
-			$sheet->setCellValue('G'.$contar, $prod->cantidad);
+
+			$sheet->setCellValue('G'.$contar, $prod->stock);
 
 			$sheet->setCellValue('H'.$contar, $prod->fechaalta);
 
