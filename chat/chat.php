@@ -1,30 +1,19 @@
 <?php
-	session_name("chingon");
-	@session_start();
-	if (isset($_REQUEST['function'])){$function=$_REQUEST['function'];}	else{ $function="";}
+	require_once("../control_db.php");
 
 	error_reporting(E_ALL);
 	ini_set('display_errors', '1');
 
 	require_once("../init.php");
 
-	class Chat{
+class Chat extends Sagyc{
 		public function __construct(){
 			date_default_timezone_set("America/Chicago");
 			$this->Salud = array();
 			$this->dbh = new PDO("mysql:host=".SERVIDOR.";port=".PORT.";dbname=".BDD, MYSQLUSER, MYSQLPASS);
 			$this->dbh->query("SET NAMES 'utf8'");
 		}
-		public function general($sql){
-			try{
-				$sth = $this->dbh->prepare($sql);
-				$sth->execute();
-				return $sth->fetchAll();
-			}
-			catch(PDOException $e){
-				return "Database access FAILED!".$e->getMessage();
-			}
-		}
+
 		public function conectado(){
 			try{
 				$sql="select * from chat_conectados where idpersona='".$_SESSION['idusuario']."'";
@@ -39,7 +28,7 @@
 						$nick=$_SESSION['nombre'];
 					}
 					$sql="insert into chat_conectados (idpersona, ultima, foto, nick, nombre) values ('".$_SESSION['idusuario']."', '$fecha', '".$_SESSION['foto']."', '$nick', '".$_SESSION['nombre']."')";
-					$stmt= $this->dbh->query($sql);
+					$this->dbh->query($sql);
 					$_SESSION["tchat"]=$fecha;
 				}
 				else{
@@ -52,7 +41,7 @@
 						}
 						$fecha=mktime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"));
 						$sql="update chat_conectados set ultima='$fecha', foto='".$_SESSION['foto']."', nick='$nick', nombre='".$_SESSION['nombre']."' where idpersona='".$_SESSION['idusuario']."'";
-						$conec= $this->dbh->query($sql);
+						$this->dbh->query($sql);
 						$_SESSION["tchat"]=$fecha;
 					}
 					catch(PDOException $e){
@@ -66,38 +55,37 @@
 		}
 		public function inicia(){
 			$_SESSION["carga"]=1;
-			$x="<li class='nav-item dropdown'>";
-				$x.= "<a class='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+			echo  "<li class='nav-item dropdown'>";
+				echo  "<a class='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
 				  <i class='fab fa-rocketchat fa-spin' style='color:#07009e !important;'></i> Chat";
-				$x.= "</a>";
+				echo  "</a>";
 
-				$x.= "<div id='myUL' class='dropdown-menu' aria-labelledby='navbarDropdown' style='width:200px;max-height:400px !important; overflow: scroll; overflow-x: hidden;'>";
-				$x.="<div class='row'><div class='col-12'><input type='text' id='myInput' placeholder='Buscar..' title='Buscar' class='form-control' autocomplete='off'></div></div>";
-					$x.="<div id='conecta_x'>";
-					$x.= "</div>";
-				$x.= "</div>";
-			$x.= "</li>";
-			return $x;
+				echo  "<div id='myUL' class='dropdown-menu' aria-labelledby='navbarDropdown' style='width:200px;max-height:400px !important; overflow: scroll; overflow-x: hidden;'>";
+				echo "<div class='row'><div class='col-12'><input type='text' id='myInput' placeholder='Buscar..' title='Buscar' class='form-control' autocomplete='off'></div></div>";
+					echo "<div id='conecta_x'>";
+						echo self::conectados();
+					echo  "</div>";
+				echo  "</div>";
+			echo  "</li>";
 		}
 		public function conectados(){
 			$this->conectado();
-			$x="";
 			$fecha2=mktime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))-100;
-			$sql="select chat_conectados.idpersona,chat_conectados.nick,chat_conectados.foto, chat_conectados.nombre, chat_conectados.ultima from chat_conectados
-			where chat_conectados.idpersona!='".$_SESSION['idusuario']."' order by chat_conectados.ultima desc";
-			$row=$this->general($sql);
+			$sql="select chat_conectados.idpersona,chat_conectados.nick,chat_conectados.foto, chat_conectados.nombre, chat_conectados.ultima from chat_conectados where chat_conectados.idpersona!='".$_SESSION['idusuario']."' order by chat_conectados.ultima desc";
+			$sth=$this->dbh->query($sql);
+			$row=$sth->fetchAll(PDO::FETCH_OBJ);
+
 			foreach($row as $key){
-				$x.= "<a class='dropdown-item' onclick='register_popup(\"".$key['idpersona']."\")' title='".$key['nombre']."'>";
-				if(($key['ultima']-$fecha2)>0){
-					$x.= "<i class='fab fa-rocketchat' style='color:black;'></i>";
+				echo "<a class='dropdown-item' onclick='register_popup(\"".$key->idpersona."\")'>";
+				if(($key->ultima-$fecha2)>0){
+					echo "<i class='fab fa-rocketchat' style='color:black;'></i>";
 				}
 				else{
-					$x.="<i class='fas fa-user-clock'></i>";
+					echo "<i class='fas fa-user-clock'></i>";
 				}
-				$x.=$key['nick'];
-				$x.= "</a>";
+				echo $key->nick;
+				echo  "</a>";
 			}
-			return $x;
 		}
 		public function carga(){
 			$idpersona=$_REQUEST['id'];
@@ -105,94 +93,97 @@
 			///////////////////////////////////////////////////////
 			$fecha=mktime(0,0,0,date("m"),date("d"),date("Y"))-100;
 			$sql="select * from chat_conectados where idpersona='$idpersona'";
-			$pers=$this->general($sql);
+			$sth = $this->dbh->query($sql);
+		 	$pers=$sth->fetch(PDO::FETCH_OBJ);
 
-			$x.="<div id='opcion_$idpersona' class='opcionbox'>";
-			$arreglo=array();
-			$directory="../chat/smileys/";
-			$dirint = dir($directory);
-			$contar=0;
-			while (($archivo = $dirint->read()) !== false){
-				if ($archivo != "." && $archivo != ".." && $archivo != "" && (substr($archivo,-4)==".png" || substr($archivo,-4)==".gif")){
-					$arreglo[$contar]=$directory.$archivo;
-					$x.="<img src='chat/smileys/$archivo' width='20px' class='emojiimg' data-id='$idpersona' data-lugar='chat/smileys/$archivo'>";
-					$contar++;
+			echo "<div id='opcion_$idpersona' class='opcionbox'>";
+				$arreglo=array();
+				$directory="../chat/smileys/";
+				$dirint = dir($directory);
+				$contar=0;
+				while (($archivo = $dirint->read()) !== false){
+					if ($archivo != "." && $archivo != ".." && $archivo != "" && (substr($archivo,-4)==".png" || substr($archivo,-4)==".gif")){
+						$arreglo[$contar]=$directory.$archivo;
+						echo "<img src='chat/smileys/$archivo' width='30px' class='emojiimg mb-2' data-id='$idpersona' data-lugar='chat/smileys/$archivo'>";
+						$contar++;
+					}
 				}
-			}
+			echo "</div>";
 
-				$x.="</div>";
-
-				$x.= "<div class='card-header' id='head$idpersona'>";
-					$x.= "<div class='row'>";
-						$x.= "<div class='col-2'>";
-							if(strlen($pers[0]['foto'])>0){
-								$x.="<img src='a_archivos/personal/".trim($pers[0]['foto'])."' width='30px' width='40px'/>";
+				echo  "<div class='chat-header mb-3' id='head$idpersona'>";
+					echo  "<div class='row'>";
+						echo  "<div class='col-3'>";
+							if(strlen($pers->foto)>0 and file_exists("".$this->f_usuarios."/".$pers->foto)){
+								echo "<img src='".$this->f_usuarios."/".$pers->foto."' width='40px' class='rounded-circle'/>";
 							}
 							else{
-								$x.="<img src='chat/Screenshot_1.png' width='30px' width='40px'/>";
+								echo "<img src='img/user.jpg' width='40px' class='rounded-circle'/>";
 							}
-						$x.="</div>";
-						$x.= "<div class='col-6'>";
-							$x.= "<label style='width:100px !important;height:23px;color:white;font-size:10pt;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;' title='".$pers[0]['nick']."'>".$pers[0]['nick']."</label>";
-						$x.= "</div>";
-						$x.= "<div class='col-4'>";
-							$x.= "<div class='btn-group'>";
-								$x.= "<a id='min$idpersona' class='btn btn-outline-secondary btn-sm' onclick='minimizar(\"$idpersona\")'><i class='fas fa-window-minimize'></i></a>";
-								$x.= "<a id='max$idpersona' style='display:none;'  class='btn btn-outline-secondary btn-sm' onclick='maximizar(\"$idpersona\")'><i class='fas fa-window-maximize'></i></a>";
-								$x.= "<a class='btn btn-outline-secondary btn-sm' onclick='close_popup(\"$idpersona\")'><i class='fas fa-times-circle'></i></a>";
-							$x.= "</div>";
-						$x.= "</div>";
-					$x.= "</div>";
-				$x.= "</div>";
+						echo "</div>";
+						echo  "<div class='col-6' style='padding: 5px;top: 6px;font-size:12px'>";
+							echo  "<label title='".$pers->nick."'>".$pers->nick;
+							echo "</label>";
 
-				$x.= "<div class='card-body contenido'  id='contenido$idpersona'
+						echo "</div>";
+						echo  "<div class='col-3'>";
+								echo  "<a class='btn-clipboard' onclick='close_popup(\"$idpersona\")'><i class='fas fa-times-circle'></i></a>";
+								echo  "<a id='min$idpersona' class='btn-clipboard' onclick='minimizar(\"$idpersona\")'><i class='fas fa-window-minimize'></i></a>";
+								echo  "<a id='max$idpersona' style='display:none;'  class='btn-clipboard' onclick='maximizar(\"$idpersona\")'><i class='fas fa-window-maximize'></i></a>";
+						echo  "</div>";
+					echo  "</div>";
+				echo  "</div>";
+
+				echo  "<div class='card-body contenido'  id='contenido$idpersona'
 				ondragenter='return enter(event)'
 				ondragover='return over(event)'
 				ondragleave='return leave(event)'
 				ondrop='return drop(event,".$idpersona.")'>";
 
 				$sql="select * from chat where ((de='".$_SESSION['idusuario']."' and para='$idpersona') or (de='$idpersona' and para='".$_SESSION['idusuario']."')) order by idchat asc";
-				$men=$this->general($sql);
+				$sth = $this->dbh->query($sql);
+			 	$men=$sth->fetchAll(PDO::FETCH_OBJ);
+
+
 				$refresh="";
 				foreach ($men as $key){
-					if($key['de']==$_SESSION['idusuario']){
-						$x.= "<div class='b2'>";
-						$x.= "<b>Yo:</b>";
-						$refresh="para".$key['paran'];
-						$nick=$key['paran'];
+					if($key->de==$_SESSION['idusuario']){
+						echo  "<div class='b2'>";
+						echo  "<b>Yo:</b>";
+						$refresh="para".$key->paran;
+						$nick=$key->paran;
 					}
 					else{
-						$x.= "<div class='burbuja'>";
-						$x.= "<b>".$key['den'].":</b>";
-						$refresh="para".$key['den'];
-						$nick=$key['den'];
+						echo  "<div class='burbuja'>";
+						echo  "<b>".$key->den.":</b>";
+						$refresh="para".$key->den;
+						$nick=$key->den;
 					}
-					$x.= "<br>".$key['mensaje'];
-					$x.= "<span id='horachat'>";
-					$x.= $this->fecha($key['envio']);
-					$x.= "</span></div>";
-					$_SESSION["tchat"]=$key['envio'];
+					echo  "<br>".$key->mensaje;
+					echo  "<span id='horachat'>";
+					echo  $this->fecha($key->envio);
+					echo  "</span></div>";
+					$_SESSION["tchat"]=$key->envio;
 				}
-				$x.= "</div>";
+				echo  "</div>";
 
-				$x.= "<div class='card-footer popup-messages-footer' id='mensajex$idpersona'>";
-					$x.= "<div class='row'>";
-						$x.= "<div class='col-sm-12'>";
-							$x.="<div contenteditable='true' class='mensaje_chat' data-para='$idpersona' id='mensaje_$idpersona' name='mensaje_$idpersona' onclick='leido($idpersona)'>";
-						$x.="</div>";
+				echo  "<div class='card-footer popup-messages-footer' id='mensajex$idpersona'>";
+					echo  "<div class='row'>";
+						echo  "<div class='col-sm-12'>";
+							echo "<div contenteditable='true' class='mensaje_chat' data-para='$idpersona' id='mensaje_$idpersona' name='mensaje_$idpersona' onclick='leido($idpersona)'>";
+						echo "</div>";
 
-						$x.= "</div>";
-						$x.= "</div>";
-						$x.= "<div class='row'>";
-							$x.= "<div class='col-sm-12 btn-footer'>";
-								$x.= "<div class='btn-group' role='group' aria-label='Basic example' style='font-color:white;'>";
+						echo  "</div>";
+						echo  "</div>";
+						echo  "<div class='row'>";
+							echo  "<div class='col-sm-12 btn-footer'>";
+								echo  "<div class='btn-group' role='group' aria-label='Basic example' style='font-color:white;'>";
 
-									$x.= "<button title='Mandar' class='btn btn-outline-secondary btn-sm' onclick='mensaje_manda(document.getElementById(\"mensaje_$idpersona\").value,\"$idpersona\")'><i class='fas fa-location-arrow'></i></button>";
+									echo  "<button title='Mandar' class='btn btn-outline-secondary btn-sm' onclick='mensaje_manda(document.getElementById(\"mensaje_$idpersona\").value,\"$idpersona\")'><i class='fas fa-location-arrow'></i></button>";
 
-									$x.= "<button class='btn btn-outline-secondary btn-sm emoji' data-id='$idpersona'><i class='far fa-smile-wink'></i></button>";
+									echo  "<button class='btn btn-outline-secondary btn-sm emoji' data-id='$idpersona'><i class='far fa-smile-wink'></i></button>";
 
-									$x.= "<button class='btn btn-outline-secondary btn-sm btn-file'>";
-									$x.= "<i class='fas fa-paperclip'></i><input class='form-control' type='file'
+									echo  "<button class='btn btn-outline-secondary btn-sm btn-file'>";
+									echo  "<i class='fas fa-paperclip'></i><input class='form-control' type='file'
 											id='subechat_$idpersona'
 											name='subechat_$idpersona'
 											data-control='subechat_$idpersona'
@@ -204,13 +195,12 @@
 											data-divdest='trabajo'
 											data-dest='a_comite/editar.php?id='
 											>";
-									$x.= "</button>";
-								$x.= "</div>";
-							$x.= "</div>";
-						$x.= "</div>";
-					$x.= "</div>";
-				$x.= "</div>";
-			return $x;
+									echo  "</button>";
+								echo  "</div>";
+							echo  "</div>";
+						echo  "</div>";
+					echo  "</div>";
+				echo  "</div>";
 		}
 		public function manda(){
 			$x="";
@@ -221,13 +211,13 @@
 				if(strlen($mensaje)>0){
 					$fecha=mktime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"));
 					$sql="insert into chat (de,para,mensaje,envio,leido,den) values ('".$_SESSION['idusuario']."','$idpersona','$mensaje','$fecha','0','".$_SESSION['nick']."')";
-					$resp=$this->general($sql);
-					$x.= "<div class='b2'>";
-					$x.= "<b>Yo:</b>";
-					$x.= "<br>".$mensaje;
-					$x.= "<span id='horachat'>$fecha";
-					$x.= date('Y-m-d H:i:s',$fecha);
-					$x.= "</span></div>";
+					$this->dbh->query($sql);
+					echo  "<div class='b2'>";
+					echo  "<b>Yo:</b>";
+					echo  "<br>".$mensaje;
+					echo  "<span id='horachat'>$fecha";
+					echo  date('Y-m-d H:i:s',$fecha);
+					echo  "</span></div>";
 				}
 			}
 			return $x;
@@ -247,22 +237,26 @@
 			if(isset($_SESSION['idusuario']) and count($men)>0){
 				for($i=0;$i<count($men);$i++){
 					$x="<div class='burbuja'>";
-					$x.="<b>".$men[$i]['den'].":</b>";
-					$x.="<br>".$men[$i]['mensaje'];
-					$x.="<span id='horachat'>";
-					$x.=date('Y-m-d H:i:s',$men[$i]['envio']);
-					$x.="</span></div>";
+					$x.= "<b>".$men[$i]['den'].":</b>";
+					$x.= "<br>".$men[$i]['mensaje'];
+					$x.= "<span id='horachat'>";
+					$x.= date('Y-m-d H:i:s',$men[$i]['envio']);
+					$x.= "</span></div>";
 					$arr[$i] = array('para' => $men[$i]['de'],'texto' => $x,'de' => $_SESSION['idusuario']);
 					$_SESSION["tchat"]=$men[$i]['envio'];
 				}
 				$myJSON = json_encode($arr);
-				echo $myJSON;
+				return $myJSON;
+			}
+			else{
+				$myJSON = json_encode($arr);
+				return $myJSON;
 			}
 		}
 		public function leido(){
 			$idpersona=$_REQUEST['id'];
 			$sql="update chat set leido=1 where para='".$_SESSION['idusuario']."' and de='$idpersona'";
-			$this->general($sql);
+			$this->dbh->query($sql);
 		}
 		public function carga_archivo(){
 			$x="";
@@ -275,23 +269,23 @@
 			$ext=$info->getExtension();
 
 			if($ext=="jpg" or $ext=="png"){
-				$file.="<img src=\'chat/tmp/$archivo\' width=\'100%\' />";
+				$file.="<img src=\'tmp/$archivo\' width=\'100%\' />";
 			}
 			$fecha=mktime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"));
-			$file.="<a class=\'htipo1\' href=\'chat/tmp/".$archivo."\' target=\'_blank\'><i class=\'fas fa-paperclip\'></i>".$original."</a>";
+			$file.="<a class=\'htipo1\' href=\'tmp/".$archivo."\' target=\'_blank\'><i class=\'fas fa-paperclip\'></i>".$original."</a>";
 			$sql="insert into chat (de,para,mensaje,envio,den,leido) values ('".$_SESSION['idusuario']."','$id','$file','$fecha','".$_SESSION['nick']."','0')";
-			$resp=$this->general($sql);
+			$this->dbh->query($sql);
 
-			$x.= "<div class='b2'>";
-			$x.= "<b>Yo:</b>";
+			echo  "<div class='b2'>";
+			echo  "<b>Yo:</b>";
 			if($ext=="jpg" or $ext=="png"){
-				$x.="<img src='chat/tmp/$archivo' width='100%' />";
+				echo "<img src='tmp/$archivo' width='100%' />";
 			}
-			$x.= "<br><a href='chat/tmp/$archivo' target='_blank'><i class='fas fa-paperclip'></i>$original";
-			$x.="</a>";
-			$x.= "<span id='horachat'>$fecha";
-			$x.= date('Y-m-d H:i:s',$fecha);
-			$x.= "</span></div>";
+			echo  "<br><a href='tmp/$archivo' target='_blank'><i class='fas fa-paperclip'></i>$original";
+			echo "</a>";
+			echo  "<span id='horachat'>$fecha";
+			echo  date('Y-m-d H:i:s',$fecha);
+			echo  "</span></div>";
 			return $x;
 		}
 		public function subir_archivo(){
@@ -317,7 +311,7 @@
 				$string.=".".$extension;
 
 				$n_nombre=$id."_".$contarx."_".$string;
-				$destino=$ruta."/".$n_nombre;
+				$destino="../".$ruta."/".$n_nombre;
 
 				if(move_uploaded_file($key['tmp_name'],$destino)){
 					chmod($destino,0666);

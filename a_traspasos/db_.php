@@ -50,7 +50,6 @@ class Traspaso extends Sagyc{
 		return $sth->fetchAll(PDO::FETCH_OBJ);
   }
 
-
 	public function recepcion_lista(){
 		try{
 			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' and idsucursal='".$_SESSION['idsucursal']."' and estado='Enviada' order by idtraspaso desc";

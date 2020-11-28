@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="lib/modulos.css"/>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="chat/chat.css" />
+	<link href="lib/animate.min.css" rel="stylesheet"/>
 </head>
 
 <?php
@@ -30,7 +31,7 @@
 ?>
 
 <header class="d-block p-2" id='header'>
-	<nav class='barraprincipal navbar navbar-expand-sm fixed-top navbar-light bg-light' >
+	<nav class='barraprincipal navbar navbar-expand-md fixed-top navbar-light bg-light' >
 
 		<button class="btn btn-warning btn-sm mr-2" type="button" onclick='fijar()'><i class='fas fa-bars'></i></button>
 
@@ -48,26 +49,14 @@
 	  </button>
 	  <div class='navbar-collapse collapse' id='navbarsExample06' style=''>
 
-	    <ul class='navbar-nav mr-auto'>
-
-	    </ul>
-
-			<ul class='nav navbar-nav navbar-right' id='chatx'>
-			 <li class='nav-item dropdown'>
-					<a class='btn my-2 my-sm-0' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-					 <i class='fab fa-rocketchat fa-spin' style='color:#96ff57 !important;'></i> Chat
-					</a>
-
-					<div id='myUL' class='dropdown-menu' aria-labelledby='navbarDropdown' style='width:200px;max-height:400px !important; overflow: scroll; overflow-x: hidden;'>
-				 <div class='row'><div class='col-12'><input type='text' id='myInput' placeholder='Buscar..' title='Buscar' class='form-control' autocomplete='off'></div></div>
-					 <div id='conecta_x'>
-					 </div>
-					</div>
-				</li>
-		 </ul>
-
-
-      <ul class='nav navbar-nav navbar-right' id='precios'>
+	    <ul class='navbar-nav mr-auto px-1'></ul>
+			<ul class='nav navbar-nav navbar-right px-1' id='chatx'></ul>
+			<?php
+				if($_SESSION['a_sistema']==1){
+      		echo "<ul class='nav navbar-nav navbar-right px-1' id='fondo'></ul>";
+			 	}
+			?>
+      <ul class='nav navbar-nav navbar-right px-1' id='precios'>
 				<?php
 					if($_SESSION['a_sistema']==1){
 						echo "<li class='nav-item'>";
@@ -78,12 +67,8 @@
 					}
 				?>
 			</ul>
-			<?php
-				if($_SESSION['a_sistema']==1){
-      	 echo "<ul class='nav navbar-nav navbar-right' id='fondo'></ul>";
-			 	}
-			?>
-      <ul class='nav navbar-nav navbar-right'>
+
+      <ul class='nav navbar-nav navbar-right px-1'>
         <li class='nav-item'>
           <a class='nav-link pull-left border border-warning rounded' onclick='salir()'>
             <i class='fas fa-sign-out-alt text-dark'></i> Salir
@@ -211,8 +196,7 @@
 	<script src="lib/jquery/jquery-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="lib/jquery/jquery-ui.min.css" />
 
-	<!-- Animation library for notifications   -->
-  <link href="lib/animate.css" rel="stylesheet"/>
+
 
 	<!--   Alertas   -->
 	<script src="lib/swal/dist/sweetalert2.min.js"></script>

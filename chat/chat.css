@@ -160,7 +160,31 @@
 	font-family: 'Open Sans', sans-serif;
 	z-index: 10;
 
+	-webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75) !important;
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75) !important;
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75) !important;
 }
+.chat-header{
+	background-color: #ffc107 !important;
+	-webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75) !important;
+	-moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75) !important;
+	box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75) !important;
+}
+.btn-clipboard {
+	position: relative;
+  float: right;
+  top: .65rem;
+  right: .65rem;
+  z-index: 10;
+  display: block;
+  padding: -1.75rem .5rem;
+  font-size: 89%;
+  color: #007bff;
+  background-color: #fff;
+  /* border: 1px solid; */
+  border-radius: .25rem;
+}
+
 .contenido{
 	height:260px;
 	overflow:auto;
@@ -251,7 +275,7 @@
 	padding:0px;
 	display:none;
 	border-radius:5px;
-
+	padding: 10px;
 	-webkit-box-shadow: 1px 1px 6px 0px rgba(0,0,0,0.37);
 	-moz-box-shadow: 1px 1px 6px 0px rgba(0,0,0,0.37);
 	box-shadow: 1px 1px 6px 0px rgba(0,0,0,0.37);
@@ -281,7 +305,7 @@
 }
 
 .brilla {
-	background: #ff3636;
+	background: #ffc107;
 	clear: both;
 	opacity:.8;
 	-webkit-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.37);
@@ -303,7 +327,7 @@
   0% { opacity: 1.0; }
   50% { opacity: 0.0; }
   100% { opacity: 1.0;
-	background:#ff3636;
+	background:#ffc107;
   }
 }
 
@@ -311,14 +335,14 @@
   0% { opacity: 1.0; }
   50% { opacity: 0.0; }
    100% { opacity: 1.0;
-	background:#ff3636;
+	background:#ffc107;
    }
 }
 @keyframes parpadeo {
     0% { opacity: 1.0; }
    50% { opacity: 0.0; }
   100% { opacity: 1.0;
-	background:#ff3636;
+	background:#ffc107;
   }
 }
 

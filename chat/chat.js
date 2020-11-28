@@ -1,106 +1,120 @@
-		var chatx="";
-		var newx="";
+		let chatx="";
+		let newx="";
+		let db_chat="chat/chat.php";
+		let debugc=1;
 
 		function chat_inicia(){
 			if(chatx==""){
-				chatx=window.setInterval("conectados()",120000);
+				chatx=setInterval(function(){ conectados(); }, 120000);
 			}
 			if(newx==""){
-				newx=window.setInterval("nuevos()",2000);
+				newx=setInterval(function(){ nuevos(); }, 2000);
 			}
-			$.ajax({
-				data:  {
-					"function":"inicia"
-				},
-				url: "chat/chat.php",
-				type: "post",
-				success:  function (response) {
-					$("#chatx").html(response);
+
+			var formData = new FormData();
+		  formData.append("function", "inicia");
+		  let xhr = new XMLHttpRequest();
+		  xhr.open('POST',db_chat);
+		  xhr.addEventListener('load',(data)=>{
+				if (debugc==1){
+					console.log("----------");
+					console.log("Inicia");
+					console.log(data.target.response);
 				}
-			});
+		    document.getElementById("chatx").innerHTML=data.target.response;
+		  });
+		  xhr.send(formData);
 			conectados();
 		}
 		function conectados(){
-			$.ajax({
-				data:  {
-					"function":"conectados"
-				},
-				url: "chat/chat.php",
-				type: "post",
-				success:  function (response) {
-					$("#conecta_x").html(response);
+			var formData = new FormData();
+		  formData.append("function", "conectados");
+		  let xhr = new XMLHttpRequest();
+		  xhr.open('POST',db_chat);
+		  xhr.addEventListener('load',(data)=>{
+				if (debugc==1){
+					console.log("----------");
+					console.log("Conectados");
+					console.log(data.target.response);
 				}
-			});
+		    document.getElementById("conecta_x").innerHTML=data.target.response;
+		  });
+		  xhr.send(formData);
 		}
 		function carga(id){
-			$.ajax({
-				data:  {
-					"function":"carga",
-					"id":id
-				},
-				url: "chat/chat.php",
-				type: "post",
-				success:  function (response) {
-					$("#chat_"+id).html(response);
-					scroll("contenido"+id);
+			var formData = new FormData();
+		  formData.append("function", "carga");
+		  formData.append("id", id);
+		  let xhr = new XMLHttpRequest();
+		  xhr.open('POST',db_chat);
+		  xhr.addEventListener('load',(data)=>{
+				if (debugc==1){
+					console.log("----------");
+					console.log("Carga");
+					console.log(data.target.response);
 				}
-			});
+		    document.getElementById("chat_"+id).innerHTML=data.target.response;
+				scroll("contenido"+id);
+		  });
+		  xhr.send(formData);
 		}
 
 		function nuevos(){
-			$.ajax({
-				data:  {
-					"function":"nuevos"
-				},
-				url: "chat/chat.php",
-				type: "post",
-				timeout:1000,
-				success:  function (response) {
-					if(response.length>0){
-						var data = JSON.parse(response);
-						for (i = 0; i < data.length; i++) {
-						  register_popup(data[i].para);
-						  $("#contenido"+data[i].para).append(data[i].texto);
-						  scroll("contenido"+data[i].para);
-						  $("#head"+data[i].para).addClass("brilla");
-						}
-					}
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					if(textStatus==="timeout") {
-						
-					}
+			var formData = new FormData();
+		  formData.append("function", "nuevos");
+		  let xhr = new XMLHttpRequest();
+		  xhr.open('POST',db_chat);
+			xhr.timeout = 2000;
+		  xhr.addEventListener('load',(data)=>{
+				if (debugc==1){
+					console.log("----------");
+					console.log("Nuevos");
+					console.log(data.target.response);
 				}
-			});
+				var jdada = JSON.parse(data.target.response);
+				for (i = 0; i < jdada.length; i++) {
+					register_popup(jdada[i].para);
+					$("#contenido"+jdada[i].para).append(jdada[i].texto);
+					scroll("contenido"+jdada[i].para);
+					$("#head"+jdada[i].para).addClass("brilla");
+				}
+		  });
+		  xhr.send(formData);
 		}
 		function leido(id){
-			$.ajax({
-				data:  {
-					"function":"leido",
-					"id":id
-				},
-				url: "chat/chat.php",
-				type: "post",
-				success:  function (response) {
+			var formData = new FormData();
+		  formData.append("function", "leido");
+		  formData.append("id", id);
+		  let xhr = new XMLHttpRequest();
+		  xhr.open('POST',db_chat);
+		  xhr.addEventListener('load',(data)=>{
+				if (debugc==1){
+					console.log("----------");
+					console.log("Leidos");
+					console.log(data.target.response);
 				}
-			});
-			$("#head"+id).removeClass("brilla");
+				$("#head"+id).removeClass("brilla");
+		  });
+		  xhr.send(formData);
 		}
 		function mensaje_manda(texto,id){
-			$.ajax({
-				data:  {
-					"function":"manda",
-					"id":id,
-					"texto":texto
-				},
-				url: "chat/chat.php",
-				type: "post",
-				success:  function (response) {
-					$("#contenido"+id).append(response);
-					scroll("contenido"+id);
-					document.getElementById("mensaje_"+id).value="";
+			var formData = new FormData();
+		  formData.append("manda", "manda");
+		  formData.append("id", id);
+		  formData.append("texto", texto);
+		  let xhr = new XMLHttpRequest();
+		  xhr.open('POST',db_chat);
+		  xhr.addEventListener('load',(data)=>{
+				if (debugc==1){
+					console.log("----------");
+					console.log("Manda");
+					console.log(data.target.response);
 				}
-			});
+				$("#contenido"+id).append(data.target.response);
+				scroll("contenido"+id);
+				document.getElementById("mensaje_"+id).value="";
+		  });
+		  xhr.send(formData);
 		}
 
 		$(document).on("keyup",".mensaje_chat",function(e){
@@ -109,21 +123,25 @@
 			if ( e.which == 13 ) {
 				var id= $(this).data('para');
 				var texto=$(this).html();
-				$.ajax({
-					data:  {
-						"function":"manda",
-						"id":id,
-						"texto":texto
-					},
-					url: "chat/chat.php",
-					type: "post",
-					success:  function (response) {
-						$("#"+textarea).empty();
-						$("#contenido"+id).append(response);
-						scroll("contenido"+id);
-						document.getElementById("mensaje_"+id).value="";
+
+				var formData = new FormData();
+			  formData.append("manda", "manda");
+			  formData.append("id", id);
+			  formData.append("texto", texto);
+			  let xhr = new XMLHttpRequest();
+			  xhr.open('POST',db_chat);
+			  xhr.addEventListener('load',(data)=>{
+					if (debugc==1){
+						console.log("----------");
+						console.log("Manda");
+						console.log(data.target.response);
 					}
-				});
+					$("#"+textarea).empty();
+					$("#contenido"+id).append(data.target.response);
+					scroll("contenido"+id);
+					document.getElementById("mensaje_"+id).value="";
+			  });
+			  xhr.send(formData);
 			}
 		});
 		$(document).on("keyup","#myInput",function(e){
@@ -270,7 +288,8 @@
 					return;
 				}
 			}
-			$('body').append('<div class="card bg-dark popup-box text-white" id="chat_'+ id +'"></div>');
+			$('body').append('<div class="card popup-box animate__animated animate__fadeInRight animate__faster" id="chat_'+ id +'"></div>');
+			console.log("Entra");
 			popups.unshift(id);
 			calculate_popups();
 			carga(id);
@@ -466,3 +485,37 @@
 			}
 			xhr.send(formData);
 		}
+
+
+
+
+			var html5_audiotypes={
+				"mp3": "audio/mpeg",
+				"mp4": "audio/mp4",
+				"ogg": "audio/ogg",
+				"wav": "audio/wav"
+			}
+			function createsoundbite(sound){
+				var html5audio=document.createElement('audio')
+				if (html5audio.canPlayType){ //Comprobar soporte para audio HTML5
+					for (var i=0; i<arguments.length; i++){
+						var sourceel=document.createElement('source')
+						sourceel.setAttribute('src', arguments[i])
+						if (arguments[i].match(/.(w+)$/i))
+						sourceel.setAttribute('type', html5_audiotypes[RegExp.$1])
+						html5audio.appendChild(sourceel)
+					}
+					html5audio.load()
+					html5audio.playclip=function(){
+						html5audio.pause()
+						html5audio.currentTime=0
+						html5audio.play()
+					}
+					return html5audio
+				}
+				else{
+				return {playclip:function(){throw new Error('Su navegador no soporta audio HTML5')}}
+				}
+			}
+			var hover2 = createsoundbite('chat/newmsg.mp3');
+			var hover3 = createsoundbite('chat/010762485_prev.mp3');
