@@ -409,7 +409,7 @@ class Productos extends Sagyc{
 		$sheet->getColumnDimension($columnID)
 		 ->setAutoSize(true);
 		}
-		//largo de celdas
+		//largo de celdas, en este caso para que la imagen quepe dentro de la celda
 		foreach(range('A','A') as $columnID3) {
 		 $sheet->getColumnDimension($columnID3)->setWidth(15);
 		}
@@ -437,7 +437,7 @@ class Productos extends Sagyc{
 		where productos.idsucursal='".$_SESSION['idsucursal']."' ";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
-		$contar=7;
+		$contar=7; //empiezan los datos a partir de la fila 7
 
 		$sheet->getStyle('A7:N7')->getFill()
 		->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
@@ -451,10 +451,11 @@ class Productos extends Sagyc{
 			$sheet->getStyle('A1')
 		->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); //ALINEACION DE FUENTE
 
-		$sheet->getStyle('A1')->getFont()->setBold(true);
+		$sheet->getStyle('A1')->getFont()->setBold(true); // NEGRITA
 		$sheet->getStyle('A7:N7')->getFont()->setBold(true); // NEGRITA
 		$sheet->mergeCells('A1:F1'); //combinar celdas
 		$sheet->mergeCells('A2:E2'); //combinar celdas
+		$sheet->setAutoFilter('A7:N7'); //filtro con rango
 		//$sheet->getStyle('A7:O7')->getFill()->getStartColor()->setARGB('29bb04');
 
 
@@ -475,12 +476,12 @@ class Productos extends Sagyc{
 		$contar++;
 		foreach($sth->fetchAll(PDO::FETCH_OBJ) as $prod){
 
-			//BORDES
+			//BORDES dentro de un array para llenado facil
 					$styleArray = [
 					'borders' => [
 							'allBorders' => [
 									'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN, //BORDER_THICK pone el borde mas grueso
-									'color' => ['argb' => '04006a'],
+									'color' => ['argb' => '04006a'], // color del borde
 													],
 											],
 										];
@@ -507,12 +508,15 @@ class Productos extends Sagyc{
 			$sheeti->setPath('../a_archivos/productos/'.$prod->archivo);
 			}
 
-			$sheeti->setHeight(40);
+			$sheeti->setHeight(40);//tamaño de la imagen
 			$sheeti->setCoordinates('A'.$contar);
 			$sheeti->setOffsetX(20);
 			$sheeti->setOffsetY(5);
 			$sheeti->setWorksheet($sheet);
-			///altura de columna
+
+			////////////////////////// fin carga imagenes
+
+			///altura de columna/celda en este caso para que la imagen se aguste a la celda
 			foreach(range('8',$contar) as $columnID2) {
 			 $sheet->getRowDimension($columnID2)->setRowHeight(40);
 			}
@@ -546,6 +550,9 @@ class Productos extends Sagyc{
 			}
 			$sheet->setCellValue('J'.$contar, $prod->nombrecat);
 			$sheet->setCellValue('K'.$contar, $prod->fechamod);
+
+			$sheet->getStyle('L'.$contar.":".'N'.$contar)->getNumberFormat() // asigno formato moneda a los 3 precios
+	    ->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
 			$sheet->setCellValue('L'.$contar, $prod->precio);
 			$sheet->setCellValue('M'.$contar, $prod->precio_mayoreo);
 			$sheet->setCellValue('N'.$contar, $prod->precio_distri);
@@ -558,7 +565,7 @@ class Productos extends Sagyc{
 
 		echo "<div class='container text-center' style='background-color:".$_SESSION['cfondo']."; '>";
 		echo "<h3>Descargar Inventario</h3>";
-		echo "<a href='$direccion' target='_black' class='btn btn-success'><i class='fas fa-download'></i>Excel</a>";
+		echo "<a href='$direccion' target='_black' class='btn btn-success'><i class='fas fa-file-excel'></i>Excel</a>";
 		echo "</div>";
 	}
 	public function asignar_sucursal(){

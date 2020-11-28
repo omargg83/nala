@@ -325,6 +325,7 @@ class Productos extends Sagyc{
 		$sheet->getStyle('A7:O7')->getFont()->setBold(true); // NEGRITA
 		$sheet->mergeCells('A1:F1'); //combinar celdas
 		$sheet->mergeCells('A2:E2'); //combinar celdas
+		$sheet->setAutoFilter('A7:O7'); //filtro
 		//$sheet->getStyle('A7:O7')->getFill()->getStartColor()->setARGB('29bb04');
 
 
@@ -423,7 +424,7 @@ class Productos extends Sagyc{
 
 		echo "<div class='container text-center' style='background-color:".$_SESSION['cfondo']."; '>";
 		echo "<h3>Descargar Catalogo</h3>";
-		echo "<a href='$direccion' target='_black' class='btn btn-success'><i class='fas fa-download'></i>Excel</a>";
+		echo "<a href='$direccion' target='_black' class='btn btn-success'><i class='fas fa-file-excel'></i>Excel</a>";
 		echo "</div>";
 	}
 	public function homologa_final(){
