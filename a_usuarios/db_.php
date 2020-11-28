@@ -44,11 +44,12 @@ class Usuario extends Sagyc{
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
   }
-	public function usuario_lista(){
+	public function usuario_lista($pagina){
 		try{
+			$pagina=$pagina*$_SESSION['pagina'];
 			$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo,tienda.razon AS tienda FROM usuarios
 			LEFT OUTER JOIN tienda ON tienda.idtienda = usuarios.idtienda
-			where tienda.idtienda='".$_SESSION['idtienda']."'";
+			where tienda.idtienda='".$_SESSION['idtienda']."' limit $pagina,".$_SESSION['pagina']."";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -106,6 +107,12 @@ class Usuario extends Sagyc{
 		if (isset($_REQUEST['id'])){$id=$_REQUEST['id'];}
 		if (isset($_REQUEST['pass1'])){$pass1=$_REQUEST['pass1'];}
 		if (isset($_REQUEST['pass2'])){$pass2=$_REQUEST['pass2'];}
+
+		$a=$this->validar_clave($pass1);
+		if(strlen($a)>0){
+			return $a;
+		}
+		
 		if(trim($pass1)==($pass2)){
 			$arreglo=array();
 			$passPOST=md5(trim($pass1));
@@ -270,6 +277,24 @@ class Usuario extends Sagyc{
 			}
 		}
 		return $this->update('usuarios',array('idusuario'=>$idusuario), $arreglo);
+	}
+
+	private function validar_clave($clave){
+		if(strlen($clave) < 12){
+		  return "La clave debe tener al menos 6 caracteres";
+		}
+		if(strlen($clave) > 16){
+		  return "La clave no puede tener más de 16 caracteres";
+		}
+		if (!preg_match('`[a-z]`',$clave)){
+		  return "La clave debe tener al menos una letra minúscula";
+		}
+		if (!preg_match('`[A-Z]`',$clave)){
+		  return "La clave debe tener al menos una letra mayúscula";
+		}
+		if (!preg_match('`[0-9]`',$clave)){
+		  return "La clave debe tener al menos un caracter numérico";
+		}
 	}
 }
 

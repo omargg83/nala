@@ -30,10 +30,10 @@ class Cliente extends Sagyc{
 			die();
 		}
 	}
-	public function clientes_lista(){
+	public function clientes_lista($pagina){
 		try{
-
-			$sql="SELECT * FROM clientes where idtienda='".$_SESSION['idtienda']."'";
+			$pagina=$pagina*$_SESSION['pagina'];
+			$sql="SELECT * FROM clientes where idtienda='".$_SESSION['idtienda']."' limit $pagina,".$_SESSION['pagina']."";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
