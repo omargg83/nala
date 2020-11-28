@@ -78,15 +78,19 @@ class Usuario extends Sagyc{
 		if (isset($_REQUEST['nombre'])){
 			$arreglo+=array('nombre'=>clean_var($_REQUEST['nombre']));
 		}
+		if (isset($_REQUEST['correo'])){
+			$arreglo+=array('correo'=>$_REQUEST['correo']);
+		}
 		if (isset($_REQUEST['estado'])){
 			$arreglo+=array('activo'=>$_REQUEST['estado']);
+		}
+		if (isset($_REQUEST['correo'])){
+			$arreglo+=array('correo'=>$_REQUEST['correo']);
 		}
 		if (isset($_REQUEST['user'])){
 			$arreglo+=array('user'=>clean_var($_REQUEST['user']));
 		}
-		if (isset($_REQUEST['nivel'])){
-			$arreglo+=array('nivel'=>$_REQUEST['nivel']);
-		}
+
 		if (isset($_REQUEST['idcaja'])){
 			$arreglo+=array('idcaja'=>$_REQUEST['idcaja']);
 		}
@@ -105,18 +109,22 @@ class Usuario extends Sagyc{
 	}
 	public function password(){
 		if (isset($_REQUEST['id'])){$id=$_REQUEST['id'];}
-		if (isset($_REQUEST['pass1'])){$pass1=$_REQUEST['pass1'];}
-		if (isset($_REQUEST['pass2'])){$pass2=$_REQUEST['pass2'];}
+		if (isset($_REQUEST['pass1'])){$pass1=strip_tags($_REQUEST['pass1']);}
+		if (isset($_REQUEST['pass2'])){$pass2=strip_tags($_REQUEST['pass2']);}
 
-		$a=$this->validar_clave($pass1);
+		$a=self::validar_clave($pass1);
 		if(strlen($a)>0){
-			return $a;
+			$arreglo =array();
+			$arreglo+=array('error'=>1);
+			$arreglo+=array('terror'=>$a);
+			return json_encode($arreglo);
 		}
-		
+
 		if(trim($pass1)==($pass2)){
 			$arreglo=array();
-			$passPOST=md5(trim($pass1));
-			$arreglo=array('pass'=>$passPOST);
+			$pass1=md5("sagyc%chingon$%&/()=".$pass1);
+			$pass1=hash("sha512",$pass1);
+			$arreglo=array('pass'=>$pass1);
 			$x=$this->update('usuarios',array('idusuario'=>$id), $arreglo);
 			return $x;
 		}
@@ -280,21 +288,23 @@ class Usuario extends Sagyc{
 	}
 
 	private function validar_clave($clave){
+		$x="";
 		if(strlen($clave) < 12){
-		  return "La clave debe tener al menos 6 caracteres";
+		  $x= "La clave debe tener al menos 6 caracteres";
 		}
 		if(strlen($clave) > 16){
-		  return "La clave no puede tener más de 16 caracteres";
+		  $x=  "La clave no puede tener más de 16 caracteres";
 		}
 		if (!preg_match('`[a-z]`',$clave)){
-		  return "La clave debe tener al menos una letra minúscula";
+		  $x=  "La clave debe tener al menos una letra minúscula";
 		}
 		if (!preg_match('`[A-Z]`',$clave)){
-		  return "La clave debe tener al menos una letra mayúscula";
+		  $x=  "La clave debe tener al menos una letra mayúscula";
 		}
 		if (!preg_match('`[0-9]`',$clave)){
-		  return "La clave debe tener al menos un caracter numérico";
+		  $x=  "La clave debe tener al menos un caracter numérico";
 		}
+		return $x;
 	}
 }
 

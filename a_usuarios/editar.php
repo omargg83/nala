@@ -14,6 +14,7 @@
 		$estado=$pd->activo;
 		$idcaja=$pd->idcaja;
 		$archivo=$pd->archivo;
+		$correo=$pd->correo;
 	}
 	else{
 		$id=0;
@@ -24,6 +25,7 @@
 		$estado="1";
 		$idsucursal=$_SESSION['idsucursal'];
 		$archivo="";
+		$correo="";
 	}
 ?>
 <div class="container">
@@ -49,32 +51,36 @@
 					<div class="col-10">
 						<div class="row">
 							<div class="col-12">
+								<label>Correo:</label>
+								<input type="email" class="form-control form-control-sm" name="correo" id="correo" value="<?php echo $correo ;?>" placeholder="Correo" required>
+							</div>
+
+							<div class="col-12">
 		 				   <label>Nombre:</label>
 		 					 <input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre ;?>" placeholder="Nombre del usuario" required>
 		 				 	</div>
-
 							<div class="col-12">
 							 <label >Estado:</label>
 								<select class="form-control form-control-sm" name="estado" id="estado">
-									<option value="1"<?php if($estado=="1") echo "selected"; ?> >Activa</option>
+									<option value="1"<?php if($estado=="1") echo "selected"; ?> >Activo</option>
 									<option value="0"<?php if($estado=="0") echo "selected"; ?> >Inactivo</option>
 								</select>
 							</div>
-
 							<div class="col-12">
-								<label >Usuario:</label>
+								<label>Chat:</label>
 								<input type="text" class="form-control form-control-sm" name="user" id="user" value="<?php echo $user ;?>" placeholder="Usuario" required>
 							</div>
 
-						<div class="col-12">
-		 				 <label>Nivel:</label>
-		 					<select class="form-control form-control-sm" name="nivel" id="nivel">
-		 					  <option value="1"<?php if($nivel=="1") echo "selected"; ?> >1 Administrador</option>
-		 					  <option value="2"<?php if($nivel=="2") echo "selected"; ?> >2 Normal</option>
-		 					</select>
-		 				</div>
-
-		 				<div class="col-12">
+							<?php
+								/*<div class="col-12">
+				 				 <label>Nivel:</label>
+				 					<select class="form-control form-control-sm" name="nivel" id="nivel">
+				 					  <option value="1"<?php if($nivel=="1") echo "selected"; ?> >1 Administrador</option>
+				 					  <option value="2"<?php if($nivel=="2") echo "selected"; ?> >2 Normal</option>
+				 					</select>
+				 				</div>*/
+							?>
+		 					<div class="col-12">
 		 				  <label>Sucursal:</label>
 		 					<?php
 
@@ -89,12 +95,7 @@
 		 					  echo "</select>";
 		 					?>
 		 				</div>
-
-
-
-
 						</div>
-
 					</div>
 				</div>
 
