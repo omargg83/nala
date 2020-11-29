@@ -24,7 +24,7 @@
 		</div>
 		<div class='row header-row'>
 			<div class='col-2'>#</div>
-			<div class='col-2'>Tipo</div>
+			<div class='col-2'>Código</div>
 			<div class='col-5'>Nombre</div>
 			<div class='col-1'>Existencia</div>
 			<div class='col-2'>Precio de venta</div>
@@ -69,8 +69,7 @@
 						echo "</div>";
 
 						echo "<div class='col-2'>";
-							if($key->tipo==0) echo "Servicio";
-							if($key->tipo==3) echo "Volúmen";
+							echo $key->codigo;
 						echo "</div>";
 
 						echo "<div class='col-5'>".$key->nombre."</div>";

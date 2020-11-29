@@ -59,7 +59,7 @@ class Chat extends Sagyc{
 			$_SESSION["carga"]=1;
 			echo  "<li class='nav-item dropdown'>";
 				echo  "<a class='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-				  <i class='fab fa-rocketchat fa-spin' style='color:#07009e !important;'></i> Chat";
+				  <i class='fab fa-rocketchat fa-spin' style='color:#07009e !important;'></i>";
 				echo  "</a>";
 
 				echo  "<div id='myUL' class='dropdown-menu' aria-labelledby='navbarDropdown' style='width:200px;max-height:400px !important; overflow: scroll; overflow-x: hidden;'>";

@@ -80,8 +80,11 @@
 									else{
 										if($idsucursal!=$_SESSION['idsucursal']){
 											echo "<button class='btn btn-warning btn-sm' type='button' is='b-print' des='a_traspasos/imprimir' v_idtraspaso='$idtraspaso' omodal='1'><i class='fas fa-print'></i>Imprimir</button>";
+										
+											if($db->nivel_personal==0){
+												echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_traspasos/db_' des='a_traspasos/editar' desid='$idtraspaso' fun='abrir_traspaso' dix='trabajo' v_idtraspaso='$idtraspaso' id='finaliza' tp='¿Desea abrir el traspaso seleccionado?'><i class='fas fa-lock-open'></i>Desbloquear</button>";
+											}
 										}
-
 									}
 								}
 							?>

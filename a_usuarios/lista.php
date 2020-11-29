@@ -34,7 +34,7 @@
 					echo "<div class='col-2'>";
 						if($db->nivel_captura==1){
 							echo "<button class='btn btn-warning btn-sm' is='b-link' des='a_usuarios/editar' dix='trabajo' v_id='$key->idusuario' id='edit_persona'><i class='fas fa-pencil-alt'></i></button>";
-							
+
 						}
 						echo "</div>";
 					echo "<div class='col-4'>".$key->nombre."</div>";
@@ -52,23 +52,25 @@
 
 <?php
 	if(strlen($texto)==0){
-		$sql="SELECT count(usuarios.idusuario) as total FROM usuarios
-		LEFT OUTER JOIN tienda ON tienda.idtienda = usuarios.idtienda
-		where tienda.idtienda='".$_SESSION['idtienda']."'";
-		$sth = $db->dbh->query($sql);
-		$contar=$sth->fetch(PDO::FETCH_OBJ);
-		$paginas=ceil($contar->total/$_SESSION['pagina']);
-		$pagx=$paginas-1;
-		echo "<br>";
-		echo "<nav aria-label='Page navigation text-center'>";
-			echo "<ul class='pagination'>";
-				echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_usuarios/lista' dix='trabajo'>Primera</a></li>";
-				for($i=0;$i<$paginas;$i++){
-					$b=$i+1;
-					echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_usuarios/lista' dix='trabajo' v_pag='$i'>$b</a></li>";
-				}
-				echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_usuarios/lista' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
-			echo "</ul>";
-		echo "</nav>";
+		if($db->nivel_personal==0){
+			$sql="SELECT count(usuarios.idusuario) as total FROM usuarios
+			LEFT OUTER JOIN tienda ON tienda.idtienda = usuarios.idtienda
+			where tienda.idtienda='".$_SESSION['idtienda']."'";
+			$sth = $db->dbh->query($sql);
+			$contar=$sth->fetch(PDO::FETCH_OBJ);
+			$paginas=ceil($contar->total/$_SESSION['pagina']);
+			$pagx=$paginas-1;
+			echo "<br>";
+			echo "<nav aria-label='Page navigation text-center'>";
+				echo "<ul class='pagination'>";
+					echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_usuarios/lista' dix='trabajo'>Primera</a></li>";
+					for($i=0;$i<$paginas;$i++){
+						$b=$i+1;
+						echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_usuarios/lista' dix='trabajo' v_pag='$i'>$b</a></li>";
+					}
+					echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_usuarios/lista' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
+				echo "</ul>";
+			echo "</nav>";
+		}
 	}
 ?>

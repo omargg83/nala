@@ -203,6 +203,12 @@ class Traspaso extends Sagyc{
 		$arreglo+=array('estado'=>"Enviada");
 		return $this->update('traspasos',array('idtraspaso'=>$idtraspaso), $arreglo);
 	}
+	public function abrir_traspaso(){
+		$idtraspaso=$_REQUEST['idtraspaso'];
+		$arreglo =array();
+		$arreglo+=array('estado'=>"Activa");
+		return $this->update('traspasos',array('idtraspaso'=>$idtraspaso), $arreglo);
+	}
 	public function recibir_traspaso(){
 		$idbodega=$_REQUEST['idbodega'];
 

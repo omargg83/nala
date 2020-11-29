@@ -61,7 +61,7 @@
 					if($_SESSION['a_sistema']==1){
 						echo "<li class='nav-item'>";
 		          echo "<a class='nav-link pull-left bg-warning rounded' is='b-link' des='a_precios/index' omodal='1'>";
-		            echo "<i class='fas fa-sign-out-alt text-dark'></i> Precios";
+		            echo "<i class='fas fa-search-dollar'></i>";
 		          echo "</a>";
 		        echo "</li>";
 					}
@@ -71,7 +71,7 @@
       <ul class='nav navbar-nav navbar-right px-1'>
         <li class='nav-item'>
           <a class='nav-link pull-left border border-warning rounded' onclick='salir()'>
-            <i class='fas fa-sign-out-alt text-dark'></i> Salir
+            <i class='fas fa-sign-out-alt text-dark'></i>
           </a>
         </li>
       </ul>

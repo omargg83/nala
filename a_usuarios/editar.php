@@ -72,29 +72,21 @@
 							</div>
 
 							<?php
-								/*<div class="col-12">
-				 				 <label>Nivel:</label>
-				 					<select class="form-control form-control-sm" name="nivel" id="nivel">
-				 					  <option value="1"<?php if($nivel=="1") echo "selected"; ?> >1 Administrador</option>
-				 					  <option value="2"<?php if($nivel=="2") echo "selected"; ?> >2 Normal</option>
-				 					</select>
-				 				</div>*/
-							?>
-		 					<div class="col-12">
-		 				  <label>Sucursal:</label>
-		 					<?php
-
-		 						echo "<select class='form-control form-control-sm' name='idsucursal' id='idsucursal'>";
-		 						foreach($sucursal as $v1){
-		 							  echo '<option value="'.$v1->idsucursal.'"';
-		 							  if($v1->idsucursal==$idsucursal){
-		 								  echo " selected";
-		 							  }
-		 							  echo '>'.$v1->nombre.'</option>';
-		 						}
-		 					  echo "</select>";
+								if($db->nivel_personal==0){
+				 					echo "<div class='col-12'>";
+				 				  	echo "<label>Sucursal:</label>";
+				 						echo "<select class='form-control form-control-sm' name='idsucursal' id='idsucursal'>";
+				 						foreach($sucursal as $v1){
+				 							  echo '<option value="'.$v1->idsucursal.'"';
+				 							  if($v1->idsucursal==$idsucursal){
+				 								  echo " selected";
+				 							  }
+				 							  echo '>'.$v1->nombre.'</option>';
+				 						}
+				 					  echo "</select>";
+									echo "</div>";
+								}
 		 					?>
-		 				</div>
 						</div>
 					</div>
 				</div>
@@ -122,48 +114,51 @@
 			</div>
 		</form>
 
-
 <?php
 	if($id>0){
-		echo "<div class='card-body' >";
-			echo "<form is='f-submit' id='form_permiso' db='a_usuarios/db_' fun='guardar_permiso' des='a_usuarios/form_permisos' dix='permisos' desid='id'>";
-				echo "<input type='hidden' class='form-control form-control-sm' name='idusuariox' id='idusuariox' value='$id' readonly>";
-				echo "<div class='row'>";
-					echo "<div class='col-sm-4'>";
-						echo "<label for='prof'>Modulo:</label>";
-						echo "<select id='modulo' name='modulo' class='form-control'>";
-						echo $db->modulos();
-						echo "</select>";
+		if($db->nivel_personal==0){
+			echo "<div class='card-body' >";
+				echo "<form is='f-submit' id='form_permiso' db='a_usuarios/db_' fun='guardar_permiso' des='a_usuarios/form_permisos' dix='permisos' desid='id'>";
+					echo "<input type='hidden' class='form-control form-control-sm' name='idusuariox' id='idusuariox' value='$id' readonly>";
+					echo "<div class='row'>";
+						echo "<div class='col-sm-4'>";
+							echo "<label for='prof'>Modulo:</label>";
+							echo "<select id='modulo' name='modulo' class='form-control'>";
+							echo $db->modulos();
+							echo "</select>";
+						echo "</div>";
+
+						echo "<div class='col-sm-4'>";
+							echo "<label>Captura</label>";
+							echo "<select id='captura' name='captura' class='form-control'>";
+							echo "<option value='0' >Sin captura</option>";
+							echo "<option value='1' >Captura</option>";
+							echo "</select>";
+						echo "</div>";
+
+						echo "<div class='col-sm-4'>";
+							echo "<label for='prof'>Nivel</label>";
+							echo "<select id='nivelx' name='nivelx' class='form-control'>";
+							echo $db->nivel();
+							echo "</select>";
+						echo "</div>";
+
+						echo "<div class='col-sm-12'>";
+							echo "<div class='btn-group'>";
+								echo "<button class='btn btn-warning btn-sm' type='submit' ><i class='fa fa-check'></i>Agregar</button>";
+
+								echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_usuarios/editar' desid='id' db='a_usuarios/db_' fun='agregar_todos' dix='trabajo' v_idusuario='$id'>Todos</button>";
+
+							echo "</div>";
+						echo "</div>";
 					echo "</div>";
+				echo "</form>";
 
-					echo "<div class='col-sm-4'>";
-						echo "<label>Captura</label>";
-						echo "<select id='captura' name='captura' class='form-control'>";
-						echo "<option value='0' >Sin captura</option>";
-						echo "<option value='1' >Captura</option>";
-						echo "</select>";
-					echo "</div>";
-
-					echo "<div class='col-sm-4'>";
-						echo "<label for='prof'>Nivel</label>";
-						echo "<select id='nivelx' name='nivelx' class='form-control'>";
-						echo $db->nivel();
-						echo "</select>";
-					echo "</div>";
-
-					echo "<div class='col-sm-12'>";
-						echo "<button class='btn btn-warning btn-sm' type='submit' ><i class='fa fa-check'></i>Agregar</button>";
-
-						echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_usuarios/editar' desid='id' db='a_usuarios/db_' fun='agregar_todos' dix='trabajo' v_idusuario='$id'>Todos</button>";
-
-					echo "</div>";
+				echo "<div id='permisos'>";
+					include 'form_permisos.php';
 				echo "</div>";
-			echo "</form>";
-
-			echo "<div id='permisos'>";
-				include 'form_permisos.php';
 			echo "</div>";
-		echo "</div>";
+		}
 	}
 ?>
 	</div>

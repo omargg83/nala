@@ -111,31 +111,8 @@
 	}
 
 	$(document).on('click',"[is*='menu-link']",function(e){
-		e.preventDefault();
-		cargando(true);
-		if(document.querySelector('.activeside')){
-			document.querySelector('.activeside').classList.remove('activeside');
-			this.classList.add('activeside');
-		}
-		else{
-			this.classList.add('activeside');
-		}
-		let formData = new FormData();
 		let hash=e.currentTarget.hash.slice(1);
-		let arrayDeCadenas = hash.split("?");
-		let nhash=arrayDeCadenas[0];
-		if(arrayDeCadenas.length>1){
-			let query=arrayDeCadenas[1];
-			var vars = query.split("&");
-			for (var i=0; i < vars.length; i++) {
-			var pair = vars[i].split("=");
-				formData.append(pair[0],pair[1]);
-			}
-		}
-		let datos = new Object();
-		datos.des=nhash+".php";
-		datos.dix="contenido";
-		redirige_div(formData,datos);
+		loadContent(hash);
 	});
 	$(document).on('click',"[is*='a-link']",function(e){
 		e.preventDefault();

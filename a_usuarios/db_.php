@@ -47,9 +47,17 @@ class Usuario extends Sagyc{
 	public function usuario_lista($pagina){
 		try{
 			$pagina=$pagina*$_SESSION['pagina'];
-			$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo, tienda.razon AS tienda FROM usuarios
-			LEFT OUTER JOIN tienda ON tienda.idtienda = usuarios.idtienda
-			where tienda.idtienda='".$_SESSION['idtienda']."' limit $pagina,".$_SESSION['pagina']."";
+
+			if($this->nivel_personal==0){
+				$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo, tienda.razon AS tienda FROM usuarios
+				LEFT OUTER JOIN tienda ON tienda.idtienda = usuarios.idtienda
+				where tienda.idtienda='".$_SESSION['idtienda']."' limit $pagina,".$_SESSION['pagina']."";
+			}
+			else{
+				$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo, tienda.razon AS tienda FROM usuarios
+				LEFT OUTER JOIN tienda ON tienda.idtienda = usuarios.idtienda
+				where usuarios.idusuario='".$_SESSION['idusuario']."'";
+			}
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -90,16 +98,13 @@ class Usuario extends Sagyc{
 		if (isset($_REQUEST['user'])){
 			$arreglo+=array('user'=>clean_var($_REQUEST['user']));
 		}
-
-		if (isset($_REQUEST['idcaja'])){
-			$arreglo+=array('idcaja'=>$_REQUEST['idcaja']);
-		}
 		if (isset($_REQUEST['idsucursal'])){
 			$arreglo+=array('idsucursal'=>$_REQUEST['idsucursal']);
 		}
 
 		if($id==0){
 			$arreglo+=array('idtienda'=>$_SESSION['idtienda']);
+			$arreglo+=array('idfondo'=>"fondo/fondosagyc.jpg");
 			$x=$this->insert('usuarios', $arreglo);
 		}
 		else{
@@ -170,7 +175,7 @@ class Usuario extends Sagyc{
 
 	public function nivel(){
 		echo "<option value='0' >Administrador</option>";
-		echo "<option value='1' >Captura</option>";
+		echo "<option value='1' >Personal</option>";
 	}
 	public function guardar_permiso(){
 		$x="";
@@ -263,6 +268,7 @@ class Usuario extends Sagyc{
 				$nombreFile = "resp_".date("YmdHis").rand(0000,9999).".".$extension;
 				move_uploaded_file($tmp,$ruta.$nombreFile);
 				$ruta=$ruta."/".$nombreFile;
+				$_SESSION['foto']=$nombreFile;
 				$arreglo+=array('archivo'=>$nombreFile);
 			}
 			else{
@@ -270,6 +276,10 @@ class Usuario extends Sagyc{
 				exit;
 			}
 		}
+
+		$sql="update chat_conectados set foto='$nombreFile' where idpersona='".$_SESSION['idusuario']."'";
+		$this->dbh->query($sql);
+
 		return $this->update('usuarios',array('idusuario'=>$idusuario), $arreglo);
 	}
 
