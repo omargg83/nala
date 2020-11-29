@@ -164,14 +164,14 @@
 				$mail->Host = "smtp.gmail.com";						  // Specify main and backup SMTP servers
 				$mail->SMTPAuth = true;                               // Enable SMTP authentication
 
-				$mail->Username = "sistema.subsaludpublicahgo@gmail.com";       // SMTP username
-				$mail->Password = "";                       // SMTP password  <----------- AGREGAR AQUI EL PASSWORDS
+				$mail->Username = "soportesagyc@gmail.com";       // SMTP username
+				$mail->Password = "SAGYC123$";                       // SMTP password  <----------- AGREGAR AQUI EL PASSWORDS
 
 				$mail->SMTPSecure = "ssl";                            // Enable TLS encryption, `ssl` also accepted
 				$mail->Port = 465;                                    // TCP port to connect to
 				$mail->CharSet = 'UTF-8';
 
-				$mail->From = "sistema.subsaludpublicahgo@gmail.com";   //////////esto solo muestra el remitente
+				$mail->From = "soportesagyc@gmail.com";   //////////esto solo muestra el remitente
 				$mail->FromName = "Sistema";			//////////// remitente
 			//////////hasta aca
 
