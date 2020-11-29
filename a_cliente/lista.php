@@ -38,8 +38,6 @@
 							echo "<div class='btn-group'>";
 							if($db->nivel_captura==1){
 								echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_cliente/editar' dix='trabajo' v_id='$key->idcliente'><i class='fas fa-pencil-alt'></i></button>";
-								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_cliente/db_' des='a_cliente/lista' fun='borrar_cliente' dix='trabajo' v_id='$key->idcliente' id='eliminar' tp='¿Desea eliminar el cliente seleccionado?'><i class='far fa-trash-alt'></i></button>";
-
 							}
 
 						echo "</div>";

@@ -17,14 +17,18 @@
 						</div>
 					</div>
 				</form>
+				<?php
+					if($_SESSION['a_sistema']==1){
+						if($db->nivel_captura==1){
+							echo "<li class='nav-item active'>";
+								echo "<a class='nav-link barranav izq' title='Nuevo' is='a-link' id='new_personal' des='a_traspasos/editar' dix='trabajo' v_id='0'><i class='fas fa-plus'></i><span>Nuevo</span></a>";
+							echo "</li>";
+						}
+					}
+				?>
 
 				<li class='nav-item active'>
 					<a class='nav-link barranav' title='Mostrar todo' is='a-link' id='envios' des='a_traspasos/lista' dix='trabajo'><i class='fas fa-arrow-right'></i><span>Traspasos</span></a>
-				</li>
-
-
-				<li class='nav-item active'>
-					<a class='nav-link barranav izq' title='Nuevo' is='a-link' id='new_personal' des='a_traspasos/editar' dix='trabajo' v_id='0'><i class='fas fa-plus'></i><span>Nuevo</span></a>
 				</li>
 			</ul>
 	  </div>

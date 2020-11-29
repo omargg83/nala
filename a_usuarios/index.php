@@ -18,16 +18,18 @@
 					</div>
 				</form>
 
+				<?php
+				if($db->nivel_captura==1){
+					echo "<li class='nav-item active'>";
+					echo "<a class='nav-link barranav izq' title='Nuevo' is='a-link' id='new_personal' des='a_usuarios/editar' dix='trabajo' v_id='0'><i class='fas fa-plus'></i><span>Nuevo</span></a>";
+					echo "</li>";
+				}
+				?>
+				
 				<li class='nav-item active'>
 					<a class='nav-link barranav' title='Mostrar todo' is='a-link' id='lista_comision' des='a_usuarios/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Lista</span></a>
 				</li>
-				<li class='nav-item active'>
-					<?php
-					if($db->nivel_captura==1){
-						echo "<a class='nav-link barranav izq' title='Nuevo' is='a-link' id='new_personal' des='a_usuarios/editar' dix='trabajo' v_id='0'><i class='fas fa-plus'></i><span>Nuevo</span></a>";
-						}
-					?>
-				</li>
+
 			</ul>
 	  </div>
 </nav>

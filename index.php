@@ -144,20 +144,17 @@
 						if(array_key_exists('TRASPASOS', $db->derecho))
 						echo "<a href='#a_traspasos/index' is='menu-link' title='Traspasos'><i class='fas fa-arrows-alt-h'></i><span>Traspasos</span></a>";
 
-						if(array_key_exists('DATOSEMP', $db->derecho))
-		        echo "<a href='#a_datosemp/index' is='menu-link' title='Datosemp'><i class='fas fa-wrench'></i><span>Datos Emp.</span></a>";
-
-						if(array_key_exists('CAJAS', $db->derecho))
-		        echo "<a href='#a_cajas/index' is='menu-link' title='Datosemp'><i class='fas fa-cart-arrow-down'></i><span>Cajas</span></a>";
-
 						if(array_key_exists('GASTOS', $db->derecho))
 		        echo "<a href='#a_gastos/index' is='menu-link' title='Datosemp'><i class='fas fa-donate'></i><span>Gastos</span></a>";
+
+						if(array_key_exists('REPORTES', $db->derecho) and $_SESSION['a_sistema']==1)
+						echo "<a href='#a_reporte/index' is='menu-link' title='Reportes'><i class='far fa-chart-bar'></i> <span>Reportes</span></a>";
 
 						if(array_key_exists('USUARIOS', $db->derecho))
 						echo "<a href='#a_usuarios/index' is='menu-link' title='Usuarios'><i class='fas fa-users'></i> <span>Usuarios</span></a>";
 
-						if(array_key_exists('REPORTES', $db->derecho) and $_SESSION['a_sistema']==1)
-						echo "<a href='#a_reporte/index' is='menu-link' title='Reportes'><i class='far fa-chart-bar'></i> <span>Reportes</span></a>";
+						if(array_key_exists('DATOSEMP', $db->derecho))
+		        echo "<a href='#a_datosemp/index' is='menu-link' title='Datosemp'><i class='fas fa-wrench'></i><span>Datos Emp.</span></a>";
 					?>
 					</div>
 	      </div>

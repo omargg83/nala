@@ -1,6 +1,6 @@
 <?php
 	require_once("db_.php");
-	if (isset($_POST['id'])){$id=$_POST['id'];} else{ $id=0;}
+	if (isset($_REQUEST['id'])){$id=clean_var($_REQUEST['id']);} else{ $id=0;}
 
 	$razon_social="";
 	$nombre="";
@@ -121,9 +121,15 @@
 			<div class='card-footer'>
 				<div class="row">
 					<div class="col-sm-12">
-
+						<div class="btn-group">
 						<button class="btn btn-warning btn-sm" type="submit"><i class='far fa-save'></i>Guardar</button>
+						<?php
+							if($id>0){
+								echo "<button type='button' class='btn btn-danger btn-sm' is='b-link' db='a_cliente/db_' des='a_cliente/lista' fun='borrar_cliente' dix='trabajo' v_id='$id' id='eliminar' tp='¿Desea eliminar el cliente seleccionado?'><i class='far fa-trash-alt'></i>Eliminar</button>";
+							}
+						?>
 						<button type='button' class='btn btn-warning btn-sm' id='lista_penarea' is='b-link'  des='a_cliente/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
+					</div>
 
 					</div>
 				</div>

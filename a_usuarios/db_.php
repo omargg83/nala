@@ -37,7 +37,7 @@ class Usuario extends Sagyc{
 		return $sth->fetch(PDO::FETCH_OBJ);
 	}
 	public function usuario_buscar($texto){
-		$sql="select usuarios.idusuario, usuarios.idtienda, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo,tienda.razon AS tienda, sucursal.idsucursal, sucursal.nombre as sucursal from usuarios
+		$sql="select usuarios.idusuario, usuarios.idtienda, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo,tienda.razon AS tienda, sucursal.idsucursal, sucursal.nombre as sucursal from usuarios
 		left outer join tienda on tienda.idtienda=usuarios.idtienda
 		where usuarios.nombre like '%$texto%' and tienda.idtienda='".$_SESSION['idtienda']."'";
 		$sth = $this->dbh->prepare($sql);
@@ -47,7 +47,7 @@ class Usuario extends Sagyc{
 	public function usuario_lista($pagina){
 		try{
 			$pagina=$pagina*$_SESSION['pagina'];
-			$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo,tienda.razon AS tienda FROM usuarios
+			$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo, tienda.razon AS tienda FROM usuarios
 			LEFT OUTER JOIN tienda ON tienda.idtienda = usuarios.idtienda
 			where tienda.idtienda='".$_SESSION['idtienda']."' limit $pagina,".$_SESSION['pagina']."";
 			$sth = $this->dbh->prepare($sql);
@@ -147,7 +147,6 @@ class Usuario extends Sagyc{
 		$x.= "<option value='PRODUCTOS'>Productos</option>";
 		$x.= "<option value='INVENTARIO'>Inventario</option>";
 
-
 		$x.= "<optgroup label='Clientes'>";
 		$x.= "<option value='CLIENTES'>Clientes</option>";
 		$x.= "<option value='CITAS'>Citas</option>";
@@ -170,21 +169,8 @@ class Usuario extends Sagyc{
 	}
 
 	public function nivel(){
-		$x="";
-		$x.="<option value='0' >0-Administrador</option>";
-		$x.="<option value='1' >1-Subsecretarío</option>";
-		$x.="<option value='2' >2-Dirección</option>";
-		$x.="<option value='3' >3-Subdirector</option>";
-		$x.="<option value='4' >4-Coordinador Administrativo</option>";
-		$x.="<option value='5' >5-Jefe Depto.</option>";
-		$x.="<option value='6' >6-Coordinador</option>";
-		$x.="<option value='7' >7-Secretaria</option>";
-		$x.="<option value='8' >8-Chofer</option>";
-		$x.="<option value='9' >9-Personal</option>";
-		$x.="<option value='10' >10-Informatica</option>";
-		$x.="<option value='11' >11-Administrador del sistema</option>";
-		$x.="<option value='12' >12-Oficialia</option>";
-		return $x;
+		echo "<option value='0' >Administrador</option>";
+		echo "<option value='1' >Captura</option>";
 	}
 	public function guardar_permiso(){
 		$x="";
@@ -289,7 +275,7 @@ class Usuario extends Sagyc{
 
 	private function validar_clave($clave){
 		$x="";
-		if(strlen($clave) < 12){
+		if(strlen($clave) < 6){
 		  $x= "La clave debe tener al menos 6 caracteres";
 		}
 		if(strlen($clave) > 16){

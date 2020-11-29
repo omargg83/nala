@@ -17,7 +17,6 @@
 						</div>
 					</div>
 				</form>
-			<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_comision' des='a_cliente/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Lista</span></a></li>
 			<?php
 			if($_SESSION['a_sistema']==1){
 				if($db->nivel_captura==1){
@@ -26,6 +25,7 @@
 				}
 			}
 			?>
+			<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_comision' des='a_cliente/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Lista</span></a></li>
 			</ul>
 	  </div>
 	</nav>
