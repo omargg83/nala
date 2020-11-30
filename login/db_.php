@@ -135,12 +135,12 @@
 
 					$texto="La nueva contraseña es: <br> $pass_nuevo";
 					$texto.="<br></a>";
-					return self::correo($res->correo,$texto,"correo");
+					return self::correo($res->correo,$texto,"Cambio de contraseña");
 				}
 				else{
 					$arreglo=array();
 					$arreglo+=array('error'=>1);
-					$arreglo+=array('terror'=>"no tiene correo registrado en la plantilla");
+					$arreglo+=array('terror'=>"no tiene correo registrado en la base de datos");
 				}
 				return json_encode($arreglo);
 			}
