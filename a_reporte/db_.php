@@ -59,7 +59,7 @@ class Venta extends Sagyc{
 			$sth->bindValue(":fecha1",$desde);
 			$sth->bindValue(":fecha2",$hasta);
 			$sth->execute();
-			return $sth->fetchAll();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(PDOException $e){
 			return "Database access FAILED! ".$e->getMessage();
@@ -88,7 +88,7 @@ class Venta extends Sagyc{
 				$sth->bindValue(":idsucursal",$idsucursal);
 			}
 			$sth->execute();
-			return $sth->fetchAll();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(PDOException $e){
 			return "Database access FAILED! ".$e->getMessage();

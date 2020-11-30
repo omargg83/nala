@@ -172,7 +172,7 @@
 				$mail->CharSet = 'UTF-8';
 
 				$mail->From = "soportesagyc@gmail.com";   //////////esto solo muestra el remitente
-				$mail->FromName = "Sistema";			//////////// remitente
+				$mail->FromName = "Sagyc punto de venta";			//////////// remitente
 			//////////hasta aca
 
 			$mail->IsHTML(true);

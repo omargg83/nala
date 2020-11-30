@@ -25,10 +25,9 @@
 	}
 	$sth->execute();
 	$res=$sth->fetchAll(PDO::FETCH_OBJ);
-	$vendedor=$res->vendedor;
 	$suc=  $db->sucursal_info();
 	$tiend=  $db->tienda_info();
-
+	print_r($res);
 	set_include_path('../lib/pdf2/src/'.PATH_SEPARATOR.get_include_path());
 	include 'Cezpdf.php';
 
@@ -46,11 +45,12 @@
 	$contar=0;
 	$pdf->ezText("Corte de caja por usuario",12,array('justification' => 'center'));
 	$pdf->ezText(" ",10);
-		$pdf->ezText($res->vendedor,10,array('justification' => 'center'));
 	$pdf->ezText("Del: ".$xdel,10,array('justification' => 'left'));
 	$pdf->ezText("Al: ".$xal,10,array('justification' => 'left'));
 	$pdf->ezText(" ",10);
 	foreach($res as $key){
+		$pdf->ezText("Vendedor: ".$key->vendedor,10,array('justification' => 'left'));
+		$pdf->ezText(" ",10);
 		$data[$contar]=array(
 			'Total'=>moneda($key->total),
 			'Tipo'=>$key->tipo_pago

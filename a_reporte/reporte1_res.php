@@ -4,50 +4,67 @@
 	echo "<div class='container-fluid' style='background-color:".$_SESSION['cfondo']."; '>";
 	echo "<br><h5>Ventas emitidas</h5>";
 	echo "<hr>";
-?>
+  echo "<div class='container-fluid' style='background-color:".$_SESSION['cfondo']."; '>";
+  ?>
 
-  <div class="content table-responsive table-full-width">
-  		<table id='x_venta' class='dataTable compact hover row-border' style='font-size:10pt;'>
-  		<thead>
-  		<tr>
-  		<th>-</th>
-  		<th>Venta</th>
-  		<th>Fecha</th>
-  		<th>Cliente</th>
-  		<th>Tienda</th>
-  		<th>Total</th>
-  		<th>Estado</th>
-  		</tr>
-  		</thead>
-  		<tbody>
-  		<?php
-  			for($i=0;$i<count($pd);$i++){
-  		?>
-  					<tr id="<?php echo $pd[$i]['idventa']; ?>" class="edit-t">
-  						<td>
-  							<div class="btn-group">
-                  <button class='btn btn-warning btn-sm'  id='edit_persona' is='b-link' id='nueva_venta' des='a_venta/venta' dix='trabajo'  v_idventa='<?php echo $pd[$i]['idventa']; ?> ' ><i class="fas fa-pencil-alt"></i></button>
+  <div class='tabla_css' id='tabla_css'>
+    <div class='row titulo-row'>
+      <div class='col-12'>
+        VENTAS EMITIDAS
+      </div>
+    </div>
+    <div class='row header-row'>
+    <!--  <div class='col-1'>-</div> -->
+      <div class='col-1'>Ticket #</div>
+      <div class='col-2'>Fecha</div>
+      <div class='col-3'>Cliente</div>
+      <div class='col-3'>Tienda</div>
+      <div class='col-1'>Total</div>
+      <div class='col-1'>Estado</div>
+    </div>
 
-  							</div>
-  						</td>
-  						<td  ><?php echo $pd[$i]["idventa"]; ?></td>
-  						<td><?php echo $pd[$i]["fecha"]; ?></td>
-  						<td><?php echo $pd[$i]["nombrecli"]; ?></td>
-              <td><?php echo $pd[$i]["nombre"]; ?></td>
-  						<td align="left"><?php echo number_format($pd[$i]["total"],2); ?></td>
-  						<td><?php echo $pd[$i]["estado"]; ?></td>
+      <?php
+      $monto_t=0;
+        foreach($pd as $key){
+          echo "<div class='row body-row' draggable='true'>";
+          /*  echo "<div class='col-1'>";
+              echo "<div class='btn-group'>";
 
-  					</tr>
-  		<?php
-  			}
-  		?>
-  		</tbody>
-  	</table>
+              echo "<button class='btn btn-warning btn-sm'  id='edit_persona' is='b-link' id='nueva_venta' des='a_venta/venta' dix='trabajo' title='Ver detalle' v_idventa='$key->idventa' ><i class='far fa-eye'></i></button>";
+              //////
+              echo "</div>";
+            echo "</div>";*/
+
+            echo "<div class='col-1 text-center'>";
+              echo $key->idventa;
+            echo "</div>";
+
+            echo "<div class='col-2'>".$key->fecha."</div>";
+
+
+            echo "<div class='col-3 text-center'>";
+              echo $key->nombrecli;
+            echo "</div>";
+
+            echo "<div class='col-3 text-center'>";
+              echo $key->nombre;
+            echo "</div>";
+
+            echo "<div class='col-1 text-right' >".moneda($key->total)."</div>";
+            $monto_t+=$key->total;
+            echo "<div class='col-1 text-center'>";
+              echo $key->estado;
+            echo "</div>";
+
+          echo '</div>';
+        }
+
+        echo "<div class='row body-row' draggable='true'>";
+            echo "<tr>";
+            echo "<td>Total  </td>";
+            echo "<div class='col-1 text-right' ><b>".moneda($monto_t)."</b></div>";
+            echo"</tr>";
+        echo'</div>';
+      ?>
+    </div>
   </div>
-
-
-  <script>
-  	$(document).ready( function () {
-  		lista("x_venta");
-  	});
-  </script>

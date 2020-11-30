@@ -482,7 +482,7 @@ class Productos extends Sagyc{
 			//BORDES dentro de un array para llenado facil
 					$styleArray = [
 					'borders' => [
-							'allBorders' => [
+							'allBorders' => [ // consultar parametros extras de abajo
 									'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN, //BORDER_THICK pone el borde mas grueso
 									'color' => ['argb' => '04006a'], // color del borde
 													],
