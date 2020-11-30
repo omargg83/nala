@@ -27,7 +27,6 @@
 	$res=$sth->fetchAll(PDO::FETCH_OBJ);
 	$suc=  $db->sucursal_info();
 	$tiend=  $db->tienda_info();
-	print_r($res);
 	set_include_path('../lib/pdf2/src/'.PATH_SEPARATOR.get_include_path());
 	include 'Cezpdf.php';
 
