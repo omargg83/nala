@@ -154,7 +154,10 @@
 						echo "<a href='#a_usuarios/index' is='menu-link' title='Usuarios'><i class='fas fa-users'></i> <span>Usuarios</span></a>";
 
 						if(array_key_exists('DATOSEMP', $db->derecho))
-		        echo "<a href='#a_datosemp/index' is='menu-link' title='Datosemp'><i class='fas fa-wrench'></i><span>Datos Emp.</span></a>";
+		        echo "<a href='#a_datosemp/index' is='menu-link' title='Datos de la empresa'><i class='fas fa-wrench'></i><span>Datos Emp.</span></a>";
+
+						if(array_key_exists('SUPERVISOR', $db->derecho))
+		        echo "<a href='#a_supervisor/index' is='menu-link' title='Supervisor'><i class='far fa-eye'></i><span>Supervisor</span></a>";
 					?>
 					</div>
 	      </div>

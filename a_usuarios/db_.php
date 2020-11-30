@@ -170,6 +170,9 @@ class Usuario extends Sagyc{
 		$x.= "<option value='CAJAS'>Cajas</option>";
 		$x.= "<option value='REPORTES'>Reportes</option>";
 		$x.= "<option value='USUARIOS'>Usuarios</option>";
+
+		$x.= "<optgroup label='Supervisor'>";
+		$x.= "<option value='SUPERVISOR'>Supervisor</option>";
 		return $x;
 	}
 

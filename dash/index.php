@@ -65,7 +65,7 @@ require_once("../db_.php");
 				<div class='dash_icon'>
 					<div class='row'>
 						<div class='col-3'>
-							<img class='card-img-top mx-auto d-block' src='img\\pies.png' alt='Card image' style='width:60px'>
+							<img class='card-img-top mx-auto d-block' src='img\\pies.png' alt='Card image' style='width:150px'>
 						</div>
 						<div class='col-9'>
 							<h5>PRODUCTOS</h5>

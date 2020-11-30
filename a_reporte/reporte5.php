@@ -1,7 +1,7 @@
 <?php
   require_once("db_.php");
   $fecha=date("Y-m-d");
-  $nuevafecha = strtotime ( '-1 month' , strtotime ( $fecha ) ) ;
+  $nuevafecha = strtotime ( '+0 month' , strtotime ( $fecha ) ) ;
   $fecha1 = date ( "Y-m-d" , $nuevafecha );
 
   $sql="select * from sucursal where idsucursal!='".$_SESSION['idsucursal']."'";
