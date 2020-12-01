@@ -6,7 +6,7 @@
 			<div class="card bg-white text-black">
 				<p class="card-text text-center">Inventario</p>
 				<div class='card-footer'>
-					<a class="btn btn-warning btn-sm btn-block" id='menu_ventas' is='menu-link' href='#a_supervisor/lista'>Ir</a>
+					<a class="btn btn-warning btn-sm btn-block" id='menu_ventas' is='menu-link' href='#a_supervisor/reporte7'>Ir</a>
 				</div>
 			</div>
 		</div>
