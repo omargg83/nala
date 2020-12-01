@@ -16,17 +16,17 @@
     <div class="alert alert-light" role="alert">
       <h4 class="alert-heading">CORTE DE CAJA POR USUARIO</h4>
       <div class='row'>
-        <div class='col-4'>
+        <div class='col-xl col-auto'>
             <label><b>Del</b></label>
             <input class="form-control fechaclass" placeholder="Desde...." type="date" id='desde' name='desde' value='<?php echo $fecha1; ?>' autocomplete="off">
         </div>
 
-        <div class='col-4'>
+        <div class='col-xl col-auto'>
           <label><b>Al</b></label>
           <input class="form-control fechaclass" placeholder="Hasta...." type="date" id='hasta' name='hasta' value='<?php echo $fecha; ?>' autocomplete="off">
         </div>
 
-        <div class='col-4'>
+        <div class='col-xl col-auto'>
           <label><b>Vendedor</b></label>
           <select class="form-control" name="idusuario" id="idusuario" required>
             <option value=""></option>
@@ -41,7 +41,7 @@
       </div>
       <hr>
       <div class='row'>
-        <div class='col-12'>
+        <div class='col-xl col-auto'>
           <div class='btn-group'>
             <button title='Buscar' class='btn btn-warning btn-sm' id='buscar_canalizado' type='submit' id='lista_buscar'><i class='fa fa-search'></i><span> Consultar</span></button>
 

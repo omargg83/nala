@@ -9,18 +9,18 @@
 
   <div class='tabla_css' id='tabla_css'>
     <div class='row titulo-row'>
-      <div class='col-12'>
+      <div class='col-xl col-auto'>
         VENTAS EMITIDAS POR SUCURSAL
       </div>
     </div>
     <div class='row header-row'>
     <!--  <div class='col-1'>-</div> -->
-      <div class='col-1'>Ticket #</div>
-      <div class='col-2'>Fecha</div>
-      <div class='col-3'>Cliente</div>
-      <div class='col-3'>Sucursal</div>
-      <div class='col-1'>Total</div>
-      <div class='col-1'>Estado</div>
+      <div class='col-xl col-auto'>Ticket #</div>
+      <div class='col-xl col-auto'>Fecha</div>
+      <div class='col-xl col-auto'>Cliente</div>
+      <div class='col-xl col-auto'>Sucursal</div>
+      <div class='col-xl col-auto'>Total</div>
+      <div class='col-xl col-auto'>Estado</div>
     </div>
 
       <?php
@@ -35,24 +35,24 @@
               echo "</div>";
             echo "</div>";*/
 
-            echo "<div class='col-1 text-center'>";
+            echo "<div class='col-xl col-auto text-center'>";
               echo $key->idventa;
             echo "</div>";
 
-            echo "<div class='col-2'>".$key->fecha."</div>";
+            echo "<div class='col-xl col-auto'>".$key->fecha."</div>";
 
 
-            echo "<div class='col-3 text-center'>";
+            echo "<div class='col-xl col-auto text-center'>";
               echo $key->nombrecli;
             echo "</div>";
 
-            echo "<div class='col-3 text-center'>";
+            echo "<div class='col-xl col-auto text-center'>";
               echo $key->nombre;
             echo "</div>";
 
-            echo "<div class='col-1 text-right' >".moneda($key->total)."</div>";
+            echo "<div class='col-xl col-auto text-right' >".moneda($key->total)."</div>";
             $monto_t+=$key->total;
-            echo "<div class='col-1 text-center'>";
+            echo "<div class='col-xl col-auto text-center'>";
               echo $key->estado;
             echo "</div>";
 
@@ -61,7 +61,7 @@
         echo "<div class='row body-row' draggable='true'>";
             echo "<tr>";
             echo "<td>Total  </td>";
-            echo "<div class='col-1 text-right' ><b>".moneda($monto_t)."</b></div>";
+            echo "<div class='col-xl col-auto text-right' ><b>".moneda($monto_t)."</b></div>";
             echo"</tr>";
         echo'</div>';
       ?>

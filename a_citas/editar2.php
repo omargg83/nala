@@ -74,13 +74,13 @@
         echo "<div class='card-body'>";
 
           echo "<div class='row'>";
-            echo "<div class='col-2'>";
+            echo "<div class='col-xl col-auto'>";
               echo "<label>Fecha</label>";
               echo "<input type='text' class='form-control form-control-sm fechaclass' id='fecha' name='fecha' value='$fecha'>";
 
             echo "</div>";
 
-						echo "<div class='col-2'>";
+						echo "<div class='col-xl col-auto'>";
 			        echo "<label>Hora Inicio</label>";
 			        echo "<select class='form-control form-control-sm' name='hora' id='hora'>";
 								for($i=0;$i<24;$i++){
@@ -89,7 +89,7 @@
 			        echo  "</select>";
 			      echo "</div>";
 
-						echo "<div class='col-2'>";
+						echo "<div class='col-xl col-auto'>";
 			        echo "<label>Minuto</label>";
 			        echo "<select class='form-control form-control-sm' name='minuto' id='minuto'>";
 								for($i=0;$i<=59;$i++){
@@ -98,7 +98,7 @@
 			        echo  "</select>";
 			      echo "</div>";
 
-						echo "<div class='col-2'>";
+						echo "<div class='col-xl col-auto'>";
 			        echo "<label>Hora final</label>";
 			        echo "<select class='form-control form-control-sm' name='hora_fin' id='hora_fin'>";
 								for($i=0;$i<24;$i++){
@@ -107,7 +107,7 @@
 			        echo  "</select>";
 			      echo "</div>";
 
-						echo "<div class='col-2'>";
+						echo "<div class='col-xl col-auto'>";
 			        echo "<label>Minuto</label>";
 			        echo "<select class='form-control form-control-sm' name='minuto_fin' id='minuto_fin'>";
 								for($i=0;$i<=59;$i++){
@@ -116,7 +116,7 @@
 			        echo  "</select>";
 			      echo "</div>";
 
-						echo "<div class='col-3'>";
+						echo "<div class='col-xl col-auto'>";
 							echo "<label>Estado</label>";
 							echo "<select id='estatus' name='estatus' class='form-control form-control-sm'>";
 								echo "<option value='PENDIENTE'"; if($estatus=='PENDIENTE'){ echo " selected"; } echo ">PENDIENTE</option>";
@@ -131,12 +131,12 @@
 
 					echo "<hr>";
 					echo "<div class='row'>";
-						echo "<div class='col-6'>";
+						echo "<div class='col-xl col-auto'>";
 							echo "<label>Asunto:</label>";
 								echo "<input type='text' class='form-control form-control-sm' id='asunto' name='asunto' value='$asunto' placeholder='Asunto' maxlength='65' required >";
 						echo "</div>";
 
-						echo "<div class='col-6'>";
+						echo "<div class='col-xl col-auto'>";
 							echo "<label>Nombre:</label>";
 								echo "<input type='text' class='form-control form-control-sm' id='nombre' name='nombre' value='$nombre_cli' placeholder='Nombre del cliente' readonly>";
 						echo "</div>";
@@ -146,12 +146,12 @@
 
 					echo "<div class='row'>";
 
-						echo "<div class='col-4'>";
+						echo "<div class='col-xl col-auto'>";
 							echo "<label>Correo:</label>";
 							echo "<input type='text' class='form-control form-control-sm' id='correo' name='correo' value='$correo_cli' readonly>";
 						echo "</div>";
 
-						echo "<div class='col-4'>";
+						echo "<div class='col-xl col-auto'>";
 							echo "<label>Teléfono:</label>";
 							echo "<input type='text' class='form-control form-control-sm' id='telefono' name='telefono' value='$telefono_cli' readonly>";
 						echo "</div>";
@@ -159,14 +159,14 @@
 					echo "</div>";
 					echo "<hr>";
 				  echo "<div class='row'>";
-            echo "<div class='col-12'>";
+            echo "<div class='col-xl col-auto'>";
               echo "<label>Notas de la cita</label>";
               echo "<input type='text' class='form-control form-control-sm' id='observaciones' name='observaciones' value='$observaciones' placeholder='Notas del pedido'>";
             echo "</div>";
           echo "</div>";
 
 					echo "<div class='row'>";
-						echo "<div class='col-2'>";
+						echo "<div class='col-xl col-auto'>";
 							echo "<label>Cubiculo</label>";
 							echo "<select class='form-control form-control-sm' name='cubiculo' id='cubiculo'>";
 								echo  "<option value='1' "; if($cubiculo=="1"){ echo " selected";} echo ">1</option>";
@@ -176,7 +176,7 @@
 							echo  "</select>";
 						echo "</div>";
 
-						echo "<div class='col-3'>";
+						echo "<div class='col-xl col-auto'>";
 							echo "<label>Atiende</label>";
 							echo "<select class='form-control form-control-sm' name='atiende' id='atiende'>";
 								foreach($ati as $key){
@@ -185,7 +185,7 @@
 							echo  "</select>";
 						echo "</div>";
 
-						echo "<div class='col-4'>";
+						echo "<div class='col-xl col-auto'>";
 							echo "<label>Servicio</label>";
 							echo "<select class='form-control form-control-sm' name='servicio' id='servicio'>";
 							echo "<option value=''"; if($servicio==''){ echo " selected"; } echo "></option>";
@@ -195,7 +195,7 @@
 							echo  "</select>";
 						echo "</div>";
 
-						echo "<div class='col-3'>";
+						echo "<div class='col-xl col-auto'>";
               echo "<label>Costo:</label>";
               echo "<input type='text' class='form-control form-control-sm' id='precio' name='precio' value='$precio' placeholder='Costo de la cita'>";
             echo "</div>";
@@ -207,7 +207,7 @@
 
 						if($db->nivel_captura==1){
 							echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
-							}		
+							}
 
 							if($estatus=='PENDIENTE' or $id==0){
 

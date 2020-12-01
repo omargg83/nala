@@ -13,7 +13,7 @@
       <h4 class="alert-heading">INVENTARIO POR SUCURSAL</h4>
       <div class='row'>
 
-        <div class='col-6'>
+        <div class='col-xl col-auto'>
           <label><b>Sucursal</b></label>
           <select class="form-control" name="idsucursal" id="idsucursal" required>
             <option value=""></option>
@@ -28,7 +28,7 @@
       </div>
       <hr>
       <div class='row'>
-        <div class='col-12'>
+        <div class='col-xl col-auto'>
           <div class='btn-group'>
 
             <button title='Buscar' class='btn btn-warning btn-sm' id='buscar_canalizado' type='submit' id='lista_buscar'><i class='fa fa-search'></i><span>Consultar</span></button>

@@ -22,7 +22,7 @@
 			</div>
 			<div class='card-body'>
 				<div class='row'>
-					<div class="col-6">
+					<div class="col-xl col-auto">
 						<label>Nombre categoría:</label>
 							<input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre;?>" placeholder="Nombre" required maxlength="55">
 					</div>
@@ -31,7 +31,7 @@
 			</div>
 			<div class='card-footer'>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-xl col-auto">
 
 						<button class="btn btn-warning btn-sm" type="submit"><i class='far fa-save'></i>Guardar</button>
 						<button type='button' class='btn btn-warning btn-sm' id='lista_penarea' is='b-link'  des='a_categorias/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
