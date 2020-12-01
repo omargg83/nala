@@ -75,7 +75,7 @@
 			echo "<div class='row'>";
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Cantidad</label>";
-					echo "<input type='text' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1' required >";
+					echo "<input type='number' class='form-control form-control-sm' name='cantidad' id='cantidad' value='1' required >";
 				echo "</div>";
 
 				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";

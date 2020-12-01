@@ -697,10 +697,7 @@
 		}
 		public function recalcular($idproducto=0, $idbodega=0){
 			$existencia=0;
-			if($idproducto>0){
-
-			}
-			else{
+			if($idproducto==0){
 				$idproducto=clean_var($_REQUEST['idproducto']);
 			}
 
@@ -710,9 +707,13 @@
 				$sql="select * from bodega where idproducto=$idproducto and idbodega<$idbodega order by fecha desc  limit 1";
 				$sth = $this->dbh->prepare($sql);
 				$sth->execute();
-				$inicio=$sth->fetch(PDO::FETCH_OBJ);
-				$existencia=$inicio->existencia;
-
+				if($sth->rowCount()>0){
+					$inicio=$sth->fetch(PDO::FETCH_OBJ);
+					$existencia=$inicio->existencia;
+				}
+				else{
+					$existencia=0;
+				}
 				//////comenzara desde el registro idbodega
 				$sql="select * from bodega where idproducto=$idproducto and idbodega>=$idbodega order by fecha asc";
 			}

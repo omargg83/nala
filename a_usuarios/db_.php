@@ -16,14 +16,20 @@ class Usuario extends Sagyc{
 
 	public function __construct(){
 		parent::__construct();
-		if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('USUARIOS', $this->derecho)) {
+		if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('USUARIOS', $this->derecho) or $_SESSION['nivel']==0) {
 			////////////////PERMISOS
-			$sql="SELECT nivel,captura FROM usuarios_permiso where idusuario='".$_SESSION['idusuario']."' and modulo='USUARIOS'";
-			$stmt= $this->dbh->query($sql);
+			if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('USUARIOS', $this->derecho)) {
+				$sql="SELECT nivel,captura FROM usuarios_permiso where idusuario='".$_SESSION['idusuario']."' and modulo='USUARIOS'";
+				$stmt= $this->dbh->query($sql);
 
-			$row =$stmt->fetchObject();
-			$this->nivel_personal=$row->nivel;
-			$this->nivel_captura=$row->captura;
+				$row =$stmt->fetchObject();
+				$this->nivel_personal=$row->nivel;
+				$this->nivel_captura=$row->captura;
+			}
+			if($_SESSION['nivel']==0){
+				$this->nivel_personal=0;
+				$this->nivel_captura=1;
+			}
 		}
 		else{
 			include "../error.php";
@@ -37,9 +43,9 @@ class Usuario extends Sagyc{
 		return $sth->fetch(PDO::FETCH_OBJ);
 	}
 	public function usuario_buscar($texto){
-		$sql="select usuarios.idusuario, usuarios.idtienda, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo,tienda.razon AS tienda, sucursal.idsucursal, sucursal.nombre as sucursal from usuarios
+		$sql="select usuarios.idusuario, usuarios.idtienda, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo,tienda.razon AS tienda, usuarios.idsucursal from usuarios
 		left outer join tienda on tienda.idtienda=usuarios.idtienda
-		where usuarios.nombre like '%$texto%' and tienda.idtienda='".$_SESSION['idtienda']."'";
+		where usuarios.nombre like '%$texto%' and tienda.idtienda='".$_SESSION['idtienda']."' order by usuarios.idsucursal";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -49,12 +55,12 @@ class Usuario extends Sagyc{
 			$pagina=$pagina*$_SESSION['pagina'];
 
 			if($this->nivel_personal==0){
-				$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo, tienda.razon AS tienda FROM usuarios
+				$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.idsucursal, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo, tienda.razon AS tienda FROM usuarios
 				LEFT OUTER JOIN tienda ON tienda.idtienda = usuarios.idtienda
-				where tienda.idtienda='".$_SESSION['idtienda']."' limit $pagina,".$_SESSION['pagina']."";
+				where tienda.idtienda='".$_SESSION['idtienda']."' order by usuarios.idsucursal limit $pagina,".$_SESSION['pagina']."";
 			}
 			else{
-				$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo, tienda.razon AS tienda FROM usuarios
+				$sql="SELECT usuarios.idusuario, usuarios.idtienda, usuarios.idsucursal, usuarios.correo, usuarios.nombre, usuarios.USER,	usuarios.pass,	usuarios.nivel,	usuarios.activo, tienda.razon AS tienda FROM usuarios
 				LEFT OUTER JOIN tienda ON tienda.idtienda = usuarios.idtienda
 				where usuarios.idusuario='".$_SESSION['idusuario']."'";
 			}
@@ -105,6 +111,7 @@ class Usuario extends Sagyc{
 		if($id==0){
 			$arreglo+=array('idtienda'=>$_SESSION['idtienda']);
 			$arreglo+=array('idfondo'=>"fondo/fondosagyc.jpg");
+			$arreglo+=array('nivel'=>2);
 			$x=$this->insert('usuarios', $arreglo);
 		}
 		else{
@@ -286,7 +293,7 @@ class Usuario extends Sagyc{
 		return $this->update('usuarios',array('idusuario'=>$idusuario), $arreglo);
 	}
 
-	private function validar_clave($clave){
+	public function validar_clave($clave){
 		$x="";
 		if(strlen($clave) < 6){
 		  $x= "La clave debe tener al menos 6 caracteres";
@@ -304,6 +311,71 @@ class Usuario extends Sagyc{
 		  $x=  "La clave debe tener al menos un caracter numérico";
 		}
 		return $x;
+	}
+	public function sucursal($id){
+		try{
+			$sql="select * from sucursal where idsucursal=:id";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":id",$id);
+			$sth->execute();
+			return $sth->fetch(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED!".$e->getMessage();
+		}
+	}
+	public function tienda($id){
+		$sql="select * from tienda where idtienda=:idtienda";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":idtienda",$id);
+		$sth->execute();
+		return $sth->fetch(PDO::FETCH_OBJ);
+	}
+
+	public function cambio_user($id){
+		try{
+
+			$sql="SELECT * FROM usuarios where idusuario=:id";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":id",$id);
+			$sth->execute();
+			return $sth->fetch(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED!".$e->getMessage();
+		}
+	}
+	public function cambiar_user(){
+
+		$id=clean_var($_REQUEST['id']);
+		$CLAVE=self::cambio_user($id);
+
+		$_SESSION['autoriza']=1;
+		$_SESSION['nombre']=$CLAVE->nombre;
+
+		$_SESSION['nick']=$CLAVE->user;
+		$_SESSION['idusuario']=$CLAVE->idusuario;
+		$_SESSION['idtienda']=$CLAVE->idtienda;
+		$_SESSION['idsucursal']=$CLAVE->idsucursal;
+		$_SESSION['sidebar']=$CLAVE->sidebar;
+		$_SESSION['idcaja']=$CLAVE->idcaja;
+		$_SESSION['foto']=$CLAVE->archivo;
+
+		$sucursal=self::sucursal($CLAVE->idsucursal);
+		$_SESSION['sucursal_nombre']=$sucursal->nombre;
+		$_SESSION['matriz']=$sucursal->matriz;
+
+		if($_SESSION['a_sistema']==1){
+			$_SESSION['idfondo']=$CLAVE->idfondo;
+		}
+		else{
+			$_SESSION['idfondo']="";
+		}
+
+		$arr=array();
+		$arr=array('acceso'=>1);
+		return json_encode($arr);
+
 	}
 }
 

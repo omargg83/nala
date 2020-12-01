@@ -23,9 +23,10 @@
 	</div>
 	<div class='row header-row'>
 		<div class='col-2'>#</div>
-		<div class='col-4'>NOMBRE</div>
-		<div class='col-4'>CORREO</div>
+		<div class='col-3'>NOMBRE</div>
+		<div class='col-3'>CORREO</div>
 		<div class='col-2'>ACTIVO</div>
+		<div class='col-2'>SUCURSAL</div>
 	</div>
 
 		<?php
@@ -35,13 +36,20 @@
 						if($db->nivel_captura==1){
 							echo "<button class='btn btn-warning btn-sm' is='b-link' des='a_usuarios/editar' dix='trabajo' v_id='$key->idusuario' id='edit_persona'><i class='fas fa-pencil-alt'></i></button>";
 
+							if($_SESSION['nivel']==0){
+									echo "<button type='button' class='btn btn-danger btn-sm' is='b-link' db='a_usuarios/db_' fun='cambiar_user' dix='trabajo' v_id='$key->idusuario' id='cabiar' tp='¿Desea cambiar a la cuenta selecionada?'><i class='fas fa-user-shield'></i></button>";
+							}
 						}
 						echo "</div>";
-					echo "<div class='col-4'>".$key->nombre."</div>";
-					echo "<div class='col-4'>".$key->correo."</div>";
+					echo "<div class='col-3'>".$key->nombre."</div>";
+					echo "<div class='col-3'>".$key->correo."</div>";
 					echo "<div class='col-2'>";
 						if ($key->activo==0) { echo "Inactivo"; }
 						if ($key->activo==1) { echo "Activo"; }
+					echo "</div>";
+					echo "<div class='col-2'>";
+						$sucursal=$db->sucursal($key->idsucursal);
+						echo $sucursal->nombre;
 					echo "</div>";
 				echo "</div>";
 			}

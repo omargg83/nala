@@ -3,11 +3,10 @@
 	$idproducto=$_REQUEST['idproducto'];
 	$cate=$db->categoria();
 	if($idproducto>0){
-		//$db->recalcular();
+		$db->recalcular($idproducto);
 
 
 		$per = $db->producto_editar($idproducto);
-
 		$exist=$per->cantidad;
 		$precio=$per->precio;
 		$stockmin=$per->stockmin;
@@ -245,7 +244,7 @@
 									}
 								}
 
-								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='control_db' des='a_inventario/editar' fun='recalcular' dix='trabajo' v_idproducto='$idproducto' v_ctrl='control' id='recal' tp='¿Desea recalcular?'><i class='fas fa-exclamation-triangle'></i>+ Recalcular</button>";
+								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='control_db' des='a_inventario/editar' fun='recalcular' dix='trabajo' v_idproducto='$idproducto' v_idbodega='0' v_ctrl='control' id='recal' tp='¿Desea recalcular?'><i class='fas fa-exclamation-triangle'></i>+ Recalcular</button>";
 
 							?>
 							<button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_inventario/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
