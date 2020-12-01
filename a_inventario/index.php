@@ -20,10 +20,9 @@
           </div>
         </form>
 
+        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_inventario' des='a_inventario/lista' dix='trabajo'><i class='fas fa-box-open'></i><span>Productos</span></a></li>
 
-        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_inventario' des='a_inventario/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Inventario</span></a></li>
-
-        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_servicios' des='a_inventario/lista_servicios' dix='trabajo'><i class='fas fa-list-ul'></i><span>Servicios</span></a></li>
+        <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_servicios' des='a_inventario/lista_servicios' dix='trabajo'><i class='fab fa-servicestack'></i><span>Servicios</span></a></li>
 
         <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_servicios' des='a_inventario/excel' dix='trabajo'><i class="far fa-file-excel"></i><span>Excel</span></a></li>
 

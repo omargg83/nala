@@ -25,8 +25,8 @@
 		<div class='row header-row'>
 			<div class='col-2'>#</div>
 			<div class='col-2'>Código</div>
-			<div class='col-5'>Nombre</div>
-			<div class='col-1'>Existencia</div>
+			<div class='col-4'>Nombre</div>
+			<div class='col-2'>Existencia</div>
 			<div class='col-2'>Precio de venta</div>
 		</div>
 
@@ -72,10 +72,10 @@
 							echo $key->codigo;
 						echo "</div>";
 
-						echo "<div class='col-5'>".$key->nombre."</div>";
+						echo "<div class='col-4'>".$key->nombre."</div>";
 
 
-						echo "<div class='col-1 text-center'>";
+						echo "<div class='col-2 text-center'>";
 							echo $exist;
 						echo "</div>";
 
@@ -89,7 +89,7 @@
 <?php
 	if(strlen($texto)==0){
 		$sql="SELECT count(productos.idproducto) as total
-		from productos LEFT OUTER JOIN productos_catalogo ON productos_catalogo.idcatalogo = productos.idcatalogo	where productos.idsucursal='".$_SESSION['idsucursal']."' and productos_catalogo.tipo<>0";
+		from productos LEFT OUTER JOIN productos_catalogo ON productos_catalogo.idcatalogo = productos.idcatalogo	where productos.idsucursal='".$_SESSION['idsucursal']."' and productos_catalogo.tipo=3";
 		$sth = $db->dbh->query($sql);
 		$contar=$sth->fetch(PDO::FETCH_OBJ);
 		$paginas=ceil($contar->total/$_SESSION['pagina']);
