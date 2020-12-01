@@ -2,6 +2,10 @@
 	require_once("db_.php");
 	$idproducto=$_REQUEST['idproducto'];
 	$cate=$db->categoria();
+	$rapido=0;
+	if(isset($_REQUEST['rapido'])){
+		$rapido=$_REQUEST['rapido'];
+	}
 	if($idproducto>0){
 		$db->recalcular($idproducto);
 
@@ -245,8 +249,14 @@
 
 								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='control_db' des='a_inventario/editar' fun='recalcular' dix='trabajo' v_idproducto='$idproducto' v_idbodega='0' v_ctrl='control' id='recal' tp='¿Desea recalcular?'><i class='fas fa-exclamation-triangle'></i>+ Recalcular</button>";
 
+								if($rapido==0){
+									echo "<button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_inventario/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>";
+								}
+								else{
+									echo "<button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link' cmodal='1' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>";
+								}
 							?>
-							<button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_inventario/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
+
 						</div>
 					</div>
 				</div>

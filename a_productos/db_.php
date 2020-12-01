@@ -304,7 +304,7 @@ class Productos extends Sagyc{
 		where productos_catalogo.idtienda='".$_SESSION['idtienda']."' and productos_catalogo.activo_catalogo=1 order by productos_catalogo.nombre asc, productos_catalogo.idcatalogo asc";
 
 
-	//	$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by nombre asc, idcatalogo asc";
+		//	$sql="SELECT * from productos_catalogo where activo_catalogo=1 order by nombre asc, idcatalogo asc";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		$contar=7;
@@ -443,7 +443,6 @@ class Productos extends Sagyc{
 		$x=$this->borrar('productos_catalogo',"idcatalogo",$destino);
 		return $x;
 	}
-
 
 }
 $db = new Productos();

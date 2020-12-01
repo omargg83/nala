@@ -45,10 +45,10 @@
 			echo "<div class='row'>";
 				echo "<div class='col-xl col-auto'>";
 					if(strlen($producto->archivo)>0 and file_exists("../".$db->f_productos."/".$producto->archivo)){
-						echo "<img src='".$db->f_productos."/".$producto->archivo."' width='100%' class='img-thumbnail'/>";
+						echo "<img src='".$db->f_productos."/".$producto->archivo."' width='100px;' class='img-thumbnail'/>";
 					}
 					else{
-						echo "<img src='img/unnamed.png' width='100%' class='img-thumbnail'/>";
+						echo "<img src='img/unnamed.png' width='100px;' class='img-thumbnail'/>";
 					}
 
 				echo "</div>";

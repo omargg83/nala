@@ -8,10 +8,8 @@
 	ini_set('display_errors', '1');
 	date_default_timezone_set("America/Mexico_City");
 
-	$_SESSION['des']=1;
-	$_SESSION['pagina']=100;
-
 	require_once("init.php");
+
 	class Sagyc{
 		public $nivel_personal;
 		public $nivel_captura;
@@ -754,6 +752,11 @@
 				$arreglo+=array('existencia'=>$existencia);
 				self::update('bodega',array('idbodega'=>$bodega->idbodega), $arreglo);
 			}
+
+			$arreglo =array();
+			$arreglo += array('cantidad'=>$existencia);
+			$x=$this->update('productos_catalogo',array('idcatalogo'=>$idcatalogo), $arreglo);
+
 			$arreglo =array();
 			$arreglo+=array('id'=>$idproducto);
 			$arreglo+=array('error'=>0);

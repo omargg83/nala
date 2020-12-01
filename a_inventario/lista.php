@@ -35,7 +35,12 @@
 					echo "<div class='row body-row' draggable='true'>";
 						echo "<div class='col-xl col-auto'>";
 							echo "<div class='btn-group'>";
+
 							echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_inventario/editar' dix='trabajo' v_idproducto='$key->idproducto'><i class='fas fa-pencil-alt'></i></button>";
+
+							if($_SESSION['nivel']==66){
+								echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_inventario/editar' omodal='1' dix='trabajo' v_idproducto='$key->idproducto' v_rapido='1'><i class='fab fa-searchengin'></i></button>";
+							}
 
 							if($key->tipo==3){
 								$sql="select sum(cantidad) as total from bodega where idsucursal='".$_SESSION['idsucursal']."' and idproducto='$key->idproducto'";

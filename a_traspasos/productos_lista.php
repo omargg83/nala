@@ -22,6 +22,7 @@
   $res=$sth->fetchAll(PDO::FETCH_OBJ);
 
 	echo "<div class='container'>";
+	
 	echo "<div class='tabla_css' id='tabla_css'>";
 		echo "<div class='row header-row'>";
 			echo "<div class='col-xl col-auto'>DESCRIPCION</div>";

@@ -98,7 +98,6 @@
 				</div>
 			</div>
 		</form>
-
 <?php
 	if($idtraspaso>0){
 		echo "<div class='col-xl col-auto' id='lista' style='max-height:600px; overflow:auto;'>";
