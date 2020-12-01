@@ -57,7 +57,13 @@
 
 							<div class="col-12">
 		 				   <label>Nombre:</label>
-		 					 <input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre ;?>" placeholder="Nombre del usuario" required>
+		 					 <input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre ;?>" placeholder="Nombre del usuario" required
+							 <?php
+							 	if($id>0){
+									echo " readonly";
+								}
+							 ?>
+							 >
 		 				 	</div>
 							<div class="col-12">
 							 <label >Estado:</label>

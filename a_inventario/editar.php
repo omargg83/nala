@@ -135,38 +135,39 @@
 				}
 			?>
 			<div class='row mb-3'>
-						<div class="col-2">
+						<div class="col-4">
 						 <label><b>Existencias</b></label>
 						 <input type="text" class="form-control form-control-sm" id="tmp_ex" name='tmp_ex' placeholder="Existencias" value="<?php echo $exist; ?>" readonly>
 						</div>
 
 
-						<div class="col-2">
+						<div class="col-4">
 						 <label>Precio compra</label>
 						 <input type="text" class="form-control form-control-sm" id="preciocompra" name='preciocompra' placeholder="Precio" value="<?php echo $preciocompra; ?>">
 						</div>
 
-						<div class="col-2">
+						<div class="col-4">
 						 <label>Stock Minimo</label>
 						 <input type="text" class="form-control form-control-sm" id="stockmin" name='stockmin' placeholder="Stock Minimo" value="<?php echo $stockmin; ?>">
 						</div>
 
-						<div class="col-2">
+						<div class="col-4">
 						 <label>$ Venta</label>
 						 <input type="text" class="form-control form-control-sm" id="precio" name='precio' placeholder="Precio" value="<?php echo $precio; ?>" required>
 						</div>
 
-						<div class="col-2">
+						<div class="col-4">
 						 <label>$ Mayoreo</label>
 						 <input type="text" class="form-control form-control-sm" id="precio_mayoreo" name='precio_mayoreo' placeholder="Precio Mayoreo" value="<?php echo $precio_mayoreo; ?>">
 						</div>
 
-						<div class="col-2">
+						<div class="col-4">
 						 <label>$ Distribuidor</label>
 						 <input type="text" class="form-control form-control-sm" id="precio_distri" name='precio_distri' placeholder="Precio Distribuidor" value="<?php echo $precio_distri; ?>">
 						</div>
 
 					</div>
+					<hr>
 			<div class='row mb-3'>
 						<div class='col-3'>
 							<p><b>Esquema de descuento:</b></p>
@@ -181,30 +182,26 @@
 						</div>
 					</div>
 					<hr>
+					<p><b>Esquema NALA:</b></p>
 					<div class='row mb-3' >
-						<div class="col-3">
-							<br><p><b>Esquema NALA:</b></p>
-						</div>
-						<div class="col-3">
+						<div class="col-4">
 						 <label>Cantidad min. Mayoreo (Pza.)</label>
 						 <input type="text" class="form-control form-control-sm" id="cantidad_mayoreo" name='cantidad_mayoreo' placeholder="# Cant. Mayoreo" value="<?php echo $cantidad_mayoreo; ?>" >
 						</div>
 
-						<div class="col-3">
+						<div class="col-4">
 						 <label>Monto min. compra mayoreo</label>
 						 <input type="text" class="form-control form-control-sm" id="monto_mayor" name='monto_mayor' placeholder="Monto min compra mayoreo" value="<?php echo $monto_mayor; ?>" >
 						</div>
 
-						<div class="col-3">
+						<div class="col-4">
 						 <label>Monto min. compra distribuidor</label>
 						 <input type="text" class="form-control form-control-sm" id="monto_distribuidor" name='monto_distribuidor' placeholder="Monto min compra distribuidor" value="<?php echo $monto_distribuidor; ?>" >
 						</div>
 					</div>
 					<hr>
+					<p><b>Esquema 2:</b></p>
 					<div class='row mb-3'>
-						<div class="col-4">
-							<br><p><b>Esquema 2:</b></p>
-						</div>
 						<div class="col-4">
 						 <label>Cantidad Para Precio Mayoreo (Pza.)</label>
 						 <input type="text" class="form-control form-control-sm" id="mayoreo_cantidad" name='mayoreo_cantidad' placeholder="# Cant. Mayoreo" value="<?php echo $mayoreo_cantidad; ?>" >
@@ -230,14 +227,13 @@
 									}
 								}
 
-
-									if($idproducto>0){
-										if($_SESSION['matriz']==1){
-											echo "<button type='button' class='btn btn-warning btn-sm' id='genera_Barras' is='b-link' title='Editar' tp='¿Desea generar el codigo de barras?' db='a_inventario/db_' fun='barras' des='a_inventario/editar' dix='trabajo' v_idproducto='$idproducto' v_idcatalogo='$idcatalogo'><i class='fas fa-barcode'></i>Barras</button>";
-										}
-
-										echo "<button type='button' class='btn btn-warning btn-sm' id='Imprime_barras' is='b-print' title='Editar' des='a_inventario/imprimir' v_idcatalogo='$idcatalogo'><i class='fas fa-print'></i>Barras</button>";
+								if($idproducto>0){
+									if($_SESSION['matriz']==1){
+										echo "<button type='button' class='btn btn-warning btn-sm' id='genera_Barras' is='b-link' title='Editar' tp='¿Desea generar el codigo de barras?' db='a_inventario/db_' fun='barras' des='a_inventario/editar' dix='trabajo' v_idproducto='$idproducto' v_idcatalogo='$idcatalogo'><i class='fas fa-barcode'></i>Barras</button>";
 									}
+
+									echo "<button type='button' class='btn btn-warning btn-sm' id='Imprime_barras' is='b-print' title='Editar' des='a_inventario/imprimir' v_idcatalogo='$idcatalogo'><i class='fas fa-print'></i>Barras</button>";
+								}
 
 
 								if($idproducto>0){
@@ -245,6 +241,9 @@
 										echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_inventario/form_agrega' omodal='1' v_id='0' v_idproducto='$idproducto' ><i class='fas fa-key'></i>+ existencias</button>";
 									}
 								}
+
+								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='control_db' des='a_inventario/editar' fun='recalcular' dix='trabajo' v_idproducto='$idproducto' v_ctrl='control' id='recal' tp='¿Desea recalcular?'><i class='fas fa-exclamation-triangle'></i>+ Recalcular</button>";
+
 							?>
 							<button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_inventario/lista' dix='trabajo' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
 						</div>

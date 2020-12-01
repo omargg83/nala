@@ -63,7 +63,7 @@ class Traspaso extends Sagyc{
 		}
 	}
 	public function recepcion_buscar($texto){
-		$sql="select * from traspasos	where traspasos.idtienda='".$_SESSION['idtienda']."' and idsucursal='".$_SESSION['idsucursal']."' and estado='Enviada' and (traspasos.numero like '%$texto%' or traspasos.nombre like '%$texto%') limit 100";
+		$sql="select * from traspasos	where traspasos.idtienda='".$_SESSION['idtienda']."' and idsucursal='".$_SESSION['idsucursal']."' and (estado='Enviada' or estado='Recibida') and (traspasos.numero like '%$texto%' or traspasos.nombre like '%$texto%') limit 100";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -71,7 +71,7 @@ class Traspaso extends Sagyc{
 
 	public function traspasos_lista(){
 		try{
-			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' and iddesde='".$_SESSION['idsucursal']."' order by idtraspaso desc";
+			$sql="SELECT * FROM traspasos where idtienda='".$_SESSION['idtienda']."' and iddesde='".$_SESSION['idsucursal']."' and (estado='Activa' or estado='Enviada') order by idtraspaso desc";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -94,9 +94,6 @@ class Traspaso extends Sagyc{
 		if (isset($_REQUEST['nombre'])){
 			$arreglo+=array('nombre'=>clean_var($_REQUEST['nombre']));
 		}
-
-
-
 		if (isset($_REQUEST['fecha'])){
 			$arreglo+=array('fecha'=>$_REQUEST['fecha']);
 		}
@@ -123,7 +120,10 @@ class Traspaso extends Sagyc{
 		return $x;
 	}
 	public function traspaso_pedido($id){
-		$sql="select * from bodega where idtraspaso='$id' order by idbodega desc";
+		$sql="select bodega.*,productos_catalogo.codigo from bodega
+		left outer join productos on productos.idproducto=bodega.idproducto
+		left outer join productos_catalogo on productos_catalogo.idcatalogo=productos.idcatalogo
+		where idtraspaso='$id' order by idbodega desc";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -178,6 +178,7 @@ class Traspaso extends Sagyc{
 		$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
 		$arreglo+=array('idproducto'=>$producto->idproducto);
 		$arreglo+=array('v_cantidad'=>$cantidad);
+		$arreglo+=array('trasp_recepcion'=>0);
 
 		$cantidad=$cantidad*-1;
 		$arreglo+=array('cantidad'=>$cantidad);
@@ -258,22 +259,34 @@ class Traspaso extends Sagyc{
 			$idproducto=$producto->idproducto;
 		}
 
+		$date=date("Y-m-d H:i:s");
+		$cantidad=abs($bodega->cantidad);
+
 		$arreglo=array();
 		$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
 		$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
 		$arreglo+=array('idproducto'=>$idproducto);
 		$arreglo+=array('idpadre'=>$bodega->idbodega);
-		$cantidad=abs($bodega->cantidad);
 		$arreglo+=array('cantidad'=>$cantidad);
-		$date=date("Y-m-d H:i:s");
 		$arreglo+=array('fecha'=>$date);
 		$arreglo+=array('nombre'=>$bodega->nombre);
 		$x=$this->insert('bodega', $arreglo);
+
+
 		$ped=json_decode($x);
 		if($ped->error==0){
 			$arreglo=array();
 			$arreglo+=array('trasp_recepcion'=>1);
 			$x=$this->update('bodega',array('idbodega'=>$idbodega),$arreglo);
+
+			$sql="select * from bodega where idtraspaso=$bodega->idtraspaso and trasp_recepcion=0";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			if($sth->rowCount()==0){
+				$arreglo=array();
+				$arreglo+=array('estado'=>"Recibida");
+				$x=$this->update('traspasos',array('idtraspaso'=>$bodega->idtraspaso),$arreglo);
+			}
 		}
 		else{
 			$arreglo =array();
@@ -284,6 +297,18 @@ class Traspaso extends Sagyc{
 
 		return $x;
 
+	}
+	public function sucursal($id){
+		try{
+			$sql="select * from sucursal where idsucursal=:id";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":id",$id);
+			$sth->execute();
+			return $sth->fetch(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED!".$e->getMessage();
+		}
 	}
 }
 $db = new Traspaso();

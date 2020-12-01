@@ -27,10 +27,10 @@
 		$pedido = $db->ventas_pedido($idventa);
 		echo "<div class='tabla_css col-12' id='tabla_css' style='min-height:200px'>";
 			echo "<div class='row header-row'>";
-				echo "<div class='col-6'>DESCRIPCION</div>";
-				echo "<div class='col-2'>#</div>";
-				echo "<div class='col-2'>$</div>";
-				echo "<div class='col-2'>G$</div>";
+				echo "<div class='col-12'>DESCRIPCION</div>";
+				echo "<div class='col-4'>#</div>";
+				echo "<div class='col-4'>$</div>";
+				echo "<div class='col-4'>G$</div>";
 			echo "</div>";
 
 			$gtotal=0;
@@ -38,20 +38,18 @@
 			$total=0;
 
 			foreach($pedido as $key){
-			//	print_r($sumas);
-			//	print_r($key);
 				echo "<div class='row body-row' draggable='true'>";
-					echo "<div class='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6'>";
+					echo "<div class='col-12'>";
 						echo "<div class='btn-group mr-3'>";
 							if($estado_compra=="Activa"){
 								echo "<button class='btn btn-warning btn-sm' id='del_$key->idbodega' type='button' is='is-borraprod' v_idbodega='$key->idbodega' title='Borrar'><i class='far fa-trash-alt'></i></button>";
 							}
 						echo "</div>";
-
 						echo $key->nombre;
+						echo $key->codigo;
 					echo "</div>";
 
-					echo "<div class='col-2 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-center'>";
+					echo "<div class='col-4 text-center'>";
 						echo number_format($key->v_cantidad);
 					echo "</div>";
 
@@ -59,7 +57,7 @@
 					//////////// comparacion de esquemas de descuento /////////////////////////////
 					if ( $key->esquema==0) {
 
-							echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
+							echo "<div class='col-4 text-right'>";
 								echo number_format($key->v_precio_normal,2);
 								$total=$key->v_precio_normal;
 
@@ -70,20 +68,20 @@
 					if ( $key->esquema==2) {
 
 						if ($key->v_cantidad < $key->mayoreo_cantidad) {
-							echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
+							echo "<div class='col-4 text-right'>";
 								echo number_format($key->v_precio_normal,2);
 								$total=$key->v_precio_normal;
 							echo "</div>";
 						}
 						else if ($key->v_cantidad >= $key->mayoreo_cantidad and $key->v_cantidad < $key->distri_cantidad) {
-							echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
+							echo "<div class='col-4 text-right'>";
 								echo number_format($key->v_precio_mayoreo,2);
 								$total=$key->v_precio_mayoreo;
 							echo "</div>";
 						}
 
 						else if ($key->v_cantidad >= $key->distri_cantidad) {
-							echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
+							echo "<div class='col-4 text-right'>";
 								echo number_format($key->v_precio_distribuidor,2);
 								$total=$key->v_precio_distribuidor;
 							echo "</div>";
@@ -97,19 +95,19 @@
 
 
 					if ($sumas->total_mayoreo < $key->monto_mayor and $sumcant < $key->cantidad_mayoreo){
-					echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
+					echo "<div class='col-4 text-right'>";
 						echo number_format($key->v_precio_normal,2);
 						$total=$key->v_precio_normal;
 					echo "</div>";
 					}
 					else if ($sumas->total_distribuidor >= $key->monto_distribuidor) { //primero que nada checo que se alcance el monto para distribuidor antes de mayoreo porque si no no funciona
-						echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
+						echo "<div class='col-4 text-right'>";
 							echo number_format($key->v_precio_distribuidor,2);
 							$total=$key->v_precio_distribuidor;
 						echo "</div>";
 					}
 					else if ($sumcant >= $key->cantidad_mayoreo or $sumas->total_mayoreo >= $key->monto_mayor) {
-						echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
+						echo "<div class='col-4 text-right'>";
 							echo number_format($key->v_precio_mayoreo,2);
 							$total=$key->v_precio_mayoreo;
 						echo "</div>";
@@ -144,7 +142,7 @@
 					///////////////////////// fin comparacion esquemas
 
 
-					echo "<div class='col-5 col-sm-4 col-md-4 col-lg-4 col-xl-2 text-right'>";
+					echo "<div class='col-4 text-right'>";
 						echo number_format($total*$key->v_cantidad,2);
 						$total=$total*$key->v_cantidad;
 						$gtotal+=$total;

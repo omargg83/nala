@@ -15,9 +15,9 @@
   		echo "<div class='row header-row'>";
   			echo "<div class='col-2'>Fecha</div>";
   			echo "<div class='col-2'>Tipo</div>";
-  			echo "<div class='col-2'>Descripción</div>";
+  			echo "<div class='col-4'>Descripción</div>";
   			echo "<div class='col-2'>Cantidad</div>";
-  			echo "<div class='col-2'>Precio</div>";
+  			echo "<div class='col-2'>Existencia</div>";
   		echo "</div>";
 
       $total=0;
@@ -25,10 +25,9 @@
         echo "<div class='row body-row' draggable='true'>";
           echo "<div class='col-2'>";
             echo fecha($key->fecha);
-            echo "<br>".$key->idbodega;
           echo "</div>";
           echo "<div class='col-2'>";
-            if($key->cantidad>0 and strlen($key->idcompra)==0){
+            if($key->cantidad>0 and strlen($key->idcompra)==0 and strlen($key->idpadre)==0){
               echo "Ingreso";
             }
             if($key->cantidad>0 and strlen($key->idcompra)>0){
@@ -40,35 +39,54 @@
             if($key->cantidad<0 and strlen($key->idtraspaso)>0){
               echo "Traspaso";
             }
+						if($key->cantidad>0 and strlen($key->idpadre)>0){
+              echo "Ingreso x traspaso";
+            }
+						$usuario=$db->usuario($key->idpersona);
+						echo "<br>";
+						echo $usuario->nombre;
           echo "</div>";
-          echo "<div class='col-2'>";
+          echo "<div class='col-4'>";
+
             if(strlen($key->idtraspaso)>0){
               $sql="select * from traspasos where idtraspaso=$key->idtraspaso";
               $sth = $db->dbh->query($sql);
-              $res=$sth->fetch(PDO::FETCH_OBJ);
-              echo "#:".$res->numero;
-              echo "<br>".fecha($res->fecha);
-              echo "<br>".$res->nombre;
+              $traspaso=$sth->fetch(PDO::FETCH_OBJ);
+              echo "#:".$traspaso->numero;
+              echo "<br>".$traspaso->nombre;
             }
             if(strlen($key->idcompra)>0){
               $sql="select * from compras where idcompra=$key->idcompra";
               $sth = $db->dbh->query($sql);
-              $res=$sth->fetch(PDO::FETCH_OBJ);
-              echo "#:".$res->numero;
-              echo "<br>".fecha($res->fecha);
-              echo "<br>".$res->nombre;
+              $compra=$sth->fetch(PDO::FETCH_OBJ);
+              echo "#:".$compra->numero;
+              echo "<br>".$compra->nombre;
             }
             if(strlen($key->idventa)>0){
               $sql="select * from venta where idventa=$key->idventa";
               $sth = $db->dbh->query($sql);
-              $res=$sth->fetch(PDO::FETCH_OBJ);
-              echo "#:".$res->numero;
-              echo "<br>".fecha($res->fecha);
+              $venta=$sth->fetch(PDO::FETCH_OBJ);
+              echo "#:".$venta->numero;
             }
+						if(strlen($key->idpadre)>0){
+							$sql="select * from bodega where idbodega='$key->idpadre'";
+							$sth = $db->dbh->query($sql);
+							$origen=$sth->fetch(PDO::FETCH_OBJ);
+
+							$sql="select * from traspasos where idtraspaso=$origen->idtraspaso";
+							$sth = $db->dbh->query($sql);
+              $traspaso=$sth->fetch(PDO::FETCH_OBJ);
+							echo "#:".$traspaso->numero;
+							echo "<br>".$traspaso->nombre;
+						}
           echo "</div>";
 
           echo "<div class='col-2 text-center'>";
             echo $key->cantidad;
+          echo "</div>";
+
+          echo "<div class='col-2 text-center'>";
+            echo $key->existencia;
           echo "</div>";
 
         echo "</div>";
@@ -76,6 +94,8 @@
     echo "</div>";
   echo "</div>";
 echo "</div>";
+
+
     $sql="select count(bodega.idbodega) as total from bodega where idproducto=$idproducto and idsucursal='".$_SESSION['idsucursal']."' order by idbodega desc";
 		$sth = $db->dbh->query($sql);
 		$contar=$sth->fetch(PDO::FETCH_OBJ);

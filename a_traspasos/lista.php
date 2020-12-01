@@ -8,7 +8,6 @@
 	else{
 		$pd = $db->traspasos_lista();
 	}
-
 	echo "<div class='container-fluid' style='background-color:".$_SESSION['cfondo']."; '>";
 ?>
 	<div class='tabla_css' id='tabla_css'>
@@ -40,7 +39,10 @@
 						<div class='col-2'><?php echo $key->nombre; ?></div>
 
 						<div class='col-2'><?php echo $key->estado; ?></div>
-						<div class='col-2'><?php echo $key->idsucursal; ?></div>
+						<div class='col-2'><?php
+							$sucursal=$db->sucursal($key->idsucursal);
+							echo $sucursal->nombre;
+						?></div>
 
 					</div>
 			<?php
@@ -74,7 +76,7 @@
 		<div class='col-2'>Fecha</div>
 		<div class='col-2'>nombre</div>
 		<div class='col-2'>Estado</div>
-		<div class='col-2'>Destino</div>
+		<div class='col-2'>Origen</div>
 	</div>
 
 		<?php
@@ -91,7 +93,10 @@
 					<div class='col-2'><?php echo $key->nombre; ?></div>
 
 					<div class='col-2'><?php echo $key->estado; ?></div>
-					<div class='col-2'><?php echo $key->idsucursal; ?></div>
+					<div class='col-2'><?php
+						$sucursal=$db->sucursal($key->iddesde);
+						echo $sucursal->nombre;
+					?></div>
 
 				</div>
 		<?php

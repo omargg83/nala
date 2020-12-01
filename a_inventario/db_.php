@@ -36,6 +36,12 @@ class Productos extends Sagyc{
 		}
 		$this->doc="a_archivos/productos/";
 	}
+	public function usuario($id){
+		$sql="select * from usuarios where idusuario='$id'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetch(PDO::FETCH_OBJ);
+	}
 	public function producto_buscar($texto){
 		$sql="SELECT
 		productos_catalogo.nombre,
@@ -273,7 +279,6 @@ class Productos extends Sagyc{
 
 			if($_REQUEST['cantidad']<1){
 				$arreglo =array();
-				$arreglo+=array('id'=>$idproducto);
 				$arreglo+=array('error'=>1);
 				$arreglo+=array('terror'=>"Error de cantidad, favor de verificar");
 				return json_encode($arreglo);

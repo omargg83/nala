@@ -32,8 +32,6 @@
 			 <input type="date" class="form-control form-control-sm fechaclass" id="fecha" name='fecha' placeholder="Fecha" value="<?php echo $fecha; ?>">
 			</div>
 			<div class="col-3">
-
-
 			 <label>Nota de compra</label>
 			 <?php
 			 	echo "<select type='text' class='form-control form-control-sm' id='idcompra' name='idcompra'>";
@@ -43,24 +41,18 @@
 					}
 				echo "</select>";
 			?>
-
-
 			</div>
 		</div>
 	</div>
-	<div class='modal-footer' >
 
 		<div class='modal-footer' >
- <?php
-			echo "<div class='btn-group'>";
-
-				if($db->nivel_captura==1){
-				echo "<button class='btn btn-warning btn-sm' type='submit' is='f-submit' id='acceso' title='Guardar'><i class='far fa-save'></i>Guardar</button>";
-				}
-?>
-
-			<button class="btn btn-warning btn-sm" type="button" is="b-link" cmodal='1' ><i class="fas fa-sign-out-alt"></i>Cerrar</button>
-		</div>
-
-  </div>
+			<div class='btn-group'>
+	 			<?php
+					if($db->nivel_captura==1){
+					echo "<button class='btn btn-warning btn-sm' type='submit' is='f-submit' id='acceso' title='Guardar'><i class='far fa-save'></i>Guardar</button>";
+					}
+				?>
+				<button class="btn btn-warning btn-sm" type="button" is="b-link" cmodal='1' ><i class="fas fa-sign-out-alt"></i>Cerrar</button>
+			</div>
+	  </div>
 </form>

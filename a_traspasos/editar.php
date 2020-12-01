@@ -31,7 +31,7 @@
 				<input type="hidden" class="form-control form-control-sm" name="idtraspaso" id="idtraspaso" value="<?php echo $idtraspaso ;?>" placeholder="Tienda" readonly>
 				<div class='row'>
 
-				 <div class='col-3'>
+				 <div class='col-2'>
 				   <label>Número:</label>
 					 <input type="text" class="form-control form-control-sm" name="numero" id="numero" value="<?php echo $numero ;?>" placeholder="Número" required readonly>
 				 </div>
@@ -41,7 +41,7 @@
 					 <input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre ;?>" placeholder="identificador" required>
 				 </div>
 
-				 <div class='col-3'>
+				 <div class='col-2'>
 				   <label>Fecha:</label>
 					 <input type="date" class="form-control form-control-sm" name="fecha" id="fecha" value="<?php echo $fecha ;?>" placeholder="Fecha" required>
 				 </div>
@@ -59,7 +59,11 @@
 						}
 					  echo "</select>";
 					?>
+				</div>
 
+				<div class='col-2'>
+					<label>Estado:</label>
+					<input type="text" class="form-control form-control-sm" value="<?php echo $estado ;?>" placeholder="Fecha" readonly>
 				</div>
 			</div>
 		</div>
@@ -80,8 +84,8 @@
 									else{
 										if($idsucursal!=$_SESSION['idsucursal']){
 											echo "<button class='btn btn-warning btn-sm' type='button' is='b-print' des='a_traspasos/imprimir' v_idtraspaso='$idtraspaso' omodal='1'><i class='fas fa-print'></i>Imprimir</button>";
-										
-											if($db->nivel_personal==0){
+
+											if($db->nivel_personal==0 and $estado!="Recibida"){
 												echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_traspasos/db_' des='a_traspasos/editar' desid='$idtraspaso' fun='abrir_traspaso' dix='trabajo' v_idtraspaso='$idtraspaso' id='finaliza' tp='¿Desea abrir el traspaso seleccionado?'><i class='fas fa-lock-open'></i>Desbloquear</button>";
 											}
 										}
