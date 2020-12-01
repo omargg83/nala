@@ -176,7 +176,7 @@
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" id="myModal" data-backdrop="static" data-keyboard="false">
-	<div class="modal-dialog modal-lg" role="document" id='modal_dispo'>
+	<div class="modal-dialog modal-xl" role="document" id='modal_dispo'>
 		<div class="modal-content" id='modal_form'>
 
 		</div>

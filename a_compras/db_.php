@@ -157,6 +157,7 @@ class Compras extends Sagyc{
 		}
 		else{
 			///////////////////
+			////////////busca en el catalogo el tipo de producto
 			$sql="select * from productos_catalogo where idcatalogo='$idcatalogo'";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
@@ -174,6 +175,7 @@ class Compras extends Sagyc{
 				$arreglo+=array('cantidad'=>0);
 			}
 
+			////////////busca el primer producto que encuentre para duplicarlo en sucursal
 			$sql="select * from productos where idcatalogo='$idcatalogo' order by idproducto asc limit 1";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();

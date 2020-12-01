@@ -34,6 +34,10 @@
 
             echo "<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='cate_nue' des='a_categorias/lista' dix='trabajo'><i class='fas fa-box'></i><span>Categorias</span></a></li>";
           }
+
+          if($_SESSION['nivel']==66){
+            echo "<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='cate_nue' des='a_inventario/duplicados'  dix='trabajo'><i class='fas fa-box'></i><span>Duplicados</span></a></li>";
+          }
         ?>
 
         <li class='nav-item active'><a class='nav-link barranav izq' is='a-link' title='Nuevo' id='new_poliza' des='a_inventario/agregar' v_id='0' dix='trabajo'><i class='fas fa-cloud-download-alt'></i><span>Agregar producto</span></a></li>

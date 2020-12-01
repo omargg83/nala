@@ -33,6 +33,8 @@
 		$distri_cantidad=$per->distri_cantidad;
 		///
 
+
+		//$db->recalcular($idproducto);
 	}
 	else{
 		$precio=0;
@@ -89,10 +91,10 @@
 					<div class="col-xl col-auto">
 						<?php
 							if(strlen($archivo)>0 and file_exists("../".$db->f_productos."/".$archivo)){
-								echo "<img src='".$db->f_productos."/".$archivo."' width='100%' class='img-thumbnail'/>";
+								echo "<img src='".$db->f_productos."/".$archivo."' width='200px' class='img-thumbnail'/>";
 							}
 							else{
-								echo "<img src='img/unnamed.png' width='100%' class='img-thumbnail'/>";
+								echo "<img src='img/unnamed.png' width='200px' class='img-thumbnail'/>";
 							}
 					 	?>
 					</div>
@@ -124,9 +126,6 @@
 						</div>
 					</div>
 				</div>
-
-
-
 				<hr>
 			<?php
 				if($tipo==3){
@@ -142,7 +141,6 @@
 						 <label><b>Existencias</b></label>
 						 <input type="text" class="form-control form-control-sm" id="tmp_ex" name='tmp_ex' placeholder="Existencias" value="<?php echo $exist; ?>" readonly>
 						</div>
-
 
 						<div class="col-xl col-auto">
 						 <label>Precio compra</label>

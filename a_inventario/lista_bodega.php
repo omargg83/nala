@@ -13,6 +13,9 @@
 
     echo "<div class='tabla_css' id='tabla_css'>";
   		echo "<div class='row header-row'>";
+				if($_SESSION['nivel']==66){
+	  			echo "<div class='col-xl col-auto'>-</div>";
+				}
   			echo "<div class='col-xl col-auto'>Fecha</div>";
   			echo "<div class='col-xl col-auto'>Tipo</div>";
   			echo "<div class='col-xl col-auto'>Descripción</div>";
@@ -23,8 +26,13 @@
       $total=0;
       foreach($row as $key){
         echo "<div class='row body-row' draggable='true'>";
+					if($_SESSION['nivel']==66){
+						echo "<div class='col-xl col-auto'>";
+								echo "<button type='button' class='btn btn-warning btn-sm' id='edit_bodega' is='b-link' title='Editar' des='a_inventario/form_bodega' dix='trabajo' v_idproducto='$key->idproducto' v_idbodega='$key->idbodega' omodal='1'><i class='fas fa-pencil-alt'></i></button>";
+						echo "</div>";
+					}
           echo "<div class='col-xl col-auto'>";
-            echo fecha($key->fecha);
+            echo fecha($key->fecha,2);
           echo "</div>";
           echo "<div class='col-xl col-auto'>";
             if($key->cantidad>0 and strlen($key->idcompra)==0 and strlen($key->idpadre)==0){

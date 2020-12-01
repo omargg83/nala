@@ -47,6 +47,7 @@ class Productos extends Sagyc{
 		productos_catalogo.nombre,
 		productos_catalogo.codigo,
 		productos_catalogo.tipo,
+		productos_catalogo.idcatalogo,
 		productos.idproducto,
 		productos.idcatalogo,
 		productos.activo_producto,
@@ -57,6 +58,7 @@ class Productos extends Sagyc{
 		productos.precio_distri,
 		productos.stockmin,
 		productos.idsucursal
+
 		from productos
 		LEFT OUTER JOIN productos_catalogo ON productos_catalogo.idcatalogo = productos.idcatalogo
 		where productos.idsucursal='".$_SESSION['idsucursal']."' and
@@ -75,6 +77,7 @@ class Productos extends Sagyc{
 			productos_catalogo.nombre,
 			productos_catalogo.codigo,
 			productos_catalogo.tipo,
+			productos_catalogo.idcatalogo,
 			productos.*
 			from productos
 			LEFT OUTER JOIN productos_catalogo ON productos_catalogo.idcatalogo = productos.idcatalogo
@@ -87,6 +90,29 @@ class Productos extends Sagyc{
 			return "Database access FAILED! ".$e->getMessage();
 		}
 	}
+
+	public function duplicados_lista(){
+		try{
+
+			$sql="SELECT count(productos_catalogo.idcatalogo) as duplicados,
+			productos_catalogo.nombre,
+			productos_catalogo.codigo,
+			productos_catalogo.tipo,
+			productos_catalogo.idcatalogo,
+			productos.*
+			from productos
+			LEFT OUTER JOIN productos_catalogo ON productos_catalogo.idcatalogo = productos.idcatalogo
+			where productos.idsucursal='".$_SESSION['idsucursal']."' group by productos_catalogo.idcatalogo order by productos_catalogo.idcatalogo";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
+
+
 	public function catalogo_lista($pagina, $texto){
 		try{
 			$texto=clean_var($texto);
@@ -663,6 +689,35 @@ class Productos extends Sagyc{
 			$arreglo+=array('terror'=>"El producto ya existe en la sucursal");
 			return json_encode($arreglo);
 		}
+	}
+
+	public function bodega_editar($idbodega){
+		try{
+			$sql="SELECT * from bodega where idbodega=:idbodega";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":idbodega",$idbodega);
+			$sth->execute();
+			return $sth->fetch(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED!".$e->getMessage();
+		}
+	}
+	public function bodega_guardar(){
+		$idbodega=$_REQUEST['idbodega'];
+		$idproducto=$_REQUEST['idproducto'];
+		$arreglo =array();
+		$fecha=clean_var($_REQUEST['fecha']);
+		$hora=clean_var($_REQUEST['hora']);
+		$fecha=$fecha." ".$hora;
+		$arreglo+=array('fecha'=>$fecha);
+		$this->update('bodega',array('idbodega'=>$idbodega), $arreglo);
+
+		self::recalcular($idproducto,$idbodega);
+		$arreglo =array();
+		$arreglo+=array('id'=>$idproducto);
+		$arreglo+=array('error'=>0);
+		return json_encode($arreglo);
 	}
 }
 $db = new Productos();

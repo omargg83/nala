@@ -695,30 +695,46 @@
 			$arreglo+=array('sidebar'=>$sidebar);
 			return $this->update('usuarios',array('idusuario'=>$_SESSION['idusuario']), $arreglo);
 		}
-		public function recalcular($idproducto=0, $idbodega=0){
+		public function recalcular($idproducto=0, $idbodega=""){
 			$existencia=0;
+
 			if($idproducto==0){
 				$idproducto=clean_var($_REQUEST['idproducto']);
 			}
 
-			if(isset($_REQUEST['idbodega'])){
+			if(isset($_REQUEST['idbodega']) and $_REQUEST['idbodega']>0){
+				////////////////para cuando existe un registro del cual partir
+				//echo "\n uno";
 				$idbodega=clean_var($_REQUEST['idbodega']);
 				//////////// se extrae el anterior para obtener exitencia;
-				$sql="select * from bodega where idproducto=$idproducto and idbodega<$idbodega order by fecha desc  limit 1";
+				$sql="select * from bodega where idproducto=$idproducto and idbodega=$idbodega";
+				//echo "\n $sql";
+				$sth = $this->dbh->prepare($sql);
+				$sth->execute();
+				$reg=$sth->fetch(PDO::FETCH_OBJ);
+
+				$sql="select * from bodega where idproducto=$idproducto and fecha<'$reg->fecha' order by fecha desc limit 1";
+				//echo "\n $sql";
 				$sth = $this->dbh->prepare($sql);
 				$sth->execute();
 				if($sth->rowCount()>0){
 					$inicio=$sth->fetch(PDO::FETCH_OBJ);
 					$existencia=$inicio->existencia;
+
+					$sql="select * from bodega where idproducto=$idproducto and fecha>'$inicio->fecha' order by fecha asc";
 				}
 				else{
 					$existencia=0;
+					$sql="select * from bodega where idproducto=$idproducto order by fecha asc";
 				}
 				//////comenzara desde el registro idbodega
-				$sql="select * from bodega where idproducto=$idproducto and idbodega>=$idbodega order by fecha asc";
+				//echo "\n $sql";
 			}
 			else{
+				///////////////////busca el ultimo que este no tenga null para partir desde ahi
+				//echo "\n dos";
 				$sql="select * from bodega where idproducto=$idproducto and existencia is not null order by fecha desc limit 1 ";
+				//echo "\n $sql";
 				$sth = $this->dbh->prepare($sql);
 				$sth->execute();
 				if($sth->rowCount()>0){

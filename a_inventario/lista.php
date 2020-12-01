@@ -35,7 +35,6 @@
 					echo "<div class='row body-row' draggable='true'>";
 						echo "<div class='col-xl col-auto'>";
 							echo "<div class='btn-group'>";
-
 							echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_inventario/editar' dix='trabajo' v_idproducto='$key->idproducto'><i class='fas fa-pencil-alt'></i></button>";
 
 							if($key->tipo==3){
