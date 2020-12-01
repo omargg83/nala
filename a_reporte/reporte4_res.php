@@ -10,16 +10,16 @@
 
   <div class='tabla_css' id='tabla_css'>
     <div class='row titulo-row'>
-      <div class='col-12'>
+      <div class='col-xl col-auto'>
         CORTE DE CAJA POR USUARIO
       </div>
     </div>
     <div class='row header-row'>
     <!--  <div class='col-1'>-</div> -->
-      <div class='col-3'>Fecha</div>
-      <div class='col-3'>Total</div>
-      <div class='col-3'>Tipo de Pago</div>
-      <div class='col-3'>Vendedor</div>
+      <div class='col-xl col-auto'>Fecha</div>
+      <div class='col-xl col-auto'>Total</div>
+      <div class='col-xl col-auto'>Tipo de Pago</div>
+      <div class='col-xl col-auto'>Vendedor</div>
     </div>
 
       <?php
@@ -34,19 +34,19 @@
               echo "</div>";
             echo "</div>";*/
 
-            echo "<div class='col-3 text-center'>".$key->fecha."</div>";
+            echo "<div class='col-xl col-auto text-center'>".$key->fecha."</div>";
 
 
-            echo "<div class='col-3 text-center'>";
+            echo "<div class='col-xl col-auto text-center'>";
               echo moneda($key->total);
                    $monto_t+=$key->total;
             echo "</div>";
 
-            echo "<div class='col-3 text-center'>";
+            echo "<div class='col-xl col-auto text-center'>";
               echo $key->tipo_pago;
             echo "</div>";
 
-            echo "<div class='col-3 text-center'>";
+            echo "<div class='col-xl col-auto text-center'>";
               echo $key->vendedor;
             echo "</div>";
 
@@ -55,7 +55,7 @@
           echo "<div class='row body-row' draggable='true'>";
       echo "<tr>";
       echo "<td>Total  </td>";
-      echo "<div class='col-1 text-right' ><b>".moneda($monto_t)."</b></div>";
+      echo "<div class='col-xl col-auto text-right' ><b>".moneda($monto_t)."</b></div>";
       echo"</tr>";
           echo'</div>';
       ?>
