@@ -31,15 +31,16 @@
 		</div>
 
 			<?php
+
 				foreach($pd as $key){
 					echo "<div class='row body-row' draggable='true'>";
 						echo "<div class='col-2'>";
 							echo "<div class='btn-group'>";
 
-							echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_inventario/editar' dix='trabajo' v_idproducto='$key->idproducto'><i class='fas fa-pencil-alt'></i></button>";
+						//	echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_inventario/editar' dix='trabajo' v_idproducto='$key->idproducto'><i class='fas fa-pencil-alt'></i></button>";
 
 							if($key->tipo==3){
-								$sql="select sum(cantidad) as total from bodega where idsucursal='".$_SESSION['idsucursal']."' and idproducto='$key->idproducto'";
+								$sql="select sum(cantidad) as total from bodega where idsucursal='$key->idsucursal' and idproducto='$key->idproducto'";
 								$sth = $db->dbh->prepare($sql);
 								$sth->execute();
 								$cantidad=$sth->fetch(PDO::FETCH_OBJ);
