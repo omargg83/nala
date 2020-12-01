@@ -1,5 +1,5 @@
 <?php
-$server=3;
+$server=2;
 $_SESSION['des']=1;
 
 if($server==2){
