@@ -695,34 +695,39 @@
 			$arreglo+=array('sidebar'=>$sidebar);
 			return $this->update('usuarios',array('idusuario'=>$_SESSION['idusuario']), $arreglo);
 		}
-		public function recalcular(){
+		public function recalcular($idproducto=0, $idbodega=0){
 			$existencia=0;
-			$idproducto=clean_var($_REQUEST['idproducto']);
+			if($idproducto>0){
+
+			}
+			else{
+				$idproducto=clean_var($_REQUEST['idproducto']);
+			}
 
 			if(isset($_REQUEST['idbodega'])){
 				$idbodega=clean_var($_REQUEST['idbodega']);
 				//////////// se extrae el anterior para obtener exitencia;
-				$sql="select * from bodega where idproducto=$idproducto and idbodega<$idbodega order by idbodega desc limit 1";
+				$sql="select * from bodega where idproducto=$idproducto and idbodega<$idbodega order by fecha desc  limit 1";
 				$sth = $this->dbh->prepare($sql);
 				$sth->execute();
 				$inicio=$sth->fetch(PDO::FETCH_OBJ);
 				$existencia=$inicio->existencia;
 
 				//////comenzara desde el registro idbodega
-				$sql="select * from bodega where idproducto=$idproducto and idbodega>=$idbodega order by idbodega asc";
+				$sql="select * from bodega where idproducto=$idproducto and idbodega>=$idbodega order by fecha asc";
 			}
 			else{
-				$sql="select * from bodega where idproducto=$idproducto and existencia is not null order by idbodega desc limit 1 ";
+				$sql="select * from bodega where idproducto=$idproducto and existencia is not null order by fecha desc limit 1 ";
 				$sth = $this->dbh->prepare($sql);
 				$sth->execute();
 				if($sth->rowCount()>0){
 					$inicio=$sth->fetch(PDO::FETCH_OBJ);
 					$existencia=$inicio->existencia;
 					$idbodega=$inicio->idbodega;
-					$sql="select * from bodega where idproducto=$idproducto and idbodega>$idbodega order by idbodega asc limit 100";
+					$sql="select * from bodega where idproducto=$idproducto and idbodega>$idbodega order by fecha asc limit 100";
 				}
 				else{
-					$sql="select * from bodega where idproducto=$idproducto order by idbodega asc limit 100";
+					$sql="select * from bodega where idproducto=$idproducto order by fecha asc limit 100";
 				}
 			}
 			$sth = $this->dbh->query($sql);

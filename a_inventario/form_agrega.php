@@ -19,19 +19,15 @@
 		echo "<input type='hidden' id='idproducto' NAME='idproducto' value='$idproducto'>";
 	?>
 		<div class='row'>
-			<div class="col-3">
+			<div class="col-4">
 			 <label>Cantidad</label>
 			 <input type="text" class="form-control form-control-sm" id="cantidad" name='cantidad' placeholder="Cantidad" value="<?php echo $cantidad; ?>">
 			</div>
-			<div class="col-3">
+			<div class="col-4">
 			 <label>Precio de compra</label>
 			 <input type="text" class="form-control form-control-sm" id="precio" name='precio' placeholder="Precio" value="<?php echo $precio; ?>">
 			</div>
-			<div class="col-3">
-			 <label>Fecha</label>
-			 <input type="date" class="form-control form-control-sm fechaclass" id="fecha" name='fecha' placeholder="Fecha" value="<?php echo $fecha; ?>">
-			</div>
-			<div class="col-3">
+			<div class="col-4">
 			 <label>Nota de compra</label>
 			 <?php
 			 	echo "<select type='text' class='form-control form-control-sm' id='idcompra' name='idcompra'>";
