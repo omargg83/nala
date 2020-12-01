@@ -730,7 +730,7 @@
 				$existencia=$bodega->cantidad+$existencia;
 				$arreglo=array();
 				$arreglo+=array('existencia'=>$existencia);
-				echo self::update('bodega',array('idbodega'=>$bodega->idbodega), $arreglo);
+				self::update('bodega',array('idbodega'=>$bodega->idbodega), $arreglo);
 			}
 			$arreglo =array();
 			$arreglo+=array('id'=>$idproducto);
