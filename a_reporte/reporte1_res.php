@@ -15,12 +15,12 @@
     </div>
     <div class='row header-row'>
     <!--  <div class='col-1'>-</div> -->
-      <div class='col-1'>Ticket #</div>
-      <div class='col-2'>Fecha</div>
-      <div class='col-3'>Cliente</div>
-      <div class='col-3'>Tienda</div>
-      <div class='col-1'>Total</div>
-      <div class='col-1'>Estado</div>
+      <div class='col-xl'>Ticket #</div>
+      <div class='col-xl'>Fecha</div>
+      <div class='col-xl'>Cliente</div>
+      <div class='col-xl'>Tienda</div>
+      <div class='col-xl'>Total</div>
+      <div class='col-xl'>Estado</div>
     </div>
 
       <?php
@@ -35,24 +35,24 @@
               echo "</div>";
             echo "</div>";*/
 
-            echo "<div class='col-1 text-center'>";
+            echo "<div class='col-xl text-center'>";
               echo $key->idventa;
             echo "</div>";
 
-            echo "<div class='col-2'>".$key->fecha."</div>";
+            echo "<div class='col-xl'>".$key->fecha."</div>";
 
 
-            echo "<div class='col-3 text-center'>";
+            echo "<div class='col-xl text-center'>";
               echo $key->nombrecli;
             echo "</div>";
 
-            echo "<div class='col-3 text-center'>";
+            echo "<div class='col-xl text-center'>";
               echo $key->nombre;
             echo "</div>";
 
-            echo "<div class='col-1 text-right' >".moneda($key->total)."</div>";
+            echo "<div class='col-xl text-right' >".moneda($key->total)."</div>";
             $monto_t+=$key->total;
-            echo "<div class='col-1 text-center'>";
+            echo "<div class='col-xl text-center'>";
               echo $key->estado;
             echo "</div>";
 
