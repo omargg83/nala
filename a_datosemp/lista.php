@@ -11,7 +11,7 @@
 	</div>
 	<div class='row header-row'>
 		<div class='col-2'>#</div>
-		<div class='col-2'>Razon Social</div>
+		<div class='col-4'>Razon Social</div>
 		<div class='col-4'>Calle</div>
 		<div class='col-2'>No</div>
 	</div>
@@ -24,7 +24,7 @@
 					echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_datosemp/editar' dix='trabajo' v_idtienda='$key->idtienda'><i class='fas fa-pencil-alt'></i></button>";
 					echo "</div>";
 					echo "</div>";
-					echo "<div class='col-2'>".$key->razon."</div>";
+					echo "<div class='col-4'>".$key->razon."</div>";
 					echo "<div class='col-4'>".$key->calle."</div>";
 					echo "<div class='col-2'>".$key->no."</div>";
 				echo "</div>";
