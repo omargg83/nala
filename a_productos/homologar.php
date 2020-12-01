@@ -24,11 +24,11 @@
 				<div class='tab-content' id='myTabContent'>
 					<div class='tab-pane fade show active' id='ssh' role='tabpanel' aria-labelledby='ssh-tab'>
 							<div class='row'>
-								<div class="col-2">
+								<div class="col-xl col-auto">
 									<label>ID</label><br>
 									<p><?php echo $idcatalogo; ?></p>
 								</div>
-								<div class="col-10">
+								<div class="col-xl col-auto">
 								 <label>Tipo de producto</label>
 								 	<?php
 											if($tipo==0){
@@ -41,17 +41,17 @@
 								</div>
 							</div>
 							<div class='row'>
-								<div class="col-2">
+								<div class="col-xl col-auto">
 									<label>Código</label><br>
 									<p><?php echo $codigo; ?>"</p>
 								</div>
 
-								<div class="col-8">
+								<div class="col-xl col-auto">
 								 <label><b>Nombre</b></label><br>
 								 <p><?php echo $nombre; ?>"</p>
 								</div>
 
-								<div class='col-2'>
+								<div class='col-xl col-auto'>
 									<label>categoría</label>
 									<select class='form-control form-control-sm' name='categoria' id='categoria'>
 										<?php
@@ -61,7 +61,7 @@
 									</select>
 								</div>
 
-								<div class="col-12">
+								<div class="col-xl col-auto">
 									<label>Descripción</label>
 									 <p><?php echo $descripcion; ?>"</p>
 								</div>

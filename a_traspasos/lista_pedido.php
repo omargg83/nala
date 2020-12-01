@@ -15,12 +15,12 @@
   }
 
 	$pedido = $db->traspaso_pedido($idtraspaso);
-	echo "<div class='tabla_css col-12' id='tabla_css'>";
+	echo "<div class='tabla_css col-xl col-auto' id='tabla_css'>";
 		echo "<div class='row header-row'>";
-			echo "<div class='col-2'>-</div>";
-			echo "<div class='col-3'>Código</div>";
-			echo "<div class='col-5'>Descripcion</div>";
-			echo "<div class='col-2'>Cantidad</div>";
+			echo "<div class='col-xl col-auto'>-</div>";
+			echo "<div class='col-xl col-auto'>Código</div>";
+			echo "<div class='col-xl col-auto'>Descripcion</div>";
+			echo "<div class='col-xl col-auto'>Cantidad</div>";
 		echo "</div>";
 
 	if($idtraspaso>0){
@@ -28,7 +28,7 @@
 		foreach($pedido as $key){
 			echo "<div class='row body-row' draggable='true'>";
 
-				echo "<div class='col-2'>";
+				echo "<div class='col-xl col-auto'>";
 					echo "<div class='btn-group mr-3'>";
 						if($estado_compra=="Activa"){
 							echo "<button class='btn btn-warning btn-sm' id='del_$key->idbodega' type='button' is='t-borraprod' v_idbodega='$key->idbodega' title='Borrar'><i class='far fa-trash-alt'></i></button>";
@@ -39,15 +39,15 @@
 					echo "</div>";
 				echo "</div>";
 
-				echo "<div class='col-3'>";
+				echo "<div class='col-xl col-auto'>";
 					echo $key->codigo;
 				echo "</div>";
 
-				echo "<div class='col-5'>";
+				echo "<div class='col-xl col-auto'>";
 					echo $key->nombre;
 				echo "</div>";
 
-				echo "<div class='col-2 text-center'>";
+				echo "<div class='col-xl col-auto text-center'>";
 					echo number_format($key->v_cantidad);
 				echo "</div>";
 

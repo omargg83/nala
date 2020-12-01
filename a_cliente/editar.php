@@ -88,6 +88,7 @@
 							<input type="text" class="form-control form-control-sm" id="colonia" name='colonia' placeholder="Colonia" value="<?php echo $colonia;?>" maxlength='150'>
 						</div>
 					</div>
+				<hr>
 					<div class='row'>
 							<div class="col-xl col-auto">
 								<label>Ciudad</label>
@@ -106,20 +107,23 @@
 							<input type="text" class="form-control form-control-sm" id="estado" name='estado' placeholder="Estado" value="<?php echo $estado;?>" maxlength='100'>
 						</div>
 					</div>
+				<hr>
 					<div class='row'>
-					<div class="col-xl col-auto">
-						<label>Correo:</label>
-							<input type="text" class="form-control form-control-sm" name="correo" id="correo" value="<?php echo $correo;?>" placeholder="Correo" maxlength='45'>
+							<div class="col-xl col-auto">
+								<label>Correo:</label>
+									<input type="text" class="form-control form-control-sm" name="correo" id="correo" value="<?php echo $correo;?>" placeholder="Correo" maxlength='45'>
+							</div>
+							<div class="col-xl col-auto">
+								<label>Telefono:</label>
+									<input type="text" class="form-control form-control-sm" name="telefono" id="telefono" value="<?php echo $telefono;?>" placeholder="Telefono" maxlength='45'>
+							</div>
 					</div>
-					<div class="col-xl col-auto">
-						<label>Telefono:</label>
-							<input type="text" class="form-control form-control-sm" name="telefono" id="telefono" value="<?php echo $telefono;?>" placeholder="Telefono" maxlength='45'>
-					</div>
-
-					<div class="col-xl col-auto">
-						<label>Observaciones:</label>
-							<textarea type="text" class="form-control form-control-sm" name="observaciones" id="observaciones" placeholder="Observaciones" rows='5'><?php echo $observaciones;?></textarea>
-					</div>
+				<hr>
+					<div class='row'>
+						<div class="col-xl col-auto">
+							<label>Observaciones:</label>
+								<textarea type="text" class="form-control form-control-sm" name="observaciones" id="observaciones" placeholder="Observaciones" rows='5'><?php echo $observaciones;?></textarea>
+						</div>
 				</div>
 			</div>
 			<div class='card-footer'>

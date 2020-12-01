@@ -5,12 +5,12 @@
 	$pedido = $db->entrada($idcompra);
 	echo "<div class='tabla_css' id='tabla_css'>";
 		echo "<div class='row header-row'>";
-			echo "<div class='col-2'>#</div>";
-			echo "<div class='col-2'>Código</div>";
-			echo "<div class='col-2'>Nombre</div>";
-			echo "<div class='col-2'>Cantidad</div>";
-			echo "<div class='col-2'>Precio Compra</div>";
-			echo "<div class='col-2'>Total</div>";
+			echo "<div class='col-xl col-auto'>#</div>";
+			echo "<div class='col-xl col-auto'>Código</div>";
+			echo "<div class='col-xl col-auto'>Nombre</div>";
+			echo "<div class='col-xl col-auto'>Cantidad</div>";
+			echo "<div class='col-xl col-auto'>Precio Compra</div>";
+			echo "<div class='col-xl col-auto'>Total</div>";
 		echo "</div>";
 
 	$gtotal=0;
@@ -20,7 +20,7 @@
 	$suma=0;
 	foreach($pedido as $key){
 		echo "<div class='row body-row' draggable='true'>";
-			echo "<div class='col-2'>";
+			echo "<div class='col-xl col-auto'>";
 
 		if($estado=="Activa" and $key->cantidad>0){
 
@@ -29,19 +29,19 @@
 		}
 
 		echo "</div>";
-		echo "<div class='col-2'>".$key->codigo."</div>";
-		echo "<div class='col-2'>".$key->nombre."</div>";
-		echo "<div class='col-2 text-center'>".$key->cantidad."</div>";
-		echo "<div class='col-2 text-right'>".moneda($key->c_precio)."</div>";
-		echo "<div class='col-2 text-right'>".moneda($key->cantidad*$key->c_precio)."</div>";
+		echo "<div class='col-xl col-auto'>".$key->codigo."</div>";
+		echo "<div class='col-xl col-auto'>".$key->nombre."</div>";
+		echo "<div class='col-xl col-auto text-center'>".$key->cantidad."</div>";
+		echo "<div class='col-xl col-auto text-right'>".moneda($key->c_precio)."</div>";
+		echo "<div class='col-xl col-auto text-right'>".moneda($key->cantidad*$key->c_precio)."</div>";
 		$suma+=$key->cantidad*$key->c_precio;
 		echo "</div>";
 	}
 	echo "</div>";
 	echo "<div class='row body-row' draggable='true'>";
-		echo "<div class='col-10'>";
+		echo "<div class='col-xl col-auto'>";
 		echo "</div>";
-		echo "<div class='col-2 text-right'>";
+		echo "<div class='col-xl col-auto text-right'>";
 			echo "<h4>";
 			echo moneda($suma);
 			echo "</h4>";

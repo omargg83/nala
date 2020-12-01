@@ -29,12 +29,12 @@
 	echo "<div class='container'>";
 	echo "<div class='tabla_css' id='tabla_css'>";
 		echo "<div class='row header-row'>";
-			echo "<div class='col-1'><i class='far fa-lightbulb' title='Estatus'></i></div>";
-			echo "<div class='col-1'><i class='fas fa-cubes' title='Stock'></i></div>";
-			echo "<div class='col-4'><i class='far fa-file-alt' title='Descripción'></i></div>";
-			echo "<div class='col-2'><i class='fas fa-dollar-sign' title='Precio' ></i></div>";
-			echo "<div class='col-2'><i class='fas fa-dollar-sign' title='Precio Mayoreo' >M</i></div>";
-			echo "<div class='col-2'><i class='fas fa-dollar-sign' title='Precio Distribuidor' >D</i></div>";
+			echo "<div class='col-xl col-auto'><i class='far fa-lightbulb' title='Estatus'></i></div>";
+			echo "<div class='col-xl col-auto'><i class='fas fa-cubes' title='Stock'></i></div>";
+			echo "<div class='col-xl col-auto'><i class='far fa-file-alt' title='Descripción'></i></div>";
+			echo "<div class='col-xl col-auto'><i class='fas fa-dollar-sign' title='Precio' ></i></div>";
+			echo "<div class='col-xl col-auto'><i class='fas fa-dollar-sign' title='Precio Mayoreo' >M</i></div>";
+			echo "<div class='col-xl col-auto'><i class='fas fa-dollar-sign' title='Precio Distribuidor' >D</i></div>";
 		echo "</div>";
 
 	  if(count($res)>0){
@@ -45,7 +45,7 @@
 				$cantidad=$sth->fetch(PDO::FETCH_OBJ);
 
 	      echo "<div class='row body-row' is='b-card' draggable='true'>";
-	      echo  "<div class='col-1'>";
+	      echo  "<div class='col-xl col-auto'>";
 		      echo  "<div class='btn-group'>";
 					if($cantidad->total>0 and $key->activo_producto==1 ){
 						echo "<button type='button'  id='0' des='' dix='0' v_idproducto='0' class='btn btn-warning btn-sm' title='Producto en existencia' omodal='1'><i class='far fa-thumbs-up'></i></button>";
@@ -63,25 +63,25 @@
 		    echo  "</div>";
 	      echo  "</div>";
 
-				echo  "<div class='col-1 text-center'>";
+				echo  "<div class='col-xl col-auto text-center'>";
 					echo $cantidad->total;
 	      echo  "</div>";
 
-	      echo  "<div class='col-4'>";
+	      echo  "<div class='col-xl col-auto'>";
 				echo  $key->codigo;
 				echo "<br>";
 	      echo  $key->nombre;
 	      echo  "</div>";
 
-				echo  "<div class='col-2'>";
+				echo  "<div class='col-xl col-auto'>";
 	        echo 	moneda($key->precio);
 	      echo  "</div>";
 
-				echo  "<div class='col-2'>";
+				echo  "<div class='col-xl col-auto'>";
 					echo 	moneda($key->precio_mayoreo);
 				echo  "</div>";
 
-				echo  "<div class='col-2'>";
+				echo  "<div class='col-xl col-auto'>";
 					echo 	moneda($key->precio_distri);
 				echo  "</div>";
 

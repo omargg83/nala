@@ -13,20 +13,20 @@
 
     echo "<div class='tabla_css' id='tabla_css'>";
   		echo "<div class='row header-row'>";
-  			echo "<div class='col-2'>Fecha</div>";
-  			echo "<div class='col-2'>Tipo</div>";
-  			echo "<div class='col-4'>Descripción</div>";
-  			echo "<div class='col-2'>Cantidad</div>";
-  			echo "<div class='col-2'>Existencia</div>";
+  			echo "<div class='col-xl col-auto'>Fecha</div>";
+  			echo "<div class='col-xl col-auto'>Tipo</div>";
+  			echo "<div class='col-xl col-auto'>Descripción</div>";
+  			echo "<div class='col-xl col-auto'>Cantidad</div>";
+  			echo "<div class='col-xl col-auto'>Existencia</div>";
   		echo "</div>";
 
       $total=0;
       foreach($row as $key){
         echo "<div class='row body-row' draggable='true'>";
-          echo "<div class='col-2'>";
+          echo "<div class='col-xl col-auto'>";
             echo fecha($key->fecha);
           echo "</div>";
-          echo "<div class='col-2'>";
+          echo "<div class='col-xl col-auto'>";
             if($key->cantidad>0 and strlen($key->idcompra)==0 and strlen($key->idpadre)==0){
               echo "Ingreso";
             }
@@ -46,7 +46,7 @@
 						echo "<br>";
 						echo $usuario->nombre;
           echo "</div>";
-          echo "<div class='col-4'>";
+          echo "<div class='col-xl col-auto'>";
 
             if(strlen($key->idtraspaso)>0){
               $sql="select * from traspasos where idtraspaso=$key->idtraspaso";
@@ -81,11 +81,11 @@
 						}
           echo "</div>";
 
-          echo "<div class='col-2 text-center'>";
+          echo "<div class='col-xl col-auto text-center'>";
             echo $key->cantidad;
           echo "</div>";
 
-          echo "<div class='col-2 text-center'>";
+          echo "<div class='col-xl col-auto text-center'>";
             echo $key->existencia;
           echo "</div>";
 

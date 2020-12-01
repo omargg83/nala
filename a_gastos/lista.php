@@ -13,22 +13,22 @@
 ?>
 <div class='tabla_css' id='tabla_css'>
 	<div class='row titulo-row'>
-		<div class='col-12'>
+		<div class='col-xl col-auto'>
 			LISTA DE GASTOS
 		</div>
 	</div>
 	<div class='row header-row'>
-		<div class='col-2'>#</div>
-		<div class='col-2'>Fecha</div>
-		<div class='col-2'>Gasto</div>
-		<div class='col-4'>Descripción</div>
-		<div class='col-2'>Costo</div>
+		<div class='col-xl col-auto'>#</div>
+		<div class='col-xl col-auto'>Fecha</div>
+		<div class='col-xl col-auto'>Gasto</div>
+		<div class='col-xl col-auto'>Descripción</div>
+		<div class='col-xl col-auto'>Costo</div>
 	</div>
 
 		<?php
 			foreach($pd as $key){
 				echo "<div class='row body-row' draggable='true'>";
-					echo "<div class='col-2'>";
+					echo "<div class='col-xl col-auto'>";
 						echo "<div class='btn-group'>";
 
 						echo "<button type='button' class='btn btn-warning btn-sm' id='edit_persona' is='b-link' title='Editar' des='a_gastos/editar' dix='trabajo' v_idgastos='$key->idgastos'><i class='fas fa-pencil-alt'></i></button>";
@@ -38,10 +38,10 @@
 						echo "</div>";
 					echo "</div>";
 
-					echo "<div class='col-2'>".$key->fecha."</div>";
-					echo "<div class='col-2'>".$key->gasto."</div>";
-					echo "<div class='col-4'>".$key->descripcion."</div>";
-					echo "<div class='col-2'>".moneda($key->costo)."</div>";
+					echo "<div class='col-xl col-auto text-center'>".$key->fecha."</div>";
+					echo "<div class='col-xl col-auto text-center'>".$key->gasto."</div>";
+					echo "<div class='col-xl col-auto text-center'>".$key->descripcion."</div>";
+					echo "<div class='col-xl col-auto text-center'>".moneda($key->costo)."</div>";
 				echo "</div>";
 			}
 		?>

@@ -24,13 +24,13 @@
 	echo "<div class='container'>";
 	echo "<div class='tabla_css' id='tabla_css'>";
 		echo "<div class='row header-row'>";
-			echo "<div class='col-12'>DESCRIPCION</div>";
+			echo "<div class='col-xl col-auto'>DESCRIPCION</div>";
 		echo "</div>";
 
 	  if(count($res)>0){
 	    foreach ($res as $key) {
 	      echo "<div class='row body-row' is='b-card' draggable='true'>";
-					echo "<div class='col-12'>";
+					echo "<div class='col-xl col-auto'>";
 						if($estado_compra=="Activa" and $_SESSION['a_sistema']==1){
 							echo "<div class='btn-group mr-1'>";
 						      echo "<button type='button' is='b-link' id='sel_producto_$key->idproducto' des='a_traspasos/producto_selecciona' dix='resultadosx' v_idproducto='$key->idproducto' v_idtraspaso='$idtraspaso' class='btn btn-warning btn-sm' title='Seleccionar producto'><i class='fas fa-plus'></i></button>";

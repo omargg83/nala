@@ -43,7 +43,7 @@
 		echo "<div class='modal-body' style='max-height:580px;overflow: auto;'>";
 
 			echo "<div class='row'>";
-				echo "<div class='col-4'>";
+				echo "<div class='col-xl col-auto'>";
 					if(strlen($producto->archivo)>0 and file_exists("../".$db->f_productos."/".$producto->archivo)){
 						echo "<img src='".$db->f_productos."/".$producto->archivo."' width='100%' class='img-thumbnail'/>";
 					}
@@ -52,7 +52,7 @@
 					}
 
 				echo "</div>";
-				echo "<div class='col-8'>";
+				echo "<div class='col-xl col-auto'>";
 					echo "<label>Producto</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='nombre' id='nombre' value='".$producto->nombre."' readonly>";
 					echo "<small>";
@@ -86,7 +86,7 @@
 
 			echo "<hr>";
 			echo "<div class='row'>";
-				echo "<div class='col-12'>";
+				echo "<div class='col-xl col-auto'>";
 					echo "<div class='btn-group'>";
 						echo "<button class='btn btn-warning btn-sm' type='submit' ><i class='fas fa-cart-plus'></i>Agregar</button>";
 						echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' cmodal='1' ><i class='fas fa-sign-out-alt'></i>Cerrar</button>";

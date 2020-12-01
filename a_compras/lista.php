@@ -18,40 +18,40 @@
 ?>
 	<div class='tabla_css' id='tabla_css'>
 		<div class='row titulo-row'>
-			<div class='col-12'>
+			<div class='col-xl col-auto'>
 				LISTA DE COMPRAS
 			</div>
 		</div>
 		<div class='row header-row'>
-			<div class='col-2'>#</div>
-			<div class='col-2'>Fecha</div>
-			<div class='col-2'>Numero</div>
-			<div class='col-2'>Nombre</div>
-			<div class='col-2'>Proveedor</div>
-			<div class='col-2'>Estado</div>
+			<div class='col-xl col-auto'>#</div>
+			<div class='col-xl col-auto'>Fecha</div>
+			<div class='col-xl col-auto'>Numero</div>
+			<div class='col-xl col-auto'>Nombre</div>
+			<div class='col-xl col-auto'>Proveedor</div>
+			<div class='col-xl col-auto'>Estado</div>
 		</div>
 
 			<?php
 				foreach($pd as $key){
 					echo "<div class='row body-row' draggable='true'>";
-						echo "<div class='col-2'>";
+						echo "<div class='col-xl col-auto'>";
 
 							echo "<div class='btn-group'>";
 
 							if($db->nivel_captura==1){
 								echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_compras/editar' dix='trabajo' v_idcompra='$key->idcompra'><i class='fas fa-pencil-alt'></i></button>";
-								
+
 
 							}
 							echo "</div>";
 
 						echo "</div>";
 
-						echo "<div class='col-2'>".fecha($key->fecha)."</div>";
-						echo "<div class='col-2'>".$key->numero."</div>";
-						echo "<div class='col-2'>".$key->nombre."</div>";
-						echo "<div class='col-2'>".$key->idproveedor."</div>";
-						echo "<div class='col-2'>".$key->estado."</div>";
+						echo "<div class='col-xl col-auto text-center'>".fecha($key->fecha)."</div>";
+						echo "<div class='col-xl col-auto text-center'>".$key->numero."</div>";
+						echo "<div class='col-xl col-auto text-center'>".$key->nombre."</div>";
+						echo "<div class='col-xl col-auto text-center'>".$key->idproveedor."</div>";
+						echo "<div class='col-xl col-auto text-center'>".$key->estado."</div>";
 
 					echo "</div>";
 				}

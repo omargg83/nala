@@ -25,21 +25,21 @@
 			</div>
 			<div class='card-body'>
 				<div class='row'>
-					<div class="col-3">
+					<div class="col-xl col-auto">
 						<label>Nombre Proveedor:</label>
 							<input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre;?>" placeholder="Nombre" required maxlength="100">
 					</div>
-					<div class="col-3">
+					<div class="col-xl col-auto">
 						<label>Email:</label>
 							<input type="text" class="form-control form-control-sm" name="emailp" id="emailp" value="<?php echo $emailp;?>" placeholder="Email" maxlength="100">
 					</div>
 
-					<div class="col-3">
+					<div class="col-xl col-auto">
 						<label>Telefonos:</label>
 							<input type="text" class="form-control form-control-sm" name="telp" id="telp" value="<?php echo $telp;?>" placeholder="Telefonos" maxlength="45">
 					</div>
 
-					<div class="col-3">
+					<div class="col-xl col-auto">
 						<label>Dirección:</label>
 							<input type="text" class="form-control form-control-sm" name="dirp" id="dirp" value="<?php echo $dirp;?>" placeholder="Dirección" maxlength="150">
 					</div>
@@ -47,7 +47,7 @@
 			</div>
 			<div class='card-footer'>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-xl col-auto">
 						<div class="btn-group">
 							<button class="btn btn-warning btn-sm" type="submit"><i class='far fa-save'></i>Guardar</button>
 							<?php

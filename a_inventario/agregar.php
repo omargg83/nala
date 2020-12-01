@@ -15,7 +15,7 @@
 
 	echo "<div class='container' style='background-color:".$_SESSION['cfondo']."; '>";
 		echo "<div class='row'>";
-			echo "<div class='col-sm-12'>";
+			echo "<div class='col-xl col-auto'>";
 				echo "<label>Buscar</label>";
 				echo "<form is='b-submit' id='form_bagrega' des='a_inventario/agregar' dix='trabajo' >";
 					echo "<div clas='row'>";
@@ -36,21 +36,21 @@
 
 	<div class='tabla_css' id='tabla_css'>
 	  <div class='row titulo-row'>
-	    <div class='col-12'>
+	    <div class='col-xl col-auto'>
 	      ASIGNAR PRODUCTO A LA SUCURSAL
 	    </div>
 	  </div>
 	  <div class='row header-row'>
-	    <div class='col-2'>#</div>
-	    <div class='col-2'>Tipo</div>
-	    <div class='col-2'>Codigo</div>
-	    <div class='col-6'>Nombre</div>
+	    <div class='col-xl col-auto'>#</div>
+	    <div class='col-xl col-auto'>Tipo</div>
+	    <div class='col-xl col-auto'>Codigo</div>
+	    <div class='col-xl col-auto'>Nombre</div>
 	  </div>
 
 	    <?php
 	      foreach($pd as $key){
 	        echo "<div class='row body-row' draggable='true'>";
-	          echo "<div class='col-2'>";
+	          echo "<div class='col-xl col-auto'>";
 	            echo "<div class='btn-group'>";
 
 
@@ -61,13 +61,13 @@
 	            echo "</div>";
 	          echo "</div>";
 
-	          echo "<div class='col-2'>";
+	          echo "<div class='col-xl col-auto text-center'>";
 	            if($key->tipo==0) echo "Servicio";
 	            if($key->tipo==3) echo "Producto";
 	          echo "</div>";
 
-	          echo "<div class='col-2'>".$key->codigo."</div>";
-	          echo "<div class='col-6'>".$key->nombre."</div>";
+	          echo "<div class='col-xl col-auto text-center'>".$key->codigo."</div>";
+	          echo "<div class='col-xl col-auto text-center'>".$key->nombre."</div>";
 
 	        echo '</div>';
 	      }

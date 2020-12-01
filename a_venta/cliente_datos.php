@@ -13,9 +13,9 @@
 ?>
 
 <input type="hidden" name="idcliente" id="idcliente" value="<?php echo $idcliente; ?>" readonly>
-<div class='col-12'>
+<div class='col-xl col-auto'>
   <div class="input-group">
     <input type="text" class="form-control form-control-sm" name="n_cliente" id='n_cliente' placeholder='Cliente' aria-label="buscar producto" aria-describedby="basic-addon2" value="<?php echo $n_cliente; ?>" readonly>
-    
+
   </div>
 </div>
