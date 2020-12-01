@@ -71,38 +71,42 @@
 				<hr>
 
 				<div class='row'>
-					<div class="col-xl col-auto">
-						<label>Dirección</label>
-						<input type="text" class="form-control form-control-sm" id="direccion" name='direccion' placeholder="Dirección" value="<?php echo $direccion;?>" maxlength='200'>
+						<div class="col-xl col-auto">
+							<label>Dirección</label>
+							<input type="text" class="form-control form-control-sm" id="direccion" name='direccion' placeholder="Dirección" value="<?php echo $direccion;?>" maxlength='200'>
+						</div>
+						<div class="col-xl col-auto">
+							<label>Entre calles</label>
+							<input type="text" class="form-control form-control-sm" id="entrecalles" name='entrecalles' placeholder="Entre calles" value="<?php echo $entrecalles;?>" maxlength='200'>
+						</div>
+						<div class="col-xl col-auto">
+							<label>No. exterior</label>
+							<input type="text" class="form-control form-control-sm" id="numero" name='numero' placeholder="No. exterior" value="<?php echo $numero;?>" maxlength='20'>
+						</div>
+						<div class="col-xl col-auto">
+							<label>Colonia</label>
+							<input type="text" class="form-control form-control-sm" id="colonia" name='colonia' placeholder="Colonia" value="<?php echo $colonia;?>" maxlength='150'>
+						</div>
 					</div>
-					<div class="col-xl col-auto">
-						<label>Entre calles</label>
-						<input type="text" class="form-control form-control-sm" id="entrecalles" name='entrecalles' placeholder="Entre calles" value="<?php echo $entrecalles;?>" maxlength='200'>
+					<div class='row'>
+							<div class="col-xl col-auto">
+								<label>Ciudad</label>
+								<input type="text" class="form-control form-control-sm" id="ciudad" name='ciudad' placeholder="Ciudad" value="<?php echo $ciudad;?>" maxlength='150' >
+							</div>
+							<div class="col-xl col-auto">
+								<label>Código postal</label>
+								<input type="text" class="form-control form-control-sm" id="cp" name='cp' placeholder="Código postal" value="<?php echo $cp;?>" maxlength='5' >
+							</div>
+							<div class="col-xl col-auto">
+								<label>País</label>
+								<input type="text" class="form-control form-control-sm" id="pais" name='pais' placeholder="País" value="<?php echo $pais;?>" maxlength='100'>
+							</div>
+						<div class="col-xl col-auto">
+							<label>Estado</label>
+							<input type="text" class="form-control form-control-sm" id="estado" name='estado' placeholder="Estado" value="<?php echo $estado;?>" maxlength='100'>
+						</div>
 					</div>
-					<div class="col-xl col-auto">
-						<label>No. exterior</label>
-						<input type="text" class="form-control form-control-sm" id="numero" name='numero' placeholder="No. exterior" value="<?php echo $numero;?>" maxlength='20'>
-					</div>
-					<div class="col-xl col-auto">
-						<label>Colonia</label>
-						<input type="text" class="form-control form-control-sm" id="colonia" name='colonia' placeholder="Colonia" value="<?php echo $colonia;?>" maxlength='150'>
-					</div>
-					<div class="col-xl col-auto">
-						<label>Ciudad</label>
-						<input type="text" class="form-control form-control-sm" id="ciudad" name='ciudad' placeholder="Ciudad" value="<?php echo $ciudad;?>" maxlength='150' >
-					</div>
-					<div class="col-xl col-auto">
-						<label>Código postal</label>
-						<input type="text" class="form-control form-control-sm" id="cp" name='cp' placeholder="Código postal" value="<?php echo $cp;?>" maxlength='5' >
-					</div>
-					<div class="col-xl col-auto">
-						<label>País</label>
-						<input type="text" class="form-control form-control-sm" id="pais" name='pais' placeholder="País" value="<?php echo $pais;?>" maxlength='100'>
-					</div>
-					<div class="col-xl col-auto">
-						<label>Estado</label>
-						<input type="text" class="form-control form-control-sm" id="estado" name='estado' placeholder="Estado" value="<?php echo $estado;?>" maxlength='100'>
-					</div>
+					<div class='row'>
 					<div class="col-xl col-auto">
 						<label>Correo:</label>
 							<input type="text" class="form-control form-control-sm" name="correo" id="correo" value="<?php echo $correo;?>" placeholder="Correo" maxlength='45'>
