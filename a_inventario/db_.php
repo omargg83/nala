@@ -298,13 +298,10 @@ class Productos extends Sagyc{
 					$arreglo += array('idcompra'=>null);
 				}
 			}
-			if (isset($_REQUEST['fecha'])){
-				$fx=explode("-",$_REQUEST['fecha']);
-
-				$arreglo+=array('fecha'=>$_REQUEST['fecha']);
-			}
+		
 			$x="";
 			if($id==0){
+				$arreglo+=array('fecha'=>date("Y-m-d H:i:s"));
 				$arreglo+=array('fechaalta'=>date("Y-m-d H:i:s"));
 				$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
 				$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
@@ -334,7 +331,7 @@ class Productos extends Sagyc{
 	public function productos_inventario($id,$pagina){
 		try{
 			$pagina=$pagina*$_SESSION['pagina'];
-			$sql="select * from bodega where idproducto=$id and idsucursal='".$_SESSION['idsucursal']."' order by idbodega desc limit $pagina,".$_SESSION['pagina']."";
+			$sql="select * from bodega where idproducto=$id and idsucursal='".$_SESSION['idsucursal']."' order by fecha asc limit $pagina,".$_SESSION['pagina']."";
 			$sth = $this->dbh->prepare($sql);
 			$sth->execute();
 			return $sth->fetchAll(PDO::FETCH_OBJ);

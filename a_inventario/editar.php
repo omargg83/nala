@@ -3,6 +3,9 @@
 	$idproducto=$_REQUEST['idproducto'];
 	$cate=$db->categoria();
 	if($idproducto>0){
+		//$db->recalcular();
+
+
 		$per = $db->producto_editar($idproducto);
 
 		$exist=$per->cantidad;

@@ -173,6 +173,7 @@ class Traspaso extends Sagyc{
 		}
 
 		$arreglo=array();
+		$arreglo+=array('fecha'=>date("Y-m-d H:i:s"));
 		$arreglo+=array('idtraspaso'=>$idtraspaso);
 		$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
 		$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
@@ -263,6 +264,8 @@ class Traspaso extends Sagyc{
 		$cantidad=abs($bodega->cantidad);
 
 		$arreglo=array();
+		$arreglo+=array('fecha'=>date("Y-m-d H:i:s"));
+		$arreglo+=array('fechaalta'=>date("Y-m-d H:i:s"));
 		$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
 		$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
 		$arreglo+=array('idproducto'=>$idproducto);
@@ -271,7 +274,6 @@ class Traspaso extends Sagyc{
 		$arreglo+=array('fecha'=>$date);
 		$arreglo+=array('nombre'=>$bodega->nombre);
 		$x=$this->insert('bodega', $arreglo);
-
 
 		$ped=json_decode($x);
 		if($ped->error==0){

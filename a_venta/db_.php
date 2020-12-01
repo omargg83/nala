@@ -154,10 +154,8 @@ class Venta extends Sagyc{
 					$estado=$venta->estado;
 				}
 
-
 				///////////////////////////recalcula esquemas
 				$esquema=json_decode(self::esquemas($idproducto,$cantidad));
-
 
 				$arreglo=array();
 				$arreglo+=array('fecha'=>date("Y-m-d H:i:s"));
@@ -190,7 +188,6 @@ class Venta extends Sagyc{
 				$arreglo+=array('monto_distribuidor'=>$producto->monto_distribuidor);
 
 				$arreglo+=array('v_precio'=>$precio);
-
 				$x=$this->insert('bodega', $arreglo);
 				$ped=json_decode($x);
 
@@ -268,22 +265,18 @@ class Venta extends Sagyc{
 	public function suma_venta($idventa){
 
 		///////////////corregir este
+		$sql="select sum(v_precio * v_cantidad) as total from bodega where idventa='$idventa' ";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		$rex=$sth->fetch(PDO::FETCH_OBJ);
+		$total=$rex->total;
+		$subtotal=$total/1.16;
+		$iva=$total-$subtotal;
 
-			$sql="select sum(v_precio * v_cantidad) as total from bodega where idventa='$idventa' ";
-			$sth = $this->dbh->prepare($sql);
-			$sth->execute();
-			$rex=$sth->fetch(PDO::FETCH_OBJ);
-			$total=$rex->total;
-			$subtotal=$total/1.16;
-			$iva=$total-$subtotal;
-
-			$arreglo=array();
-			$arreglo+=array('total'=>$rex->total,'subtotal'=>$subtotal, 'iva'=>$iva);
-			$this->update('venta',array('idventa'=>$idventa), $arreglo);
-			return $rex->total;
-
-
-		return 0;
+		$arreglo=array();
+		$arreglo+=array('total'=>$rex->total,'subtotal'=>$subtotal, 'iva'=>$iva);
+		$this->update('venta',array('idventa'=>$idventa), $arreglo);
+		return $rex->total;
 	}
 
 

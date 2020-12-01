@@ -225,6 +225,8 @@ class Compras extends Sagyc{
 		}
 
 		$arreglo=array();
+		$arreglo+=array('fecha'=>date("Y-m-d H:i:s"));
+		$arreglo+=array('fechaalta'=>date("Y-m-d H:i:s"));
 		$arreglo+=array('idcompra'=>$idcompra);
 		$arreglo+=array('idproducto'=>$idproducto);
 		$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
