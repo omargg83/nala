@@ -36,7 +36,7 @@
 						if($db->nivel_captura==1){
 							echo "<button class='btn btn-warning btn-sm' is='b-link' des='a_usuarios/editar' dix='trabajo' v_id='$key->idusuario' id='edit_persona'><i class='fas fa-pencil-alt'></i></button>";
 
-							if($_SESSION['nivel']==0){
+							if($_SESSION['nivel']==66){
 									echo "<button type='button' class='btn btn-danger btn-sm' is='b-link' db='a_usuarios/db_' fun='cambiar_user' dix='trabajo' v_id='$key->idusuario' id='cabiar' tp='¿Desea cambiar a la cuenta selecionada?'><i class='fas fa-user-shield'></i></button>";
 							}
 						}

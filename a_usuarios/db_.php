@@ -16,7 +16,7 @@ class Usuario extends Sagyc{
 
 	public function __construct(){
 		parent::__construct();
-		if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('USUARIOS', $this->derecho) or $_SESSION['nivel']==0) {
+		if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('USUARIOS', $this->derecho) or $_SESSION['nivel']==66) {
 			////////////////PERMISOS
 			if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('USUARIOS', $this->derecho)) {
 				$sql="SELECT nivel,captura FROM usuarios_permiso where idusuario='".$_SESSION['idusuario']."' and modulo='USUARIOS'";
@@ -26,7 +26,7 @@ class Usuario extends Sagyc{
 				$this->nivel_personal=$row->nivel;
 				$this->nivel_captura=$row->captura;
 			}
-			if($_SESSION['nivel']==0){
+			if($_SESSION['nivel']==66){
 				$this->nivel_personal=0;
 				$this->nivel_captura=1;
 			}

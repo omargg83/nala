@@ -545,7 +545,7 @@ $(document).on('submit',"[is*='t-selecciona']",function(e){
   xhr.addEventListener('load',(data)=>{
     console.log(data.target.response);
     cargando(false);
-    
+
     var datos = JSON.parse(data.target.response);
     if(datos.error==0){
       $('#myModal').modal('hide');
