@@ -1,40 +1,68 @@
-<br>
-<div class='container-fluid'>
-	<div class='row'>
-		<div class="col-3 edit-t mb-1">
-	  	<div class="card bg-white text-black">
-		    <p class="card-text text-center">Ventas</p>
-				<div class='card-footer'>
-					<a class="btn btn-warning btn-sm btn-block" id='menu_ventas' is='menu-link' href='#a_reporte/reporte1'>Ir</a>
-				</div>
-		  </div>
-	  </div>
-		<div class="col-3 edit-t mb-1">
-	  	<div class="card bg-white text-black">
-		    <p class="card-text text-center">Ventas y productos por vendedor</p>
-				<div class='card-footer'>
-					<a class="btn btn-warning btn-sm btn-block" id='menu_ventas' is='menu-link' href='#a_reporte/reporte2'>Ir</a>
-				</div>
-		  </div>
-	  </div>
+<?php
+	echo "<div class='alert alert-warning'><b>REPORTES</b></div>";
+	echo "<div class='container-fluid'>";
+		echo "<div class='row'>";
 
-		<div class="col-3 edit-t mb-1">
-	  	<div class="card bg-white text-black">
-		    <p class="card-text text-center">Corte de caja</p>
-				<div class='card-footer'>
-					<a class="btn btn-warning btn-sm btn-block" id='menu_ventas' is='menu-link' href='#a_reporte/reporte3'>Ir</a>
-				</div>
-		  </div>
-	  </div>
+				echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
+					<div class='dash_icon'>
+						<div class='row'>
+							<div class='col-3 text-center'>
+								<i class='fas fa-cash-register fa-3x'></i>
+							</div>
+							<div class='col-9'>
+								<h5>Ventas</h5>
+								<p class='card-text text-center'>Reporte de ventas</p>
+								<a class='btn btn-warning btn-sm btn-block' id='menu_ventas' is='menu-link' href='#a_reporte/reporte1'>Ir</a>
+							</div>
+						</div>
+				  </div>
+			  </div>";
 
-		<div class="col-3 edit-t mb-1">
-			<div class="card bg-white text-black">
-				<p class="card-text text-center">Corte de caja por usuario</p>
-				<div class='card-footer'>
-					<a class="btn btn-warning btn-sm btn-block" id='menu_ventas' is='menu-link' href='#a_reporte/reporte4'>Ir</a>
-				</div>
-			</div>
-		</div>
+				echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
+					<div class='dash_icon'>
+						<div class='row'>
+							<div class='col-3 text-center'>
+								<i class='fas fa-people-carry fa-3x'></i>
+							</div>
+							<div class='col-9'>
+								<h5>Ventas y productos</h5>
+								<p class='card-text text-center'>Ventas y productos por vendedor</p>
+								<a class='btn btn-warning btn-sm btn-block' id='menu_ventas' is='menu-link' href='#a_reporte/reporte2'>Ir</a>
+							</div>
+						</div>
+				  </div>
+			  </div>";
 
-	</div>
-</div>
+				echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
+					<div class='dash_icon'>
+						<div class='row'>
+							<div class='col-3 text-center'>
+								<i class='fas fa-receipt fa-3x'></i>
+							</div>
+							<div class='col-9'>
+								<h5>Caja</h5>
+								<p class='card-text text-center'>Corte de caja</p>
+								<a class='btn btn-warning btn-sm btn-block' id='menu_ventas' is='menu-link' href='#a_reporte/reporte3'>Ir</a>
+							</div>
+						</div>
+				  </div>
+			  </div>";
+
+				echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
+					<div class='dash_icon'>
+						<div class='row'>
+							<div class='col-3 text-center'>
+								<i class='fas fa-hand-holding-usd fa-3x'></i>
+							</div>
+							<div class='col-9'>
+								<h5>Caja</h5>
+								<p class='card-text text-center'>Corte de caja por usuario</p>
+								<a class='btn btn-warning btn-sm btn-block' id='menu_ventas' is='menu-link' href='#a_reporte/reporte4'>Ir</a>
+							</div>
+						</div>
+				  </div>
+			  </div>";
+
+		echo "</div>";
+	echo "</div>";
+?>

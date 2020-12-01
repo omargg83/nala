@@ -113,6 +113,14 @@
 	$(document).on('click',"[is*='menu-link']",function(e){
 		let hash=e.currentTarget.hash.slice(1);
 		loadContent(hash);
+
+		if(document.querySelector('.activeside')){
+			document.querySelector('.activeside').classList.remove('activeside');
+			this.classList.add('activeside');
+		}
+		else{
+			this.classList.add('activeside');
+		}
 	});
 	$(document).on('click',"[is*='a-link']",function(e){
 		e.preventDefault();

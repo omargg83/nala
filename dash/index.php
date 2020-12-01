@@ -1,11 +1,9 @@
 <?php
 require_once("../db_.php");
-?>
-<br>
-<div class='container-fluid'>
-	<div class='row'>
-		<?php
 
+
+echo "<div class='container-fluid'>";
+	echo "<div class='row'>";
 		if(array_key_exists('VENTA', $db->derecho)){
 			echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
 				<div class='dash_icon'>
