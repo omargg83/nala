@@ -1,6 +1,6 @@
 <?php
 $server=2;
-$_SESSION['des']=0;
+$_SESSION['des']=1;
 $_SESSION['pagina']=50;
 
 if($server==2){

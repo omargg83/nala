@@ -339,6 +339,9 @@ class Productos extends Sagyc{
 			}
 			$ped=json_decode($x);
 			if($ped->error==0){
+
+				parent::recalcular($idproducto);
+
 				$arreglo =array();
 				$arreglo+=array('id'=>$idproducto);
 				$arreglo+=array('error'=>0);

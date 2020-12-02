@@ -32,7 +32,7 @@
 
 			<?php
 				foreach($pd as $key){
-					echo "<div class='row body-row' draggable='true'>";
+					echo "<div class='row body-row' >";
 						echo "<div class='col-xl col-auto'>";
 							echo "<div class='btn-group'>";
 
@@ -78,9 +78,33 @@
 
 						echo "<div class='col-xl col-auto'>".$key->nombre."</div>";
 
-
 						echo "<div class='col-xl col-auto text-center'>";
-							echo $exist;
+
+							if($_SESSION['nivel']==66){
+								echo "Sum:".$exist;
+								echo "<br>Tabla:".$key->cantidad;
+								$sql="select * from bodega where idproducto='$key->idproducto' order by fecha desc limit 1";
+								$sth = $db->dbh->prepare($sql);
+								$sth->execute();
+								if($sth->rowCount()>0){
+									$bod=$sth->fetch(PDO::FETCH_OBJ);
+									echo "<br>Bodega: ".$bod->existencia;
+									$bod=$bod->existencia;
+								}
+								else{
+									$bod=0;
+									echo "<br>Bodega: 0";
+								}
+								if($exist==$key->cantidad and $key->cantidad==$bod){
+
+								}
+								else{
+									echo "<B>MAL</B>";
+								}
+							}
+							else{
+								echo $exist;
+							}
 						echo "</div>";
 
 						echo "<div class='col-xl col-auto text-center' >".moneda($key->precio)."</div>";

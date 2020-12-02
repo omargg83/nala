@@ -165,6 +165,7 @@ class Venta extends Sagyc{
 				$arreglo+=array('idproducto'=>$producto->idproducto);
 				$arreglo+=array('nombre'=>$producto->nombre);
 				$arreglo+=array('esquema'=>$producto->esquema);
+				$arreglo+=array('codigo'=>$producto->codigo);
 
 				$arreglo+=array('v_cantidad'=>$cantidad);
 				$total=$cantidad*$precio;
@@ -193,6 +194,10 @@ class Venta extends Sagyc{
 
 				$total=$this->suma_venta($idventa);
 				if($ped->error==0){
+
+					parent::recalcular($idproducto);
+
+
 					$arreglo =array();
 					$arreglo+=array('idventa'=>$idventa);
 					$arreglo+=array('error'=>0);
@@ -219,11 +224,23 @@ class Venta extends Sagyc{
 		return $sth->fetchAll(PDO::FETCH_OBJ);
 	}
 	public function borrar_venta(){
+
+		$idproducto=$_REQUEST['idproducto'];
 		$idbodega=$_REQUEST['idbodega'];
 		$idventa=$_REQUEST['idventa'];
-		$x=$this->borrar('bodega',"idbodega",$idbodega);
-		$total=$this->suma_venta($idventa);
 
+		$sql="select * from bodega where idbodega='$idbodega'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		$bodega=$sth->fetch(PDO::FETCH_OBJ);
+
+		$x=$this->borrar('bodega',"idbodega",$idbodega);
+		$ped=json_decode($x);
+		if($ped->error==0){
+			parent::recalcular($idproducto, "FECHA" ,$bodega->fecha);
+		}
+
+		$total=$this->suma_venta($idventa);
 		$arreglo =array();
 		$arreglo+=array('idventa'=>$idventa);
 		$arreglo+=array('error'=>0);
@@ -278,7 +295,6 @@ class Venta extends Sagyc{
 		$this->update('venta',array('idventa'=>$idventa), $arreglo);
 		return $rex->total;
 	}
-
 
 	public function finalizar_venta(){
 

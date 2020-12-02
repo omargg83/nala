@@ -156,20 +156,23 @@ function fondos(){
   };
   xhr.send(formData);
 }
-function fondo(archivo){
+
+$(document).on('click',"[is*='p-fondo']",function(e){
+  e.preventDefault();
+  let archivo=e.currentTarget.attributes.v_fondo.value;
   var formData = new FormData();
   formData.append("function", "fondo");
   formData.append("imagen", archivo);
   formData.append("ctrl", "control");
+
   let xhr = new XMLHttpRequest();
   xhr.open('POST',"control_db.php");
   xhr.addEventListener('load',(data)=>{
     document.body.style.backgroundImage = "url('"+ archivo +"')";
   });
-  xhr.onerror = (e)=>{
-  };
   xhr.send(formData);
-}
+});
+
 function fijar(){
   let sidebar;
   if(document.querySelector('.sidebar')){
@@ -283,6 +286,7 @@ $(document).on('click',"[is*='is-borraprod']",function(e){
   e.preventDefault();
   let idventa=document.getElementById("idventa").value;
   let idbodega=e.currentTarget.attributes.v_idbodega.value;
+  let idproducto=e.currentTarget.attributes.v_idproducto.value;
   let formData = new FormData();
 
   $.confirm({
@@ -293,11 +297,13 @@ $(document).on('click',"[is*='is-borraprod']",function(e){
         cargando(true);
         formData.append("idventa", idventa);
         formData.append("idbodega", idbodega);
+        formData.append("idproducto", idproducto);
         formData.append("function", "borrar_venta");
 
         let xhr = new XMLHttpRequest();
         xhr.open('POST',"a_venta/db_.php");
         xhr.addEventListener('load',(data)=>{
+          console.log(data.target.response);
           var datos = JSON.parse(data.target.response);
           //document.getElementById("total").value=datos.total;
           lista(idventa);
