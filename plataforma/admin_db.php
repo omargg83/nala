@@ -14,6 +14,7 @@
 		public $nivel_personal;
 		public $nivel_captura;
 		public $limite=300;
+		public $f_empresas="../img/logos/";
 
 		public function __construct(){
 			date_default_timezone_set("America/Mexico_City");

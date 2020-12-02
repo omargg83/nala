@@ -18,6 +18,7 @@
 
 		public $f_productos="a_archivos/productos/";
 		public $f_usuarios="a_archivos/usuarios/";
+		public $f_empresas="img/logos/";
 
 		public function __construct(){
 			date_default_timezone_set("America/Mexico_City");
