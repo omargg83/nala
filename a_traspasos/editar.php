@@ -100,7 +100,7 @@
 		</form>
 <?php
 	if($idtraspaso>0){
-		echo "<div class='col-xl col-auto' id='lista' style='max-height:600px; overflow:auto;'>";
+		echo "<div class='col-12' id='lista' style='max-height:600px; overflow:auto;'>";
 			include 'lista_pedido.php';
 		echo "</div>";
 	}
