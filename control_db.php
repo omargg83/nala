@@ -756,7 +756,7 @@
 
 			$arreglo =array();
 			$arreglo += array('cantidad'=>$existencia);
-			$x=$this->update('productos_catalogo',array('idcatalogo'=>$idcatalogo), $arreglo);
+		//	$x=$this->update('productos_catalogo',array('idcatalogo'=>$idcatalogo), $arreglo);
 
 			$arreglo =array();
 			$arreglo+=array('id'=>$idproducto);
