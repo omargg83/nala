@@ -727,14 +727,15 @@
 					$idbodega=clean_var($_REQUEST['idbodega']);
 				}
 			}
-			//echo "\n Bodega: $idbodega";
 
+			//echo "\n Bodega: $idbodega";
 			if($idbodega=="INICIO"){
 				/////////////////////desde inicio de los tiempos
-				echo "\n INICIO";
+				//echo "\n INICIO";
 				$sql="select * from bodega where idproducto=$idproducto order by fecha asc";
 			}
-			else if($idbodega>0 or $idbodega!="INICIO"){
+			else if($idbodega>0 or ($idbodega!="INICIO" and strlen($idbodega)>0)){
+
 				////////////////para cuando existe un registro del cual partir de idbodega
 				//echo "\n uno";
 
