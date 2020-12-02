@@ -185,13 +185,26 @@ class Traspaso extends Sagyc{
 		$arreglo+=array('cantidad'=>$cantidad);
 		$arreglo+=array('nombre'=>$producto->nombre);
 		$x=$this->insert('bodega', $arreglo);
+
+		parent::recalcular($idproducto);
 		//$ped=json_decode($x);
 		return $x;
 	}
 	public function borrar_traspaso(){
 		$idbodega=$_REQUEST['idbodega'];
 		$idtraspaso=$_REQUEST['idtraspaso'];
+
+		$sql="select * from bodega where idbodega='$idbodega'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		$bodega=$sth->fetch(PDO::FETCH_OBJ);
+
 		$x=$this->borrar('bodega',"idbodega",$idbodega);
+
+		$ped=json_decode($x);
+		if($ped->error==0){
+			parent::recalcular($bodega->idproducto, "FECHA" ,$bodega->fecha);
+		}
 
 		$arreglo =array();
 		$arreglo+=array('idtraspaso'=>$idtraspaso);

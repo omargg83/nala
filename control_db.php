@@ -715,8 +715,6 @@
 				 	recalcular($idproducto, "FECHA" ,$bodega->fecha);
 			*/
 
-
-
 			if(isset($_REQUEST['fecha'])){
 				$fecha=clean_var($_REQUEST['fecha']);
 			}
@@ -729,30 +727,31 @@
 					$idbodega=clean_var($_REQUEST['idbodega']);
 				}
 			}
+			//echo "\n Bodega: $idbodega";
 
-			if( $idbodega=="INICIO"){
+			if($idbodega=="INICIO"){
 				/////////////////////desde inicio de los tiempos
-				//echo "\n INICIO";
+				echo "\n INICIO";
 				$sql="select * from bodega where idproducto=$idproducto order by fecha asc";
 			}
-			else if($idbodega>0 and $idbodega!="INICIO"){
+			else if($idbodega>0 or $idbodega!="INICIO"){
 				////////////////para cuando existe un registro del cual partir de idbodega
 				//echo "\n uno";
 
 				if($idbodega!="FECHA"){
 					//////////// se extrae el actual idbodega para obtener fecha;
-					echo "\n idbodega $idbodega";
+					//echo "\n idbodega $idbodega";
 					$sql="select * from bodega where idproducto=$idproducto and idbodega=$idbodega";
-					echo "\n $sql";
+					//echo "\n $sql";
 					$sth = $this->dbh->prepare($sql);
 					$sth->execute();
 					$reg=$sth->fetch(PDO::FETCH_OBJ);
 				}
 				else{
 					///////////////a partir de la fecha extrae el ultimo para partir de ahi
-					echo "\n fecha $fecha";
+					//echo "\n fecha $fecha";
 					$sql="select * from bodega where idproducto=$idproducto and fecha<'$fecha' order by fecha desc limit 1";
-					echo "\n $sql";
+					//echo "\n $sql";
 					$sth = $this->dbh->prepare($sql);
 					$sth->execute();
 					$reg=$sth->fetch(PDO::FETCH_OBJ);

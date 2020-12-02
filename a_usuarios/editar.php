@@ -153,8 +153,6 @@
 							echo $db->nivel();
 							echo "</select>";
 						echo "</div>";
-
-
 					echo "</div>";
 				echo "</form>";
 				echo "<hr>";

@@ -225,7 +225,6 @@ class Venta extends Sagyc{
 	}
 	public function borrar_venta(){
 
-		$idproducto=$_REQUEST['idproducto'];
 		$idbodega=$_REQUEST['idbodega'];
 		$idventa=$_REQUEST['idventa'];
 
@@ -235,9 +234,10 @@ class Venta extends Sagyc{
 		$bodega=$sth->fetch(PDO::FETCH_OBJ);
 
 		$x=$this->borrar('bodega',"idbodega",$idbodega);
+		
 		$ped=json_decode($x);
 		if($ped->error==0){
-			parent::recalcular($idproducto, "FECHA" ,$bodega->fecha);
+			parent::recalcular($bodega->idproducto, "FECHA" ,$bodega->fecha);
 		}
 
 		$total=$this->suma_venta($idventa);

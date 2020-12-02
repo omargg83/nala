@@ -717,6 +717,7 @@ class Productos extends Sagyc{
 		$this->update('bodega',array('idbodega'=>$idbodega), $arreglo);
 
 		self::recalcular($idproducto,$idbodega);
+		
 		$arreglo =array();
 		$arreglo+=array('id'=>$idproducto);
 		$arreglo+=array('error'=>0);

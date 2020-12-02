@@ -593,6 +593,7 @@ $(document).on('click',"[is*='t-borraprod']",function(e){
         let xhr = new XMLHttpRequest();
         xhr.open('POST',"a_traspasos/db_.php");
         xhr.addEventListener('load',(data)=>{
+          console.log(data.target.response);
           var datos = JSON.parse(data.target.response);
 
           tras_lista(idtraspaso);
