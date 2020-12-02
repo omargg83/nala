@@ -106,7 +106,7 @@ class Venta extends Sagyc{
 			$desde = date("Y-m-d", strtotime($desde))." 00:00:00";
 			$hasta = date("Y-m-d", strtotime($hasta))." 23:59:59";
 
-			$sql="select venta.idventa, venta.idsucursal, venta.descuento, venta.factura, clientes.nombre as nombrecli, sucursal.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
+			$sql="select venta.idventa, venta.numero, venta.idsucursal, venta.descuento, venta.factura, clientes.nombre as nombrecli, sucursal.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
 			left outer join clientes on clientes.idcliente=venta.idcliente
 			left outer join sucursal on sucursal.idsucursal=venta.idsucursal where (venta.fecha BETWEEN :fecha1 AND :fecha2)";
 			if(strlen($idsucursal)>0){

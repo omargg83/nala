@@ -52,7 +52,7 @@ class Venta extends Sagyc{
 			$desde = date("Y-m-d", strtotime($desde))." 00:00:00";
 			$hasta = date("Y-m-d", strtotime($hasta))." 23:59:59";
 
-			$sql="select venta.idventa, venta.idsucursal, venta.descuento, venta.factura, clientes.nombre as nombrecli, sucursal.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
+			$sql="select venta.idventa, venta.numero, venta.idsucursal, venta.descuento, venta.factura, clientes.nombre as nombrecli, sucursal.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
 			left outer join clientes on clientes.idcliente=venta.idcliente
 			left outer join sucursal on sucursal.idsucursal=venta.idsucursal where venta.idsucursal='".$_SESSION['idsucursal']."' and (venta.fecha BETWEEN :fecha1 AND :fecha2)";
 			$sth = $this->dbh->prepare($sql);
@@ -103,7 +103,7 @@ class Venta extends Sagyc{
 			$desde = date("Y-m-d", strtotime($desde))." 00:00:00";
 			$hasta = date("Y-m-d", strtotime($hasta))." 23:59:59";
 
-			$sql="SELECT venta.idventa, venta.idsucursal,	venta.descuento,	venta.factura, clientes.nombre as nombrecli, sucursal.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado,bodega.v_cantidad, bodega.v_precio,	bodega.v_total,	bodega.nombre, bodega.observaciones, bodega.cliente, usuarios.nombre as vendedor FROM	bodega
+			$sql="SELECT venta.*, clientes.nombre as nombrecli, sucursal.nombre,bodega.v_cantidad, bodega.v_precio,	bodega.v_total,	bodega.nombre, bodega.observaciones, bodega.cliente, usuarios.nombre as vendedor FROM	bodega
 				LEFT OUTER JOIN venta ON venta.idventa = bodega.idventa
 				LEFT OUTER JOIN usuarios ON usuarios.idusuario = venta.idusuario
 				left outer join productos on productos.idproducto=bodega.idproducto

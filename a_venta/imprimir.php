@@ -14,6 +14,7 @@
 	$iva=$pd->iva;
 	$total=$pd->total;
 	$tipo_pago=$pd->tipo_pago;
+	$numerotiket=$pd->numero;
 
 	$cliente=$db->cliente($idcliente);
 	$nombre_cli=$cliente->nombre;
@@ -39,9 +40,6 @@
 		$pdf->ezImage("../img/logoimp.jpg", 0, 100, 'none', 'center');
 	}
 
-
-
-
 	$pdf->ezText($tiend->razon,10,array('justification' => 'center'));
 	$pdf->ezText($suc->ubicacion,10,array('justification' => 'center'));
 	$pdf->ezText("Codigo Postal: ".$suc->cp,10,array('justification' => 'center'));
@@ -52,7 +50,7 @@
 	$pdf->ezText("Cliente: ".$nombre_cli,10);
 	$pdf->ezText("Fecha y hora: ".$fecha,10);
 	//$pdf->ezText("Expedido en: Pachuca Hgo.",10);
-	$pdf->ezText("Ticket #: ".$idventa,12);
+	$pdf->ezText("Ticket #: ".$numerotiket,12);
 	$pdf->ezText(" ",10);
 	$data=array();
 	$contar=0;
