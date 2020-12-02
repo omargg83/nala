@@ -1,5 +1,5 @@
 <?php
-$server=2;
+$server=3;
 $_SESSION['des']=0;
 $_SESSION['pagina']=50;
 

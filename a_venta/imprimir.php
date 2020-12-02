@@ -39,9 +39,6 @@
 		$pdf->ezImage("../img/logoimp.jpg", 0, 100, 'none', 'center');
 	}
 
-
-
-
 	$pdf->ezText($tiend->razon,10,array('justification' => 'center'));
 	$pdf->ezText($suc->ubicacion,10,array('justification' => 'center'));
 	$pdf->ezText("Codigo Postal: ".$suc->cp,10,array('justification' => 'center'));
