@@ -154,7 +154,7 @@
 							echo "</select>";
 						echo "</div>";
 					echo "</div>";
-				echo "</form>";
+
 				echo "<hr>";
 				echo "<div class='row'>";
 					echo "<div class='col-xl col-auto'>";
@@ -166,7 +166,7 @@
 						echo "</div>";
 					echo "</div>";
 				echo "</div>";
-
+	echo "</form>";
 
 				echo "<div id='permisos'>";
 					include 'form_permisos.php';
