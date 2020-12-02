@@ -37,7 +37,7 @@
             echo "</div>";*/
 
             echo "<div class='col-xl col-auto text-center'>";
-              echo $key->idventa;
+              echo $key->numero;
             echo "</div>";
 
             echo "<div class='col-xl col-auto'>".$key->fecha."</div>";
