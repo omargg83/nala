@@ -1,5 +1,5 @@
 <?php
-$server=2;
+$server=3;
 $_SESSION['pagina']=50;
 
 if($server==2){
