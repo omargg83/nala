@@ -42,7 +42,9 @@
 					echo "<div class='col-12'>";
 						echo "<div class='btn-group mr-3'>";
 							if($estado_compra=="Activa"){
-								echo "<button class='btn btn-warning btn-sm' id='del_$key->idbodega' type='button' is='is-borraprod' v_idbodega='$key->idbodega' title='Borrar'><i class='far fa-trash-alt'></i></button>";
+							//	echo "<button class='btn btn-warning btn-sm' id='del_$key->idbodega' type='button' is='is-borraprod' v_idbodega='$key->idbodega' title='Borrar'><i class='far fa-trash-alt'></i></button>";
+								echo "<button class='btn btn-warning btn-sm' id='del_$key->idbodega' type='button' is='is-borraprod' v_idbodega='$key->idbodega' v_idproducto='$key->idproducto' title='Borrar'><i class='far fa-trash-alt'></i></button>";
+
 							}
 						echo "</div>";
 						echo $key->codigo." - ";
