@@ -20,7 +20,7 @@ else if($server==3){
   define("BDD", "sagycrmr_nala");
   define("PORT", "3306");
   define("SERVER", "NUBE");
-  $_SESSION['des']=1;
+  $_SESSION['des']=0;
 }
 
 ?>
