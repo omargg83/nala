@@ -125,8 +125,10 @@
 			echo "<hr>";
 			echo "<div class='row'>";
 				echo "<div class='col-12'>";
-						echo "<button class='btn btn-warning btn-sm' type='submit' ><i class='fas fa-cart-plus'></i>Agregar</button>";
-						echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' cmodal='1' ><i class='fas fa-sign-out-alt'></i>Cancelar</button>";
+					echo "<div class='btn-group'>";
+							echo "<button class='btn btn-warning btn-sm' type='submit' ><i class='fas fa-cart-plus'></i>Agregar</button>";
+							echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' cmodal='1' ><i class='fas fa-sign-out-alt'></i>Cancelar</button>";
+					echo "</div>";
 				echo "</div>";
 			echo "</div>";
 	echo "</form>";
