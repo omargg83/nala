@@ -253,7 +253,7 @@ class Compras extends Sagyc{
 		$sth->execute();
 		$bodega=$sth->fetch(PDO::FETCH_OBJ);
 
-		$x=$this->borrar('bodega',"idbodega",$idbodega);
+		$x=$this->borrar('bodega',"idbodega",$bodega->idbodega);
 		$ped=json_decode($x);
 
 		if($ped->error==0){

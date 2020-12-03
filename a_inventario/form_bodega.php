@@ -9,7 +9,6 @@
 
 <form is="f-submit" id="form_inventario" db="a_inventario/db_" fun="bodega_guardar" des="a_inventario/editar" desid='idproducto' cmodal='2'>
 <input type="hidden" name="idbodega" id="idbodega" value="<?php echo $idbodega;?>">
-<input type="hidden" name="idproducto" id="idproducto" value="<?php echo $idproducto;?>">
 <div class='modal-header'>
 	<h5 class='modal-title'>Editar bodega</h5>
 </div>

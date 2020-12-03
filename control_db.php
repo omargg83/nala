@@ -614,20 +614,19 @@
 			$x="";
 			$directory="fondo/";
 			$dirint = dir($directory);
-			$x.= "<ul class='nav navbar-nav navbar-right'>";
-				$x.= "<li class='nav-item dropdown'>";
-					$x.= "<a class='nav-link dropdown-toggle text-dark' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-desktop'></i></a>";
-					$x.= "<div class='dropdown-menu' aria-labelledby='navbarDropdown' style='width: 200px;max-height: 400px !important;overflow: scroll;overflow-x: scroll;overflow-x: hidden;'>";
+			echo "<ul class='nav navbar-nav navbar-right'>";
+				echo "<li class='nav-item dropdown'>";
+					echo "<a class='nav-link dropdown-toggle text-dark' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-desktop text-secondary'></i></a>";
+					echo "<div class='dropdown-menu' aria-labelledby='navbarDropdown' style='width: 200px;max-height: 400px !important;overflow: scroll;overflow-x: scroll;overflow-x: hidden;'>";
 					while (($archivo = $dirint->read()) !== false){
 						if ($archivo != "." && $archivo != ".." && $archivo != "" && substr($archivo,-4)==".jpg"){
-							$x.= "<img src='$directory".$archivo."' is='p-fondo' v_fondo='$directory$archivo'alt='Fondo' class='rounded mt-3 mx-3' style='width:140px;height:80px'>";
+							echo "<img src='$directory".$archivo."' is='p-fondo' v_fondo='$directory$archivo'alt='Fondo' class='rounded mt-3 mx-3' style='width:140px;height:80px'>";
 						}
 					}
-					$x.= "</div>";
-				$x.= "</li>";
-			$x.= "</ul>";
+					echo "</div>";
+				echo "</li>";
+			echo "</ul>";
 			$dirint->close();
-			return $x;
 		}
 		public function fondo(){
 			if (isset($_REQUEST['imagen'])){$imagen=$_REQUEST['imagen'];}

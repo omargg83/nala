@@ -197,7 +197,6 @@ class Venta extends Sagyc{
 
 					parent::recalcular($idproducto);
 
-
 					$arreglo =array();
 					$arreglo+=array('idventa'=>$idventa);
 					$arreglo+=array('error'=>0);
@@ -234,7 +233,7 @@ class Venta extends Sagyc{
 		$bodega=$sth->fetch(PDO::FETCH_OBJ);
 
 		$x=$this->borrar('bodega',"idbodega",$idbodega);
-		
+
 		$ped=json_decode($x);
 		if($ped->error==0){
 			parent::recalcular($bodega->idproducto, "FECHA" ,$bodega->fecha);

@@ -370,19 +370,24 @@ class Productos extends Sagyc{
 		}
 	}
 	public function borrar_ingreso(){
+
 		$idbodega=$_REQUEST['idbodega'];
-		$idproducto=$_REQUEST['idproducto'];
 
 		$sql="SELECT * from bodega where idbodega=:id";
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(":id",$idbodega);
 		$sth->execute();
-		$res=$sth->fetch(PDO::FETCH_OBJ);
+		$bodega=$sth->fetch(PDO::FETCH_OBJ);
 
-		$x=$this->borrar('bodega',"idbodega",$idbodega);
+		$x=$this->borrar('bodega',"idbodega",$bodega->idbodega);
+
+		$ped=json_decode($x);
+		if($ped->error==0){
+			parent::recalcular($bodega->idproducto, "FECHA" ,$bodega->fecha);
+		}
 
 		$arreglo =array();
-		$arreglo+=array('id'=>$idproducto);
+		$arreglo+=array('id'=>$bodega->idproducto);
 		$arreglo+=array('error'=>0);
 		$arreglo+=array('terror'=>0);
 		return json_encode($arreglo);
@@ -708,18 +713,27 @@ class Productos extends Sagyc{
 	}
 	public function bodega_guardar(){
 		$idbodega=$_REQUEST['idbodega'];
-		$idproducto=$_REQUEST['idproducto'];
+
+		$sql="SELECT * from bodega where idbodega=:id";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":id",$idbodega);
+		$sth->execute();
+		$bodega=$sth->fetch(PDO::FETCH_OBJ);
+
 		$arreglo =array();
 		$fecha=clean_var($_REQUEST['fecha']);
 		$hora=clean_var($_REQUEST['hora']);
 		$fecha=$fecha." ".$hora;
 		$arreglo+=array('fecha'=>$fecha);
-		$this->update('bodega',array('idbodega'=>$idbodega), $arreglo);
+		$x=$this->update('bodega',array('idbodega'=>$bodega->idbodega), $arreglo);
 
-		self::recalcular($idproducto,$idbodega);
+		$ped=json_decode($x);
+		if($ped->error==0){
+			parent::recalcular($bodega->idproducto, "FECHA" ,$bodega->fecha);
+		}
 
 		$arreglo =array();
-		$arreglo+=array('id'=>$idproducto);
+		$arreglo+=array('id'=>$bodega->idproducto);
 		$arreglo+=array('error'=>0);
 		return json_encode($arreglo);
 	}

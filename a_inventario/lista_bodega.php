@@ -24,13 +24,23 @@
   		echo "</div>";
 
       $total=0;
+			$contar=0;
       foreach($row as $key){
         echo "<div class='row body-row' draggable='true'>";
-					if($_SESSION['nivel']==66){
-						echo "<div class='col-xl col-auto'>";
+					echo "<div class='col-xl col-auto'>";
+						echo "<div class='btn-group'>";
+
+							if($_SESSION['nivel']==66){
 								echo "<button type='button' class='btn btn-warning btn-sm' id='edit_bodega' is='b-link' title='Editar' des='a_inventario/form_bodega' dix='trabajo' v_idproducto='$key->idproducto' v_idbodega='$key->idbodega' omodal='1'><i class='fas fa-pencil-alt'></i></button>";
+							}
+
+							////////////agregar en este if el permiso. lo que puse solo permite eliminar si es ingreso, no elimina ni venta ni traspaso, nada... solo ingreso
+							if($key->cantidad>0 and strlen($key->idcompra)==0 and strlen($key->idpadre)==0 and $contar==0){
+								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_inventario/db_' des='a_inventario/lista_bodega' desid='idproducto' fun='borrar_ingreso' dix='registro_bodega' id='eliminar' v_idbodega='$key->idbodega' tp='¿Desea eliminar el ingreso seleccionado?'><i class='far fa-trash-alt'></i></button>";
+							}
 						echo "</div>";
-					}
+
+					echo "</div>";
           echo "<div class='col-xl col-auto'>";
             echo fecha($key->fecha,2);
           echo "</div>";
@@ -98,6 +108,7 @@
           echo "</div>";
 
         echo "</div>";
+				$contar++;
       }
     echo "</div>";
   echo "</div>";

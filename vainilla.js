@@ -286,7 +286,6 @@ $(document).on('click',"[is*='is-borraprod']",function(e){
   e.preventDefault();
   let idventa=document.getElementById("idventa").value;
   let idbodega=e.currentTarget.attributes.v_idbodega.value;
-  let idproducto=e.currentTarget.attributes.v_idproducto.value;
   let formData = new FormData();
 
   $.confirm({
@@ -297,15 +296,12 @@ $(document).on('click',"[is*='is-borraprod']",function(e){
         cargando(true);
         formData.append("idventa", idventa);
         formData.append("idbodega", idbodega);
-        formData.append("idproducto", idproducto);
         formData.append("function", "borrar_venta");
 
         let xhr = new XMLHttpRequest();
         xhr.open('POST',"a_venta/db_.php");
         xhr.addEventListener('load',(data)=>{
-          console.log(data.target.response);
           var datos = JSON.parse(data.target.response);
-          //document.getElementById("total").value=datos.total;
           lista(idventa);
         });
         xhr.onerror =  ()=>{
