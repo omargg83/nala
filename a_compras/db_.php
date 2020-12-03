@@ -238,6 +238,8 @@ class Compras extends Sagyc{
 		$arreglo+=array('c_precio'=>$preciocompra);
 		$x=$this->insert('bodega', $arreglo);
 
+		self::recalcular($idproducto);
+
 		$arr=array();
 		$arr+=array('id'=>$idcompra);
 		$arr+=array('error'=>0);
@@ -245,7 +247,18 @@ class Compras extends Sagyc{
 	}
 	public function borrar_registro(){
 		$idbodega=$_REQUEST['idbodega'];
+
+		$sql="select * from bodega where idbodega='$idbodega'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		$bodega=$sth->fetch(PDO::FETCH_OBJ);
+
 		$x=$this->borrar('bodega',"idbodega",$idbodega);
+		$ped=json_decode($x);
+
+		if($ped->error==0){
+			parent::recalcular($bodega->idproducto, "FECHA" ,$bodega->fecha);
+		}
 		return $x;
 	}
 	public function finalizar_compra(){
