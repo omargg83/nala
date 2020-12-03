@@ -1,4 +1,3 @@
-
   <form id="form_login">
     <div class="input-group mb-3">
     <input type="text" id="userAcceso"  name="userAcceso" class="form-control" placeholder="Usuario" required autofocus>
