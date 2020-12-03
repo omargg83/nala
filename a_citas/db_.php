@@ -18,19 +18,6 @@ class Pedidos extends Sagyc{
 
 	public function __construct(){
 		parent::__construct();
-		if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('CITAS', $this->derecho)) {
-			////////////////PERMISOS
-			$sql="SELECT nivel,captura FROM usuarios_permiso where idusuario='".$_SESSION['idusuario']."' and modulo='CITAS'";
-			$stmt= $this->dbh->query($sql);
-
-			$row =$stmt->fetchObject();
-			$this->nivel_personal=$row->nivel;
-			$this->nivel_captura=$row->captura;
-		}
-		else{
-			include "../error.php";
-			die();
-		}
 	}
 	public function busca_cliente($texto){
 		try{
