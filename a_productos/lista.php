@@ -78,7 +78,9 @@
 			    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo'>Primera</a></li>";
 					for($i=0;$i<$paginas;$i++){
 						$b=$i+1;
-						echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo' v_pag='$i'>$b</a></li>";
+						//if($i>=$pag-5 and $i<=$pag+10){
+							echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo' v_pag='$i'>$b</a></li>";
+						//}
 					}
 			    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_productos/lista' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
 			  echo "</ul>";
