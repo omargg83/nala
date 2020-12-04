@@ -7,10 +7,24 @@
     $pag=$_REQUEST['pag'];
   }
   $row=$db->productos_inventario($idproducto, $pag);
-
+	$per = $db->producto_editar($idproducto);
+	$tipo=$per->tipo;
   echo "<div class='card'>";
   echo "<div class='card-body'>";
+		if($idproducto>0){
+			echo "<div class='row'>";
+				echo "<div class='col-12 col-xl col-auto'>";
+						echo "<div class='btn-group'>";
+						if($tipo==3){
+							echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_inventario/form_agrega' omodal='1' v_id='0' v_idproducto='$idproducto' ><i class='fas fa-plus'></i>existencias</button>";
 
+							echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_inventario/form_quita' omodal='1' v_id='0' v_idproducto='$idproducto' ><i class='fas fa-minus'></i>existencias</button>";
+						}
+						echo "</div>";
+				echo "</div>";
+			echo "</div>";
+		}
+		echo "<br>";
     echo "<div class='tabla_css' id='tabla_css'>";
   		echo "<div class='row header-row'>";
 				if($_SESSION['nivel']==66){
@@ -35,7 +49,7 @@
 							}
 
 							////////////agregar en este if el permiso. lo que puse solo permite eliminar si es ingreso, no elimina ni venta ni traspaso, nada... solo ingreso
-							if($key->cantidad>0 and strlen($key->idcompra)==0 and strlen($key->idpadre)==0 and $contar==0){
+							if(strlen($key->idcompra)==0 and strlen($key->idpadre)==0 and $contar==0 and strlen($key->idventa)==0){
 								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_inventario/db_' des='a_inventario/lista_bodega' desid='idproducto' fun='borrar_ingreso' dix='registro_bodega' id='eliminar' v_idbodega='$key->idbodega' tp='¿Desea eliminar el ingreso seleccionado?'><i class='far fa-trash-alt'></i></button>";
 							}
 						echo "</div>";
@@ -45,25 +59,29 @@
             echo fecha($key->fecha,2);
           echo "</div>";
           echo "<div class='col-12 col-xl col-auto text-center'>";
-            if($key->cantidad>0 and strlen($key->idcompra)==0 and strlen($key->idpadre)==0){
+            if($key->cantidad<0 and strlen($key->idcompra)==0 and strlen($key->idpadre)==0 and strlen($key->idventa)==0){
+              echo "Descuento";
+            }
+            else if($key->cantidad>0 and strlen($key->idcompra)==0 and strlen($key->idpadre)==0){
               echo "Ingreso";
             }
-            if($key->cantidad>0 and strlen($key->idcompra)>0){
+            else if($key->cantidad>0 and strlen($key->idcompra)>0){
               echo "Compra";
             }
-            if($key->cantidad<0 and strlen($key->idventa)>0){
+            else if($key->cantidad<0 and strlen($key->idventa)>0){
               echo "Venta";
             }
-            if($key->cantidad<0 and strlen($key->idtraspaso)>0){
+            else if($key->cantidad<0 and strlen($key->idtraspaso)>0){
               echo "Traspaso";
             }
-						if($key->cantidad>0 and strlen($key->idpadre)>0){
+						else if($key->cantidad>0 and strlen($key->idpadre)>0){
               echo "Ingreso x traspaso";
             }
 						$usuario=$db->usuario($key->idpersona);
 						echo "<br>";
 						echo $usuario->nombre;
           echo "</div>";
+
           echo "<div class='col-12 col-xl col-auto text-center'>";
 
             if(strlen($key->idtraspaso)>0){
@@ -107,6 +125,11 @@
             echo $key->existencia;
           echo "</div>";
 
+					if(strlen($key->observaciones)>0){
+						echo "<div class='col-12'>";
+							echo $key->observaciones;
+						echo "</div>";
+					}
         echo "</div>";
 				$contar++;
       }

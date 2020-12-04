@@ -251,15 +251,10 @@
 								}
 
 
-								if($idproducto>0){
-									if($tipo==3){
-										echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_inventario/form_agrega' omodal='1' v_id='0' v_idproducto='$idproducto' ><i class='fas fa-key'></i>+ existencias</button>";
-									}
-								}
 								if($_SESSION['nivel']==66){
-									echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='control_db' des='a_inventario/editar' fun='recalcular' dix='trabajo' v_idproducto='$idproducto' v_idbodega='0' v_ctrl='control' id='recal' tp='¿Desea recalcular?'><i class='fas fa-exclamation-triangle'></i>+ Recalcular</button>";
+									echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='control_db' des='a_inventario/editar' fun='recalcular' dix='trabajo' v_idproducto='$idproducto'  v_ctrl='control' id='recal' tp='¿Desea recalcular lo pendiente?'><i class='fas fa-exclamation-triangle'></i></button>";
 
-									echo "<button type='button' class='btn btn-danger btn-sm' is='b-link' db='control_db' des='a_inventario/editar' fun='recalcular' dix='trabajo' v_idproducto='$idproducto' v_idbodega='INICIO' v_ctrl='control' id='TIEMPOS' tp='¿Desea recalcular desde inicio de los tiempos?'><i class='fas fa-exclamation-triangle'></i>+ Recalcular Todo</button>";
+									echo "<button type='button' class='btn btn-danger btn-sm' is='b-link' db='control_db' des='a_inventario/editar' fun='recalcular' dix='trabajo' v_idproducto='$idproducto' v_idbodega='INICIO' v_ctrl='control' id='TIEMPOS' tp='¿Desea recalcular desde inicio de los tiempos?'><i class='fas fa-exclamation-triangle'></i></button>";
 								}
 
 								if($rapido==0){
