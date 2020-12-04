@@ -7,8 +7,7 @@
 	if(isset($_REQUEST['pag'])){
 		$pag=$_REQUEST['pag'];
 	}
-	$pd = $db->ventas_pagadas($pag);
-
+	$pd = $db->ventas_canceladas($pag);
 
 	echo "<div class='container-fluid' style='background-color:".$_SESSION['cfondo']."; '>";
 ?>
@@ -56,7 +55,7 @@
 	if(strlen($texto)==0){
 		$sql="select count(venta.idventa) as total from venta
 		left outer join clientes on clientes.idcliente=venta.idcliente
-		where venta.idsucursal='".$_SESSION['idsucursal']."' and venta.estado='Pagada' order by venta.numero desc";
+		where venta.idsucursal='".$_SESSION['idsucursal']."' and venta.estado='Cancelada' order by venta.numero desc";
 		$sth = $db->dbh->query($sql);
 		$contar=$sth->fetch(PDO::FETCH_OBJ);
 		$paginas=ceil($contar->total/$_SESSION['pagina']);
@@ -64,12 +63,12 @@
 		echo "<br>";
 		echo "<nav aria-label='Page navigation text-center'>";
 		  echo "<ul class='pagination'>";
-		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_ventas/lista_pagadas' dix='trabajo'>Primera</a></li>";
+		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_ventas/lista_canceladas' dix='trabajo'>Primera</a></li>";
 				for($i=0;$i<$paginas;$i++){
 					$b=$i+1;
-					echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_ventas/lista_pagadas' dix='trabajo' v_pag='$i'>$b</a></li>";
+					echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_ventas/lista_canceladas' dix='trabajo' v_pag='$i'>$b</a></li>";
 				}
-		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_ventas/lista_pagadas' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
+		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_ventas/lista_canceladas' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
 		  echo "</ul>";
 		echo "</nav>";
 	}

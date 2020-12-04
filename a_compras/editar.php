@@ -59,15 +59,12 @@ else{
 				<div class="row">
 					<div class="col-12 col-xl col-auto">
 						<div class="btn-group flex-wrap">
-
 						<?php
 							if($estado=="Activa"){
 								echo "<button class='btn btn-warning btn-sm' type='submit'><i class='far fa-save'></i>Guardar</button>";
 							}
 							if($idcompra>0 and $estado=="Activa"){
-
 								echo "<button type='button' class='btn btn-danger btn-sm' is='b-link' db='a_compras/db_' des='a_compras/lista' fun='borrar_compra' dix='trabajo' v_idcompra='$idcompra' id='eliminar' tp='¿Desea eliminar la compra seleccionada?'><i class='far fa-trash-alt'></i>Eliminar</button>";
-
 
 								echo "<button type='button' class='btn btn-warning btn-sm' id='producto_add' is='b-link' v_idcompra='$idcompra' des='a_compras/form_producto' omodal='1' title='Agregar Producto'><i class='fab fa-product-hunt'></i>+ Producto</button>";
 

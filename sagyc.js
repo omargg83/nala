@@ -241,7 +241,7 @@
 					 let xhr = new XMLHttpRequest();
 					 xhr.open('POST',datos.db);
 					 xhr.addEventListener('load',(data)=>{
-						 
+
 						 if (!isJSON(data.target.response)){
 							 Swal.fire({
 								 type: 'error',
@@ -524,6 +524,7 @@
 					$('#myModal').modal('show');
 					datos.dix="modal_form";
 				}
+
 				document.getElementById(datos.dix).innerHTML = datares.target.responseText;
 				var scripts = document.getElementById(datos.dix).getElementsByTagName("script");
 				for (var i = 0; i < scripts.length; i++) {

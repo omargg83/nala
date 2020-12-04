@@ -37,7 +37,7 @@ class Venta extends Sagyc{
 		$pagina=$pagina*$_SESSION['pagina'];
 		$sql="select venta.idventa, venta.numero, venta.idsucursal, clientes.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
 		left outer join clientes on clientes.idcliente=venta.idcliente
-		where venta.idsucursal='".$_SESSION['idsucursal']."' and venta.estado='Activa' order by venta.numero desc limit $pagina,".$_SESSION['pagina']."";
+		where venta.idsucursal='".$_SESSION['idsucursal']."' and (venta.estado='Activa' or venta.estado='Editar') order by venta.numero desc limit $pagina,".$_SESSION['pagina']."";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -60,6 +60,15 @@ class Venta extends Sagyc{
 		return $sth->fetchAll(PDO::FETCH_OBJ);
   }
 
+	public function ventas_canceladas($pagina){
+		$pagina=$pagina*$_SESSION['pagina'];
+		$sql="select venta.idventa, venta.numero, venta.idsucursal, clientes.nombre, venta.total, venta.fecha, venta.gtotal, venta.estado from venta
+		left outer join clientes on clientes.idcliente=venta.idcliente
+		where venta.idsucursal='".$_SESSION['idsucursal']."' and venta.estado='Cancelada' order by venta.numero desc limit $pagina,".$_SESSION['pagina']."";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll(PDO::FETCH_OBJ);
+	}
 	public function selecciona_cita(){
 		try{
 

@@ -38,12 +38,17 @@
 				echo "<div class='row body-row' draggable='true'>";
 					echo "<div class='col-12'>";
 						echo "<div class='btn-group mr-3'>";
-							if($estado_compra=="Activa"){
+							if($estado_compra=="Activa" ){
 								echo "<button class='btn btn-warning btn-sm' id='del_$key->idbodega' type='button' is='is-borraprod' v_idbodega='$key->idbodega'  title='Borrar'><i class='far fa-trash-alt'></i></button>";
 							}
+							if($estado_compra=="Editar" and $key->v_cantidad>0){
+								echo "<button class='btn btn-warning btn-sm' id='can_$key->idbodega' type='button' is='is-cancelaprod' v_idbodega='$key->idbodega'  title='Borrar'><i class='far fa-trash-alt'></i></button>";
+							}
+
 						echo "</div>";
-						echo $key->codigo." - ";
+						echo trim($key->codigo)." - ";
 						echo $key->nombre;
+						echo "<br>".$key->observaciones;
 					echo "</div>";
 
 					echo "<div class='col-4 text-center'>";
@@ -83,8 +88,6 @@
 								$total=$key->v_precio_distribuidor;
 							echo "</div>";
 						}
-
-
 					}
 
 

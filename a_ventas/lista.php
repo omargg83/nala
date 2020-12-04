@@ -39,7 +39,7 @@
 							<div class="btn-group">
 								<?php
 									if($db->nivel_captura==1){
-										echo "<button class='btn btn-warning btn-sm'  id='edit_persona' is='b-link' id='nueva_venta' des='a_venta/venta' dix='trabajo'  v_idventa='$key->idventa'><i class='fas fa-pencil-alt'></i></button>";
+										echo "<button class='btn btn-warning btn-sm'  id='edit_persona' is='b-link' id='nueva_venta' des='a_venta/venta' dix='trabajo'  v_idventa='$key->idventa' v_general='1'><i class='fas fa-pencil-alt'></i></button>";
 									}
 								?>
 							</div>
@@ -65,7 +65,7 @@
 	if(strlen($texto)==0){
 		$sql="select count(venta.idventa) as total from venta
 		left outer join clientes on clientes.idcliente=venta.idcliente
-		where venta.idsucursal='".$_SESSION['idsucursal']."' and venta.estado='Activa' order by venta.numero desc";
+		where venta.idsucursal='".$_SESSION['idsucursal']."' and (venta.estado='Activa' or venta.estado='Editar') order by venta.numero desc";
 
 		$sth = $db->dbh->query($sql);
 		$contar=$sth->fetch(PDO::FETCH_OBJ);

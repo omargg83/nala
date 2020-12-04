@@ -315,6 +315,39 @@ $(document).on('click',"[is*='is-borraprod']",function(e){
     }
   });
 });
+$(document).on('click',"[is*='is-cancelaprod']",function(e){
+  e.preventDefault();
+  let idventa=document.getElementById("idventa").value;
+  let idbodega=e.currentTarget.attributes.v_idbodega.value;
+  let formData = new FormData();
+
+  $.confirm({
+    title: 'Eliminar',
+    content: '¿Desea cancelar el producto seleccionado?',
+    buttons: {
+      Eliminar: function () {
+        cargando(true);
+        formData.append("idventa", idventa);
+        formData.append("idbodega", idbodega);
+        formData.append("function", "cancelar_producto");
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST',"a_venta/db_.php");
+        xhr.addEventListener('load',(data)=>{
+          var datos = JSON.parse(data.target.response);
+          lista(idventa);
+        });
+        xhr.onerror =  ()=>{
+          cargando(false);
+        };
+        xhr.send(formData);
+      },
+      Cancelar: function () {
+
+      }
+    }
+  });
+});
 $(document).on('click',"[is*='is-cliente']",function(e){
   e.preventDefault();
   cargando(true);
@@ -398,7 +431,37 @@ $(document).on('change',"[is*='f-cantidad']",function(e){
 $(document).on('keypress',"[is*='f-cantidad']",function(e){
   calcular();
 });
+$(document).on('click',"[is*='is-finedit']",function(e){
+  e.preventDefault();
+  let idventa=document.getElementById("idventa").value;
 
+  let formData = new FormData();
+  $.confirm({
+    title: 'Eliminar',
+    content: '¿Desea finalizar la edición?',
+    buttons: {
+      Finalizar: function () {
+        cargando(true);
+        formData.append("idventa", idventa);
+        formData.append("function", "finalizar_edicion");
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST',"a_venta/db_.php");
+        xhr.addEventListener('load',(data)=>{
+          venta(idventa);
+          cargando(false);
+        });
+        xhr.onerror =  ()=>{
+          cargando(false);
+        };
+        xhr.send(formData);
+      },
+      Cancelar: function () {
+
+      }
+    }
+  });
+});
 function calcular(){
   let idproducto=document.getElementById("idproducto").value;
   let cantidad=document.getElementById("cantidad").value;
@@ -485,11 +548,13 @@ function cliente_datos(idcliente){
 
 }
 function venta(idventa){
+
   let formData = new FormData();
   formData.append("idventa", idventa);
   let xhr = new XMLHttpRequest();
   xhr.open('POST',"a_venta/venta.php");
   xhr.addEventListener('load',(data)=>{
+    console.log("entra"+idventa);
     document.getElementById("trabajo").innerHTML = data.target.response;
   });
   xhr.onerror =  ()=>{

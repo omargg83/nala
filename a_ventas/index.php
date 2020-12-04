@@ -27,7 +27,10 @@
 				?>
 
 				<li class='nav-item active'><a class='nav-link barranav' title='Mostrar todo' id='lista_comision' is='a-link' des='a_ventas/lista' dix='trabajo' ><i class="far fa-folder-open"></i><span>Abiertas</span></a></li>
+
 				<li class='nav-item active'><a class='nav-link barranav' title='Mostrar todo' id='lista_comision2' is='a-link' des='a_ventas/lista_pagadas' dix='trabajo' ><i class="far fa-check-square"></i><span>Efectuadas</span></a></li>
+
+				<li class='nav-item active'><a class='nav-link barranav' title='Mostrar todo' id='lista_cacel' is='a-link' des='a_ventas/lista_canceladas' dix='trabajo' ><i class="fas fa-ban"></i><span>Canceladas</span></a></li>
 
 			</ul>
 	  </div>

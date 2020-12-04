@@ -77,11 +77,18 @@
               else{
                 if($_SESSION['a_sistema']==1){
                   echo "<button type='button' class='btn btn-warning btn-sm mr-2' id='nueva' is='b-link' des='a_venta/venta' dix='trabajo'><i class='fas fa-cash-register'></i>Nueva</button>";
+
                   if ($tamanoticket==0) {
                     echo "<button type='button' class='btn btn-warning btn-sm mr-2'  id='print_persona' is='b-print' title='Editar' des='a_venta/imprimir' dix='trabajo' v_idventa='$idventa'><i class='fas fa-print'></i>Imprimir</button>";
                   }
                   else {
                     echo "<button type='button' class='btn btn-warning btn-sm mr-2'  id='print_persona' is='b-print' title='Editar' des='a_venta/imprimir88mm' dix='trabajo' v_idventa='$idventa'><i class='fas fa-print'></i>Imprimir</button>";
+                  }
+                  if($estado_compra=="Pagada"){
+                    echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_venta/db_' des='a_venta/venta' desid='idventa' fun='editar_venta' dix='trabajo' id='eliminar' v_idventa='$idventa' tp='¿Desea editar la venta seleccionada?'><i class='fas fa-user-edit'></i>Editar</button>";
+                  }
+                  if($estado_compra=="Editar"){
+                    echo "<button type='button' class='btn btn-success btn-sm mr-2' id='finedit' is='is-finedit'><i class='fas fa-cash-register'></i>Finalizar</button>";
                   }
                 }
               }
@@ -119,7 +126,6 @@
             <hr>
             <div clas='row' id='resultadosx' style='min-height:500px; max-height: 500; overflow:auto;'>
             </div>
-
           </div>
         </div>
       </div>

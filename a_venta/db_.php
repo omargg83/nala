@@ -232,7 +232,7 @@ class Venta extends Sagyc{
 		$sth->execute();
 		$bodega=$sth->fetch(PDO::FETCH_OBJ);
 
-		$x=$this->borrar('bodega',"idbodega",$idbodega);
+		$x=$this->borrar('bodega',"idbodega",$bodega->idbodega);
 
 		$ped=json_decode($x);
 		if($ped->error==0){
@@ -240,6 +240,34 @@ class Venta extends Sagyc{
 		}
 
 		$total=$this->suma_venta($idventa);
+		$arreglo =array();
+		$arreglo+=array('idventa'=>$idventa);
+		$arreglo+=array('error'=>0);
+		$arreglo+=array('total'=>$total);
+		return json_encode($arreglo);
+	}
+	public function cancelar_producto(){
+
+		$idbodega=$_REQUEST['idbodega'];
+		$idventa=$_REQUEST['idventa'];
+
+		$sql="select * from bodega where idbodega='$idbodega'";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		$bodega=$sth->fetch(PDO::FETCH_OBJ);
+
+		$arreglo=array();
+		$arreglo+=array('cantidad'=>0);
+		$arreglo+=array('v_cantidad'=>0);
+		$arreglo+=array('observaciones'=>"Cancelada");
+		$x=$this->update('bodega',array('idbodega'=>$bodega->idbodega), $arreglo);
+		$ped=json_decode($x);
+		if($ped->error==0){
+			parent::recalcular($bodega->idproducto, "FECHA" ,$bodega->fecha);
+		}
+
+		$total=$this->suma_venta($idventa);
+
 		$arreglo =array();
 		$arreglo+=array('idventa'=>$idventa);
 		$arreglo+=array('error'=>0);
@@ -459,6 +487,31 @@ class Venta extends Sagyc{
 		$cantidad=clean_var($_REQUEST['cantidad']);
 
 		return self::esquemas($idproducto,$cantidad);
+	}
+
+	public function editar_venta(){
+		$idventa=$_REQUEST['idventa'];
+		$arreglo =array();
+		$arreglo+=array('estado'=>"Editar");
+		return $this->update('venta',array('idventa'=>$idventa), $arreglo);
+	}
+	public function finalizar_edicion(){
+		$idventa=clean_var($_REQUEST['idventa']);
+
+		$sql="select sum(v_precio * v_cantidad) as total from bodega where idventa='$idventa' ";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		$rex=$sth->fetch(PDO::FETCH_OBJ);
+		$total=$rex->total;
+		$arreglo =array();
+		if($total>0){
+			$arreglo+=array('estado'=>"Pagada");
+		}
+		else{
+			$arreglo+=array('estado'=>"Cancelada");
+		}
+		$x=$this->update('venta',array('idventa'=>$idventa), $arreglo);
+		return $x;
 	}
 }
 
