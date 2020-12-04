@@ -43,7 +43,7 @@
 		echo "<div class='modal-body' style='max-height:580px;overflow: auto;'>";
 
 			echo "<div class='row'>";
-				echo "<div class='col-xl col-auto'>";
+				echo "<div class='col-12 col-xl col-auto'>";
 					if(strlen($producto->archivo)>0 and file_exists("../".$db->f_productos."/".$producto->archivo)){
 						echo "<img src='".$db->f_productos."/".$producto->archivo."' width='100px;' class='img-thumbnail'/>";
 					}
@@ -52,7 +52,7 @@
 					}
 
 				echo "</div>";
-				echo "<div class='col-xl col-auto'>";
+				echo "<div class='col-12 col-xl col-auto'>";
 					echo "<label>Producto</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='nombre' id='nombre' value='".$producto->nombre."' readonly>";
 					echo "<small>";

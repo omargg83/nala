@@ -31,22 +31,22 @@
 				<input type="hidden" class="form-control form-control-sm" name="idtraspaso" id="idtraspaso" value="<?php echo $idtraspaso ;?>" placeholder="Tienda" readonly>
 				<div class='row'>
 
-				 <div class='col-xl col-auto'>
+				 <div class='col-12 col-xl col-auto'>
 				   <label>Número:</label>
 					 <input type="text" class="form-control form-control-sm" name="numero" id="numero" value="<?php echo $numero ;?>" placeholder="Número" required readonly>
 				 </div>
 
-				 <div class='col-xl col-auto'>
+				 <div class='col-12 col-xl col-auto'>
 				   <label>Identificador:</label>
 					 <input type="text" class="form-control form-control-sm" name="nombre" id="nombre" value="<?php echo $nombre ;?>" placeholder="identificador" required>
 				 </div>
 
-				 <div class='col-xl col-auto'>
+				 <div class='col-12 col-xl col-auto'>
 				   <label>Fecha:</label>
 					 <input type="date" class="form-control form-control-sm" name="fecha" id="fecha" value="<?php echo $fecha ;?>" placeholder="Fecha" required>
 				 </div>
 
-				<div class="col-xl col-auto">
+				<div class='col-12 col-xl col-auto'>
 				  <label >Enviar a:</label>
 					<?php
 						echo "<select class='form-control form-control-sm' name='idsucursal' id='idsucursal'>";
@@ -61,7 +61,7 @@
 					?>
 				</div>
 
-				<div class='col-xl col-auto'>
+				<div class='col-12 col-xl col-auto'>
 					<label>Estado:</label>
 					<input type="text" class="form-control form-control-sm" value="<?php echo $estado ;?>" placeholder="Fecha" readonly>
 				</div>
@@ -69,7 +69,7 @@
 		</div>
 			<div class="card-footer">
 				<div class="row">
-					<div class="col-xl col-auto">
+					<div class="col-12 col-xl col-auto">
 						<div class="btn-group">
 							<?php
 								if($estado=="Activa"){
@@ -100,7 +100,7 @@
 		</form>
 <?php
 	if($idtraspaso>0){
-		echo "<div class='col-xl col-auto' id='lista'>";
+		echo "<div class='col-12 col-xl col-auto' id='lista'>";
 			include 'lista_pedido.php';
 		echo "</div>";
 	}
