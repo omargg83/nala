@@ -40,7 +40,7 @@
 
 		echo "<div class='modal-body' style='max-height:580px;overflow: auto;'>";
 			echo "<div class='row'>";
-				echo "<div class='col-4'>";
+				echo "<div class='col-3 col-xs col-auto'>";
 					if(strlen($producto->archivo)>0 and file_exists("../".$db->f_productos."/".$producto->archivo)){
 						echo "<img src='".$db->f_productos."/".$producto->archivo."' width='100%' class='img-thumbnail'/>";
 					}
@@ -49,7 +49,7 @@
 					}
 
 				echo "</div>";
-				echo "<div class='col-8'>";
+				echo "<div class='col-6 col-xs col-auto'>";
 					echo "<input type='text' class='form-control form-control-sm' name='nombre' id='nombre' value='".$producto->nombre."' readonly>";
 					echo "<small>";
 						if ($producto->esquema==0){
@@ -69,17 +69,17 @@
 			echo "</div>";
 
 			echo "<div class='row'>";
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label><b>Cantidad</b></label>";
 					echo "<input type='number' min=0 max=9999 class='form-control' is='f-cantidad' name='cantidad' id='cantidad' value='0' required>";
 				echo "</div>";
 
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label><b>Precio a aplicar x Unidad</b></label>";
 					echo "<input type='text' class='form-control' name='precio' id='precio' value='".$producto->precio."' readonly>";
 				echo "</div>";
 
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label><b>Existencia</b>:</label>";
 					echo "<input type='text' class='form-control' name='existencia' id='existencia' value='$exist' readonly>";
 				echo "</div>";
@@ -89,34 +89,34 @@
 			echo "<hr>";
 				//////////////////////arreglar esto
 			echo "<div class='row'>";
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Precio normal</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='precio_normal' id='precio_normal' value='$producto->precio' readonly>";
 				echo "</div>";
 
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Precio Mayoreo</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='precio_mayoreo' id='precio_mayoreo' value='$producto->precio_mayoreo' readonly>";
 				echo "</div>";
 
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Precio Ditribuidor</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='precio_distribuidor' id='precio_distribuidor' value='$producto->precio_distri' readonly>";
 				echo "</div>";
 			echo "</div>";
 
 			echo "<div class='row'>";
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Total normal</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='normal' id='normal' value='".$producto->precio."' readonly>";
 				echo "</div>";
 
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Total Mayoreo</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='mayoreo' id='mayoreo' value='".$producto->precio_mayoreo."' readonly>";
 				echo "</div>";
 
-				echo "<div class='col-sm-12 col-md-12 col-lg-4 col-xl-4'>";
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
 					echo "<label>Total Ditribuidor</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='distribuidor' id='distribuidor' value='".$producto->precio_distri."' readonly>";
 				echo "</div>";
@@ -124,7 +124,7 @@
 
 			echo "<hr>";
 			echo "<div class='row'>";
-				echo "<div class='col-12'>";
+				echo "<div class='col-6'>";
 					echo "<div class='btn-group'>";
 							echo "<button class='btn btn-warning btn-sm' type='submit' ><i class='fas fa-cart-plus'></i>Agregar</button>";
 							echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' cmodal='1' ><i class='fas fa-sign-out-alt'></i>Cancelar</button>";
