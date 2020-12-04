@@ -68,7 +68,7 @@
             else if($key->cantidad>0 and strlen($key->idcompra)>0){
               echo "Compra";
             }
-            else if($key->cantidad<0 and strlen($key->idventa)>0){
+            else if(strlen($key->idventa)>0){
               echo "Venta";
             }
             else if($key->cantidad<0 and strlen($key->idtraspaso)>0){
