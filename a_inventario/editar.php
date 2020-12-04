@@ -7,7 +7,9 @@
 		$rapido=$_REQUEST['rapido'];
 	}
 	if($idproducto>0){
-		$db->recalcular($idproducto);
+		if(!isset($_REQUEST['idbodega'])){
+			$db->recalcular($idproducto);
+		}
 
 		$per = $db->producto_editar($idproducto);
 		$exist=$per->cantidad;

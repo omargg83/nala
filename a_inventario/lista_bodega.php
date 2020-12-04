@@ -50,7 +50,7 @@
 
 							////////////agregar en este if el permiso. lo que puse solo permite eliminar si es ingreso, no elimina ni venta ni traspaso, nada... solo ingreso
 							if(strlen($key->idcompra)==0 and strlen($key->idpadre)==0 and $contar==0 and strlen($key->idventa)==0){
-								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_inventario/db_' des='a_inventario/lista_bodega' desid='idproducto' fun='borrar_ingreso' dix='registro_bodega' id='eliminar' v_idbodega='$key->idbodega' tp='¿Desea eliminar el ingreso seleccionado?'><i class='far fa-trash-alt'></i></button>";
+								echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_inventario/db_' des='a_inventario/editar' desid='idproducto' fun='borrar_ingreso' dix='trabajo' id='eliminar' v_idbodega='$key->idbodega' tp='¿Desea eliminar el ingreso seleccionado?'><i class='far fa-trash-alt'></i></button>";
 							}
 						echo "</div>";
 
