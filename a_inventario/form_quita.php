@@ -10,9 +10,9 @@
 	$observaciones="";
 ?>
 
-<form is="f-submit" id="form_inventario" db="a_inventario/db_" fun="existencia_agrega" des="a_inventario/editar" desid='idproducto' cmodal='1'>
+<form is="f-submit" id="form_inventario" db="a_inventario/db_" fun="existencia_quita" des="a_inventario/editar" desid='idproducto' cmodal='1'>
 <div class='modal-header'>
-	<h5 class='modal-title'>Agregar existencia</h5>
+	<h5 class='modal-title'>Descontar existencia</h5>
 </div>
   <div class='modal-body' >
 	<?php
@@ -21,23 +21,8 @@
 	?>
 		<div class='row'>
 			<div class="col-xl col-auto">
-			 <label>Cantidad</label>
+			 <label>Cantidad a restar</label>
 			 <input type="number" class="form-control form-control-sm" id="cantidad" name='cantidad' placeholder="Cantidad" value="<?php echo $cantidad; ?>">
-			</div>
-			<div class="col-xl col-auto">
-			 <label>Precio de compra</label>
-			 <input type="number" class="form-control form-control-sm" id="precio" name='precio' placeholder="Precio" value="<?php echo $precio; ?>">
-			</div>
-			<div class="col-xl col-auto">
-			 <label>Nota de compra</label>
-			 <?php
-			 	echo "<select type='text' class='form-control form-control-sm' id='idcompra' name='idcompra'>";
-					echo "<option value='0'></option>";
-					foreach ($db->compras_lista() as $v2){
-						echo "<option value='$v2->idcompra'>$v2->nombre</option>";
-					}
-				echo "</select>";
-			?>
 			</div>
 		</div>
 		<div class="row">

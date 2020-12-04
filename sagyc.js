@@ -178,10 +178,7 @@
 	});
 
 	$(document).on('submit',"[is*='f-submit']",function(e){
-		e.preventDefault();
-
-		 e.preventDefault();
-
+			e.preventDefault();
 		 //////////id del formulario
 		 let id=e.currentTarget.attributes.id.nodeValue;
 		 let elemento = document.getElementById(id);
@@ -244,8 +241,7 @@
 					 let xhr = new XMLHttpRequest();
 					 xhr.open('POST',datos.db);
 					 xhr.addEventListener('load',(data)=>{
-
-
+						 
 						 if (!isJSON(data.target.response)){
 							 Swal.fire({
 								 type: 'error',

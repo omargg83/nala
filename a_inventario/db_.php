@@ -316,6 +316,9 @@ class Productos extends Sagyc{
 			if (isset($_REQUEST['precio'])){
 				$arreglo += array('c_precio'=>$_REQUEST['precio']);
 			}
+			if (isset($_REQUEST['observaciones'])){
+				$arreglo += array('observaciones'=>$_REQUEST['observaciones']);
+			}
 			if (isset($_REQUEST['idcompra'])){
 				if($_REQUEST['idcompra']>0){
 					$arreglo += array('idcompra'=>$_REQUEST['idcompra']);
@@ -324,6 +327,63 @@ class Productos extends Sagyc{
 					$arreglo += array('idcompra'=>null);
 				}
 			}
+
+			$x="";
+			if($id==0){
+				$arreglo+=array('fecha'=>date("Y-m-d H:i:s"));
+				$arreglo+=array('fechaalta'=>date("Y-m-d H:i:s"));
+				$arreglo+=array('idpersona'=>$_SESSION['idusuario']);
+				$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
+				$x=$this->insert('bodega', $arreglo);
+			}
+			else{
+				$arreglo+=array('fechamod'=>date("Y-m-d H:i:s"));
+				$x=$this->update('bodega',array('id'=>$id), $arreglo);
+			}
+			$ped=json_decode($x);
+			if($ped->error==0){
+
+				parent::recalcular($idproducto);
+
+				$arreglo =array();
+				$arreglo+=array('id'=>$idproducto);
+				$arreglo+=array('error'=>0);
+				$arreglo+=array('terror'=>0);
+				$arreglo+=array('param1'=>"");
+				$arreglo+=array('param2'=>"");
+				$arreglo+=array('param3'=>"");
+				return json_encode($arreglo);
+			}
+			return $x;
+		}
+		catch(PDOException $e){
+			return "Database access FAILED!".$e->getMessage();
+		}
+	}
+	public function existencia_quita(){
+		try{
+
+			if($_REQUEST['cantidad']<1){
+				$arreglo =array();
+				$arreglo+=array('error'=>1);
+				$arreglo+=array('terror'=>"Error de cantidad, favor de verificar");
+				return json_encode($arreglo);
+			}
+
+			$id=$_REQUEST['id'];
+			$idproducto=$_REQUEST['idproducto'];
+			$arreglo =array();
+			$arreglo = array('idproducto'=>$idproducto);
+
+			if (isset($_REQUEST['cantidad'])){
+				$cantidad=$_REQUEST['cantidad']*-1;
+				$arreglo += array('cantidad'=>$cantidad);
+			}
+
+			if (isset($_REQUEST['observaciones'])){
+				$arreglo += array('observaciones'=>$_REQUEST['observaciones']);
+			}
+
 
 			$x="";
 			if($id==0){
