@@ -18,23 +18,23 @@
 ?>
 	<div class='tabla_css' id='tabla_css'>
 		<div class='row titulo-row'>
-			<div class='col-xl col-auto'>
+			<div class='col-12 col-xl col-auto'>
 				LISTA DE COMPRAS
 			</div>
 		</div>
 		<div class='row header-row'>
-			<div class='col-xl col-auto'>#</div>
-			<div class='col-xl col-auto'>Fecha</div>
-			<div class='col-xl col-auto'>Numero</div>
-			<div class='col-xl col-auto'>Nombre</div>
-			<div class='col-xl col-auto'>Proveedor</div>
-			<div class='col-xl col-auto'>Estado</div>
+			<div class='col-12 col-xl col-auto'>#</div>
+			<div class='col-12 col-xl col-auto'>Fecha</div>
+			<div class='col-12 col-xl col-auto'>Numero</div>
+			<div class='col-12 col-xl col-auto'>Nombre</div>
+			<div class='col-12 col-xl col-auto'>Proveedor</div>
+			<div class='col-12 col-xl col-auto'>Estado</div>
 		</div>
 
 			<?php
 				foreach($pd as $key){
 					echo "<div class='row body-row' draggable='true'>";
-						echo "<div class='col-xl col-auto'>";
+						echo "<div class='col-12 col-xl col-auto	text-center'>";
 
 							echo "<div class='btn-group'>";
 
@@ -47,11 +47,11 @@
 
 						echo "</div>";
 
-						echo "<div class='col-xl col-auto text-center'>".fecha($key->fecha)."</div>";
-						echo "<div class='col-xl col-auto text-center'>".$key->numero."</div>";
-						echo "<div class='col-xl col-auto text-center'>".$key->nombre."</div>";
-						echo "<div class='col-xl col-auto text-center'>".$key->idproveedor."</div>";
-						echo "<div class='col-xl col-auto text-center'>".$key->estado."</div>";
+						echo "<div class='col-12 col-xl col-auto text-center'>".fecha($key->fecha)."</div>";
+						echo "<div class='col-12 col-xl col-auto text-center'>".$key->numero."</div>";
+						echo "<div class='col-12 col-xl col-auto text-center'>".$key->nombre."</div>";
+						echo "<div class='col-12 col-xl col-auto text-center'>".$key->idproveedor."</div>";
+						echo "<div class='col-12 col-xl col-auto text-center'>".$key->estado."</div>";
 
 					echo "</div>";
 				}

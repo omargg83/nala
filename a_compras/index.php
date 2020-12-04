@@ -2,7 +2,7 @@
 	require_once("db_.php");
 ?>
 
-	<nav class='navbar navbar-expand-sm navbar-light bg-light '>
+	<nav class='navbar navbar-expand-lg navbar-light bg-light '>
 	<a class='navbar-brand' ><i class='fas fa-shopping-bag'></i> Compras</a>
 	  <button class='navbar-toggler navbar-toggler-right' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='principal' aria-expanded='false' aria-label='Toggle navigation'>
 		<span class='navbar-toggler-icon'></span>

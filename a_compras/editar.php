@@ -23,16 +23,16 @@ else{
 			<input type="hidden" name="idcompra" id="idcompra" value="<?php echo $idcompra; ?>" class="form-control" readonly>
 			<div class='card-body'>
 				<div class='row'>
-					<div class="col-xl col-auto">
+					<div class="col-12 col-xl col-auto">
 						<label >Número:</label>
 						<input type="text" class="form-control" name="numero" id="numero" value="<?php echo $numero ;?>" placeholder="Número" readonly>
 						<small>Número interno</small>
 					</div>
-					<div class="col-xl col-auto">
+					<div class="col-12 col-xl col-auto">
 						<label >Nombre:</label>
 						<input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $nombre ;?>" placeholder="Nombre">
 					</div>
-					<div class="col-xl col-auto">
+					<div class="col-12 col-xl col-auto">
 						<label >Proveedor:</label>
 						<?php
 						echo "<select class='form-control' name='idproveedor' id='idproveedor'>";
@@ -48,7 +48,7 @@ else{
 						?>
 					</div>
 
-					<div class="col-xl col-auto">
+					<div class="col-12 col-xl col-auto">
 						<label >Estado:</label>
 						<input type="text" class="form-control" name="estado" id="estado" value="<?php echo $estado ;?>" readonly>
 					</div>
@@ -57,8 +57,8 @@ else{
 			</div>
 			<div class='card-footer'>
 				<div class="row">
-					<div class="col-xl col-auto">
-						<div class="btn-group">
+					<div class="col-12 col-xl col-auto">
+						<div class="btn-group flex-wrap">
 
 						<?php
 							if($estado=="Activa"){
