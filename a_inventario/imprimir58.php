@@ -32,7 +32,7 @@
 	$pdf->selectFont('Helvetica');
 
 	$x=-10;
-	$y=310;
+	$y=410;
 	$pdf->ezText("Impresión de Codigo de Barras",10,array('justification' => 'center'));
 	$pdf->rectangle($x,$y-30,210,80);
 	$pdf->addPngFromFile($filepath,$x+30,$y,150);
