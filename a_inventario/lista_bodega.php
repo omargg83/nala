@@ -14,20 +14,20 @@
     echo "<div class='tabla_css' id='tabla_css'>";
   		echo "<div class='row header-row'>";
 				if($_SESSION['nivel']==66){
-	  			echo "<div class='col-xl col-auto'>-</div>";
+	  			echo "<div class='col-12 col-xl col-auto'>-</div>";
 				}
-  			echo "<div class='col-xl col-auto'>Fecha</div>";
-  			echo "<div class='col-xl col-auto'>Tipo</div>";
-  			echo "<div class='col-xl col-auto'>Descripción</div>";
-  			echo "<div class='col-xl col-auto'>Cantidad</div>";
-  			echo "<div class='col-xl col-auto'>Existencia</div>";
+  			echo "<div class='col-12 col-xl col-auto'>Fecha</div>";
+  			echo "<div class='col-12 col-xl col-auto'>Tipo</div>";
+  			echo "<div class='col-12 col-xl col-auto'>Descripción</div>";
+  			echo "<div class='col-12 col-xl col-auto'>Cantidad</div>";
+  			echo "<div class='col-12 col-xl col-auto'>Existencia</div>";
   		echo "</div>";
 
       $total=0;
 			$contar=0;
       foreach($row as $key){
         echo "<div class='row body-row' draggable='true'>";
-					echo "<div class='col-xl col-auto'>";
+					echo "<div class='col-12 col-xl col-auto text-center'>";
 						echo "<div class='btn-group'>";
 
 							if($_SESSION['nivel']==66){
@@ -41,10 +41,10 @@
 						echo "</div>";
 
 					echo "</div>";
-          echo "<div class='col-xl col-auto'>";
+          echo "<div class='col-12 col-xl col-auto text-center'>";
             echo fecha($key->fecha,2);
           echo "</div>";
-          echo "<div class='col-xl col-auto'>";
+          echo "<div class='col-12 col-xl col-auto text-center'>";
             if($key->cantidad>0 and strlen($key->idcompra)==0 and strlen($key->idpadre)==0){
               echo "Ingreso";
             }
@@ -64,7 +64,7 @@
 						echo "<br>";
 						echo $usuario->nombre;
           echo "</div>";
-          echo "<div class='col-xl col-auto'>";
+          echo "<div class='col-12 col-xl col-auto text-center'>";
 
             if(strlen($key->idtraspaso)>0){
               $sql="select * from traspasos where idtraspaso=$key->idtraspaso";
@@ -99,11 +99,11 @@
 						}
           echo "</div>";
 
-          echo "<div class='col-xl col-auto text-center'>";
+          echo "<div class='col-12 col-xl col-auto text-center'>";
             echo $key->cantidad;
           echo "</div>";
 
-          echo "<div class='col-xl col-auto text-center'>";
+          echo "<div class='col-12 col-xl col-auto text-center'>";
             echo $key->existencia;
           echo "</div>";
 
