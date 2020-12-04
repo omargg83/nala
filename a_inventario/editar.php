@@ -34,6 +34,12 @@
 		///// varibables esquema 2
 		$mayoreo_cantidad=$per->mayoreo_cantidad;
 		$distri_cantidad=$per->distri_cantidad;
+
+		$sql="select etiqueta from sucursal where idsucursal='".$_SESSION['idsucursal']."'";
+		$sth = $db->dbh->prepare($sql);
+		$sth->execute();
+		$sucu=$sth->fetch(PDO::FETCH_OBJ);
+		$tamanoetiqueta=$sucu->etiqueta;
 		///
 
 	}
@@ -233,8 +239,15 @@
 									if($_SESSION['matriz']==1){
 										echo "<button type='button' class='btn btn-warning btn-sm' id='genera_Barras' is='b-link' title='Editar' tp='¿Desea generar el codigo de barras?' db='a_inventario/db_' fun='barras' des='a_inventario/editar' dix='trabajo' v_idproducto='$idproducto' v_idcatalogo='$idcatalogo'><i class='fas fa-barcode'></i>Barras</button>";
 									}
-
+									if ($tamanoetiqueta==0) {
 									echo "<button type='button' class='btn btn-warning btn-sm' id='Imprime_barras' is='b-print' title='Editar' des='a_inventario/imprimir' v_idcatalogo='$idcatalogo'><i class='fas fa-print'></i>Barras</button>";
+										}
+									else if ($tamanoetiqueta==1) {
+									echo "<button type='button' class='btn btn-warning btn-sm' id='Imprime_barras' is='b-print' title='Editar' des='a_inventario/imprimir58' v_idcatalogo='$idcatalogo'><i class='fas fa-print'></i>Barras</button>";
+										}
+									else if ($tamanoetiqueta==2) {
+									echo "<button type='button' class='btn btn-warning btn-sm' id='Imprime_barras' is='b-print' title='Editar' des='a_inventario/imprimir88' v_idcatalogo='$idcatalogo'><i class='fas fa-print'></i>Barras</button>";
+										}
 								}
 
 

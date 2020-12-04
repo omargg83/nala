@@ -11,7 +11,7 @@
 
 				<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='empresa' des='a_datosemp/lista' dix='trabajo'><i class='far fa-building'></i><span>Empresa</span></a></li>
 
-				<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='sucursal' des='a_sucursal/lista' dix='trabajo'><i class='fas fa-store'></i><span>Sucursal</span></a></li>
+				<li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='sucursal' des='a_sucursal/lista' dix='trabajo'><i class='fas fa-store'></i><span>Sucursales</span></a></li>
 
 			</ul>
 	  </div>

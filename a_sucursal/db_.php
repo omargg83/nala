@@ -98,7 +98,9 @@ class Sucursal extends Sagyc{
 		if (isset($_REQUEST['tipoticket'])){
 			$arreglo+=array('tipoticket'=>$_REQUEST['tipoticket']);
 		}
-
+		if (isset($_REQUEST['etiqueta'])){
+			$arreglo+=array('etiqueta'=>$_REQUEST['etiqueta']);
+		}
 
 		if($idsucursal==0){
 			$arreglo+=array('idtienda'=>$_SESSION['idtienda']);

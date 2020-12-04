@@ -10,6 +10,7 @@
 	$cp="";
 	$estado="";
 	$tipoticket="";
+	$etiqueta="";
 	$matriz="";
 	if($idsucursal>0){
 		$pd = $db->sucursal($idsucursal);
@@ -21,6 +22,7 @@
 		$cp=$pd->cp;
 		$estado=$pd->estado;
 		$tipoticket=$pd->tipoticket;
+		$etiqueta=$pd->etiqueta;
 		$matriz=$pd->matriz;
 	}
 ?>
@@ -73,6 +75,15 @@
 						<select class="form-control form-control-sm" name="tipoticket" id="tipoticket"required>
 							<option value='0'<?php if($tipoticket=='0') echo 'selected'; ?> >58mm</option>
 							<option value='1'<?php if($tipoticket=='1') echo 'selected'; ?> >80mm</option>
+						</select>
+					</div>
+
+					<div class='col-xl col-auto'>
+						<label>Tamaño de papel para etiqueta:</label>
+						<select class="form-control form-control-sm" name="etiqueta" id="etiqueta"required>
+							<option value='0'<?php if($etiqueta=='0') echo 'selected'; ?> >Carta</option>
+							<option value='1'<?php if($etiqueta=='1') echo 'selected'; ?> >58mm</option>
+							<option value='2'<?php if($etiqueta=='2') echo 'selected'; ?> >80mm</option>
 						</select>
 					</div>
 
