@@ -1,6 +1,6 @@
 <?php
 $server=2;
-$_SESSION['pagina']=50;
+$_SESSION['pagina']=5;
 
 if($server==2){
   //////////localhost

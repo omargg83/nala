@@ -126,10 +126,27 @@
 		echo "<nav aria-label='Page navigation text-center'>";
 		  echo "<ul class='pagination'>";
 		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista' dix='trabajo'>Primera</a></li>";
+				$contar=0;
+
+				$minimo=0;
+				$maximo=10;
+
+
 				for($i=0;$i<$paginas;$i++){
 					$b=$i+1;
-					echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista' dix='trabajo' v_pag='$i'>$b</a></li>";
+
+					$dif_min=$i-($pag-5);
+
+					//if($minimo<$i and $i<$maximo){
+						echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista' dix='trabajo' v_pag='$i'>";
+						echo $b;
+						echo "<br>";
+						echo $dif_min;
+						echo "</a></li>";
+					//}
+
 				}
+
 		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
 		  echo "</ul>";
 		echo "</nav>";
