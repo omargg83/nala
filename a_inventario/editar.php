@@ -218,8 +218,8 @@
 				</div>
 			<div class='card-footer'>
 				<div class='row'>
-					<div class="col-12 col-xl col-auto">
-						<div class='btn-group'>
+					<div class='col-12 col-xl col-auto'>
+						<div class='btn-group flex-wrap' data-toggle='buttons'>
 							<?php
 								if($_SESSION['a_sistema']==1){
 									if($db->nivel_captura==1){
