@@ -815,7 +815,26 @@
 			$arreglo+=array('error'=>0);
 			return json_encode($arreglo);
 		}
+
+		public function paginar($paginas,$pag,$pagx,$des,$div){
+			echo "<br>";
+			echo "<nav aria-label='Page navigation text-center'>";
+			  echo "<ul class='pagination justify-content-center'>";
+			    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='$des' dix='$div'>Primera</a></li>";
+					$max=$pag+4;
+					$min=$pag-4;
+					for($i=0;$i<$paginas;$i++){
+						if($min<=$i and $i<=$max){
+							$b=$i+1;
+							echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='$des' dix='$div' v_pag='$i'>$b</a></li>";
+						}
+					}
+			    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='$des' dix='$div' v_pag='$pagx'>Ultima</a></li>";
+			  echo "</ul>";
+			echo "</nav>";
+		}
 	}
+
 
 	if(strlen($ctrl)>0){
 		$db = new Sagyc();

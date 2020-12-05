@@ -6,6 +6,7 @@
 	if(isset($_REQUEST['buscar'])){
 		$texto=$_REQUEST['buscar'];
 		$pd = $db->clientes_buscar($texto);
+		$texto=1;
 	}
 	else{
 		if(isset($_REQUEST['pag'])){
@@ -61,16 +62,7 @@
 		$contar=$sth->fetch(PDO::FETCH_OBJ);
 		$paginas=ceil($contar->total/$_SESSION['pagina']);
 		$pagx=$paginas-1;
-		echo "<br>";
-		echo "<nav aria-label='Page navigation text-center'>";
-			echo "<ul class='pagination'>";
-				echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_cliente/lista' dix='trabajo'>Primera</a></li>";
-				for($i=0;$i<$paginas;$i++){
-					$b=$i+1;
-					echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_cliente/lista' dix='trabajo' v_pag='$i'>$b</a></li>";
-				}
-				echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_cliente/lista' dix='trabajo' v_pag='$pagx'>Ultima</a></li>";
-			echo "</ul>";
-		echo "</nav>";
+
+		echo $db->paginar($paginas,$pag,$pagx,"a_cliente/lista","trabajo");
 	}
 ?>

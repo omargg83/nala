@@ -143,13 +143,18 @@ echo "</div>";
 		$contar=$sth->fetch(PDO::FETCH_OBJ);
 		$paginas=ceil($contar->total/$_SESSION['pagina']);
 		$pagx=$paginas-1;
+
 		echo "<br>";
 		echo "<nav aria-label='Page navigation text-center'>";
 		  echo "<ul class='pagination'>";
 		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista_bodega' v_idproducto='$idproducto' dix='registro_bodega'>Primera</a></li>";
+				$max=$pag+4;
+				$min=$pag-4;
 				for($i=0;$i<$paginas;$i++){
-					$b=$i+1;
-					echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista_bodega' dix='registro_bodega' v_pag='$i' v_idproducto='$idproducto'>$b</a></li>";
+					if($min<=$i and $i<=$max){
+						$b=$i+1;
+						echo "<li class='page-item"; if($pag==$i){ echo " active";} echo "'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista_bodega' dix='registro_bodega' v_pag='$i' v_idproducto='$idproducto'>$b</a></li>";
+					}
 				}
 		    echo "<li class='page-item'><a class='page-link' is='b-link' title='Editar' des='a_inventario/lista_bodega' dix='registro_bodega' v_pag='$pagx' v_idproducto='$idproducto'>Ultima</a></li>";
 		  echo "</ul>";
