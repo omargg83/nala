@@ -1,7 +1,7 @@
 <?php
 	require_once("db_.php");
   $id=$_REQUEST['idcita'];
-  $fecha=date("d-m-Y");
+  $fecha=date("Y-m-d");
 	$hora=12;
 	$minuto=0;
 
