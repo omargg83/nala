@@ -205,9 +205,9 @@
         echo "</div>";
         echo "<div class='card-footer'>";
 
-						if($db->nivel_captura==1){
+				//		if($db->nivel_captura==1){
 							echo "<button type='submit' class='btn btn-warning btn-sm'><i class='far fa-save'></i>Guardar</button>";
-							}
+				//			}
 
 							if($estatus=='PENDIENTE' or $id==0){
 

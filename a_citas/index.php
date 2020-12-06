@@ -25,10 +25,11 @@
         <li class='nav-item active'><a class='nav-link barranav' is='a-link' title='Mostrar todo' id='lista_prod' des='a_citas/lista' dix='trabajo'><i class='fas fa-list-ul'></i><span>Lista</span></a></li>
 
         <?php
-        if($db->nivel_captura==1){
+        //if($db->nivel_captura==1){
           echo "<li class='nav-item active'><a class='nav-link barranav izq' is='a-link' title='Nuevo' id='new_poliza' des='a_citas/editar' v_idcita='0' dix='trabajo'><i class='fas fa-plus'></i><span>Nueva cita/agenda</span></a></li></button>";
 
-        }
+    //    }
+  //  print_r($db);
         ?>
 
       </li>

@@ -28,12 +28,12 @@ function calendar_load(tipo){
     },
     locale: 'es',
     eventColor: '#378006',
-    minTime: "09:00:00",
+    minTime: "07:00:00",
     maxTime: "22:00:00",
     slotDuration: "00:15:00",
     businessHours: {
-      start: '9:00',
-      end: '22:00',
+      start: '7:00',
+      end: '23:00',
     },
     header: {
       left: 'prev,next today',
