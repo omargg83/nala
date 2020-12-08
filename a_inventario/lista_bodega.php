@@ -17,8 +17,9 @@
 						echo "<div class='btn-group'>";
 						if($tipo==3){
 							echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_inventario/form_agrega' omodal='1' v_id='0' v_idproducto='$idproducto' ><i class='fas fa-plus'></i>existencias</button>";
-
+							if($db->nivel_personal==0){ // si su nivel es administrador podra restar existencias, si no alv
 							echo "<button class='btn btn-warning btn-sm' type='button' is='b-link' des='a_inventario/form_quita' omodal='1' v_id='0' v_idproducto='$idproducto' ><i class='fas fa-minus'></i>existencias</button>";
+							}
 						}
 						echo "</div>";
 				echo "</div>";

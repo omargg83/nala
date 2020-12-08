@@ -1,8 +1,10 @@
 <?php
+  require_once("db_.php");
 	echo "<div class='alert alert-warning'><b>REPORTES</b></div>";
 	echo "<div class='container-fluid'>";
 		echo "<div class='row'>";
 
+			if(array_key_exists('REPORTE_VENTAS', $db->derecho)){
 				echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
 					<div class='dash_icon'>
 						<div class='row'>
@@ -17,7 +19,8 @@
 						</div>
 				  </div>
 			  </div>";
-
+				}
+			if(array_key_exists('REPORTE_VENTAS_PROD', $db->derecho)){
 				echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
 					<div class='dash_icon'>
 						<div class='row'>
@@ -32,7 +35,8 @@
 						</div>
 				  </div>
 			  </div>";
-
+			}
+			if(array_key_exists('REPORTE_CORTE_DE_CAJA', $db->derecho)){
 				echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
 					<div class='dash_icon'>
 						<div class='row'>
@@ -47,7 +51,8 @@
 						</div>
 				  </div>
 			  </div>";
-
+				}
+			if(array_key_exists('REPORTE_CORTE_DE_CAJA_USUARIO', $db->derecho)){
 				echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
 					<div class='dash_icon'>
 						<div class='row'>
@@ -62,7 +67,7 @@
 						</div>
 				  </div>
 			  </div>";
-
+				}
 		echo "</div>";
 	echo "</div>";
 ?>

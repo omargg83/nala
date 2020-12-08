@@ -84,12 +84,15 @@
                   else {
                     echo "<button type='button' class='btn btn-warning btn-sm mr-2'  id='print_persona' is='b-print' title='Editar' des='a_venta/imprimir88mm' dix='trabajo' v_idventa='$idventa'><i class='fas fa-print'></i>Imprimir</button>";
                   }
+                if($db->nivel_personal==0){ // si su nivel es administrador podra editar, si no alv
                   if($estado_compra=="Pagada"){
                     echo "<button type='button' class='btn btn-warning btn-sm' is='b-link' db='a_venta/db_' des='a_venta/venta' desid='idventa' fun='editar_venta' dix='trabajo' id='eliminar' v_idventa='$idventa' tp='¿Desea editar la venta seleccionada?'><i class='fas fa-user-edit'></i>Editar</button>";
                   }
+                }
                   if($estado_compra=="Editar"){
                     echo "<button type='button' class='btn btn-success btn-sm mr-2' id='finedit' is='is-finedit'><i class='fas fa-cash-register'></i>Finalizar</button>";
                   }
+                  
                 }
               }
 
