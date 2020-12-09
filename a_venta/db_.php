@@ -279,7 +279,7 @@ class Venta extends Sagyc{
 			$idventa=$_REQUEST['idventa'];
 			$idcliente=$_REQUEST['idcliente'];
 			if($idventa==0){
-				$sql = "SELECT MAX(numero) FROM venta where idsucursal='".$_SESSION['idtienda']."'";
+				$sql = "SELECT MAX(numero) FROM venta where idsucursal='".$_SESSION['idsucursal']."'";
 				$statement = $this->dbh->prepare($sql);
 				$statement->execute();
 				$numero=$statement->fetchColumn()+1;
