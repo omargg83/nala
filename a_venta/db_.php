@@ -294,13 +294,38 @@ class Venta extends Sagyc{
 				$arreglo+=array('idusuario'=>$_SESSION['idusuario']);
 				$arreglo+=array('idsucursal'=>$_SESSION['idsucursal']);
 				$x=$this->insert('venta', $arreglo);
+
+				$ped=json_decode($x);
+				if($ped->error==0){
+					$idventa=$ped->id;
+				}
+				else{
+					return $x;
+				}
 			}
 			else{
 				$arreglo=array();
 				$arreglo+=array('idcliente'=>$idcliente);
 				$x=$this->update('venta',array('idventa'=>$idventa), $arreglo);
 			}
-			return $x;
+
+			$sql="select * from venta where idventa='$idventa'";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			$venta=$sth->fetch(PDO::FETCH_OBJ);
+			$numero=$venta->numero;
+			$date=$venta->fecha;
+			$estado=$venta->estado;
+
+
+			$arreglo =array();
+			$arreglo+=array('idventa'=>$idventa);
+			$arreglo+=array('error'=>0);
+			$arreglo+=array('numero'=>$numero);
+			$arreglo+=array('estado'=>$estado);
+			$fecha1 = date ( "Y-m-d" , strtotime($date) );
+			$arreglo+=array('fecha'=>$fecha1);
+			return json_encode($arreglo);
 		}
 		catch(PDOException $e){
 			return "Database access FAILED! ".$e->getMessage();

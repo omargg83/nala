@@ -362,7 +362,22 @@ $(document).on('click',"[is*='is-cliente']",function(e){
   let xhr = new XMLHttpRequest();
   xhr.open('POST',"a_venta/db_.php");
   xhr.addEventListener('load',(data)=>{
-    cliente_datos(idcliente);
+    var datos = JSON.parse(data.target.response);
+    if(datos.error==0){
+      document.getElementById("idventa").value=datos.idventa;
+      document.getElementById("numero").value=datos.numero;
+      document.getElementById("fecha").value=datos.fecha;
+      cliente_datos(idcliente, datos.idventa);
+    }
+    else{
+      Swal.fire({
+        type: 'error',
+        title: "Error: "+datos.terror,
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
     $('#myModal').modal('hide');
     cargando(false);
   });
@@ -533,9 +548,10 @@ function datos_compra(idventa){
   };
   xhr.send(formData);
 }
-function cliente_datos(idcliente){
+function cliente_datos(idcliente, idventa){
   var formData = new FormData();
   formData.append("idcliente", idcliente);
+  formData.append("idventa", idventa);
 
   let xhr = new XMLHttpRequest();
   xhr.open('POST',"a_venta/cliente_datos.php");

@@ -10,6 +10,11 @@
     $n_cliente=$cliente->nombre;
     $idcliente=$cliente->idcliente;
   }
+	if(isset($_REQUEST['idventa'])){
+		$idventa=$_REQUEST['idventa'];
+		$pd = $db->venta($idventa);
+		$estado_compra=$pd->estado;
+	}
 ?>
 
 <input type="hidden" name="idcliente" id="idcliente" value="<?php echo $idcliente; ?>" readonly>
