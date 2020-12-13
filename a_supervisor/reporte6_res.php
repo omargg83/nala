@@ -37,7 +37,7 @@
 
 
             echo "<div class='col-xl col-auto text-center'>";
-              echo $key->total;
+              echo moneda($key->total);
                    $monto_t+=$key->total;
             echo "</div>";
 

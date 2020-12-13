@@ -32,6 +32,7 @@
           <div class='btn-group'>
 
             <button title='Buscar' class='btn btn-warning btn-sm' id='buscar_canalizado' type='submit' id='lista_buscar'><i class='fa fa-search'></i><span>Consultar</span></button>
+            <button type='button' class='btn btn-warning btn-sm'  id='print_persona' is='f-print' title='Editar' des='a_supervisor/imventxsuc' dix='resultado'><i class='fas fa-print'></i>Imprimir</button>
 
             <button type='button' class='btn btn-warning btn-sm'  id='excel' is='a-link' title='Excel' des='a_supervisor/excel' dix='resultado'><i class="far fa-file-excel"></i>Excel</button>
 

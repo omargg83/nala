@@ -20,6 +20,9 @@
 	$sth = $db->dbh->prepare($sql);
 	$sth->bindValue(":fecha1",$desde);
 	$sth->bindValue(":fecha2",$hasta);
+	if(strlen($idsucursal)>0){
+		$sth->bindValue(":idsucursal",$idsucursal);
+	}
 	$sth->execute();
 	$res=$sth->fetchAll(PDO::FETCH_OBJ);
 
@@ -48,6 +51,7 @@
 	$contar=0;
 	$pdf->ezText("Corte de caja por sucursal",12,array('justification' => 'center'));
 	$pdf->ezText(" ",10);
+	$pdf->ezText("Sucursal: ".$suc->nombre,10,array('justification' => 'left'));
 	$pdf->ezText("Del: ".$xdel,10,array('justification' => 'left'));
 	$pdf->ezText("Al: ".$xal,10,array('justification' => 'left'));
 	$pdf->ezText(" ",10);
