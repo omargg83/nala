@@ -43,7 +43,7 @@
         <div class='col-xl col-auto'>
           <div class='btn-group'>
             <button title='Buscar' class='btn btn-warning btn-sm' id='buscar_canalizado' type='submit' id='lista_buscar'><i class='fa fa-search'></i><span> Buscar</span></button>
-
+            <button type='button' class='btn btn-warning btn-sm'  id='print_persona' is='f-print' title='Editar' des='a_supervisor/impventas' dix='resultado'><i class='fas fa-print'></i>Imprimir</button>
             <button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_supervisor/index' dix='contenido' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
           </div>
         </div>

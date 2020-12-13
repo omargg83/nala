@@ -17,7 +17,11 @@ class Venta extends Sagyc{
 
 	public function __construct(){
 		parent::__construct();
-		if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('REPORTES', $this->derecho)) {
+		if($_SESSION['nivel']==66){
+			$this->nivel_personal=0;
+			$this->nivel_captura=1;
+		}
+		else if(isset($_SESSION['idusuario']) and $_SESSION['autoriza'] == 1 and array_key_exists('REPORTES', $this->derecho)) {
 
 		}
 		else{
@@ -28,7 +32,8 @@ class Venta extends Sagyc{
 
 
 	public function sucursal_info(){
-		$sql="select * from sucursal where idsucursal='".$_SESSION['idsucursal']."'";
+		$idsucursal=$_REQUEST['idsucursal'];
+		$sql="select * from sucursal where idsucursal='".$idsucursal."'";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetch(PDO::FETCH_OBJ);

@@ -6,8 +6,6 @@
 		use PhpOffice\PhpSpreadsheet\Spreadsheet;
 		use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 		$idsucursal=$_REQUEST['idsucursal'];
-
-		print_r($idsucursal);
 		$direccion="tmp/Inventario_por_sucursal.xlsx";
 
 		$spreadsheet = new Spreadsheet();

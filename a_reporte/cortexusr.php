@@ -27,7 +27,7 @@
 	$res=$sth->fetchAll(PDO::FETCH_OBJ);
 	$suc=  $db->sucursal_info();
 	$tiend=  $db->tienda_info();
-	
+
 	set_include_path('../lib/pdf2/src/'.PATH_SEPARATOR.get_include_path());
 	include 'Cezpdf.php';
 
@@ -35,7 +35,12 @@
 	//$pdf = new Cezpdf('C7','portrait','color',array(255,255,255));
 	$pdf->selectFont('Helvetica');
 	// la imagen solo aparecera si antes del codigo ezStream se pone ob_end_clean como se muestra al final men
-	$pdf->ezImage("../img/logoimp.jpg", 0, 100, 'none', 'center');
+	if(strlen($tiend->logotipo)>0 and file_exists("../".$db->f_empresas."/".$tiend->logotipo)){
+		$pdf->ezImage("../".$db->f_empresas."/".$tiend->logotipo, 0, 100, 'none', 'center');
+	}
+	else{
+		$pdf->ezImage("../img/logoimp.jpg", 0, 100, 'none', 'center');
+	}
 	$pdf->ezText($tiend->razon,10,array('justification' => 'center'));
 	$pdf->ezText($suc->ubicacion,10,array('justification' => 'center'));
 	$pdf->ezText("Codigo Postal: ".$suc->cp,10,array('justification' => 'center'));

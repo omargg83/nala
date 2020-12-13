@@ -33,7 +33,7 @@
 
             <button title='Buscar' class='btn btn-warning btn-sm' id='buscar_canalizado' type='submit' id='lista_buscar'><i class='fa fa-search'></i><span>Consultar</span></button>
 
-            <button type='button' class='btn btn-warning btn-sm'  id='excel' is='a-link' title='Excel' des='a_supervisor/excel' dix='resultado' v_idsucursal='  <?php echo " $v2->idsucursal"?>'><i class="far fa-file-excel"></i>Excel</button>
+            <button type='button' class='btn btn-warning btn-sm'  id='excel' is='a-link' title='Excel' des='a_supervisor/excel' dix='resultado'><i class="far fa-file-excel"></i>Excel</button>
 
             <button type='button' class='btn btn-warning btn-sm' id='lista_cat' is='b-link'  des='a_supervisor/index' dix='contenido' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</button>
 
