@@ -55,17 +55,25 @@
 	$pdf->ezText("Del: ".$xdel,10,array('justification' => 'left'));
 	$pdf->ezText("Al: ".$xal,10,array('justification' => 'left'));
 	$pdf->ezText(" ",10);
-	foreach($res as $key){
-		$data[$contar]=array(
-			'Total'=>moneda($key->total),
-			'Tipo'=>$key->tipo_pago
-		);
-		$contar++;
+
+	if (empty($res)) {
+			$pdf->ezText("<b>No hay información disponible en el periodo seleccionado </b>",12,array('justification' => 'center'));
+			$pdf->ezText(" ",10);
 	}
-	$pdf->ezTable($data,"","",array('xPos'=>'left','xOrientation'=>'right','cols'=>array(
-	'Total'=>array('width'=>70),
-	'Tipo'=>array('width'=>70)
-	),'fontSize' => 7));
+	else {
+		foreach($res as $key){
+			$data[$contar]=array(
+				'Total'=>moneda($key->total),
+				'Tipo'=>$key->tipo_pago
+			);
+			$contar++;
+		}
+		$pdf->ezTable($data,"","",array('xPos'=>'left','xOrientation'=>'right','cols'=>array(
+		'Total'=>array('width'=>70),
+		'Tipo'=>array('width'=>70)
+		),'fontSize' => 7));
+	}
+
 
 	//$pdf->ezText("Expedido en: Pachuca Hgo.",10);
 
