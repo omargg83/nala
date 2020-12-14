@@ -9,13 +9,9 @@
 	$pdf->selectFont('Helvetica');
 	// la imagen solo aparecera si antes del codigo ezStream se pone ob_end_clean como se muestra al final men
 
-
-	$idusuario=$_REQUEST['idusuario'];
 	$idsucursal=$_REQUEST['idsucursal'];
 	$fechayhora=new DateTime();
 
-	$desde = date("Y-m-d", strtotime($desde))." 00:00:00";
-	$hasta = date("Y-m-d", strtotime($hasta))." 23:59:59";
 	$sql="SELECT
 	productos_catalogo.nombre,
 	productos_catalogo.codigo,
@@ -30,9 +26,6 @@
 	$sth = $db->dbh->prepare($sql);
 	if(strlen($idsucursal)>0){
 		$sth->bindValue(":idsucursal",$idsucursal);
-	}
-	if(strlen($idusuario)>0){
-		$sth->bindValue(":idusuario",$idusuario);
 	}
 	$sth->execute();
 	$res=$sth->fetchAll(PDO::FETCH_OBJ);
