@@ -9,12 +9,7 @@
 	$pdf->selectFont('Helvetica');
 	// la imagen solo aparecera si antes del codigo ezStream se pone ob_end_clean como se muestra al final men
 
-if (empty($idusuario)) {
-	$pdf->ezText("<b>No hay información disponible en el periodo seleccionado </b>",12,array('justification' => 'center'));
-	$pdf->ezText(" ",10);
 
-	}
-else {
 	$idusuario=$_REQUEST['idusuario'];
 	$idsucursal=$_REQUEST['idsucursal'];
 	$fechayhora=new DateTime();
@@ -99,7 +94,7 @@ else {
 								'Existencia'=>array('width'=>80),
 								'Precio de venta'=>array('width'=>90)
 							),'fontSize' => 8));
-		}
+						}
 
 $pdf->ezText(" ",5);
 	$pdf->ezText("    Fecha y Hora del reporte: ".$fechayhora->format('d-m-Y H:i:s'),7,array('justification' => 'left'));
@@ -111,6 +106,6 @@ $pdf->ezText(" ",5);
 
 	if (ob_get_contents()) ob_end_clean();
 	$pdf->ezStream();
-}
+
 
 ?>
