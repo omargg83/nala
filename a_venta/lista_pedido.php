@@ -9,7 +9,7 @@
     $sth->execute();
     $venta=$sth->fetch(PDO::FETCH_OBJ);
 
-		$sql="select sum(v_cantidad) as cantidad, sum(v_total_normal) as total,sum(v_total_mayoreo) as total_mayoreo,sum(v_total_distribuidor) as total_distribuidor from bodega where esquema=1 and idventa='$idventa' ";
+		$sql="select sum(v_cantidad) as cantidad, sum(v_total_normal) as total,sum(v_total_mayoreo) as total_mayoreo,sum(v_total_distribuidor) as total_distribuidor, sum(v_total_super) as total_super from bodega where esquema=1 and idventa='$idventa' ";
     $sth = $db->dbh->prepare($sql);
     $sth->execute();
     $sumas=$sth->fetch(PDO::FETCH_OBJ);
@@ -82,12 +82,20 @@
 							echo "</div>";
 						}
 
-						else if ($key->v_cantidad >= $key->distri_cantidad) {
+						else if ($key->v_cantidad >= $key->distri_cantidad and $key->v_cantidad < $key->super_cantidad) {
 							echo "<div class='col-4 text-right'>";
 								echo number_format($key->v_precio_distribuidor,2);
 								$total=$key->v_precio_distribuidor;
 							echo "</div>";
 						}
+
+						else if ($key->v_cantidad >= $key->super_cantidad) {
+							echo "<div class='col-4 text-right'>";
+								echo number_format($key->v_precio_super,2);
+								$total=$key->v_precio_super;
+							echo "</div>";
+						}
+
 					}
 
 
@@ -100,7 +108,13 @@
 						$total=$key->v_precio_normal;
 					echo "</div>";
 					}
-					else if ($sumas->total_distribuidor >= $key->monto_distribuidor) { //primero que nada checo que se alcance el monto para distribuidor antes de mayoreo porque si no no funciona
+					else if ($sumas->total_super >= $key->monto_super) { //primero que nada checo que se alcance el monto para super distribuidor antes de distribuidor porque si no no funciona
+						echo "<div class='col-4 text-right'>";
+							echo number_format($key->v_precio_super,2);
+							$total=$key->v_precio_super;
+						echo "</div>";
+					}
+					else if ($sumas->total_distribuidor >= $key->monto_distribuidor) { //despues checo que se alcance el monto para distribuidor antes de mayoreo porque si no no funciona
 						echo "<div class='col-4 text-right'>";
 							echo number_format($key->v_precio_distribuidor,2);
 							$total=$key->v_precio_distribuidor;

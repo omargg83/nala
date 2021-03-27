@@ -181,12 +181,17 @@ class Venta extends Sagyc{
 				$arreglo+=array('v_precio_distribuidor'=>$esquema->precio_distribuidor);
 				$arreglo+=array('v_total_distribuidor'=>$esquema->total_distribuidor);
 
+				$arreglo+=array('v_precio_super'=>$esquema->precio_super);
+				$arreglo+=array('v_total_super'=>$esquema->total_super);
+
 				$arreglo+=array('mayoreo_cantidad'=>$producto->mayoreo_cantidad); //define el stock minimo para alcanzar el precio mayoreo y distribuidor en el esquema 2
 				$arreglo+=array('distri_cantidad'=>$producto->distri_cantidad);
+				$arreglo+=array('super_cantidad'=>$producto->super_cantidad);
 
 				$arreglo+=array('cantidad_mayoreo'=>$producto->cantidad_mayoreo);	//define el stock minimo para alcanzar el precio mayoreo y distribuidor en el esquema 1
 				$arreglo+=array('monto_mayor'=>$producto->monto_mayor);
 				$arreglo+=array('monto_distribuidor'=>$producto->monto_distribuidor);
+				$arreglo+=array('monto_super'=>$producto->monto_super);
 
 				$arreglo+=array('v_precio'=>$precio);
 				$x=$this->insert('bodega', $arreglo);
@@ -394,17 +399,20 @@ class Venta extends Sagyc{
 		///////////////comienzan variables
 		$monto_mayor=$producto->monto_mayor;
 		$monto_distribuidor=$producto->monto_distribuidor;
+		$monto_super=$producto->monto_super;
 		$esquema=$producto->esquema;
 
 		////////////////
 		$precio=$producto->precio;
 		$precio_mayoreo=$producto->precio_mayoreo;
 		$precio_distri=$producto->precio_distri;
+		$precio_super=$producto->precio_super;
 		$cantidad_mayoreo=$producto->cantidad_mayoreo;
 
 		//////////////para esquema 2
 		$mayoreo_cantidad=$producto->mayoreo_cantidad;
 		$distri_cantidad=$producto->distri_cantidad;
+		$super_cantidad=$producto->super_cantidad;
 
 
 		///////////////terminan variables
@@ -418,9 +426,11 @@ class Venta extends Sagyc{
 			$total_menudeo=$total_menudeo;
 			$total_mayoreo=$total_menudeo;
 			$total_distribuidor=$total_menudeo;
+			$total_super=$total_menudeo;
 
 			$precio_mayoreo=$total_menudeo;
 			$precio_distri=$total_menudeo;
+			$precio_super=$total_menudeo;
 
 		}
 
@@ -444,17 +454,30 @@ class Venta extends Sagyc{
 			else{
 				$total_distribuidor=$total_menudeo;
 			}
+			if($cantidad_mayoreo>0 and $monto_super>0 and $precio_super>0){
+				///////////la buena
+				$total_super=($precio_super*$cantidad);
+			}
+			else{
+				$total_super=$total_menudeo;
+			}
 
 			///////////////calculo
 			$precio=$total_menudeo;
 
-			if($total_mayoreo>=$monto_mayor and $total_mayoreo<$monto_distribuidor){
+			if($total_mayoreo>=$monto_mayor and $total_mayoreo<$monto_distribuidor ){
 				////////////cuando es mayor que 1000
 				$precio=$precio_mayoreo;
 			}
-			else if($total_distribuidor>=$monto_distribuidor){
+
+			else if($total_distribuidor>=$monto_distribuidor and $total_distribuidor<$monto_super){
 				/////////////cuando es mayor que 3000
 				$precio=$precio_distri;
+			}
+
+			else if($total_super>=$monto_super){
+				/////////////cuando es mayor que 4000
+				$precio=$precio_super;
 			}
 			else if($cantidad>=$cantidad_mayoreo){
 				//////////////cuando es mayor de 10
@@ -483,13 +506,23 @@ class Venta extends Sagyc{
 				$total_distribuidor=$total_menudeo;
 			}
 
+			if($precio_super>0 and $super_cantidad>0){
+				$total_super=($precio_super*$cantidad);
+			}
+			else{
+				$total_super=$total_menudeo;
+			}
+
 			///////////////calculo
 			$precio=$precio_f;
 			if($cantidad>=$mayoreo_cantidad and $cantidad<$distri_cantidad){
 				$precio=$precio_mayoreo;
 			}
-			else if($cantidad>=$distri_cantidad){
+			else if($cantidad>=$distri_cantidad and $cantidad<$super_cantidad){
 				$precio=$precio_distri;
+			}
+			else if($cantidad>=$super_cantidad){
+				$precio=$precio_super;
 			}
 		}
 
@@ -498,10 +531,12 @@ class Venta extends Sagyc{
 		$arreglo+=array('total_menudeo'=>$total_menudeo);
 		$arreglo+=array('total_mayoreo'=>$total_mayoreo);
 		$arreglo+=array('total_distribuidor'=>$total_distribuidor);
+		$arreglo+=array('total_super'=>$total_super);
 
 		$arreglo+=array('precio_normal'=>$precio_f);
 		$arreglo+=array('precio_mayoreo'=>$precio_mayoreo);
 		$arreglo+=array('precio_distribuidor'=>$precio_distri);
+		$arreglo+=array('precio_super'=>$precio_super);
 
 		$arreglo+=array('precio'=>$precio);
 		return json_encode($arreglo);

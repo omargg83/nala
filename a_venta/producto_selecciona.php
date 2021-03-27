@@ -103,6 +103,11 @@
 					echo "<label>Precio Ditribuidor</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='precio_distribuidor' id='precio_distribuidor' value='$producto->precio_distri' readonly>";
 				echo "</div>";
+
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
+					echo "<label>Precio Super</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='precio_super' id='precio_super' value='$producto->precio_super' readonly>";
+				echo "</div>";
 			echo "</div>";
 
 			echo "<div class='row'>";
@@ -120,6 +125,12 @@
 					echo "<label>Total Ditribuidor</label>";
 					echo "<input type='text' class='form-control form-control-sm' name='distribuidor' id='distribuidor' value='".$producto->precio_distri."' readonly>";
 				echo "</div>";
+
+				echo "<div class='col-sm-6 col-md-12 col-lg-4 col-xl-4'>";
+					echo "<label>Total Super</label>";
+					echo "<input type='text' class='form-control form-control-sm' name='super' id='super' value='".$producto->precio_super."' readonly>";
+				echo "</div>";
+
 			echo "</div>";
 
 			echo "<hr>";

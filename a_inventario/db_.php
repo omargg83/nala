@@ -239,11 +239,25 @@ class Productos extends Sagyc{
 				$arreglo += array('monto_distribuidor'=>0);
 			}
 
+			if (isset($_REQUEST['monto_super']) and strlen($_REQUEST['monto_super'])>0){
+				$arreglo += array('monto_super'=>$_REQUEST['monto_super']);
+			}
+			else{
+				$arreglo += array('monto_super'=>0);
+			}
+
 			if (isset($_REQUEST['precio_distri']) and strlen($_REQUEST['precio_distri'])>0){
 				$arreglo += array('precio_distri'=>$_REQUEST['precio_distri']);
 			}
 			else{
 				$arreglo += array('precio_distri'=>0);
+			}
+
+			if (isset($_REQUEST['precio_super']) and strlen($_REQUEST['precio_super'])>0){
+				$arreglo += array('precio_super'=>$_REQUEST['precio_super']);
+			}
+			else{
+				$arreglo += array('precio_super'=>0);
 			}
 
 			if (isset($_REQUEST['mayoreo_cantidad']) and strlen($_REQUEST['mayoreo_cantidad'])>0){
@@ -258,6 +272,13 @@ class Productos extends Sagyc{
 			}
 			else{
 				$arreglo += array('distri_cantidad'=>0);
+			}
+
+			if (isset($_REQUEST['super_cantidad']) and strlen($_REQUEST['super_cantidad'])>0){
+				$arreglo += array('super_cantidad'=>$_REQUEST['super_cantidad']);
+			}
+			else{
+				$arreglo += array('super_cantidad'=>0);
 			}
 
 			if (isset($_REQUEST['preciocompra']) and strlen($_REQUEST['preciocompra'])>0  ){

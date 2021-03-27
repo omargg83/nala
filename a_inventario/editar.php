@@ -29,13 +29,16 @@
 		$esquema=$per->esquema;
 		$precio_mayoreo=$per->precio_mayoreo;
 		$precio_distri=$per->precio_distri;
+		$precio_super=$per->precio_super;
 		//// variables esquema NALA
 		$cantidad_mayoreo=$per->cantidad_mayoreo;
 		$monto_mayor=$per->monto_mayor;
 		$monto_distribuidor=$per->monto_distribuidor;
+		$monto_super=$per->monto_super;
 		///// varibables esquema 2
 		$mayoreo_cantidad=$per->mayoreo_cantidad;
 		$distri_cantidad=$per->distri_cantidad;
+		$super_cantidad=$per->super_cantidad;
 
 		$sql="select etiqueta from sucursal where idsucursal='".$_SESSION['idsucursal']."'";
 		$sth = $db->dbh->prepare($sql);
@@ -63,10 +66,13 @@
 		$precio_mayoreo=0;
 		$monto_mayor=1000;
 		$monto_distribuidor=3000;
+		$monto_super=4000;
 		///// variables esquema 2
 		$mayoreo_cantidad=0;
 		$distri_cantidad=0;
+		$super_cantidad=0;
 		$precio_distri=0;
+		$precio_super=0;
 
 
 		$codigo=0;
@@ -176,6 +182,11 @@
 						 <input type="text" class="form-control form-control-sm" id="precio_distri" name='precio_distri' placeholder="Precio Distribuidor" value="<?php echo $precio_distri; ?>">
 						</div>
 
+						<div class="col-12 col-xl col-auto">
+						 <label>$ Super</label>
+						 <input type="text" class="form-control form-control-sm" id="precio_super" name='precio_super' placeholder="Precio Super" value="<?php echo $precio_super; ?>">
+						</div>
+
 					</div>
 					<hr>
 			<div class='row mb-3'>
@@ -208,6 +219,11 @@
 						 <label>Monto min. compra distribuidor</label>
 						 <input type="text" class="form-control form-control-sm" id="monto_distribuidor" name='monto_distribuidor' placeholder="Monto min compra distribuidor" value="<?php echo $monto_distribuidor; ?>" >
 						</div>
+
+						<div class="col-12 col-xl col-auto">
+						 <label>Monto min. compra super</label>
+						 <input type="text" class="form-control form-control-sm" id="monto_super" name='monto_super' placeholder="Monto min compra super" value="<?php echo $monto_super; ?>" >
+						</div>
 					</div>
 					<hr>
 					<p><b>Esquema 2:</b></p>
@@ -219,7 +235,12 @@
 
 						<div class="col-12 col-xl col-auto">
 						 <label>Cantidad Para Precio Distribuidor (Pza.)</label>
-						 <input type="text" class="form-control form-control-sm" id="distri_cantidad" name='distri_cantidad' placeholder="# Cant. Mayoreo" value="<?php echo $distri_cantidad; ?>" >
+						 <input type="text" class="form-control form-control-sm" id="distri_cantidad" name='distri_cantidad' placeholder="# Cant. Distribuidor" value="<?php echo $distri_cantidad; ?>" >
+						</div>
+
+						<div class="col-12 col-xl col-auto">
+						 <label>Cantidad Para Precio Super (Pza.)</label>
+						 <input type="text" class="form-control form-control-sm" id="super_cantidad" name='super_cantidad' placeholder="# Cant. Super" value="<?php echo $super_cantidad; ?>" >
 						</div>
 
 					</div>

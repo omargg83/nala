@@ -495,11 +495,13 @@ function calcular(){
         document.getElementById("normal").value=datos.total_menudeo;
         document.getElementById("mayoreo").value=datos.total_mayoreo;
         document.getElementById("distribuidor").value=datos.total_distribuidor;
+        document.getElementById("super").value=datos.total_super;
         document.getElementById("precio").value=datos.precio;
 
         document.getElementById("precio_normal").value=datos.precio_normal;
         document.getElementById("precio_mayoreo").value=datos.precio_mayoreo;
         document.getElementById("precio_distribuidor").value=datos.precio_distribuidor;
+        document.getElementById("precio_super").value=datos.precio_super;
       }
       else{
         Swal.fire({
