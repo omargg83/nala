@@ -602,7 +602,7 @@ class Productos extends Sagyc{
 											],
 										];
 
-										$sheet->getStyle('A'.$contar.":".'N'.$contar)->applyFromArray($styleArray);
+										$sheet->getStyle('A'.$contar.":".'O'.$contar)->applyFromArray($styleArray);
 										/* parametros extras:
 
 										allBorders
