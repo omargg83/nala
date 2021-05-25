@@ -554,10 +554,10 @@ class Productos extends Sagyc{
 		$sth->execute();
 		$contar=7; //empiezan los datos a partir de la fila 7
 
-		$sheet->getStyle('A7:N7')->getFill()
+		$sheet->getStyle('A7:O7')->getFill()
 		->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
 		->getStartColor()->setARGB('04006a'); // color de celdas con rango
-		$sheet->getStyle('A7:N7')->getFont()->getColor()->setARGB('fffffc'); // CAMBIAR COLOR DE LA FUENTE
+		$sheet->getStyle('A7:O7')->getFont()->getColor()->setARGB('fffffc'); // CAMBIAR COLOR DE LA FUENTE
 		$sheet->getStyle('A1:F1')->getFont()->setSize(18); //Tamaño fuente
 		$sheet->getStyle('A2')->getFont()->setSize(18); //Tamaño fuente
 		$sheet->setCellValue('A2', 'Visitanos en www.sagyc.com.mx');
