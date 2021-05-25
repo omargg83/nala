@@ -518,7 +518,7 @@ class Productos extends Sagyc{
 		$sheet->setTitle("Inventario");
 
 		//DEFINE EL AUTOSIZE PARA CADA COLUMNA MEN
-		foreach(range('B','N') as $columnID) {
+		foreach(range('B','O') as $columnID) {
 		$sheet->getColumnDimension($columnID)
 		 ->setAutoSize(true);
 		}
