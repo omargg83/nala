@@ -668,7 +668,7 @@ class Productos extends Sagyc{
 			$sheet->setCellValue('J'.$contar, $prod->nombrecat);
 			$sheet->setCellValue('K'.$contar, $prod->fechamod);
 
-			$sheet->getStyle('L'.$contar.":".'N'.$contar)->getNumberFormat() // asigno formato moneda a los 3 precios
+			$sheet->getStyle('L'.$contar.":".'O'.$contar)->getNumberFormat() // asigno formato moneda a los 3 precios
 	    ->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
 			$sheet->setCellValue('L'.$contar, $prod->precio);
 			$sheet->setCellValue('M'.$contar, $prod->precio_mayoreo);
