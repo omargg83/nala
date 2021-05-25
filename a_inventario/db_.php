@@ -588,6 +588,7 @@ class Productos extends Sagyc{
 		$sheet->setCellValue('L'.$contar,"Precio");
 		$sheet->setCellValue('M'.$contar,"Precio Mayoreo");
 		$sheet->setCellValue('N'.$contar,"Precio Distribuidor");
+		$sheet->setCellValue('N'.$contar,"Precio Super Distribuidor");
 		$contar++;
 		foreach($sth->fetchAll(PDO::FETCH_OBJ) as $prod){
 
@@ -672,6 +673,7 @@ class Productos extends Sagyc{
 			$sheet->setCellValue('L'.$contar, $prod->precio);
 			$sheet->setCellValue('M'.$contar, $prod->precio_mayoreo);
 			$sheet->setCellValue('N'.$contar, $prod->precio_distri);
+			$sheet->setCellValue('O'.$contar, $prod->precio_super);
 
 			$contar++;
 		}
