@@ -726,6 +726,7 @@ class Productos extends Sagyc{
 				$cantidad_mayoreo=$producto->cantidad_mayoreo;
 				$precio_mayoreo=$producto->precio_mayoreo;
 				$precio_distri=$producto->precio_distri;
+				$precio_super=$producto->precio_super;
 				$mayoreo_cantidad=$producto->mayoreo_cantidad;
 				$distri_cantidad=$producto->distri_cantidad;
 				$esquema=$producto->esquema;
@@ -739,6 +740,7 @@ class Productos extends Sagyc{
 				$cantidad_mayoreo=10;
 				$precio_mayoreo=0;
 				$precio_distri=0;
+				$precio_super=0;
 				$mayoreo_cantidad=0;
 				$distri_cantidad=0;
 				$esquema=0;
@@ -753,6 +755,7 @@ class Productos extends Sagyc{
 			$arreglo+=array('cantidad_mayoreo'=>$cantidad_mayoreo);
 			$arreglo+=array('precio_mayoreo'=>$precio_mayoreo);
 			$arreglo+=array('precio_distri'=>$precio_distri);
+			$arreglo+=array('precio_super'=>$precio_super);
 			$arreglo+=array('mayoreo_cantidad'=>$mayoreo_cantidad);
 			$arreglo+=array('distri_cantidad'=>$distri_cantidad);
 			$arreglo+=array('esquema'=>$esquema);
