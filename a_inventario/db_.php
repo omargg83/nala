@@ -732,6 +732,7 @@ class Productos extends Sagyc{
 				$esquema=$producto->esquema;
 				$monto_mayor=$producto->monto_mayor;
 				$monto_distribuidor=$producto->monto_distribuidor;
+				$monto_super=$producto->monto_super;
 			}
 			else{
 				$preciocompra=0;
@@ -746,6 +747,7 @@ class Productos extends Sagyc{
 				$esquema=0;
 				$monto_mayor=1000;
 				$monto_distribuidor=3000;
+				$monto_super=5000;
 				$stockmin=1;
 			}
 
@@ -761,6 +763,7 @@ class Productos extends Sagyc{
 			$arreglo+=array('esquema'=>$esquema);
 			$arreglo+=array('monto_mayor'=>$monto_mayor);
 			$arreglo+=array('monto_distribuidor'=>$monto_distribuidor);
+			$arreglo+=array('monto_super'=>$monto_super);
 			$x=$this->insert('productos', $arreglo);
 			$ped=json_decode($x);
 			if($ped->error==0){
