@@ -567,10 +567,10 @@ class Productos extends Sagyc{
 		->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); //ALINEACION DE FUENTE
 
 		$sheet->getStyle('A1')->getFont()->setBold(true); // NEGRITA
-		$sheet->getStyle('A7:O7')->getFont()->setBold(true); // NEGRITA
+		$sheet->getStyle('A7:P7')->getFont()->setBold(true); // NEGRITA
 		$sheet->mergeCells('A1:F1'); //combinar celdas
 		$sheet->mergeCells('A2:E2'); //combinar celdas
-		$sheet->setAutoFilter('A7:O7'); //filtro con rango
+		$sheet->setAutoFilter('A7:P7'); //filtro con rango
 		//$sheet->getStyle('A7:O7')->getFill()->getStartColor()->setARGB('29bb04');
 
 
@@ -589,6 +589,9 @@ class Productos extends Sagyc{
 		$sheet->setCellValue('M'.$contar,"Precio Mayoreo");
 		$sheet->setCellValue('N'.$contar,"Precio Distribuidor");
 		$sheet->setCellValue('O'.$contar,"Precio Super Distribuidor");
+		$sheet->setCellValue('P'.$contar,"Precio Compra");
+
+
 		$contar++;
 		foreach($sth->fetchAll(PDO::FETCH_OBJ) as $prod){
 
@@ -674,6 +677,7 @@ class Productos extends Sagyc{
 			$sheet->setCellValue('M'.$contar, $prod->precio_mayoreo);
 			$sheet->setCellValue('N'.$contar, $prod->precio_distri);
 			$sheet->setCellValue('O'.$contar, $prod->precio_super);
+			$sheet->setCellValue('P'.$contar, $prod->preciocompra);
 
 			$contar++;
 		}
