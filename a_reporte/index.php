@@ -35,6 +35,21 @@
 						</div>
 				  </div>
 			  </div>";
+
+        echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
+					<div class='dash_icon'>
+						<div class='row'>
+							<div class='col-3 text-center'>
+								<i class='fas fa-people-carry fa-3x'></i>
+							</div>
+							<div class='col-9'>
+								<h5>Reporte de ganancias</h5>
+								<p class='card-text text-center'>Ganancias por venta de producto</p>
+								<a class='btn btn-warning btn-sm btn-block' id='menu_ventas' is='menu-link' href='#a_reporte/reporte7'>Ir</a>
+							</div>
+						</div>
+				  </div>
+			  </div>";
 			}
 			if(array_key_exists('REPORTE_CORTE_DE_CAJA', $db->derecho)){
 				echo "<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-1'>
